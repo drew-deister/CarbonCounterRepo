@@ -22,7 +22,7 @@ class Home extends React.Component {
     render() {
         const {navigate} = this.props.navigation;
         return (
-            <ScrollView>
+            <ScrollView style = {styles.scrollview}>
                 <HomeScreenActivityCard title = {"Count some carbon!"} navigation = {this.props.navigation} />
             </ScrollView>
 
@@ -33,7 +33,7 @@ class Home extends React.Component {
 export default Home;
 
 const styles = StyleSheet.create({
-    container: {
+    container: { // dont need this but keep it for reference sake 
         flexDirection: 'column',
         backgroundColor: 'red',
         marginTop: 30,
@@ -41,4 +41,8 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         justifyContent: 'center',
     },
+    scrollview: {
+        marginLeft: 5,
+        marginRight: 5,
+    }
 });

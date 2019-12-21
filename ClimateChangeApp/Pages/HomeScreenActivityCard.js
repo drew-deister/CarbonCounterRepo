@@ -13,11 +13,10 @@ class HomeScreenActivityCard extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style = {styles.text}> Carbon Counter </Text>
                 <Button
                     title = {this.props.title}
-                    buttonStyle={{marginLeft: 5, marginRight: 5, marginBottom: 5}}
-                    onPress={() =>  this.props.navigation.navigate('Questions')} // this is where you navigate
+                    buttonStyle={{marginLeft: 5, marginRight: 5, marginBottom: 5, backgroundColor: '#00aeef'}}
+                    onPress={() =>  this.props.navigation.navigate('Question1')} // this is where you navigate
                     // we want this to present a Question page
                 />
             </View>

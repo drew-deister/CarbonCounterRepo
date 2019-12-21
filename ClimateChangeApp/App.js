@@ -4,7 +4,9 @@ import {createAppContainer, SafeAreaView} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {StackViewStyleInterpolator} from 'react-navigation-stack'
 import Home from './Pages/Home';
-import Questions from './Pages/Questions';
+import Question1 from './Questions/Question1';
+import Question2 from './Questions/Question2';
+
 
 export default class App extends React.Component { // this is like the main method of the project
   render() {
@@ -28,7 +30,8 @@ const styles = StyleSheet.create({
 const AppNavigator = createStackNavigator(
     { // road map for the different parts of our navigation
       Home: {screen: Home},
-      Questions: {screen: Questions}
+      Question1: {screen: Question1},
+      Question2: {screen: Question2}
     },
     {
         initialRouteName: 'Home',
