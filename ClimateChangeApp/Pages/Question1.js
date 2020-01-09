@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {StyleSheet, View} from "react-native";
 import {Text, Card, Icon} from 'react-native-elements';
-import {Button} from '../Components(Lucas)/Button';
-import {Question} from '../Components(Lucas)/Question';
-import {Separator} from '../Components(Lucas)/Separator';
+import {Button} from '../Components/Button';
+import {NextButton} from '../Components/NextButton';
+import {Question} from '../Components/Question_Lucas';
+import {Separator} from '../Components/Separator';
 
 
 class Question1 extends React.Component {
@@ -30,10 +31,10 @@ class Question1 extends React.Component {
                     alert('Carnivore')}>
                     Only meat
                 </Button>
-                <Button onPress= {() =>  
+                <NextButton onPress= {() =>  
                     this.props.navigation.navigate('Question2')}>
                     Next
-                </Button>
+                </NextButton>
             </View>
         )
     }
@@ -44,7 +45,8 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: '#fff',
       alignItems: 'center',
-      //justifyContent: 'space-around',
+      justifyContent: 'center',
+    //   justifyContent: 'space-around',
       padding: 20,
     },
   });

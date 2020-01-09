@@ -18,7 +18,7 @@ import React, { Component, useState } from 'react';
 import {StyleSheet, View} from "react-native";
 import {Button, Text, Card, Icon} from 'react-native-elements';
 import { TextInput } from 'react-native-gesture-handler';
-import { Housing } from '../Components(Ethan)/Housing';
+import { Housing } from '../Components/Housing';
 
 
 class Question2 extends React.Component {

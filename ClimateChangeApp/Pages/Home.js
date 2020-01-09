@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import HomeScreenActivityCard from './HomeScreenActivityCard';
+import HomeScreenActivityCard from '../Components/HomeScreenActivityCard';
 import {ScrollView, View, StyleSheet} from 'react-native';
 import {Button, Text, Card, Icon} from 'react-native-elements';
 import {
@@ -8,7 +8,7 @@ import {
     listenOrientationChange, removeOrientationListener
 } from 'react-native-responsive-screen';
 
-class Home extends React.Component {
+export default class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -24,13 +24,15 @@ class Home extends React.Component {
         return (
             <ScrollView style = {styles.scrollview}>
                 <HomeScreenActivityCard title = {"Count some carbon!"} navigation = {this.props.navigation} />
+                <HomeScreenActivityCard title = {"Activity #2"} navigation = {this.props.navigation} />
+                <HomeScreenActivityCard title = {"Activity #3"} navigation = {this.props.navigation} />
+                <HomeScreenActivityCard title = {"Activity #4"} navigation = {this.props.navigation} />
+                <HomeScreenActivityCard title = {"Activity #5"} navigation = {this.props.navigation} />
             </ScrollView>
-
-        )
+        );
     }
 }
 
-export default Home;
 
 const styles = StyleSheet.create({
     container: { // dont need this but keep it for reference sake 

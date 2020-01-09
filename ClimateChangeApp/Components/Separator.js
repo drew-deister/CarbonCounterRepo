@@ -12,7 +12,7 @@ var styles = StyleSheet.create({
     borderBottomColor: '#000000',
     width: '100%',
     borderBottomWidth: 1,
-    bottom: '-11%',
+    marginVertical: 8
   },
 });
 

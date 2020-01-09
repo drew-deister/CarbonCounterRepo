@@ -4,8 +4,8 @@ import {createAppContainer, SafeAreaView} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {StackViewStyleInterpolator} from 'react-navigation-stack'
 import Home from './Pages/Home';
-import Question1 from './Questions/Question1';
-import Question2 from './Questions/Question2';
+import Question1 from './Pages/Question1';
+import Question2 from './Pages/Question2';
 
 
 export default class App extends React.Component { // this is like the main method of the project
