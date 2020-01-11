@@ -16,7 +16,6 @@ import {Button, Text, Card, Icon} from 'react-native-elements';
 import { TextInput } from 'react-native-gesture-handler';
 
 
-
 const Question = (props) => {
 
     // note: I had trouble implementing state.
