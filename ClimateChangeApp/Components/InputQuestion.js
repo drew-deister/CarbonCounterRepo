@@ -17,7 +17,7 @@ import { TextInput } from 'react-native-gesture-handler';
 
 
 
-const Question = (props) => {
+const InputQuestion = (props) => {
   // this is ethan's code, adapted by drew 
     return (
       <View style={props.style}>
@@ -32,7 +32,7 @@ const Question = (props) => {
     );
   };
 
-  export { Question };
+  export { InputQuestion };
 
 
 const styles = StyleSheet.create({
