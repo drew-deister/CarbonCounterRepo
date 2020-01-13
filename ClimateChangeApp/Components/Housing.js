@@ -19,16 +19,16 @@ import { TextInput } from 'react-native-gesture-handler';
 import { Question } from './Question_Ethan';
 
 
-const Housing = () => {
+class Housing extends Component {
+  render() {
     return (
-        <View style={styles.housingContainer}>
-            <Question style={styles.questionContainerRow}>{zipInfo}</Question>
-            <Question style={styles.questionContainerColumn}>{sizeInfo}</Question>
-            <Question style={styles.questionContainerColumn}>{peopleInfo}</Question>
-
-        </View>
+      <View style={styles.housingContainer}>
+          <Question style={styles.questionContainerRow}>{zipInfo}</Question>
+          <Question style={styles.questionContainerColumn}>{sizeInfo}</Question>
+          <Question style={styles.questionContainerColumn}>{peopleInfo}</Question>
+      </View>
     );
-    
+  }
 }
 
 

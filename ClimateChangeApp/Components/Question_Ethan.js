@@ -16,39 +16,17 @@ import {Button, Text, Card, Icon} from 'react-native-elements';
 import { TextInput } from 'react-native-gesture-handler';
 
 
-const Question = (props) => {
 
-    // note: I had trouble implementing state.
-    //       Everything before 'return' is not actually used
-    const [enteredInput, setEnteredInput] = useState('');
-    const [zipCollection, setZipCollection] = useState([]);
-  
-    const inputHandler = (enteredText) => {
-      setEnteredInput(enteredText);
-      listHandler();
-      
-    };
-  
-    const listHandler = () => {
-      setZipCollection(currentZips => [...currentZips, enteredInput]);
-    }
-    // re-note: The above code is not actually used
-  
+const Question = (props) => {
+  // this is ethan's code, adapted by drew 
     return (
       <View style={props.style}>
           <Text style={styles.mainText}>{props.children.main}</Text>
           <TextInput 
             placeholder={props.children.placeholder}
             style={styles.questionInput}
-            onEndEditing={inputHandler}     // this line is not used due to difficulties manipulating state
           >
           </TextInput>
-          <View>
-            {/* Tried to display list output zipCollection but having trouble handling state. recieved the error:
-            "Warning: Failed prop type: Invalid prop `children` supplied to `TextElement`, expected a ReactNode."
-            {zipCollection.map((zip) => <Text key={zip}>{zip}</Text>)} */}
-          </View>
-          
       </View>
      
     );

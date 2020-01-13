@@ -20,19 +20,44 @@ import {Button, Text, Card, Icon} from 'react-native-elements';
 import { TextInput } from 'react-native-gesture-handler';
 import { Housing } from '../Components/Housing';
 
+// import AsyncStorage from '@react-native-community/async-storage';
+
 
 class Question2 extends React.Component {
+    constructor(props) {
+      super(props); // this line is very important 
+      this.state = {
+        first: 0 // give it a default value 
+      };
+    }
+
     static navigationOptions = { // this is the label in the middle of the nav bar
         title: 'Housing',
     };
 
+
+    changeFirst(newValue) {
+      this.setState({
+        first: newValue,
+      });
+    }
+    
+    // to do: figure out how to change the Question2 state whenever the housing 
+    // component is changed,probably by binding
     render() {
         return(
           <View style={styles.housingScreen}>
-            <Housing />
+            <Housing first={this.state.first} changeFirst={this.changeFirst.bind(this)} />
           </View>
         )
     }
+
+    // should save data if there is anything to be saved
+    // currently a problem with linkage 
+    // saveData() {
+    //   let user = 'John Doe';
+    //   AsyncStorage.setItem('user', user);
+    // }
 }
 
 const styles = StyleSheet.create({
