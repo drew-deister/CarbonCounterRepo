@@ -6,6 +6,7 @@ import {StackViewStyleInterpolator} from 'react-navigation-stack'
 import Home from './Pages/Home';
 import Question1 from './Pages/Question1';
 import Question2 from './Pages/Question2';
+import GeoVideo1 from './Pages/GeoVideo1';
 
 
 export default class App extends React.Component { // this is like the main method of the project
@@ -23,14 +24,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+}); 
 
 
 // this is very important, use this as reference when you don't understand navigation
 const AppNavigator = createStackNavigator(
     { // road map for the different parts of our navigation
       Home: {screen: Home},
-      Question1: {screen: Question1},
+      Question1: {screen: GeoVideo1},
       Question2: {screen: Question2}
     },
     {
