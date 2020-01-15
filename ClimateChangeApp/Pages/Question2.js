@@ -45,84 +45,15 @@ class Question2 extends React.Component {
    
     render() {
         return(
-          <View style={styles.housingContainer}>
-              <InputQuestion style={styles.questionContainerRow}>{zipInfo}</InputQuestion>
-              <InputQuestion style={styles.questionContainerColumn}>{sizeInfo}</InputQuestion>
-              <InputQuestion style={styles.questionContainerColumn}>{peopleInfo}</InputQuestion>
+          <View >
+              
           </View>
         )
     }
 
-    // should save data if there is anything to be saved
-    // currently a problem with linkage 
-    // saveData() {
-    //   let user = 'John Doe';
-    //   AsyncStorage.setItem('user', user);
-    // }
 }
 
 
-// *********************** Housing Question information ************************* //
-// The following information is passed as props to the Question component
 
-  
-class info {
-  constructor(main, placeholder) {
-    this.main = main;
-    this.placeholder = placeholder;
-  }
-}
-
-const housingQs = {
-  zip: "enter your zipcode",
-  size: "1600 sq ft",
-  people: "3 total people"
-};
-
-const zipInfo = new info("Zipcode: ", housingQs.zip);
-const sizeInfo = new info("How big is your house? ", housingQs.size);
-const peopleInfo = new info("How many people do you live with? ", housingQs.people)
-// _____________ End Housing Question Information section _______________ //
-
-
-const styles = StyleSheet.create({
-  // The housing screen currently holds the housingContainer (aka Housing component)
-  // it will eventually hold the progress bar and potentially the navigation features
-  housingScreen: { // don't think I need this
-    paddingTop: 50,
-    paddingHorizontal: 5,
-    paddingBottom: 5,
-    height: '100%',
-  },
-
-  // ethan code
-  // Background color is used during development to help visualize the components
-    // The Housing Container holds the Questions (aka Question components)
-    housingContainer: {
-      flexDirection: 'column',
-      justifyContent: 'space-between',
-      //alignItems: 'center',
-      padding: 15,
-      //backgroundColor: 'grey',
-      height: '75%'
-    },
-    questionContainerRow: {
-        //FIXME: How to inherit the style?? Only thing that changes between row+column is flexDirection
-      flexDirection: "row",    
-      padding: 10,
-      justifyContent: 'space-evenly',
-      alignItems: 'center',
-      //backgroundColor: 'blue',
-      height: '20%'
-    },
-    questionContainerColumn: {
-      flexDirection: "column",
-      padding: 15,
-      justifyContent: 'space-evenly',
-      alignItems: 'center',
-      height: '40%',
-      //backgroundColor: 'orange'
-    },
-});
 
 export default Question2;

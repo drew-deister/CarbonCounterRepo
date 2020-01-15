@@ -7,6 +7,36 @@ import Home from './Pages/Home';
 import Question1 from './Pages/Question1';
 import Question2 from './Pages/Question2';
 
+// shirom code 
+global.theme = {
+  colors: {
+      primary: '#0B7310',
+  },
+  Slider: {
+      // maximumTrackTintColor: '#6C757D',
+      minimumTrackTintColor: '#6C757D',
+      thumbStyle: {
+          backgroundColor: '#0B7310',
+          width: 25,
+          height: 25,
+          borderRadius: 25 / 2,
+      },
+      thumbTouchSize: {
+          width: 50,
+          height: 50,
+      },
+      trackStyle: {
+          height: 10,
+          borderRadius: 10 / 2
+      }
+  },
+  Card: {
+      containerStyle: {
+          borderRadius: 3
+      }
+  }
+};
+
 
 export default class App extends React.Component { // this is like the main method of the project
   render() {
@@ -31,7 +61,8 @@ const AppNavigator = createStackNavigator(
     { // road map for the different parts of our navigation
       Home: {screen: Home},
       Question1: {screen: Question1},
-      Question2: {screen: Question2}
+      Question2: {screen: Question2},
+      Question3: {screen: Question2}, // CHANGE
     },
     {
         initialRouteName: 'Home',
