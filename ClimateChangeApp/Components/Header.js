@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#0B7310', // should be global.theme.colors.primary but couldn't get it to work
     padding: 12, // space between its border and the text within
     alignItems: 'center',
-    marginTop: hp('10%'),
+    marginTop: hp('5%'),
     marginBottom: 8,
     width: wp('80%'),
     borderRadius: 8,

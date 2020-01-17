@@ -6,6 +6,8 @@ import {StyleSheet, View} from "react-native";
 import {Text, Card, Icon, Button, Slider} from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
 import { InputQuestion } from '../Components/InputQuestion';
+import { SliderQuestion } from '../Components/SliderQuestion';
+import { NextButton } from '../Components/NextButton';
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
@@ -20,16 +22,20 @@ class QuestionCard extends React.Component {
         }
     }
 
+
     render() {
         return(
             <View style = {styles.view}>
                 <ScrollView style = {styles.scrollView}>
-                    <InputQuestion styles = {this.props.zipCodeStyle} data = {this.props.data}></InputQuestion>
+                    <InputQuestion question = {this.props.data.zipCode} placeholder = {this.props.data.zipCodePlaceholder}/>
+                    <InputQuestion question = {this.props.data.homeSize} placeholder = {this.props.data.homeSizePlaceholder}/>
+                    <InputQuestion question = {this.props.data.numPeople} placeholder = {this.props.data.numPeoplePlaceholder}/>
+                    <SliderQuestion min = {this.props.data.homeSizeMin} max = {this.props.data.homeSizeMax}/>
                     <Button
                         icon={<Icon name="arrow-forward" color="white"/>}
                         iconRight
-                        buttonStyle={{marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
-                        title='OPEN '
+                        buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
+                        title='Next '
                         onPress= {() =>  
                             this.props.navigation.push('Question2')}
                     /> 

@@ -62,7 +62,6 @@ const AppNavigator = createStackNavigator(
       Home: {screen: Home},
       Question1: {screen: Question1},
       Question2: {screen: Question2},
-      Question3: {screen: Question2}, // CHANGE
     },
     {
         initialRouteName: 'Home',

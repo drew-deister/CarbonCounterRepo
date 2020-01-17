@@ -21,12 +21,12 @@ class InputQuestion extends React.Component {
   render() {
     return (
       <View style={styles.view}>
-        <Text style = {styles.text}>{this.props.data.zipCode}</Text>
+        <Text style = {styles.text}>{this.props.question}</Text>
         <TextInput 
-           placeholder={this.props.data.zipCodePlaceholder}
+           placeholder={this.props.placeholder}
+           placeholderTextColor = {'#898d91'}
            style={styles.questionInput}></TextInput>
       </View>
-     
     )
   }
     
@@ -37,15 +37,14 @@ export { InputQuestion };
 
 const styles = StyleSheet.create({
   text: {
-    marginVertical: 8
+    marginVertical: 8,
+    color: 'white',
+    fontSize: 24,
+    fontWeight: '300'
   },
   view: {
     marginVertical: 8,
     flexDirection: 'column'
-  },
-  mainText: {
-    // backgroundColor: 'white',
-    padding: 10,
   },
   questionInput: {
     borderColor: 'green',
