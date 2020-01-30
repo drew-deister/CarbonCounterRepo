@@ -32,8 +32,8 @@ const styles = StyleSheet.create({
 const AppNavigator = createStackNavigator(
     { // road map for the different parts of our navigation
       Home: {screen: Home},
-      Question1: {screen: GeoVideo2},
-      Question2: {screen: Question2}
+      Question1: {screen: GeoVideo1},
+      Question2: {screen: GeoVideo2}
     },
     {
         initialRouteName: 'Home',
