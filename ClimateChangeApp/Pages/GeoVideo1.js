@@ -23,12 +23,19 @@ class GeoVideo1 extends React.Component {
       title: 'Around the World',
     };
 
-    /* constructor(props) {
+    constructor(props) {
       super(props);
       this.state = {
-        region = {alps}
+        location: {alps}
       }
-    } */
+    }
+
+    handleLocationChange(newLocation) {
+      console.log(newLocation);
+      this.setState({
+        location: newLocation
+      });
+    }
 
     render () {
       return(
@@ -42,6 +49,8 @@ class GeoVideo1 extends React.Component {
               //mapType='satellite'
               customMapStyle={mapstyle}
               initialRegion={alps}
+              region={this.location}
+              onRegionChange={this.handleLocationChange}
               />
           </View>
           <NextButton onPress= {() =>  
