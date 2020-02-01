@@ -21,6 +21,7 @@ class GeoVideo2 extends React.Component {
                   <Video
                     //popeye uri: 'https://ia800501.us.archive.org/11/items/popeye_i_dont_scare/popeye_i_dont_scare_512kb.mp4'
                     source={{ uri: 'https://ia800501.us.archive.org/11/items/popeye_i_dont_scare/popeye_i_dont_scare_512kb.mp4' }}
+                    //source={ require('../assets/germany.mp4') }
                     style={styles.Video}
                     resizeMode="cover"      //fill container bounds while preserving aspect ratio
                     shouldPlay
@@ -36,6 +37,8 @@ class GeoVideo2 extends React.Component {
         )
     }
 }
+
+
 
 const styles = StyleSheet.create({
     screen: {
