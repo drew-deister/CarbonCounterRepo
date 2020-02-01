@@ -8,21 +8,27 @@ import { NextButton } from '../Components/NextButton';
 //import { WebView } from 'react-native';
 
 
-var markers = [
+var alps = 
   {
-    latitude: 42.65,
-    longitude: 87.90,
-    title: 'Foo Place',
-    subtitle: '1234 Foo Drive',
-    animateDrop: true,
-    hasLeftCallout: true,
+    latitude: 46.88,
+    longitude: 9.65,
+    latitudeDelta: 15,
+    longitudeDelta: 15,
   }
-];
+
+const mapstyle = require('../mapstyle.json');
 
 class GeoVideo1 extends React.Component {
     static navigationOptions = {
       title: 'Around the World',
     };
+
+    /* constructor(props) {
+      super(props);
+      this.state = {
+        region = {alps}
+      }
+    } */
 
     render () {
       return(
@@ -30,9 +36,12 @@ class GeoVideo1 extends React.Component {
           <Text>Zoom to a region of the world you are curious about</Text>
           <View style={styles.mapContainer}>
             <MapView 
+              
               style={styles.mapStyle}
-              annotations={markers}
-              mapType='satellite'
+              //annotations={markers}
+              //mapType='satellite'
+              customMapStyle={mapstyle}
+              initialRegion={alps}
               />
           </View>
           <NextButton onPress= {() =>  
