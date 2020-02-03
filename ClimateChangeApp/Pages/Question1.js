@@ -9,17 +9,12 @@ import React, { Component } from 'react';
 import {StyleSheet, View} from "react-native";
 import {Header} from '../Components/Header';
 import {Separator} from '../Components/Separator';
-import {QuestionCard} from '../Components/QuestionCard';
-import {
-    widthPercentageToDP as wp,
-    heightPercentageToDP as hp,
-    listenOrientationChange, removeOrientationListener
-  } from 'react-native-responsive-screen';
+import {QuestionCard1} from './QuestionCard1';
 
 class Question1 extends React.Component {
     
     static navigationOptions = { // this is the label in the middle of the nav bar
-        title: 'Eating Habits',
+        title: 'Housing Information',
     };
 
     // note that the navigation prop must be passed to the Question Card
@@ -30,7 +25,7 @@ class Question1 extends React.Component {
                     Housing
                 </Header>
                 <Separator />
-                <QuestionCard navigation = {this.props.navigation} data = {data}/>
+                <QuestionCard1 navigation = {this.props.navigation} data = {data}/>
             </View>
         )
     }
@@ -42,14 +37,12 @@ const data = {
     zipCodePlaceholder: 'Enter your zipcode',
 
     homeSize: 'How big is your home (in square feet)?',
-    homeSizePlaceholder: 'If you\'re not sure, estimate',
 
     numPeople: 'How many people do you live with?',
     numPeoplePlaceholder: 'Enter a number',
 
     homeSizeMin: 0,
-    homeSizeMax: 1000,
-
+    homeSizeMax: 4000,
 
 }
   

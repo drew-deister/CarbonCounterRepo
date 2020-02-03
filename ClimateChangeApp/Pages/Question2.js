@@ -1,51 +1,49 @@
-// Question2.js
-// Author: Ethan Shifrin and Drew Deister
-// Email: Ethan.Shifrin@Vanderbilt.edu
-// Date: 12/19/19
-// parent files: This Questions page is the first page of the Carbon Counter, accessed from the home page (../App.js)
-// purpose: Display the _____* survey, the first of the Carbon Counter survey page.
+// Drew Deister
+// created 2/3/2020
 
-// 1/13/2020: This file was merged manually with the Housing file. 
+// _______________TRANSPORTATION QUESTIONS_______________
 
-// _________________This is dummy file__________________
-
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import {StyleSheet, View} from "react-native";
-import {Button, Text, Card, Icon} from 'react-native-elements';
-import { TextInput } from 'react-native-gesture-handler';
-import { InputQuestion } from '../Components/InputQuestion';
-
-
+import {Header} from '../Components/Header';
+import {Separator} from '../Components/Separator';
+import {QuestionCard2} from './QuestionCard2';
 
 class Question2 extends React.Component {
-    constructor(props) {
-      super(props); // this line is very important 
-      this.state = {
-        first: 0 // give it a default value 
-      };
-    }
-
+    
     static navigationOptions = { // this is the label in the middle of the nav bar
-        title: 'Housing',
+        title: 'Travel Information',
     };
 
-
-    changeFirst(newValue) {
-      this.setState({
-        first: newValue,
-      });
-    }
-   
+    // note that the navigation prop must be passed to the Question Card
     render() {
         return(
-          <View >
-              
-          </View>
+            <View style={styles.container}>
+                <Header>
+                    Transportation
+                </Header>
+                <Separator />
+                <QuestionCard2 navigation = {this.props.navigation} data = {data}/>
+            </View>
         )
     }
-
 }
 
+// TRANSPORTATION DATA
+const data = {
+
+    numMiles: 'How many miles do you travel on a typical school day?', 
+
+}
+  
+const styles = StyleSheet.create({    
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        padding: 0,
+    },
+});
 
 
 

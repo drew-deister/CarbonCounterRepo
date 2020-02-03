@@ -5,9 +5,6 @@
 import React, { Component } from 'react';
 import {StyleSheet, View} from "react-native";
 import {Text, Card, Icon, Button, Slider} from 'react-native-elements';
-import {Header} from '../Components/Header';
-import {Separator} from '../Components/Separator';
-import {QuestionCard} from '../Components/QuestionCard';
 import {diagonalScale} from '../Utilities/Scaling';
 import {
     widthPercentageToDP as wp,
@@ -24,6 +21,7 @@ class SliderQuestion extends React.Component {
     render() {
         return (
             <View style={styles.container}>
+                <Text style = {styles.text}>{this.props.question}</Text>
                 <Text style={{
                             color: 'white',
                             fontSize: diagonalScale(4.5),
@@ -42,7 +40,13 @@ class SliderQuestion extends React.Component {
 
 export {SliderQuestion};
 
-const styles = StyleSheet.create({    
+const styles = StyleSheet.create({ 
+    text: {
+        marginVertical: 8,
+        color: 'white',
+        fontSize: 24,
+        fontWeight: '300'
+    },   
     container: {
         alignItems: 'center',
         flexDirection: 'column',

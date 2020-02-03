@@ -1,25 +1,40 @@
 // Drew Deister
-// 1.14.2020
+// 2.3.2020
+
+// see QuestionCard1 for more thorough documentation
+
+// _______________TRANSPORTATION QUESTION CARD__________________
 
 import React, { Component } from 'react';
 import {StyleSheet, View} from "react-native";
-import {Text, Card, Icon, Button, Slider} from 'react-native-elements';
+import {Icon, Button} from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
 import { InputQuestion } from '../Components/InputQuestion';
 import { SliderQuestion } from '../Components/SliderQuestion';
-import { NextButton } from '../Components/NextButton';
+import * as SecureStore from 'expo-secure-store';
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
     listenOrientationChange, removeOrientationListener
   } from 'react-native-responsive-screen';
 
-class QuestionCard extends React.Component {
+class QuestionCard2 extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-
+        this.state = { 
+            numMiles: "",
         }
+        this.callbackFunction1 = this.callbackFunction1.bind(this) // allows child to update this.state
+
+    }
+
+    callbackFunction1(data) { 
+        this.setState({numMiles: data})
+    }
+    
+
+    saveAndPush() { // figure out how to save slider value
+        SecureStore.setItemAsync("numMiles", this.state.numMiles) // save to async
     }
 
 
@@ -27,17 +42,13 @@ class QuestionCard extends React.Component {
         return(
             <View style = {styles.view}>
                 <ScrollView style = {styles.scrollView}>
-                    <InputQuestion question = {this.props.data.zipCode} placeholder = {this.props.data.zipCodePlaceholder}/>
-                    <InputQuestion question = {this.props.data.homeSize} placeholder = {this.props.data.homeSizePlaceholder}/>
-                    <InputQuestion question = {this.props.data.numPeople} placeholder = {this.props.data.numPeoplePlaceholder}/>
-                    <SliderQuestion min = {this.props.data.homeSizeMin} max = {this.props.data.homeSizeMax}/>
+                    <SliderQuestion question = {this.props.data.numMiles} min = {this.props.data.homeSizeMin} max = {this.props.data.homeSizeMax}/>
                     <Button
                         icon={<Icon name="arrow-forward" color="white"/>}
                         iconRight
                         buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
                         title='Next '
-                        onPress= {() =>  
-                            this.props.navigation.push('Question2')}
+                        onPress= {() => this.saveAndPush()}
                     /> 
                 </ScrollView>
             </View>
@@ -60,4 +71,4 @@ const styles = StyleSheet.create({
 })
 
 
-export {QuestionCard};
+export {QuestionCard2};

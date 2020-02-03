@@ -16,8 +16,15 @@ import {Button, Text, Card, Icon} from 'react-native-elements';
 import { TextInput } from 'react-native-gesture-handler';
 
 
-
 class InputQuestion extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  sendData = (message) => { 
+    this.props.parentCallBack(message); // call the function that was binded to QuestionCard and passed through props
+  }
+
   render() {
     return (
       <View style={styles.view}>
@@ -25,6 +32,7 @@ class InputQuestion extends React.Component {
         <TextInput 
            placeholder={this.props.placeholder}
            placeholderTextColor = {'#898d91'}
+           onChangeText={text => this.sendData(text)} // update parent state (QuestionCard)
            style={styles.questionInput}></TextInput>
       </View>
     )

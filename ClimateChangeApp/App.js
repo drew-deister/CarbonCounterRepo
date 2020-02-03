@@ -7,6 +7,7 @@ import Home from './Pages/Home';
 import Question1 from './Pages/Question1';
 import Question2 from './Pages/Question2';
 
+
 // shirom code 
 global.theme = {
   colors: {
