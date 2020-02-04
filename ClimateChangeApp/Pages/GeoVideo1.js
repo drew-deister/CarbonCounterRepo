@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import {Dimensions, StyleSheet, View, WebView} from "react-native";
 import MapView from 'react-native-maps';
 import {Button, Text, Card, Icon} from 'react-native-elements';
@@ -6,9 +6,10 @@ import { TextInput } from 'react-native-gesture-handler';
 //import { Video } from 'expo-av';
 import { NextButton } from '../Components/NextButton';
 //import { WebView } from 'react-native';
+import { Map } from '../Components/Map';
 
 
-var alps = 
+const alps = 
   {
     latitude: 46.88,
     longitude: 9.65,
@@ -18,29 +19,78 @@ var alps =
 
 const mapstyle = require('../mapstyle.json');
 
+/* const allLocations = [
+  {
+    name: "Germany",
+    longitude: 51,
+    latitude: 10.5,
+  },
+  {
+    name: "France",
+    longitude: 46.2,
+    latitude: 2.2,
+  },
+  {
+    name: "Italy",
+    longitude: 41.8,
+    latitude: 12.5,
+  },
+  {
+    name: "Egypt",
+    longitude: 26.82,
+    latitude: 30.8,
+  },
+] */
+
+
 class GeoVideo1 extends React.Component {
     static navigationOptions = {
       title: 'Around the World',
-    };
+    }; 
 
     constructor(props) {
       super(props);
       this.state = {
-        location: {alps}
+        location: alps,
+        //locationsSeen: []
       }
+      //console.log("locationsSeen:");
+      //console.log(this.state.locationsSeen);
     }
 
-    handleLocationChange(newLocation) {
-      console.log(newLocation);
-      this.setState({
-        location: newLocation
+    handleLocationChange = (newLocation) => {
+      this.setState({ location: newLocation });
+      //this.checkLocationsSeen;
+      //console.log("location change:");
+      //console.log(this.state.location);
+      //console.log("locationsSeen:");
+      //console.log(this.state.locationsSeen); 
+    }; 
+
+    /*checkLocationsSeen = () => {
+      console.log("I gET HERE");
+      var latMin = this.state.location.latitude - this.state.location.latitudeDelta;
+      var latMax = this.state.location.latitude + this.state.location.latitudeDelta;
+      var longMin = this.state.location.longitude - this.state.location.longitudeDelta;
+      var longMax = this.state.location.longitude + this.state.location.longitudeDelta;
+      console.log("latitude range:", latMin, latMax);
+      console.log("longitude range:", longMin, longMax);
+      var seenLocations = allLocations.filter(function (location) {
+        var latSeen = location.latitude > latMin && location.latidue < latMax;
+        var longSeen = location.longitude > longMin && location.longitude < longMax;
+        return latSeen && longSeen;
       });
-    }
+      this.setState({ locationsSeen: seenLocationds});
+      console.log(this.state.locationsSeen); 
+    }; */
 
     render () {
       return(
         <View style={styles.mainContainer}>
           <Text>Zoom to a region of the world you are curious about</Text>
+
+          {/* <Map></Map> */}
+
           <View style={styles.mapContainer}>
             <MapView 
               
@@ -49,7 +99,7 @@ class GeoVideo1 extends React.Component {
               //mapType='satellite'
               customMapStyle={mapstyle}
               initialRegion={alps}
-              region={this.location}
+              region={this.state.location}
               onRegionChange={this.handleLocationChange}
               />
           </View>
