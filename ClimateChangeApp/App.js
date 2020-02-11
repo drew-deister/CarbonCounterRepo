@@ -1,3 +1,6 @@
+
+// hello this is Asaf's Project
+
 import React from 'react';
 import {StyleSheet, Text, View } from 'react-native';
 import {createAppContainer, SafeAreaView} from 'react-navigation';
@@ -44,7 +47,7 @@ const AppNavigator = createStackNavigator(
                 backgroundColor: '#0B7310',
             },
             headerTitleStyle: {
-                color: 'white',
+                color: 'blue',
                 fontWeight: '500',
             },
             headerTintColor: '#ffffff'
