@@ -9,7 +9,6 @@
 // To Do:
 //    1. Implement state to keep track of user input
 
-
 import React, { Component, useState } from 'react';
 import {StyleSheet, View} from "react-native";
 import {Button, Text, Card, Icon} from 'react-native-elements';
@@ -19,25 +18,30 @@ import { TextInput } from 'react-native-gesture-handler';
 class InputQuestion extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      keyboardType: this.props.keyboardType
+    }
   }
 
   sendData = (message) => { 
     this.props.parentCallBack(message); // call the function that was binded to QuestionCard and passed through props
   }
 
+
   render() {
     return (
       <View style={styles.view}>
         <Text style = {styles.text}>{this.props.question}</Text>
         <TextInput 
-           placeholder={this.props.placeholder}
-           placeholderTextColor = {'#898d91'}
-           onChangeText={text => this.sendData(text)} // update parent state (QuestionCard)
-           style={styles.questionInput}></TextInput>
+          returnKeyType = {'done'}
+          keyboardType = {this.state.keyboardType}
+          placeholder={this.props.placeholder}
+          placeholderTextColor = {'#898d91'}
+          onChangeText={text => this.sendData(text)} // update parent state (QuestionCard)
+          style={styles.questionInput}></TextInput>
       </View>
     )
   }
-    
 }
 
 export { InputQuestion };
@@ -52,7 +56,8 @@ const styles = StyleSheet.create({
   },
   view: {
     marginVertical: 8,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    alignItems: 'center'
   },
   questionInput: {
     borderColor: 'green',

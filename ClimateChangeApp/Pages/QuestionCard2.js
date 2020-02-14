@@ -7,10 +7,10 @@
 
 import React, { Component } from 'react';
 import {StyleSheet, View} from "react-native";
-import {Icon, Button} from 'react-native-elements';
+import {Icon, Button, Slider, Text} from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
+import {diagonalScale} from '../Utilities/Scaling';
 import { InputQuestion } from '../Components/InputQuestion';
-import { SliderQuestion } from '../Components/SliderQuestion';
 import * as SecureStore from 'expo-secure-store';
 import {
     widthPercentageToDP as wp,
@@ -22,7 +22,8 @@ class QuestionCard2 extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
-            numMiles: "",
+            numMiles: 1,
+            greenAmount: 1,
         }
         this.callbackFunction1 = this.callbackFunction1.bind(this) // allows child to update this.state
 
@@ -34,7 +35,8 @@ class QuestionCard2 extends React.Component {
     
 
     saveAndPush() { // figure out how to save slider value
-        SecureStore.setItemAsync("numMiles", this.state.numMiles) // save to async
+        SecureStore.setItemAsync("numMiles", toString(this.state.numMiles)) // save to async
+        SecureStore.setItemAsync("greenAmount", toString(this.state.greenAmount)) // save to async
     }
 
 
@@ -42,14 +44,37 @@ class QuestionCard2 extends React.Component {
         return(
             <View style = {styles.view}>
                 <ScrollView style = {styles.scrollView}>
-                    <SliderQuestion question = {this.props.data.numMiles} min = {this.props.data.homeSizeMin} max = {this.props.data.homeSizeMax}/>
-                    <Button
-                        icon={<Icon name="arrow-forward" color="white"/>}
-                        iconRight
-                        buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
-                        title='Next '
-                        onPress= {() => this.saveAndPush()}
-                    /> 
+                    <View style = {styles.view}>
+                        <Text style = {styles.text}>{this.props.data.numMiles}</Text>
+                        <Text style={{
+                            color: 'white',
+                            fontSize: diagonalScale(4.5),
+                            fontWeight: 'bold'}}> {this.state.numMiles}</Text>
+                        <Slider 
+                            width = {wp('80%')}
+                            onValueChange={(sliderValue) => this.setState({numMiles: sliderValue})} 
+                            value={this.state.numMiles}
+                            minimumValue={0} maximumValue={100} step = {1}/>
+
+                        <Text style = {styles.text}>{this.props.data.greenAmount}</Text>
+                        <View style = {styles.rowStyleView}>
+                            <Text style = {styles.sliderText}>Not Green</Text>
+                            <Slider style = {styles.slider}
+                                onValueChange={(sliderValue) => this.setState({greenAmount: sliderValue})} 
+                                value={this.state.greenAmount}
+                                minimumValue={0} maximumValue={100} step = {1}/>
+                            <Text style = {styles.sliderText}>Green</Text>
+                        </View>
+                        
+                        <Button
+                            icon={<Icon name="arrow-forward" color="white"/>}
+                            iconRight
+                            buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
+                            title='Next '
+                            onPress= {() => this.saveAndPush()}
+                        />
+                    </View>
+                     
                 </ScrollView>
             </View>
         )    
@@ -59,15 +84,37 @@ class QuestionCard2 extends React.Component {
 
 
 const styles = StyleSheet.create({
+    text: {
+        marginVertical: 8,
+        color: 'white',
+        fontSize: 24,
+        fontWeight: '300'
+    },
+    rowStyleView: {
+        flexDirection: 'row',
+        marginVertical: 20
+    },
     view: {
-        marginTop: 20
+        alignItems: 'center',
     },
     scrollView: {
         backgroundColor: '#0B7310',
         width: wp('100%'),
         padding: 20,
         borderRadius: 50
+    },
+    sliderText: {
+        color: 'white',
+        fontSize: 18,
+        fontWeight: '300'
+    },
+    slider: {
+        marginLeft: 4,
+        marginRight: 4,
+        width: wp('60%')
     }
+
+    
 })
 
 

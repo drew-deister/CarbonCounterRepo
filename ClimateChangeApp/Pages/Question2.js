@@ -22,7 +22,7 @@ class Question2 extends React.Component {
                 <Header>
                     Transportation
                 </Header>
-                <Separator />
+                <Separator/>
                 <QuestionCard2 navigation = {this.props.navigation} data = {data}/>
             </View>
         )
@@ -31,8 +31,9 @@ class Question2 extends React.Component {
 
 // TRANSPORTATION DATA
 const data = {
-
     numMiles: 'How many miles do you travel on a typical school day?', 
+    
+    greenAmount: 'How much of your daily travel to school is by a \'greener\' form of transportation?' 
 
 }
   
