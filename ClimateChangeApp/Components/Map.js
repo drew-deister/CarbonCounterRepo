@@ -1,5 +1,5 @@
 import React from 'react';
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 import {StyleSheet, View} from "react-native";
 
 const alps = 
@@ -9,6 +9,7 @@ const alps =
     latitudeDelta: 15,
     longitudeDelta: 15,
   }
+
 
 class Map extends React.Component {
     constructor(props) {
@@ -35,7 +36,16 @@ class Map extends React.Component {
                     initialRegion={alps}
                     region={this.state.location}
                     onRegionChange={this.handleLocationChange}
-                />
+                >
+                  {this.state.markers.map(marker => (
+                    <Marker
+                      key={marker.key}
+                      coordinate={marker.coordinate}
+                      pinColor={marker.color}
+                    />
+                  ))}
+
+                </MapView>
             </View>
         )
     }

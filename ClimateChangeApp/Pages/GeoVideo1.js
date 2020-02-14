@@ -1,12 +1,14 @@
 import React, { Component, useState } from 'react';
 import {Dimensions, StyleSheet, View, WebView} from "react-native";
-import MapView from 'react-native-maps';
+import MapView, {Marker} from 'react-native-maps';
 import {Button, Text, Card, Icon} from 'react-native-elements';
 import { TextInput } from 'react-native-gesture-handler';
 //import { Video } from 'expo-av';
 import { NextButton } from '../Components/NextButton';
 //import { WebView } from 'react-native';
 import { Map } from '../Components/Map';
+
+
 
 
 const alps = 
@@ -17,7 +19,19 @@ const alps =
     longitudeDelta: 15,
   }
 
+
+  let markers = [
+    {
+      coordinate: {     latitude: 45.65,
+        longitude: -78.90,}
+    }
+  ];
+
+  
+
 const mapstyle = require('../mapstyle.json');
+
+
 
 /* const allLocations = [
   {
@@ -52,6 +66,7 @@ class GeoVideo1 extends React.Component {
       super(props);
       this.state = {
         location: alps,
+        markers: markers
         //locationsSeen: []
       }
       //console.log("locationsSeen:");
@@ -99,9 +114,16 @@ class GeoVideo1 extends React.Component {
               //mapType='satellite'
               customMapStyle={mapstyle}
               initialRegion={alps}
-              region={this.state.location}
-              onRegionChange={this.handleLocationChange}
-              />
+              //region={this.state.location}
+              //onRegionChange={this.handleLocationChange}
+              >
+                                 {this.state.markers.map((marker, key)=> (
+                    <Marker
+                      key={key}
+                      coordinate={marker.coordinate}
+                    />
+                  ))}
+              </MapView>
           </View>
           <NextButton onPress= {() =>  
                     this.props.navigation.navigate('Question2')}>
