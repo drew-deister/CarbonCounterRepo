@@ -2,17 +2,20 @@
 // 1.14.2020
 
 // TODO: add a query for the information when the sreen is loaded?
+// note: Creating child components is generally best practices for everything on this screen.
+//       However, QuestionCard needs access to all child states, and since a child Slider component
+//       would need to update almost continuously, I have chosen to leave it as part of this parent.
 
 // _______________HOUSING QUESTION CARD__________________
 
 
 import React, { Component } from 'react';
 import {StyleSheet, View} from "react-native";
-import {Icon, Button} from 'react-native-elements';
+import {Text, Icon, Button, Slider} from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
 import { InputQuestion } from '../Components/InputQuestion';
-import { SliderQuestion } from '../Components/SliderQuestion';
 import * as SecureStore from 'expo-secure-store';
+import {diagonalScale} from '../Utilities/Scaling';
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
@@ -26,25 +29,40 @@ class QuestionCard1 extends React.Component {
         // it is superior to letting the subcompents manage themselves because we can access their states
         // and save them when the next button is pushed
         this.state = { 
-            zipCode: "",
-            numPeople: ""
+            zipCode: 0,
+            numPeople: 0,
+            sliderValue: 1,
         }
         this.callbackFunction1 = this.callbackFunction1.bind(this) // allows child to update this.state
         this.callbackFunction2 = this.callbackFunction2.bind(this)
-
     }
 
+    // MARK: Callback/state change functions
     callbackFunction1(data) { 
         this.setState({zipCode: data})
     }
     callbackFunction2(data) { 
         this.setState({numPeople: data})
     }
+    onChange(values) {
+        this.setState({sliderValue: values})
+    }
 
-    saveAndPush() { // figure out how to save slider value
-        SecureStore.setItemAsync("zipCode", this.state.zipCode) // save to async
-        SecureStore.setItemAsync("numPeople", this.state.numPeople) // save to async
-        this.props.navigation.push('Question2')
+    // called when next button is pushed
+    saveAndPush() {
+        if (this.checkValid()) {
+            SecureStore.setItemAsync("zipCode", this.state.zipCode) // save to async
+            SecureStore.setItemAsync("numPeople", toString(this.state.numPeople))
+            SecureStore.setItemAsync("squareFootage", toString(this.state.sliderValue))
+            this.props.navigation.push('Question2')
+        } else {
+            alert("Please enter a valid zipcode.")
+        }
+    }
+
+    // checks whether current inputs are valid
+    checkValid() {
+        return (this.state.zipCode.length >= 5)
     }
 
 
@@ -52,16 +70,35 @@ class QuestionCard1 extends React.Component {
         return(
             <View style = {styles.view}>
                 <ScrollView style = {styles.scrollView}>
-                    <InputQuestion parentCallBack = {this.callbackFunction1} question = {this.props.data.zipCode} placeholder = {this.props.data.zipCodePlaceholder}/>
-                    <InputQuestion parentCallBack = {this.callbackFunction2} question = {this.props.data.numPeople} placeholder = {this.props.data.numPeoplePlaceholder}/>
-                    <SliderQuestion question = {this.props.data.homeSize} min = {this.props.data.homeSizeMin} max = {this.props.data.homeSizeMax}/>
-                    <Button
-                        icon={<Icon name="arrow-forward" color="white"/>}
-                        iconRight
-                        buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
-                        title='Next '
-                        onPress= {() => this.saveAndPush()}
-                    /> 
+                    <View style = {styles.view}>
+                        <InputQuestion 
+                            keyboardType = {'numeric'}
+                            parentCallBack = {this.callbackFunction1} 
+                            question = {this.props.data.zipCode} 
+                            placeholder = {this.props.data.zipCodePlaceholder}/>
+                        <InputQuestion 
+                            keyboardType = {'numeric'}
+                            parentCallBack = {this.callbackFunction2} 
+                            question = {this.props.data.numPeople} 
+                            placeholder = {this.props.data.numPeoplePlaceholder}/>
+                        <Text style = {styles.text}>{this.props.data.homeSize}</Text>
+                        <Text style={{
+                            color: 'white',
+                            fontSize: diagonalScale(4.5),
+                            fontWeight: 'bold'}}> {this.state.sliderValue}</Text>
+                        <Slider 
+                            width = {wp('80%')}
+                            onValueChange={(sliderValue) => this.setState({sliderValue})} 
+                            value={this.state.sliderValue}
+                            minimumValue={1} maximumValue={4000} step = {10}/>
+                        <Button
+                            icon={<Icon name="arrow-forward" color="white"/>}
+                            iconRight
+                            buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
+                            title='Next '
+                            onPress= {() => this.saveAndPush()}
+                        /> 
+                    </View>
                 </ScrollView>
             </View>
         )    
@@ -71,8 +108,14 @@ class QuestionCard1 extends React.Component {
 
 
 const styles = StyleSheet.create({
+    text: {
+        marginVertical: 8,
+        color: 'white',
+        fontSize: 24,
+        fontWeight: '300'
+    },
     view: {
-        marginTop: 20
+        alignItems: 'center'
     },
     scrollView: {
         backgroundColor: '#0B7310',
