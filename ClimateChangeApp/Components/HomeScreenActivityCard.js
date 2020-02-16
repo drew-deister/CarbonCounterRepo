@@ -15,8 +15,11 @@ class HomeScreenActivityCard extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Image style = {styles.image} source = {require('../assets/small-fruit-tree-growing-on-earth.png')} />
-                <HomeScreenActivityButton onPress= {() => 
+                {/*<Image style = {styles.image} source = {require('../assets/small-fruit-tree-growing-on-earth.png')} />*/}
+                <View style={styles.blankView}></View>
+                <HomeScreenActivityButton 
+                    style = {{flex: 2}} 
+                            onPress= {() => 
                     this.props.navigation.navigate('Question1')}>
                     {this.props.title}
                 </HomeScreenActivityButton>
@@ -27,8 +30,10 @@ class HomeScreenActivityCard extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row',
-        backgroundColor: '#0B7310',
+        width: '80%',
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+        backgroundColor: '#73A388',//'#0B7310',
         marginTop: 30,
         height: 150,
         borderRadius: 20,
@@ -44,7 +49,11 @@ const styles = StyleSheet.create({
         flex: 1,
         height: '100%',
         padding: 20
+    },
+    blankView: {
+        flex: 3,
     }
+    
 });
 
 

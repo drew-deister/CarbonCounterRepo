@@ -16,14 +16,14 @@ const HomeScreenActivityButton = (props) => {
 
 const styles = StyleSheet.create({
   buttonBody: {
-    backgroundColor: 'white',
+    backgroundColor: '#73A388',//#0B7310',//'white',
     padding: 20,
     borderRadius: 8,
     marginVertical: 8,
     marginRight: 8,
   },
   buttonText:{
-    color: '#0B7310',
+    color: 'white',
     fontSize: 18,
     fontWeight: '600',
   }
