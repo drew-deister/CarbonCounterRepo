@@ -10,7 +10,6 @@ import {StyleSheet, View} from "react-native";
 import {Icon, Button, Slider, Text} from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
 import {diagonalScale} from '../Utilities/Scaling';
-import { InputQuestion } from '../Components/InputQuestion';
 import * as SecureStore from 'expo-secure-store';
 import {
     widthPercentageToDP as wp,
@@ -24,6 +23,7 @@ class QuestionCard2 extends React.Component {
         this.state = { 
             numMiles: 1,
             greenAmount: 1,
+            mode: '',
         }
         this.callbackFunction1 = this.callbackFunction1.bind(this) // allows child to update this.state
 
@@ -35,15 +35,23 @@ class QuestionCard2 extends React.Component {
     
 
     saveAndPush() { // figure out how to save slider value
-        SecureStore.setItemAsync("numMiles", toString(this.state.numMiles)) // save to async
-        SecureStore.setItemAsync("greenAmount", toString(this.state.greenAmount)) // save to async
+        if (this.checkValid()) {
+            SecureStore.setItemAsync("numMiles", toString(this.state.numMiles)) // save to async
+            SecureStore.setItemAsync("greenAmount", toString(this.state.greenAmount)) // save to async
+        } else {
+            alert('Please select a mode of transportation.')
+        }
+        
+    }
+
+    checkValid() {
+        return (this.state.mode != '')
     }
 
 
     render() {
         return(
-            <View style = {styles.view}>
-                <ScrollView style = {styles.scrollView}>
+            <ScrollView style = {styles.scrollView}>
                     <View style = {styles.view}>
                         <Text style = {styles.text}>{this.props.data.numMiles}</Text>
                         <Text style={{
@@ -65,18 +73,32 @@ class QuestionCard2 extends React.Component {
                                 minimumValue={0} maximumValue={100} step = {1}/>
                             <Text style = {styles.sliderText}>Green</Text>
                         </View>
-                        
+
+
+                        <Text style = {styles.text}>{this.props.data.transportationMode}</Text>
+                        <Button
+                            title='Diesel' buttonStyle={styles.button}// update this to move lower 
+                            onPress = {() => this.setState({mode: 'Diesel'})}/>
+                        <Button
+                            title='Sedan' buttonStyle={styles.button}
+                            onPress = {() => this.setState({mode: 'Sedan'})}/>
+                        <Button
+                            title='Pickup Truck' buttonStyle={styles.button}
+                            onPress = {() => this.setState({mode: 'Pickup Truck'})}/>
+                        <Button
+                            title='Train or Bus' buttonStyle={styles.button} 
+                            onPress = {() => this.setState({mode: 'Train or Bus'})}/>
+                        <Button
+                            title='Bike or Walk' buttonStyle={styles.button} 
+                            onPress = {() => this.setState({mode: 'Bike or Walk'})}/>
                         <Button
                             icon={<Icon name="arrow-forward" color="white"/>}
                             iconRight
-                            buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
+                            buttonStyle={styles.nextButton}// update this to move lower 
                             title='Next '
-                            onPress= {() => this.saveAndPush()}
-                        />
-                    </View>
-                     
-                </ScrollView>
-            </View>
+                            onPress= {() => this.saveAndPush()}/>
+                    </View> 
+            </ScrollView>
         )    
     }
 
@@ -101,7 +123,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#0B7310',
         width: wp('100%'),
         padding: 20,
-        borderRadius: 50
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+
     },
     sliderText: {
         color: 'white',
@@ -112,7 +136,17 @@ const styles = StyleSheet.create({
         marginLeft: 4,
         marginRight: 4,
         width: wp('60%')
-    }
+    },
+    button: { 
+        backgroundColor: 'gray', // change this 
+        marginBottom: 20,
+        width: wp('40%')
+    },
+    nextButton: {
+        backgroundColor: 'gray',
+        marginBottom: 50,
+        width: wp('55%')
+    },
 
     
 })

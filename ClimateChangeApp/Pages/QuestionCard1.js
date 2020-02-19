@@ -50,7 +50,7 @@ class QuestionCard1 extends React.Component {
 
     // called when next button is pushed
     saveAndPush() {
-        if (this.checkValid()) {
+        if (true) { // change this to CHECK VALID
             SecureStore.setItemAsync("zipCode", this.state.zipCode) // save to async
             SecureStore.setItemAsync("numPeople", toString(this.state.numPeople))
             SecureStore.setItemAsync("squareFootage", toString(this.state.sliderValue))

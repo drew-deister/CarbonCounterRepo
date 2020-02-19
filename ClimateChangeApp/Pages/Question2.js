@@ -33,7 +33,9 @@ class Question2 extends React.Component {
 const data = {
     numMiles: 'How many miles do you travel on a typical school day?', 
     
-    greenAmount: 'How much of your daily travel to school is by a \'greener\' form of transportation?' 
+    greenAmount: 'How much of your daily travel to school is by a \'greener\' form of transportation?' ,
+
+    transportationMode: 'Select your most common mode of transportation:'
 
 }
   
