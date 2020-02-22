@@ -24,14 +24,18 @@ export default class Home extends Component {
         return (
             <ScrollView style = {styles.scrollview}>
                 <HomeScreenActivityCard 
-                    title = {"Carbon Counter"}
+                    title = {"Carbon Counter"}      
                     navigateToActivity = 'Question1'
                     navigation = {this.props.navigation}/>
                 <HomeScreenActivityCard
                     title = {"WePlanet"}
                     navigateToActivity = 'GeoVideo1'
                     navigation = {this.props.navigation} />
-                <HomeScreenActivityCard navigation = {this.props.navigation} />
+                <HomeScreenActivityCard 
+                    // default title: 'Activity'
+                    // default navigateToActivity: 'Question1'
+                    navigation = {this.props.navigation}
+                    /> 
                 <HomeScreenActivityCard navigation = {this.props.navigation} />
                 <HomeScreenActivityCard navigation = {this.props.navigation} />
             </ScrollView>
