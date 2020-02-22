@@ -5,7 +5,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 import {StackViewStyleInterpolator} from 'react-navigation-stack'
 import Home from './Pages/Home';
 import Question1 from './Pages/Question1';
-import Question2 from './Pages/Question2';
+import Results from './Pages/Results';
 
 
 export default class App extends React.Component { // this is like the main method of the project
@@ -31,7 +31,7 @@ const AppNavigator = createStackNavigator(
     { // road map for the different parts of our navigation
       Home: {screen: Home},
       Question1: {screen: Question1},
-      Question2: {screen: Question2}
+      Results: {screen: Results}
     },
     {
         initialRouteName: 'Home',

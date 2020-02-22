@@ -23,16 +23,16 @@ class Question1 extends React.Component {
                     alert('Vegatarian')}>
                     Vegatarian
                 </Button>
-                <Button onPress= {() => 
+                <Button onPress= {() =>
                     alert('Everything')}>
                     I eat everything
                 </Button>
-                <Button onPress= {() => 
+                <Button onPress= {() =>
                     alert('Carnivore')}>
                     Only meat
                 </Button>
-                <NextButton onPress= {() =>  
-                    this.props.navigation.navigate('Question2')}>
+                <NextButton onPress= {() =>
+                    this.props.navigation.navigate('Results')}>
                     Next
                 </NextButton>
             </View>

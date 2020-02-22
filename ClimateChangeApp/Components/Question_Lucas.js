@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Georgia',
   },
   questionBody: {
-    backgroundColor: '#20b2aa',
+    backgroundColor: '#a9a9a9',
     padding: 12,
     alignItems: 'center',
     marginVertical: 8,

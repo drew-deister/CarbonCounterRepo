@@ -9,7 +9,7 @@ import BarCharts from '../Components/BarCharts';
 
 
 
-class Question2 extends React.Component {
+class Results extends React.Component {
     static navigationOptions = { // this is the label in the middle of the nav bar
         title: 'Results',
     };
@@ -29,7 +29,7 @@ class Question2 extends React.Component {
                 <Separator />
             </View>
             <Picker
-             style={{width: 250}}
+             style={{height: 100, width: 250}}
              selectedValue={this.state.language}
              onValueChange={(lang) => this.setState({language: lang})}>
              <Picker.Item label = 'Pounds of CO2 Burned' value = 'lbs' />
@@ -55,4 +55,4 @@ const styles = StyleSheet.create({
     },
   });
 
-export default Question2;
+export default Results;
