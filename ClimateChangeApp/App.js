@@ -6,6 +6,8 @@ import {StackViewStyleInterpolator} from 'react-navigation-stack'
 import Home from './Pages/Home';
 import Question1 from './Pages/Question1';
 import Question2 from './Pages/Question2';
+import GeoVideo1 from './Pages/GeoVideo1';
+import GeoVideo2 from './Pages/GeoVideo2';
 
 
 // shirom code 
@@ -54,7 +56,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+}); 
 
 function LogoTitle() {
     return (
@@ -71,6 +73,8 @@ const AppNavigator = createStackNavigator(
       Home: {screen: Home},
       Question1: {screen: Question1},
       Question2: {screen: Question2},
+      GeoVideo1: {screen: GeoVideo1},
+      GeoVideo2: {screen: GeoVideo2}
     },
     {
         initialRouteName: 'Home',

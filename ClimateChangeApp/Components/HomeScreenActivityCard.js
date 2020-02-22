@@ -4,12 +4,22 @@ import {Text, Card, Icon} from 'react-native-elements';
 import {HomeScreenActivityButton} from "./HomeScreenActivityButton"
 import {Alert} from "react-native";
 import { heightPercentageToDP } from 'react-native-responsive-screen';
+import PropTypes from 'prop-types';
 
 
 class HomeScreenActivityCard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
+        //nextScreen: props.children;
+    }
+    static propTypes = {
+        title: PropTypes.string,
+        navigateToActivity: PropTypes.string
+    }
+    static defaultProps = {
+        title: 'Activity',
+        navigateToActivity: 'Question1',
     }
 
     render() {
@@ -20,8 +30,12 @@ class HomeScreenActivityCard extends React.Component {
                 <HomeScreenActivityButton 
                     style = {{flex: 2}} 
                             onPress= {() => 
-                    this.props.navigation.navigate('Question1')}>
+                    this.props.navigation.navigate(this.props.navigateToActivity)}>
                     {this.props.title}
+                {/* <Image style = {styles.image} source = {require('../assets/small-fruit-tree-growing-on-earth.png')} /> */}
+                {/* <HomeScreenActivityButton onPress= {() => 
+                    this.props.navigation.navigate(this.props.navigateToActivity)}>
+                    {this.props.title} */}
                 </HomeScreenActivityButton>
             </View>
         )

@@ -45,11 +45,21 @@ export default class Home extends Component {
                 
                 
 
-                <HomeScreenActivityCard title = {"Count some carbon!"} navigation = {this.props.navigation} style={styles.carbonCounterButton}/>
-                <HomeScreenActivityCard title = {"Around the World"} navigation = {this.props.navigation} />
-                <HomeScreenActivityCard title = {"Activity #3"} navigation = {this.props.navigation} />
-                <HomeScreenActivityCard title = {"Activity #4"} navigation = {this.props.navigation} />
-                <HomeScreenActivityCard title = {"Activity #5"} navigation = {this.props.navigation} />
+                <HomeScreenActivityCard 
+                    title = {"Carbon Counter"}      
+                    navigateToActivity = 'Question1'
+                    navigation = {this.props.navigation}/>
+                <HomeScreenActivityCard
+                    title = {"WePlanet"}
+                    navigateToActivity = 'GeoVideo1'
+                    navigation = {this.props.navigation} />
+                <HomeScreenActivityCard 
+                    // default title: 'Activity'
+                    // default navigateToActivity: 'Question1'
+                    navigation = {this.props.navigation}
+                    /> 
+                <HomeScreenActivityCard navigation = {this.props.navigation} />
+                <HomeScreenActivityCard navigation = {this.props.navigation} />
             </ScrollView>
             
         );
