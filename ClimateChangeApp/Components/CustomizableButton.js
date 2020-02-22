@@ -2,8 +2,13 @@
 
 import React from 'react';
 import {Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+  listenOrientationChange, removeOrientationListener
+} from 'react-native-responsive-screen';
 
-const Button = (props) => {
+const CustomizableButton = (props) => {
   return (
     <TouchableOpacity
         onPress={props.onPress}
@@ -12,14 +17,15 @@ const Button = (props) => {
     </TouchableOpacity>
   )
 }
+
+// this is good style 
 const styles = StyleSheet.create({
   buttonBody: {
     backgroundColor: '#00aeef',
-    width: '100%',
     padding: 20,
-    // bottom: '-25%',
     borderRadius: 8,
     marginVertical: 8,
+    width: wp('80%')
   },
   buttonText:{
     color: 'white',
@@ -28,4 +34,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export {Button};
+export {CustomizableButton};

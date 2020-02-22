@@ -10,6 +10,37 @@ import GeoVideo1 from './Pages/GeoVideo1';
 import GeoVideo2 from './Pages/GeoVideo2';
 
 
+// shirom code 
+global.theme = {
+  colors: {
+      primary: '#0B7310',
+  },
+  Slider: {
+      // maximumTrackTintColor: '#6C757D',
+      minimumTrackTintColor: '#6C757D',
+      thumbStyle: {
+          backgroundColor: '#0B7310',
+          width: 25,
+          height: 25,
+          borderRadius: 25 / 2,
+      },
+      thumbTouchSize: {
+          width: 50,
+          height: 50,
+      },
+      trackStyle: {
+          height: 10,
+          borderRadius: 10 / 2
+      }
+  },
+  Card: {
+      containerStyle: {
+          borderRadius: 3
+      }
+  }
+};
+
+
 export default class App extends React.Component { // this is like the main method of the project
   render() {
       return (
