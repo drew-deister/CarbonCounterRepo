@@ -1,58 +1,50 @@
+// Drew Deister
+// created 2/3/2020
+
+// _______________TRANSPORTATION QUESTIONS_______________
+
 import React, { Component } from 'react';
-import {StyleSheet, View, Picker} from "react-native";
-import {Text, Card, Icon} from 'react-native-elements';
-import {Button} from '../Components/Button';
-import {Question} from '../Components/Question_Lucas';
+import {StyleSheet, View} from "react-native";
+import {Header} from '../Components/Header';
 import {Separator} from '../Components/Separator';
-import PieCharts from '../Components/PieCharts';
-import BarCharts from '../Components/BarCharts';
-
-
+import {QuestionCard2} from './QuestionCard2';
 
 class Question2 extends React.Component {
+
     static navigationOptions = { // this is the label in the middle of the nav bar
-        title: 'Results',
+        title: 'Travel Information',
     };
-    constructor(props) {
-       super(props);
-       this.state = {
-         state: 'Pounds of CO2 Burned'
-       }
-     }
+
+    // note that the navigation prop must be passed to the Question Card
     render() {
         return(
-          <View>
             <View style={styles.container}>
-                <Question>
-                    These are your results
-                </Question>
+                <Header>
+                    Transportation
+                </Header>
                 <Separator />
+                <QuestionCard2 navigation = {this.props.navigation} data = {data}/>
             </View>
-            <Picker
-             style={{width: 250}}
-             selectedValue={this.state.language}
-             onValueChange={(lang) => this.setState({language: lang})}>
-             <Picker.Item label = 'Pounds of CO2 Burned' value = 'lbs' />
-             <Picker.Item label = 'Solar Panel Equivalence' value = 'spe' />
-             <Picker.Item label = 'Human Equivalence' value = 'he' />
-             <Picker.Item label = 'Temp Rise in 50 Years' value = 'temp' />
-           </Picker>
-            <BarCharts />
-            <PieCharts/>
-          </View>
         )
     }
 }
 
+// TRANSPORTATION DATA
+const data = {
+
+    numMiles: 'How many miles do you travel on a typical school day?',
+
+}
+
 const styles = StyleSheet.create({
     container: {
-      //flex: 1,
-      backgroundColor: '#00ffff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    //   justifyContent: 'space-around',
-      padding: 20,
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        padding: 0,
     },
-  });
+});
+
+
 
 export default Question2;

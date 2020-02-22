@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, Picker} from "react-native";
 import {Text, Card, Icon} from 'react-native-elements';
-import {Button} from '../Components/Button';
 import {Question} from '../Components/Question_Lucas';
 import {Separator} from '../Components/Separator';
 import PieCharts from '../Components/PieCharts';
