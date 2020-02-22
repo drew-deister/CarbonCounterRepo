@@ -9,6 +9,17 @@ import {
 } from 'react-native-responsive-screen';
 //import { black } from 'react-native-paper/lib/typescript/src/styles/colors';
 
+function LogoTitle() {
+    return (
+      <Image
+        style={{ width: 50, height: 50 }}
+        source={require('../assets/Logo.png')}
+      />
+    );
+  }
+
+
+
 export default class Home extends Component {
     constructor(props) {
         super(props);
@@ -16,7 +27,8 @@ export default class Home extends Component {
     }
 
     static navigationOptions = {
-        title: 'Welcome',
+        title: ' ',
+        headerTitle: LogoTitle
     };
 
     // "main method"

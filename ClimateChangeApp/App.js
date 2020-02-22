@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View } from 'react-native';
+import {StyleSheet, Text, View, Image} from 'react-native';
 import {createAppContainer, SafeAreaView} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {StackViewStyleInterpolator} from 'react-navigation-stack'
@@ -56,6 +56,14 @@ const styles = StyleSheet.create({
   },
 });
 
+function LogoTitle() {
+    return (
+      <Image
+        style={{ width: 50, height: 50 }}
+        source={require('./assets/Logo.png')}
+      />
+    );
+  }
 
 // this is very important, use this as reference when you don't understand navigation
 const AppNavigator = createStackNavigator(
@@ -71,14 +79,16 @@ const AppNavigator = createStackNavigator(
             screenInterpolator: StackViewStyleInterpolator.forHorizontal
         }),
         defaultNavigationOptions: { // these will be augmented by the navigation options of the respective screens
+            // https://reactnavigation.org/docs/en/headers.html
             headerStyle: {
-                backgroundColor: '#0B7310',
+                backgroundColor: 'white',
             },
-            headerTitleStyle: {
-                color: 'white',
-                fontWeight: '500',
-            },
-            headerTintColor: '#ffffff'
+            headerTitle: LogoTitle,
+            // headerTitleStyle: {
+            //     color: 'white',
+            //     fontWeight: '500',
+            // },
+            headerTintColor: '#73A388'
         },
     },
 )
