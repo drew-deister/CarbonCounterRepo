@@ -126,7 +126,7 @@ class GeoVideo1 extends React.Component {
               </MapView>
           </View>
           <NextButton onPress= {() =>  
-                    this.props.navigation.navigate('Question2')}>
+                    this.props.navigation.navigate('GeoVideo2')}>
                     Next
           </NextButton>
         </View>
