@@ -33,19 +33,19 @@ class QuestionCard2 extends React.Component {
 
     saveAndPush() { // change this to some checkvalue function
         if (this.checkValid()) {
-            SecureStore.setItemAsync("numMiles", toString(this.state.numMiles)) // save to async
-            SecureStore.setItemAsync("greenAmount", toString(this.state.greenAmount)) // save to async
-            SecureStore.setItemAsync("summerChange", toString(this.state.summerChange))
-            SecureStore.setItemAsync("mode", this.state.mode)
+            SecureStore.setItemAsync("numMiles", JSON.stringify(this.state.numMiles)) // save to async
+            SecureStore.setItemAsync("greenAmount", JSON.stringify(this.state.greenAmount)) // save to async
+            SecureStore.setItemAsync("summerChange", JSON.stringify(this.state.summerChange))
+            SecureStore.setItemAsync("mode", JSON.stringify(this.state.mode))
             this.props.navigation.push('Question3')
-
             } else {
             alert('Please answer all questions.')
         }
     }
 
     checkValid() { // do some sort of error checking here
-        return (this.state.numMiles != 1)
+        // return (this.state.numMiles != 1)
+        return true
     }
 
 
@@ -153,7 +153,8 @@ const styles = StyleSheet.create({
     },
     nextButton: {
         backgroundColor: 'gray',
-        marginVertical: 50,
+        marginBottom: 80,
+        marginTop: 50,
         width: wp('55%')
     },
 

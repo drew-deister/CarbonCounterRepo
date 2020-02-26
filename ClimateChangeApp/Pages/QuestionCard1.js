@@ -33,8 +33,8 @@ class QuestionCard1 extends React.Component {
             numPeople: 0,
             sliderValue: 1,
         }
-        this.callbackFunction1 = this.callbackFunction1.bind(this);
-        this.callbackFunction2 = this.callbackFunction1.bind(this);
+        this.callbackFunction1 = this.callbackFunction1.bind(this); // make sure these are both correct
+        this.callbackFunction2 = this.callbackFunction2.bind(this);
 
     }
 
@@ -49,9 +49,9 @@ class QuestionCard1 extends React.Component {
     // called when next button is pushed
     saveAndPush() {
         if (this.checkValid()) { // change this to CHECK VALID
-            SecureStore.setItemAsync("zipCode", this.state.zipCode) // save to async
-            SecureStore.setItemAsync("numPeople", toString(this.state.numPeople))
-            SecureStore.setItemAsync("squareFootage", toString(this.state.sliderValue))
+            SecureStore.setItemAsync("zipCode", JSON.stringify(this.state.zipCode)) // save to async
+            SecureStore.setItemAsync("numPeople", JSON.stringify(this.state.numPeople))
+            // SecureStore.setItemAsync("squareFootage", toString(this.state.sliderValue))
             this.props.navigation.push('Question2')
         } else {
             alert("Please answer all questions.")

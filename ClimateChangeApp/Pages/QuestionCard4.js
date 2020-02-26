@@ -26,22 +26,22 @@ class QuestionCard4 extends React.Component {
             articlesPerShop: 0,
         }
         this.callbackFunction1 = this.callbackFunction1.bind(this);
-        this.callbackFunction2 = this.callbackFunction1.bind(this);
+        this.callbackFunction2 = this.callbackFunction2.bind(this);
     }
 
     callbackFunction1(value) {
-        this.setState({beefServings: value})
+        this.setState({shoppingFrequency: value})
     }
 
     callbackFunction2(value) {
-        this.setState({dairyServings: value})
+        this.setState({articlesPerShop: value})
     }
 
     saveAndPush() { // change this to some checkvalue function
         if (this.checkValid()) {
-            SecureStore.setItemAsync("shoppingFrequency", toString(this.state.shoppingFrequency))
-            SecureStore.setItemAsync("articlesPerShop", toString(this.state.articlesPerShop)) 
-            alert('Display results!')
+            SecureStore.setItemAsync("shoppingFrequency", JSON.stringify(this.state.shoppingFrequency))
+            SecureStore.setItemAsync("articlesPerShop", JSON.stringify(this.state.articlesPerShop))
+            this.props.navigation.push('Results')            
             } else {
             alert('Please answer all questions.')
         }
@@ -60,13 +60,13 @@ class QuestionCard4 extends React.Component {
                     <InputQuestion 
                         keyboardType = {'numeric'}
                         parentCallBack = {this.callbackFunction1}                             
-                        question = {this.props.data.beefServings} 
-                        placeholder = {this.props.data.beefServingsPlaceholder}/>
+                        question = {this.props.data.shoppingFrequency} 
+                        placeholder = {this.props.data.shoppingFrequencyPlaceholder}/>
                     <InputQuestion 
                         keyboardType = {'numeric'}
                         parentCallBack = {this.callbackFunction2}                             
-                        question = {this.props.data.dairyServings} 
-                        placeholder = {this.props.data.dairyServingsPlaceholder}/>
+                        question = {this.props.data.articlesPerShop} 
+                        placeholder = {this.props.data.articlesPerShopPlaceholder}/>
                     <Button
                         icon={<Icon name="arrow-forward" color="white"/>}
                         iconRight

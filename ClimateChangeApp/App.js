@@ -8,7 +8,7 @@ import Question1 from './Pages/Question1';
 import Question2 from './Pages/Question2';
 import Question3 from './Pages/Question3';
 import Question4 from './Pages/Question4';
-
+import Results from './Pages/Results';
 
 // shirom code 
 global.theme = {
@@ -67,6 +67,7 @@ const AppNavigator = createStackNavigator(
       Question2: {screen: Question2},
       Question3: {screen: Question3},
       Question4: {screen: Question4},
+      Results: {screen: Results}
     },
     {
         initialRouteName: 'Home',

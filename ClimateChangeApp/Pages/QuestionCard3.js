@@ -27,7 +27,7 @@ class QuestionCard3 extends React.Component {
             dairyServings: 0,
         }
         this.callbackFunction1 = this.callbackFunction1.bind(this);
-        this.callbackFunction2 = this.callbackFunction1.bind(this);
+        this.callbackFunction2 = this.callbackFunction2.bind(this);
     }
 
     callbackFunction1(value) {
@@ -41,8 +41,8 @@ class QuestionCard3 extends React.Component {
 
     saveAndPush() { // change this to some checkvalue function
         if (this.checkValid()) {
-            SecureStore.setItemAsync("beefServings", toString(this.state.beefServings))
-            SecureStore.setItemAsync("dairyServings", toString(this.state.dairyServings)) 
+            SecureStore.setItemAsync("beefServings", JSON.stringify(this.state.beefServings))
+            SecureStore.setItemAsync("dairyServings", JSON.stringify(this.state.dairyServings)) 
             this.props.navigation.push('Question4')            
             } else {
             alert('Please answer all questions.')
