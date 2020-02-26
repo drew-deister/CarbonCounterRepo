@@ -6,6 +6,8 @@ import {StackViewStyleInterpolator} from 'react-navigation-stack'
 import Home from './Pages/Home';
 import Question1 from './Pages/Question1';
 import Question2 from './Pages/Question2';
+import Question3 from './Pages/Question3';
+import Question4 from './Pages/Question4';
 
 
 // shirom code 
@@ -63,6 +65,8 @@ const AppNavigator = createStackNavigator(
       Home: {screen: Home},
       Question1: {screen: Question1},
       Question2: {screen: Question2},
+      Question3: {screen: Question3},
+      Question4: {screen: Question4},
     },
     {
         initialRouteName: 'Home',

@@ -1,18 +1,18 @@
 // Drew Deister
 // created 2/3/2020
 
-// _______________TRANSPORTATION QUESTIONS_______________
+// _______________DIET QUESTIONS_______________
 
 import React, { Component } from 'react';
 import {StyleSheet, View} from "react-native";
 import {Header} from '../Components/Header';
 import {Separator} from '../Components/Separator';
-import {QuestionCard2} from './QuestionCard2';
+import {QuestionCard3} from './QuestionCard3';
 
-class Question2 extends React.Component {
+class Question3 extends React.Component {
     
     static navigationOptions = { // this is the label in the middle of the nav bar
-        title: 'Travel Information',
+        title: 'Diet Information',
     };
 
     // note that the navigation prop must be passed to the Question Card
@@ -20,10 +20,10 @@ class Question2 extends React.Component {
         return(
             <View style={styles.container}>
                 <Header>
-                    Transportation
+                    Diet
                 </Header>
                 <Separator/>
-                <QuestionCard2 navigation = {this.props.navigation} data = {data}/>
+                <QuestionCard3 navigation = {this.props.navigation} data = {data}/>
             </View>
         )
     }
@@ -31,13 +31,14 @@ class Question2 extends React.Component {
 
 // TRANSPORTATION DATA
 const data = {
-    numMiles: 'How many miles do you travel on a typical school day?', 
+
+    beefServings: 'How many servings of beef do you have in a typical week?', 
+
+    beefServingsPlaceholder: 'Enter a number...',
     
-    greenAmount: 'How much of your daily travel to school is by a \'greener\' form of transportation?' ,
+    dairyServings: 'How many servings of dairy do you have in a typical week?',
 
-    transportationMode: 'Select your most common mode of transportation:',
-
-    summerChange: 'How does your summer travel compare to your school year travel?'
+    dairyServingsPlaceholder: 'Enter a number...',
 
 }
   
@@ -52,4 +53,4 @@ const styles = StyleSheet.create({
 
 
 
-export default Question2;
+export default Question3;

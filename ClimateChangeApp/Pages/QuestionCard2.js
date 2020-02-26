@@ -17,35 +17,35 @@ import {
     listenOrientationChange, removeOrientationListener
   } from 'react-native-responsive-screen';
 
+
 class QuestionCard2 extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
             numMiles: 1,
             greenAmount: 1,
+            summerChange: 1,
             mode: '',
         }
-        this.callbackFunction1 = this.callbackFunction1.bind(this) // allows child to update this.state
-
     }
 
-    callbackFunction1(data) { 
-        this.setState({numMiles: data})
-    }
     
 
-    saveAndPush() { // figure out how to save slider value
+    saveAndPush() { // change this to some checkvalue function
         if (this.checkValid()) {
             SecureStore.setItemAsync("numMiles", toString(this.state.numMiles)) // save to async
             SecureStore.setItemAsync("greenAmount", toString(this.state.greenAmount)) // save to async
-        } else {
-            alert('Please select a mode of transportation.')
+            SecureStore.setItemAsync("summerChange", toString(this.state.summerChange))
+            SecureStore.setItemAsync("mode", this.state.mode)
+            this.props.navigation.push('Question3')
+
+            } else {
+            alert('Please answer all questions.')
         }
-        
     }
 
-    checkValid() {
-        return (this.state.mode != '')
+    checkValid() { // do some sort of error checking here
+        return (this.state.numMiles != 1)
     }
 
 
@@ -58,22 +58,20 @@ class QuestionCard2 extends React.Component {
                             color: 'white',
                             fontSize: diagonalScale(4.5),
                             fontWeight: 'bold'}}> {this.state.numMiles}</Text>
-                        <Slider 
-                            width = {wp('80%')}
-                            onValueChange={(sliderValue) => this.setState({numMiles: sliderValue})} 
-                            value={this.state.numMiles}
-                            minimumValue={0} maximumValue={100} step = {1}/>
+                        <Slider style = {styles.slider}
+                                onValueChange={(sliderValue) => this.setState({numMiles: sliderValue})} 
+                                value={this.state.numMiles}
+                                minimumValue={0} maximumValue={100} step = {1}/>
 
                         <Text style = {styles.text}>{this.props.data.greenAmount}</Text>
                         <View style = {styles.rowStyleView}>
                             <Text style = {styles.sliderText}>Not Green</Text>
                             <Slider style = {styles.slider}
-                                onValueChange={(sliderValue) => this.setState({greenAmount: sliderValue})} 
+                                onValueChange={(sliderValue) => this.setState({greenAmound: sliderValue})} 
                                 value={this.state.greenAmount}
-                                minimumValue={0} maximumValue={100} step = {1}/>
+                                minimumValue={.1} maximumValue={2} step = {1}/>
                             <Text style = {styles.sliderText}>Green</Text>
                         </View>
-
 
                         <Text style = {styles.text}>{this.props.data.transportationMode}</Text>
                         <Button
@@ -91,6 +89,17 @@ class QuestionCard2 extends React.Component {
                         <Button
                             title='Bike or Walk' buttonStyle={styles.button} 
                             onPress = {() => this.setState({mode: 'Bike or Walk'})}/>
+                        
+                        <Text style = {styles.text}>{this.props.data.summerChange}</Text>
+                        <View style = {styles.rowStyleView}>
+                            <Text style = {styles.sliderText}>Less</Text>
+                            <Slider style = {styles.slider}
+                                onSlidingComplete={(sliderValue) => this.setState({summerChange: sliderValue})} 
+                                value={this.state.summerChange}
+                                minimumValue={.1} maximumValue={2} step = {.1}/>
+                            <Text style = {styles.sliderText}>More</Text>
+                        </View>
+
                         <Button
                             icon={<Icon name="arrow-forward" color="white"/>}
                             iconRight
@@ -144,7 +153,7 @@ const styles = StyleSheet.create({
     },
     nextButton: {
         backgroundColor: 'gray',
-        marginBottom: 50,
+        marginVertical: 50,
         width: wp('55%')
     },
 
