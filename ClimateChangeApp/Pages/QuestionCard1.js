@@ -45,6 +45,21 @@ class QuestionCard1 extends React.Component {
     callbackFunction2(value) {
         this.setState({numPeople: value})
     }
+    onChange(values) {
+        this.setState({sliderValue: values})
+    }
+
+    // called when next button is pushed
+    saveAndPush() {
+        if (this.checkValid()) {
+            SecureStore.setItemAsync("zipCode", this.state.zipCode) // save to async
+            SecureStore.setItemAsync("numPeople", toString(this.state.numPeople))
+            SecureStore.setItemAsync("squareFootage", toString(this.state.sliderValue))
+            this.props.navigation.push('Question2')
+        } else {
+            alert("Please enter a valid zipcode.")
+        }
+    }
 
     // called when next button is pushed
     saveAndPush() {

@@ -14,7 +14,7 @@ import {QuestionCard1} from './QuestionCard1';
 class Question1 extends React.Component {
     
     static navigationOptions = { // this is the label in the middle of the nav bar
-        title: 'Housing Information',
+        title: ' ',
     };
 
     // note that the navigation prop must be passed to the Question Card

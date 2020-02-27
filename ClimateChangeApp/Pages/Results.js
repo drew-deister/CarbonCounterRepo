@@ -38,21 +38,31 @@ class Results extends React.Component {
     }
 
     async fetchData() { // should probably add some error handling here 
-      const zipCode = await SecureStore.getItemAsync("zipCode")  
-      const numPeople = await SecureStore.getItemAsync("numPeople")
-      const beefServings = await SecureStore.getItemAsync("beefServings")  
+      // housing
+      const zipCode = JSON.parse(await SecureStore.getItemAsync("zipCode"))
+      const numPeople = JSON.parse(await SecureStore.getItemAsync("numPeople"))
+      const squareFootage = JSON.parse(await SecureStore.getItemAsync("squareFootage"))
+
+      // transportation
+      const numMiles = JSON.parse(await SecureStore.getItemAsync("numMiles"))
+      const greenAmount = await SecureStore.getItemAsync("greenAmount")
+      const summerChange = await SecureStore.getItemAsync("summerChange")
+      const mode = await SecureStore.getItemAsync("mode")
+
+      // diet
+      const beefServings = await SecureStore.getItemAsync("beefServings")
       const dairyServings = await SecureStore.getItemAsync("dairyServings")
-     
-      // do some test calculations
-      const carbonFootprint = JSON.parse(numPeople) * JSON.parse(beefServings); // need to parse before calculations
+
+      // shopping
+      const shoppingFrequency = JSON.parse(await SecureStore.getItemAsync("shoppingFrequency"))
+      const articlesPerShop = await SecureStore.getItemAsync("articlesPerShop")
 
       // this not only changes the state but also 
       // rerenders the components in view
       this.setState({zipCode: JSON.parse(zipCode), 
                      numPeople: JSON.parse(numPeople), 
                      beefServings: JSON.parse(beefServings),
-                     dairyServings: JSON.parse(dairyServings),
-                     carbonFootprint: carbonFootprint});
+                     dairyServings: JSON.parse(dairyServings)});
     }
     
     render() {

@@ -27,6 +27,7 @@ class InputQuestion extends React.Component {
     this.props.parentCallBack(message); // call the function that was binded to QuestionCard and passed through props
   }
 
+
   render() {
     return (
       <View style={styles.view}>

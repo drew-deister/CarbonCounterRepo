@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View } from 'react-native';
+import {StyleSheet, Text, View, Image} from 'react-native';
 import {createAppContainer, SafeAreaView} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {StackViewStyleInterpolator} from 'react-navigation-stack'
@@ -9,6 +9,9 @@ import Question2 from './Pages/Question2';
 import Question3 from './Pages/Question3';
 import Question4 from './Pages/Question4';
 import Results from './Pages/Results';
+import GeoVideo1 from './Pages/GeoVideo1';
+import GeoVideo2 from './Pages/GeoVideo2';
+
 
 // shirom code 
 global.theme = {
@@ -56,8 +59,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+}); 
 
+function LogoTitle() {
+    return (
+      <Image
+        style={{ width: 50, height: 50 }}
+        source={require('./assets/Logo.png')}
+      />
+    );
+  }
 
 // this is very important, use this as reference when you don't understand navigation
 const AppNavigator = createStackNavigator(
@@ -67,7 +78,9 @@ const AppNavigator = createStackNavigator(
       Question2: {screen: Question2},
       Question3: {screen: Question3},
       Question4: {screen: Question4},
-      Results: {screen: Results}
+      Results: {screen: Results},
+      GeoVideo1: {screen: GeoVideo1},
+      GeoVideo2: {screen: GeoVideo2}
     },
     {
         initialRouteName: 'Home',
@@ -76,14 +89,16 @@ const AppNavigator = createStackNavigator(
             screenInterpolator: StackViewStyleInterpolator.forHorizontal
         }),
         defaultNavigationOptions: { // these will be augmented by the navigation options of the respective screens
+            // https://reactnavigation.org/docs/en/headers.html
             headerStyle: {
-                backgroundColor: '#0B7310',
+                backgroundColor: 'white',
             },
-            headerTitleStyle: {
-                color: 'white',
-                fontWeight: '500',
-            },
-            headerTintColor: '#ffffff'
+            headerTitle: LogoTitle,
+            // headerTitleStyle: {
+            //     color: 'white',
+            //     fontWeight: '500',
+            // },
+            headerTintColor: '#73A388'
         },
     },
 )
