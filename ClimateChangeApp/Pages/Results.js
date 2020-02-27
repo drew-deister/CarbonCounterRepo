@@ -14,23 +14,27 @@
 import React, { Component, useState } from 'react';
 import {StyleSheet, View} from "react-native";
 import {Button, Text, Card, Icon} from 'react-native-elements';
-
-
 import * as SecureStore from 'expo-secure-store';
 
 class Results extends React.Component {
     constructor() {
       super();
       this.state = {
-        zipCode: 0, // this will be updated when the promise object is resolved
+        zipCode: 0,
         numPeople: 0,
+        squareFootage: 0,
+        numMiles: 0,
+        greenAmount: 0,
+        summerChange: 0,
+        mode: '',
         beefServings: 0,
         dairyServings: 0,
-        carbonFootprint: 0,
+        shoppingFrequency: 0,
+        articlesPerShop: 0,
       }
     }
     static navigationOptions = { // this is the label in the middle of the nav bar
-        title: 'Housing',    
+        title: 'Results',    
     };
 
     componentDidMount() { // this is automatically called by the compiler
@@ -45,24 +49,24 @@ class Results extends React.Component {
 
       // transportation
       const numMiles = JSON.parse(await SecureStore.getItemAsync("numMiles"))
-      const greenAmount = await SecureStore.getItemAsync("greenAmount")
-      const summerChange = await SecureStore.getItemAsync("summerChange")
-      const mode = await SecureStore.getItemAsync("mode")
+      const greenAmount = JSON.parse(await SecureStore.getItemAsync("greenAmount"))
+      const summerChange = JSON.parse(await SecureStore.getItemAsync("summerChange"))
+      const mode = JSON.parse(await SecureStore.getItemAsync("mode"))
 
       // diet
-      const beefServings = await SecureStore.getItemAsync("beefServings")
-      const dairyServings = await SecureStore.getItemAsync("dairyServings")
+      const beefServings = JSON.parse(await SecureStore.getItemAsync("beefServings"))
+      const dairyServings = JSON.parse(await SecureStore.getItemAsync("dairyServings"))
 
       // shopping
       const shoppingFrequency = JSON.parse(await SecureStore.getItemAsync("shoppingFrequency"))
-      const articlesPerShop = await SecureStore.getItemAsync("articlesPerShop")
+      const articlesPerShop = JSON.parse(await SecureStore.getItemAsync("articlesPerShop"))
 
       // this not only changes the state but also 
       // rerenders the components in view
-      this.setState({zipCode: JSON.parse(zipCode), 
-                     numPeople: JSON.parse(numPeople), 
-                     beefServings: JSON.parse(beefServings),
-                     dairyServings: JSON.parse(dairyServings)});
+      this.setState({zipCode: zipCode, numPeople: numPeople, squareFootage: squareFootage, 
+                     numMiles: numMiles, greenAmount: greenAmount, summerChange: summerChange, mode: mode,
+                     beefServings: beefServings, dairyServings: dairyServings, 
+                     shoppingFrequency: shoppingFrequency, articlesPerShop: articlesPerShop});
     }
     
     render() {

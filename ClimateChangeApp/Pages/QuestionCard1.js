@@ -52,9 +52,9 @@ class QuestionCard1 extends React.Component {
     // called when next button is pushed
     saveAndPush() {
         if (this.checkValid()) {
-            SecureStore.setItemAsync("zipCode", this.state.zipCode) // save to async
-            SecureStore.setItemAsync("numPeople", toString(this.state.numPeople))
-            SecureStore.setItemAsync("squareFootage", toString(this.state.sliderValue))
+            SecureStore.setItemAsync("zipCode", JSON.stringify(this.state.zipCode)) // save to async
+            SecureStore.setItemAsync("numPeople", JSON.stringify(this.state.numPeople))
+            SecureStore.setItemAsync("squareFootage", JSON.stringify(this.state.sliderValue))
             this.props.navigation.push('Question2')
         } else {
             alert("Please enter a valid zipcode.")
@@ -66,7 +66,7 @@ class QuestionCard1 extends React.Component {
         if (this.checkValid()) { // change this to CHECK VALID
             SecureStore.setItemAsync("zipCode", JSON.stringify(this.state.zipCode)) // save to async
             SecureStore.setItemAsync("numPeople", JSON.stringify(this.state.numPeople))
-            // SecureStore.setItemAsync("squareFootage", toString(this.state.sliderValue))
+            SecureStore.setItemAsync("squareFootage", JSON.stringify(this.state.sliderValue))
             this.props.navigation.push('Question2')
         } else {
             alert("Please answer all questions.")
