@@ -11,6 +11,7 @@ import Question4 from './Pages/Question4';
 import Results from './Pages/Results';
 import GeoVideo1 from './Pages/GeoVideo1';
 import GeoVideo2 from './Pages/GeoVideo2';
+import IntroPage1 from './Pages/IntroPage1';
 
 
 // shirom code 
@@ -80,10 +81,11 @@ const AppNavigator = createStackNavigator(
       Question4: {screen: Question4},
       Results: {screen: Results},
       GeoVideo1: {screen: GeoVideo1},
-      GeoVideo2: {screen: GeoVideo2}
+      GeoVideo2: {screen: GeoVideo2},
+      IntroPage1: {screen: IntroPage1}
     },
     {
-        initialRouteName: 'Home',
+        initialRouteName: 'IntroPage1',
         headerLayoutPreset: 'center',
         transitionConfig: () => ({
             screenInterpolator: StackViewStyleInterpolator.forHorizontal
