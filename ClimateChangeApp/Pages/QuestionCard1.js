@@ -33,16 +33,17 @@ class QuestionCard1 extends React.Component {
             numPeople: 0,
             sliderValue: 1,
         }
-        this.callbackFunction1 = this.callbackFunction1.bind(this) // allows child to update this.state
-        this.callbackFunction2 = this.callbackFunction2.bind(this)
+        this.callbackFunction1 = this.callbackFunction1.bind(this); // make sure these are both correct
+        this.callbackFunction2 = this.callbackFunction2.bind(this);
+
     }
 
-    // MARK: Callback/state change functions
-    callbackFunction1(data) { 
-        this.setState({zipCode: data})
+    callbackFunction1(value) {
+        this.setState({zipCode: value})
     }
-    callbackFunction2(data) { 
-        this.setState({numPeople: data})
+
+    callbackFunction2(value) {
+        this.setState({numPeople: value})
     }
     onChange(values) {
         this.setState({sliderValue: values})
@@ -60,9 +61,22 @@ class QuestionCard1 extends React.Component {
         }
     }
 
+    // called when next button is pushed
+    saveAndPush() {
+        if (this.checkValid()) { // change this to CHECK VALID
+            SecureStore.setItemAsync("zipCode", JSON.stringify(this.state.zipCode)) // save to async
+            SecureStore.setItemAsync("numPeople", JSON.stringify(this.state.numPeople))
+            // SecureStore.setItemAsync("squareFootage", toString(this.state.sliderValue))
+            this.props.navigation.push('Question2')
+        } else {
+            alert("Please answer all questions.")
+        }
+    }
+
     // checks whether current inputs are valid
     checkValid() {
-        return (this.state.zipCode.length >= 5)
+        return true
+        // return ((this.state.zipCode.length >= 5) && (this.state.sliderValue != 1)) 
     }
 
 
@@ -85,12 +99,12 @@ class QuestionCard1 extends React.Component {
                         <Text style={{
                             color: 'white',
                             fontSize: diagonalScale(4.5),
-                            fontWeight: 'bold'}}> {this.state.sliderValue}</Text>
+                            fontWeight: 'bold'}}>{this.state.sliderValue}</Text>
                         <Slider 
-                            width = {wp('80%')}
-                            onValueChange={(sliderValue) => this.setState({sliderValue})} 
-                            value={this.state.sliderValue}
-                            minimumValue={1} maximumValue={4000} step = {10}/>
+                                width = {wp('80%')} 
+                                minimumValue={0} maximumValue={100} step = {1}
+                                value={this.state.sliderValue}
+                                onValueChange={(sliderValue) => this.setState({sliderValue})}/>
                         <Button
                             icon={<Icon name="arrow-forward" color="white"/>}
                             iconRight

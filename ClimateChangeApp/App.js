@@ -6,6 +6,9 @@ import {StackViewStyleInterpolator} from 'react-navigation-stack'
 import Home from './Pages/Home';
 import Question1 from './Pages/Question1';
 import Question2 from './Pages/Question2';
+import Question3 from './Pages/Question3';
+import Question4 from './Pages/Question4';
+import Results from './Pages/Results';
 import GeoVideo1 from './Pages/GeoVideo1';
 import GeoVideo2 from './Pages/GeoVideo2';
 
@@ -73,6 +76,9 @@ const AppNavigator = createStackNavigator(
       Home: {screen: Home},
       Question1: {screen: Question1},
       Question2: {screen: Question2},
+      Question3: {screen: Question3},
+      Question4: {screen: Question4},
+      Results: {screen: Results},
       GeoVideo1: {screen: GeoVideo1},
       GeoVideo2: {screen: GeoVideo2}
     },

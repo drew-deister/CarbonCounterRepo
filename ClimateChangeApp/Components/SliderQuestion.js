@@ -10,19 +10,38 @@ import {
     heightPercentageToDP as hp,
     listenOrientationChange, removeOrientationListener
 } from 'react-native-responsive-screen';
+import _ from 'lodash';
+import { Updates } from 'expo';
 
 
-const SliderQuestion = ({onChange, min, max}) => {
-   
-    return (            
-        <View style={styles.container}>
-            <Slider style={styles.slider}
-                    maximumValue={max}
-                    minimumValue={min}
-                    step={10} 
-                    onValueChange={(sliderValue) => onChange(sliderValue)}/>
-        </View>   
-    )
+class SliderQuestion extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: 1,
+        }
+        this.onValueChangeDelayed = _.debounce(this.onChangeValue, 1)
+    }
+
+    onChangeValue(value) {
+        this.props.updateFunction({value: 2})
+    }
+
+
+    render() {
+        return (            
+            <View style={styles.container}>
+                <Slider style={styles.slider}
+                        maximumValue={this.props.max}
+                        minimumValue={this.props.min}
+                        step={1} 
+                        onValueChange={(sliderValue) => this.onValueChangeDelayed}
+                        onSlidingComplete={(sliderValue) => this.props.updateFunction(sliderValue)}/>
+            </View>   
+        )
+    }
+          
     
 }
 
@@ -35,8 +54,9 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
     },
     slider: {
-        alignSelf: 'stretch',
+        // alignSelf: 'stretch',
         marginHorizontal: 15,
+        width: wp('50%')
     }
 });
 

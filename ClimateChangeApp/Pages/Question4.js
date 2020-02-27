@@ -1,18 +1,18 @@
 // Drew Deister
-// created 2/3/2020
+// created 2/26/2020
 
-// _______________TRANSPORTATION QUESTIONS_______________
+// _______________SHOPPING QUESTIONS_______________
 
 import React, { Component } from 'react';
 import {StyleSheet, View} from "react-native";
 import {Header} from '../Components/Header';
 import {Separator} from '../Components/Separator';
-import {QuestionCard2} from './QuestionCard2';
+import {QuestionCard4} from './QuestionCard4';
 
-class Question2 extends React.Component {
+class Question4 extends React.Component {
     
     static navigationOptions = { // this is the label in the middle of the nav bar
-        title: 'Travel Information',
+        title: 'Shopping Information',
     };
 
     // note that the navigation prop must be passed to the Question Card
@@ -20,24 +20,25 @@ class Question2 extends React.Component {
         return(
             <View style={styles.container}>
                 <Header>
-                    Transportation
+                    Shopping
                 </Header>
                 <Separator/>
-                <QuestionCard2 navigation = {this.props.navigation} data = {data}/>
+                <QuestionCard4 navigation = {this.props.navigation} data = {data}/>
             </View>
         )
     }
 }
 
-// TRANSPORTATION DATA
+// SHOPPING DATA
 const data = {
-    numMiles: 'How many miles do you travel on a typical school day?', 
+
+    shoppingFrequency: 'How many times a month do you buy new clothes?',
+
+    shoppingFrequencyPlaceholder: 'Enter a number...',
     
-    greenAmount: 'How much of your daily travel to school is by a \'greener\' form of transportation?' ,
+    articlesPerShop: 'How many articles of clothing per shopping experience?',   
 
-    transportationMode: 'Select your most common mode of transportation:',
-
-    summerChange: 'How does your summer travel compare to your school year travel?'
+    articlesPerShopPlaceholder: 'Enter a number...',
 
 }
   
@@ -52,4 +53,4 @@ const styles = StyleSheet.create({
 
 
 
-export default Question2;
+export default Question4;
