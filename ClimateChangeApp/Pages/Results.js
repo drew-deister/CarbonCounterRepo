@@ -10,7 +10,6 @@
 // NOTE on JSON: The values are saved with the .stringify() function, so you have to .parse() before you can
 // perform calculations on them. 
 
-
 import React, { Component, useState } from 'react';
 import {StyleSheet, View} from "react-native";
 import {Button, Text, Card, Icon} from 'react-native-elements';
@@ -67,12 +66,31 @@ class Results extends React.Component {
                      numMiles: numMiles, greenAmount: greenAmount, summerChange: summerChange, mode: mode,
                      beefServings: beefServings, dairyServings: dairyServings, 
                      shoppingFrequency: shoppingFrequency, articlesPerShop: articlesPerShop});
+
+      // calculate
+      calculateDiet()
+      calculateShopping()
+    }
+
+    // MARK: Do calculations
+    calculateDiet() { // calculates results with variables in this.state
+      const POUNDS_PER_BEEF_SERVING = 6.61
+      const POUNDS_PER_CHEESE_SERVING = 2.45
+
+      return ((this.state.beefServings * POUNDS_PER_BEEF_SERVING * 52) + 
+                (this.state.dairyServings * POUNDS_PER_CHEESE_SERVING * 52))
+    }
+
+    calculateShopping() {
+      const POUNDS_PER_SHIRT = 12.13
+
+      return (POUNDS_PER_SHIRT * 12 * this.state.shoppingFrequency * this.state.articlesPerShop)
     }
     
     render() {
       return(
         <View>
-            <Text>{this.state.zipCode}</Text>
+            <Text percentage = {this.state.x}>{this.state.zipCode}</Text>
             <Text>{this.state.numPeople}</Text>
             <Text>{this.state.beefServings}</Text>
             <Text>{this.state.dairyServings}</Text>
