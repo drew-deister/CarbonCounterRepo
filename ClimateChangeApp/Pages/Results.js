@@ -14,6 +14,8 @@ import React, { Component, useState } from 'react';
 import {StyleSheet, View} from "react-native";
 import {Button, Text, Card, Icon} from 'react-native-elements';
 import * as SecureStore from 'expo-secure-store';
+import Slider from 'react-native-fluid-slider';
+
 
 class Results extends React.Component {
     constructor() {
@@ -30,6 +32,7 @@ class Results extends React.Component {
         dairyServings: 0,
         shoppingFrequency: 0,
         articlesPerShop: 0,
+        dummyNumber: 40,
       }
     }
     static navigationOptions = { // this is the label in the middle of the nav bar
@@ -68,8 +71,8 @@ class Results extends React.Component {
                      shoppingFrequency: shoppingFrequency, articlesPerShop: articlesPerShop});
 
       // calculate
-      calculateDiet()
-      calculateShopping()
+      this.calculateDiet()
+      this.calculateShopping()
     }
 
     // MARK: Do calculations
@@ -94,11 +97,44 @@ class Results extends React.Component {
             <Text>{this.state.numPeople}</Text>
             <Text>{this.state.beefServings}</Text>
             <Text>{this.state.dairyServings}</Text>
+            <View style={styles.sliderContainer}>
+              <Text style={styles.valueText}>
+                {this.state.dummyNumber.toFixed()}
+              </Text>
+              <Slider
+                minimumTrackTintColor = "black"
+                maximumTrackTintColor = "gray"
+                thumbTintColor = "green"
+                value={this.state.dummyNumber}
+                onValueChange={value => this.setState({ dummyNumber: value })}
+              />
+            </View>
+            
         </View>
       )
     }
 
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#000',
+    paddingHorizontal: 70,
+  },
+  sliderContainer: {
+    width: '100%',
+  },
+  valueText: {
+    fontSize: 40,
+    textAlign: 'center',
+    margin: 10,
+    color: '#ee6d51',
+  },
+});
+
+
 
 
 export default Results;

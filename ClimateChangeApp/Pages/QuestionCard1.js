@@ -2,9 +2,8 @@
 // 1.14.2020
 
 // TODO: add a query for the information when the sreen is loaded?
-// note: Creating child components is generally best practices for everything on this screen.
-//       However, QuestionCard needs access to all child states, and since a child Slider component
-//       would need to update almost continuously, I have chosen to leave it as part of this parent.
+// note: I have figured out a way to make slider modular (I had to because rerendering the whole tree was taking
+// too long). I update continously within the component but update QuestionCard's state only onSlidingComplete. 
 
 // _______________HOUSING QUESTION CARD__________________
 
@@ -16,11 +15,13 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { InputQuestion } from '../Components/InputQuestion';
 import * as SecureStore from 'expo-secure-store';
 import {diagonalScale} from '../Utilities/Scaling';
+import {SliderQuestion} from '../Components/SliderQuestion';
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
     listenOrientationChange, removeOrientationListener
   } from 'react-native-responsive-screen';
+
 
 class QuestionCard1 extends React.Component {
     constructor(props) {
@@ -35,7 +36,7 @@ class QuestionCard1 extends React.Component {
         }
         this.callbackFunction1 = this.callbackFunction1.bind(this); // make sure these are both correct
         this.callbackFunction2 = this.callbackFunction2.bind(this);
-
+        this.updateSliderState = this.updateSliderState.bind(this);
     }
 
     callbackFunction1(value) {
@@ -45,8 +46,9 @@ class QuestionCard1 extends React.Component {
     callbackFunction2(value) {
         this.setState({numPeople: value})
     }
-    onChange(values) {
-        this.setState({sliderValue: values})
+
+    updateSliderState(value) {
+        this.setState({sliderValue: value})
     }
 
     // called when next button is pushed
@@ -79,7 +81,6 @@ class QuestionCard1 extends React.Component {
         // return ((this.state.zipCode.length >= 5) && (this.state.sliderValue != 1)) 
     }
 
-
     render() {
         return(
             <View style = {styles.view}>
@@ -96,15 +97,13 @@ class QuestionCard1 extends React.Component {
                             question = {this.props.data.numPeople} 
                             placeholder = {this.props.data.numPeoplePlaceholder}/>
                         <Text style = {styles.text}>{this.props.data.homeSize}</Text>
-                        <Text style={{
-                            color: 'white',
-                            fontSize: diagonalScale(4.5),
-                            fontWeight: 'bold'}}>{this.state.sliderValue}</Text>
-                        <Slider 
-                                width = {wp('80%')} 
-                                minimumValue={0} maximumValue={100} step = {1}
-                                value={this.state.sliderValue}
-                                onValueChange={(sliderValue) => this.setState({sliderValue})}/>
+                        <SliderQuestion
+                            max = {100}
+                            min = {0}
+                            step = {1}
+                            shouldDisplay = {true}
+                            callback = {this.updateSliderState}
+                        />
                         <Button
                             icon={<Icon name="arrow-forward" color="white"/>}
                             iconRight

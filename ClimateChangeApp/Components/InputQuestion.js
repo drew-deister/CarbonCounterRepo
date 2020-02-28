@@ -37,7 +37,7 @@ class InputQuestion extends React.Component {
           keyboardType = {this.state.keyboardType}
           placeholder={this.props.placeholder}
           placeholderTextColor = {'#898d91'}
-          onChangeText={text => this.sendData(text)} // update parent state (QuestionCard)
+          onSubmitEditing={text => this.sendData(text)} // update parent state (QuestionCard)
           style={styles.questionInput}></TextInput>
       </View>
     )

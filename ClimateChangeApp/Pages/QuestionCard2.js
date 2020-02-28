@@ -5,12 +5,14 @@
 
 // _______________TRANSPORTATION QUESTION CARD__________________
 
+// todo: figure out step, style
+
 import React, { Component } from 'react';
 import {StyleSheet, View} from "react-native";
 import {Icon, Button, Slider, Text} from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
-import {diagonalScale} from '../Utilities/Scaling';
 import * as SecureStore from 'expo-secure-store';
+import {SliderQuestion} from '../Components/SliderQuestion';
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
@@ -27,8 +29,21 @@ class QuestionCard2 extends React.Component {
             summerChange: 1,
             mode: '',
         }
+        this.updateSliderState1 = this.updateSliderState1.bind(this)
+        this.updateSliderState2 = this.updateSliderState2.bind(this)
+        this.updateSliderState3 = this.updateSliderState3.bind(this)
     }
 
+    // MARK: Update functions for slider children
+    updateSliderState1(value) {
+        this.setState({numMiles: value})
+    }
+    updateSliderState2(value) {
+        this.setState({greenAmount: value})
+    }
+    updateSliderState3(value) {
+        this.setState({summerChange: value})
+    }
     
 
     saveAndPush() { // change this to some checkvalue function
@@ -54,22 +69,20 @@ class QuestionCard2 extends React.Component {
             <ScrollView style = {styles.scrollView}>
                     <View style = {styles.view}>
                         <Text style = {styles.text}>{this.props.data.numMiles}</Text>
-                        <Text style={{
-                            color: 'white',
-                            fontSize: diagonalScale(4.5),
-                            fontWeight: 'bold'}}> {this.state.numMiles}</Text>
-                        <Slider style = {styles.slider}
-                                onValueChange={(sliderValue) => this.setState({numMiles: sliderValue})} 
-                                value={this.state.numMiles}
-                                minimumValue={0} maximumValue={100} step = {1}/>
+                        <SliderQuestion
+                            max = {100} min = {0} step = {1}
+                            shouldDisplay = {true}
+                            callback = {this.updateSliderState1}
+                        />
 
                         <Text style = {styles.text}>{this.props.data.greenAmount}</Text>
                         <View style = {styles.rowStyleView}>
                             <Text style = {styles.sliderText}>Not Green</Text>
-                            <Slider style = {styles.slider}
-                                onValueChange={(sliderValue) => this.setState({greenAmound: sliderValue})} 
-                                value={this.state.greenAmount}
-                                minimumValue={.1} maximumValue={2} step = {1}/>
+                            <SliderQuestion
+                                max = {100} min = {1} step = {1}
+                                shouldDisplay = {false}
+                                callback = {this.updateSliderState2}
+                            />
                             <Text style = {styles.sliderText}>Green</Text>
                         </View>
 
@@ -93,10 +106,11 @@ class QuestionCard2 extends React.Component {
                         <Text style = {styles.text}>{this.props.data.summerChange}</Text>
                         <View style = {styles.rowStyleView}>
                             <Text style = {styles.sliderText}>Less</Text>
-                            <Slider style = {styles.slider}
-                                onSlidingComplete={(sliderValue) => this.setState({summerChange: sliderValue})} 
-                                value={this.state.summerChange}
-                                minimumValue={.1} maximumValue={2} step = {.1}/>
+                            <SliderQuestion
+                                max = {100} min = {1} step = {1}
+                                shouldDisplay = {false}
+                                callback = {this.updateSliderState3}
+                            />
                             <Text style = {styles.sliderText}>More</Text>
                         </View>
 
