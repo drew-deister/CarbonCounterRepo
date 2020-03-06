@@ -85,7 +85,7 @@ const AppNavigator = createStackNavigator(
       IntroPage1: {screen: IntroPage1}
     },
     {
-        initialRouteName: 'IntroPage1',
+        initialRouteName: 'IntroPage1',   // to go back to original, change from 'IntroPage1' to 'Home'
         headerLayoutPreset: 'center',
         transitionConfig: () => ({
             screenInterpolator: StackViewStyleInterpolator.forHorizontal

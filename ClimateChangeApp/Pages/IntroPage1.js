@@ -13,17 +13,15 @@ function LogoTitle() {
     return (
       <Image
         style={{ width: 50, height: 50 }}
-        source={require('../assets/Logo.png')}
+       // source={require('../assets/Home.png')}
+       source={require('../assets/Logo.png')}
+
       />
     );
   }
 
-export default class Home extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
-
+export default class IntroPage extends Component {
+    
     static navigationOptions = {
         title: ' ',
         headerTitle: LogoTitle
@@ -36,7 +34,7 @@ export default class Home extends Component {
         return (
             <View style = {styles.container}>
                 <View style = {styles.container}>
-                    <Image style = {styles.image} source = {require('../assets/Home.png')} />
+                    <Image style = {styles.image} source = {require('../assets/Logo.png')} />
                 </View>
                 <View style={styles.headerTextContainer}>
                     <Text style={styles.headerText}>Activities</Text>
@@ -53,10 +51,10 @@ const styles = StyleSheet.create({
     container: { // dont need this but keep it for reference sake 
         flexDirection: 'column',
         backgroundColor: 'white',
-        //marginTop: 25,
+        marginTop: 100,
         height: '21%',
         width: '100%',
-        borderRadius: 20,
+        borderRadius: 50,
         justifyContent: 'center',
         alignItems: 'center',
         alignContent: 'center'
