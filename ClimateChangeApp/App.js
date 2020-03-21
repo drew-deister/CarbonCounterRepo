@@ -12,6 +12,7 @@ import Results from './Pages/Results';
 import GeoVideo1 from './Pages/GeoVideo1';
 import GeoVideo2 from './Pages/GeoVideo2';
 import IntroPage1 from './Pages/IntroPage1';
+import IntroPage2 from './Pages/IntroPage2';
 
 
 // shirom code 
@@ -82,7 +83,8 @@ const AppNavigator = createStackNavigator(
       Results: {screen: Results},
       GeoVideo1: {screen: GeoVideo1},
       GeoVideo2: {screen: GeoVideo2},
-      IntroPage1: {screen: IntroPage1}
+      IntroPage1: {screen: IntroPage1},
+      IntroPage2: {screen: IntroPage2}
     },
     {
         initialRouteName: 'IntroPage1',   // to go back to original, change from 'IntroPage1' to 'Home'

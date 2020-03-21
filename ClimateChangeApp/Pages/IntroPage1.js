@@ -18,36 +18,10 @@ export default class IntroPage extends Component {
     render() {
         const {navigate} = this.props.navigation;
         return (
-           
-         // make tucgabke opeacity ebntire page
-
-
-        //    <View style = {styles.container}>
-
-        //     <NextButton onPress= {() =>  
-        //             this.props.navigation.navigate('Home')} style = {styles.nextButton}>
-        //             Next
-
-        //     </NextButton>
-
-               
-        //     <Image 
-        //         style = {styles.image}
-        //         source = {require('../assets/Logo.png')} />
-               
-
-        //         <View style = {styles.penis}> 
-        //         <Text style = {styles.words}> Hello </Text>
-        //         </View>
-
-
-        //     </View>   
-
-
 
         <TouchableOpacity 
             style = {styles.container} 
-            onPress= {() => this.props.navigation.navigate('Home')}> 
+            onPress= {() => this.props.navigation.navigate('IntroPage2')}> 
 
             <Image style = {styles.image} source = {require('../assets/Logo.png')} />
 
