@@ -47,7 +47,7 @@ export default class Home extends Component {
                     
                     <HomeScreenActivityCard 
                         title = {"Carbon Counter"}      
-                        navigateToActivity = 'Question1'
+                        navigateToActivity = 'TempPage'//'Question1'
                         navigation = {this.props.navigation}
                         style = {{backgroundColor: '#FCCCC0'}}
                         />
@@ -62,6 +62,7 @@ export default class Home extends Component {
                     <HomeScreenActivityCard 
                         // default title: 'Activity'
                         // default navigateToActivity: 'Question1'
+                        //navigateToActivity = 'Question1'
                         navigation = {this.props.navigation}
                         /> 
                     <HomeScreenActivityCard navigation = {this.props.navigation} />
@@ -78,8 +79,7 @@ const styles = StyleSheet.create({
     safeView: {
         flex: 1,
     },
-    imageContainer: { // dont need this but keep it for reference sake 
-        //paddingTop: 25,
+    imageContainer: {
         height: 143,
         width: 340,
     },

@@ -11,6 +11,7 @@ import Question4 from './Pages/Question4';
 import Results from './Pages/Results';
 import GeoVideo1 from './Pages/GeoVideo1';
 import GeoVideo2 from './Pages/GeoVideo2';
+import TempPage from './Pages/TemporarySurveyPage';
 
 
 // shirom code 
@@ -74,6 +75,7 @@ function LogoTitle() {
 const AppNavigator = createStackNavigator(
     { // road map for the different parts of our navigation
       Home: {screen: Home},
+      TempPage: {screen: TempPage},
       Question1: {screen: Question1},
       Question2: {screen: Question2},
       Question3: {screen: Question3},
@@ -98,7 +100,7 @@ const AppNavigator = createStackNavigator(
             //     color: 'white',
             //     fontWeight: '500',
             // },
-            headerTintColor: '#73A388'
+            headerTintColor: '#73A388',
         },
     },
 )
