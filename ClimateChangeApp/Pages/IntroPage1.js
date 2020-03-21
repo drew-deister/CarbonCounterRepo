@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import HomeScreenActivityCard from '../Components/HomeScreenActivityCard';
+//import HomeScreenActivityCard from '../Components/HomeScreenActivityCard';
 import {ScrollView, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
-import { NextButton } from '../Components/NextButton';
-import {Button, Text, Card, Icon} from 'react-native-elements';
-import {
-    widthPercentageToDP as wp,
-    heightPercentageToDP as hp,
-    listenOrientationChange, removeOrientationListener
-} from 'react-native-responsive-screen';
+// import { NextButton } from '../Components/NextButton';
+// import {Button, Text, Card, Icon} from 'react-native-elements';
+// import {
+//     widthPercentageToDP as wp,
+//     heightPercentageToDP as hp,
+//     listenOrientationChange, removeOrientationListener
+// } from 'react-native-responsive-screen';
 
 
 
@@ -47,7 +47,7 @@ export default class IntroPage extends Component {
 
         <TouchableOpacity 
             style = {styles.container} 
-            onPress= {() => this.props.navigation.navigate('Home')} style = {styles.container}> 
+            onPress= {() => this.props.navigation.navigate('Home')}> 
 
             <Image style = {styles.image} source = {require('../assets/Logo.png')} />
 
@@ -60,14 +60,13 @@ export default class IntroPage extends Component {
 
 
 const styles = StyleSheet.create({
-    container: { // dont need this but keep it for reference sake 
+    container: { 
         flex: 1,
-        flexDirection: 'row',
         backgroundColor: '#F6F8EF',
-        borderRadius: 50,
         justifyContent: 'center',
-        alignItems: 'center',
-        alignContent: 'center'
+        alignItems: 'center', 
+        borderWidth: 1, 
+        borderColor: '#707070', 
     },
     image: {
         backgroundColor: 'transparent',
@@ -76,13 +75,5 @@ const styles = StyleSheet.create({
         resizeMode: 'cover',
         alignItems: 'center',
     },
-    penis: {
-        backgroundColor: 'black',
-    },
-    words: {
-        color: 'white', 
-    }, 
-    
-    
-   
+
 });
