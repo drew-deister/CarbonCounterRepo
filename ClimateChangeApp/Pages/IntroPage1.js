@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import HomeScreenActivityCard from '../Components/HomeScreenActivityCard';
-import {ScrollView, View, StyleSheet, Image} from 'react-native';
+import {ScrollView, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import { NextButton } from '../Components/NextButton';
 import {Button, Text, Card, Icon} from 'react-native-elements';
 import {
     widthPercentageToDP as wp,
@@ -9,39 +10,50 @@ import {
 } from 'react-native-responsive-screen';
 
 
-function LogoTitle() {
-    return (
-      <Image
-        style={{ width: 50, height: 50 }}
-       // source={require('../assets/Home.png')}
-       source={require('../assets/Logo.png')}
-
-      />
-    );
-  }
 
 export default class IntroPage extends Component {
     
-    static navigationOptions = {
-        title: ' ',
-        headerTitle: LogoTitle
-    };
-
 
     // "main method"
     render() {
         const {navigate} = this.props.navigation;
         return (
-            <View style = {styles.container}>
-                <View style = {styles.container}>
-                    <Image style = {styles.image} source = {require('../assets/Logo.png')} />
-                </View>
-                <View style={styles.headerTextContainer}>
-                    <Text style={styles.headerText}>Activities</Text>
-                </View>
-                
-            </View>
-            
+           
+         // make tucgabke opeacity ebntire page
+
+
+        //    <View style = {styles.container}>
+
+        //     <NextButton onPress= {() =>  
+        //             this.props.navigation.navigate('Home')} style = {styles.nextButton}>
+        //             Next
+
+        //     </NextButton>
+
+               
+        //     <Image 
+        //         style = {styles.image}
+        //         source = {require('../assets/Logo.png')} />
+               
+
+        //         <View style = {styles.penis}> 
+        //         <Text style = {styles.words}> Hello </Text>
+        //         </View>
+
+
+        //     </View>   
+
+
+
+        <TouchableOpacity 
+            style = {styles.container} 
+            onPress= {() => this.props.navigation.navigate('Home')} style = {styles.container}> 
+
+            <Image style = {styles.image} source = {require('../assets/Logo.png')} />
+
+
+        </TouchableOpacity>
+           
         );
     }
 }
@@ -49,30 +61,28 @@ export default class IntroPage extends Component {
 
 const styles = StyleSheet.create({
     container: { // dont need this but keep it for reference sake 
-        flexDirection: 'column',
-        backgroundColor: 'white',
-        marginTop: 100,
-        height: '21%',
-        width: '100%',
+        flex: 1,
+        flexDirection: 'row',
+        backgroundColor: '#F6F8EF',
         borderRadius: 50,
         justifyContent: 'center',
         alignItems: 'center',
         alignContent: 'center'
     },
     image: {
-        paddingTop: 20,
-        //backgroundColor: 'black',
-        height: 200,
-        width: 350,
+        backgroundColor: 'transparent',
+        height: 133.48,
+        width: 147.19,
         resizeMode: 'cover',
-        
+        alignItems: 'center',
     },
-    headerTextContainer: {
-        
+    penis: {
+        backgroundColor: 'black',
     },
-    headerText: {
-        color: '#73A388',   //green
-        fontSize: 18,
-        fontWeight: '600',
-    }
+    words: {
+        color: 'white', 
+    }, 
+    
+    
+   
 });
