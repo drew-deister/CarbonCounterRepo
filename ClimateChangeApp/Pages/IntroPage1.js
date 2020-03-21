@@ -1,3 +1,5 @@
+// Asaf
+
 import React, { Component } from 'react';
 //import HomeScreenActivityCard from '../Components/HomeScreenActivityCard';
 import {ScrollView, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
