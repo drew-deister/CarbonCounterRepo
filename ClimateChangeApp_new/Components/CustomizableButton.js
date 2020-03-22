@@ -1,9 +1,14 @@
-// originally created by Lucas
-// adapted by Drew 
+// Lucas 
+
 import React from 'react';
 import {Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+  listenOrientationChange, removeOrientationListener
+} from 'react-native-responsive-screen';
 
-const HomeScreenActivityButton = (props) => {
+const CustomizableButton = (props) => {
   return (
     <TouchableOpacity
         onPress={props.onPress}
@@ -13,14 +18,14 @@ const HomeScreenActivityButton = (props) => {
   )
 }
 
-
+// this is good style 
 const styles = StyleSheet.create({
   buttonBody: {
-    backgroundColor: 'blue',//'#73A388',//#0B7310',//'white',
+    backgroundColor: '#00aeef',
     padding: 20,
     borderRadius: 8,
     marginVertical: 8,
-    marginRight: 8,
+    width: wp('80%')
   },
   buttonText:{
     color: 'white',
@@ -29,4 +34,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export {HomeScreenActivityButton};
+export {CustomizableButton};
