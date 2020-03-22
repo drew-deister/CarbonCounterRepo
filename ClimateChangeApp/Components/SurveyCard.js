@@ -9,27 +9,45 @@ import PropTypes from 'prop-types';
 
 
 
-const images = {
-    household: {source: require('../assets/Household.png')}
+var images = {
+    'Household': require('../assets/Household.png'),
+    'Transportation': require('../assets/Transportation.png'),
+    'Diet': require('../assets/Diet.png'),
+    'Shopping': require('../assets/Shopping.png')
 }
 
+var household = require('../assets/Household.png');
+
 class SurveyCard extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            imageSrc: '../assets/Household.png'
+        };
+        //nextScreen: props.children;
+    }
     static propTypes = {
         title: PropTypes.string,
         imageSrc: PropTypes.string,
     }
     static defaultProps = {
         title: 'Household',
-        imageSrc: '../assets/Household.png',
+        imageName: 'Household',
+        style: {},                      //used to change backgroundColor
+        titleStyle: {},                 //used to change title text color
     }
 
 
     render() {
         return (
             <View style={styles.safeView}>
-                <ScrollView style={styles.scrollViewStyle} contentContainerStyle = {styles.containerStyle}>
-                    <Image style = {styles.image} source = {require('../assets/Household.png')} />
-                    <Text style={styles.pageTitle}>{this.props.title}</Text>
+                <ScrollView style={[styles.scrollViewStyle, this.props.style]} contentContainerStyle = {styles.containerStyle}>
+                    <Image style = {styles.image} source = {images[this.props.imageName]} />
+                    <Text style={[styles.pageTitle, this.props.titleStyle]}>{this.props.title}</Text>
+                    <View>
+                        {this.props.children}
+                    </View>
 
                 </ScrollView>
             </View>
@@ -48,14 +66,9 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 40,
         borderTopLeftRadius: 40
     },
-    imageContainer: {
-        height: 163,
-        width: 280,
-        backgroundColor: 'green',
-    },
     image: {
         marginTop: 32,
-        height: 163,
+        height: 170,
         width: 280,
     },
     containerStyle: {
@@ -69,7 +82,7 @@ const styles = StyleSheet.create({
     pageTitle: {
         marginTop: 20,
         color: 'white',
-        fontSize: 50,
+        fontSize: 42,
         height: 33,
         width: 224,
         fontWeight: '600',

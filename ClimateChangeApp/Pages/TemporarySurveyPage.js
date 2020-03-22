@@ -8,8 +8,13 @@ export default class TempPage extends Component {
     render() {
 
         return (
-            <SurveyCard>
+            <SurveyCard
+                title='Diet'
+                imageName='Diet'
+                style={{backgroundColor: '#F0F5DF'}}
+                titleStyle={{color: '#73A388'}} >
 
+                <Text>Hello</Text>
             </SurveyCard>
             // <View style={styles.safeView}>
             //     <ScrollView style={styles.scrollViewStyle} contentContainerStyle = {styles.containerStyle}>
