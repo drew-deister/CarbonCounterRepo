@@ -76,7 +76,7 @@ class Results extends React.Component {
                      beefServings: beefServings, dairyServings: dairyServings, 
                      shoppingFrequency: shoppingFrequency, articlesPerShop: articlesPerShop});
 
-      calculate
+      //calculate
       this.calculateDiet()
       this.calculateShopping()
       // insert housing
