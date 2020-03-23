@@ -44,7 +44,6 @@ export default class Home extends Component {
                 </View>
                 
                 
-
                 <HomeScreenActivityCard 
                     title = {"Carbon Counter"}      
                     navigateToActivity = 'Question1'
