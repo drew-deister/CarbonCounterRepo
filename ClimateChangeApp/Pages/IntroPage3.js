@@ -59,10 +59,9 @@ const styles = StyleSheet.create({
   clouds: {
     backgroundColor: "transparent",
     height: 210,
-    width: 360,
+    width: 300,
     resizeMode: "cover",
-    alignItems: "center",
-    paddingBottom: 50
+    alignItems: "center"
   },
   surroundingButton: {
     paddingTop: 60
