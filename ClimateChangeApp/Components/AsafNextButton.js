@@ -4,11 +4,8 @@ import React from "react";
 import { Text, StyleSheet, TouchableOpacity } from "react-native";
 import {
   widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-  listenOrientationChange,
-  removeOrientationListener
+  heightPercentageToDP as hp
 } from "react-native-responsive-screen";
-import { shadow } from "react-native-paper";
 
 const AsafNextButton = props => {
   return (
