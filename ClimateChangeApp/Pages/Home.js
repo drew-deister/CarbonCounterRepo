@@ -37,25 +37,6 @@ export default class Home extends Component {
         return (
             <View style={styles.safeView}>
                 
-<<<<<<< HEAD
-                
-                <HomeScreenActivityCard 
-                    title = {"Carbon Counter"}      
-                    navigateToActivity = 'Question1'
-                    navigation = {this.props.navigation}/>
-                <HomeScreenActivityCard
-                    title = {"WePlanet"}
-                    navigateToActivity = 'GeoVideo1'
-                    navigation = {this.props.navigation} />
-                <HomeScreenActivityCard 
-                    // default title: 'Activity'
-                    // default navigateToActivity: 'Question1'
-                    navigation = {this.props.navigation}
-                    /> 
-                <HomeScreenActivityCard navigation = {this.props.navigation} />
-                <HomeScreenActivityCard navigation = {this.props.navigation} />
-            </ScrollView>
-=======
                 <ScrollView style = {styles.scrollview} contentContainerStyle = {styles.containerStyle}>
                     <View style = {styles.imageContainer}>
                             <Image style = {styles.image} source = {require('../assets/Home.png')} />
@@ -87,7 +68,6 @@ export default class Home extends Component {
                     {/*<HomeScreenActivityCard navigation = {this.props.navigation} />*/}
                 </ScrollView>
             </View>
->>>>>>> master
             
         );
     }
