@@ -1,6 +1,8 @@
 // Drew Deister
 // 1.14.2020
 
+// new
+
 // TODO: add a query for the information when the sreen is loaded?
 // note: Creating child components is generally best practices for everything on this screen.
 //       However, QuestionCard needs access to all child states, and since a child Slider component
@@ -52,31 +54,18 @@ class QuestionCard1 extends React.Component {
     // called when next button is pushed
     saveAndPush() {
         if (this.checkValid()) {
-            SecureStore.setItemAsync("zipCode", this.state.zipCode) // save to async
-            SecureStore.setItemAsync("numPeople", toString(this.state.numPeople))
-            SecureStore.setItemAsync("squareFootage", toString(this.state.sliderValue))
+            SecureStore.setItemAsync("zipCode", JSON.stringify(this.state.zipCode)) // save to async
+            SecureStore.setItemAsync("numPeople", JSON.stringify(this.state.numPeople))
+            SecureStore.setItemAsync("squareFootage", JSON.stringify(this.state.sliderValue))
             this.props.navigation.push('Question2')
         } else {
             alert("Please enter a valid zipcode.")
         }
     }
 
-    // called when next button is pushed
-    saveAndPush() {
-        if (this.checkValid()) { // change this to CHECK VALID
-            SecureStore.setItemAsync("zipCode", JSON.stringify(this.state.zipCode)) // save to async
-            SecureStore.setItemAsync("numPeople", JSON.stringify(this.state.numPeople))
-            // SecureStore.setItemAsync("squareFootage", toString(this.state.sliderValue))
-            this.props.navigation.push('Question2')
-        } else {
-            alert("Please answer all questions.")
-        }
-    }
-
     // checks whether current inputs are valid
     checkValid() {
-        return true
-        // return ((this.state.zipCode.length >= 5) && (this.state.sliderValue != 1)) 
+        return ((this.state.zipCode.length >= 5) && (this.state.sliderValue != 1)) 
     }
 
 

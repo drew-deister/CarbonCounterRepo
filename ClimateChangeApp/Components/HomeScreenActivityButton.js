@@ -16,7 +16,7 @@ const HomeScreenActivityButton = (props) => {
 
 const styles = StyleSheet.create({
   buttonBody: {
-    backgroundColor: '#73A388',//#0B7310',//'white',
+    backgroundColor: 'blue',//'#73A388',//#0B7310',//'white',
     padding: 20,
     borderRadius: 8,
     marginVertical: 8,

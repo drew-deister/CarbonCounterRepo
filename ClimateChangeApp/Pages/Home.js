@@ -35,14 +35,9 @@ export default class Home extends Component {
     render() {
         const {navigate} = this.props.navigation;
         return (
-            <ScrollView style = {styles.scrollview} contentContainerStyle = {styles.containerStyle}>
-                <View style = {styles.container}>
-                    <Image style = {styles.image} source = {require('../assets/Home.png')} />
-                </View>
-                <View style={styles.headerTextContainer}>
-                    <Text style={styles.headerText}>Activities</Text>
-                </View>
+            <View style={styles.safeView}>
                 
+<<<<<<< HEAD
                 
                 <HomeScreenActivityCard 
                     title = {"Carbon Counter"}      
@@ -60,6 +55,39 @@ export default class Home extends Component {
                 <HomeScreenActivityCard navigation = {this.props.navigation} />
                 <HomeScreenActivityCard navigation = {this.props.navigation} />
             </ScrollView>
+=======
+                <ScrollView style = {styles.scrollview} contentContainerStyle = {styles.containerStyle}>
+                    <View style = {styles.imageContainer}>
+                            <Image style = {styles.image} source = {require('../assets/Home.png')} />
+                    </View>
+                    <View style={styles.headerTextContainer}>
+                        <Text style={styles.pageTitle}>Activities</Text>
+                    </View>
+                    
+                    <HomeScreenActivityCard 
+                        title = {"Carbon Counter"}      
+                        navigateToActivity = 'Question1'
+                        navigation = {this.props.navigation}
+                        style = {{backgroundColor: '#FCCCC0'}}
+                        />
+                        
+                    <HomeScreenActivityCard
+                        title = {"WePlanet"}
+                        navigateToActivity = 'GeoVideo1'
+                        navigation = {this.props.navigation}
+                        style = {{backgroundColor: '#73A388'}}
+                        />
+                        
+                    <HomeScreenActivityCard 
+                        // default title: 'Activity'
+                        // default navigateToActivity: 'Question1'
+                        navigation = {this.props.navigation}
+                        /> 
+                    <HomeScreenActivityCard navigation = {this.props.navigation} />
+                    {/*<HomeScreenActivityCard navigation = {this.props.navigation} />*/}
+                </ScrollView>
+            </View>
+>>>>>>> master
             
         );
     }
@@ -67,47 +95,37 @@ export default class Home extends Component {
 
 
 const styles = StyleSheet.create({
-    container: { // dont need this but keep it for reference sake 
-        flexDirection: 'column',
-        backgroundColor: 'white',
-        //marginTop: 25,
-        height: '21%',
-        width: '100%',
-        borderRadius: 20,
-        justifyContent: 'center',
-        alignItems: 'center',
-        alignContent: 'center'
+    safeView: {
+        flex: 1,
+    },
+    imageContainer: { // dont need this but keep it for reference sake 
+        //paddingTop: 25,
+        height: 143,
+        width: 340,
     },
     containerStyle: {
+        flexGrow: 1,
         marginTop: 0,
         padding: 0,
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         alignItems: 'center',
         alignContent: 'center'
     },
     scrollview: {
-        paddingTop: '14%',
-        marginLeft: 5,
-        marginRight: 5,
-        //height: '60%'
+        paddingTop: 25,
     },
     image: {
-        paddingTop: 20,
-        //backgroundColor: 'black',
-        height: 200,
-        width: 350,
-        resizeMode: 'cover',
-        
-    },
-    carbonCounterButton: {
-        backgroundColor: '#FCCCC0'  //pink
+        height: '130%',
+        width: '100%',
     },
     headerTextContainer: {
-        
+        paddingTop: 16,
     },
-    headerText: {
+    pageTitle: {
         color: '#73A388',   //green
-        fontSize: 18,
+        fontSize: 23,
+        height: 33,
+        width: 224,
         fontWeight: '600',
     }
 });

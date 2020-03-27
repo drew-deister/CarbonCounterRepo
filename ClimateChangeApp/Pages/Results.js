@@ -11,8 +11,12 @@
 // perform calculations on them. 
 
 
+// figure out how to make buttons select
+// resolve issue with num people
+// figure out how to index with zipcodes
+
 import React, { Component, useState } from 'react';
-import {StyleSheet, View} from "react-native";
+import {StyleSheet, View, TouchableHighlight} from "react-native";
 import {Button, Text, Card, Icon} from 'react-native-elements';
 
 
@@ -22,11 +26,19 @@ class Results extends React.Component {
     constructor() {
       super();
       this.state = {
-        zipCode: 0, // this will be updated when the promise object is resolved
+        zipCode: 0,
         numPeople: 0,
+        squareFootage: 0,
+        numMiles: 0,
+        greenAmount: 0,
+        summerChange: 0,
+        mode: '',
         beefServings: 0,
         dairyServings: 0,
-        carbonFootprint: 0,
+        shoppingFrequency: 0,
+        articlesPerShop: 0,
+        dummyNumber: 40,
+
       }
     }
     static navigationOptions = { // this is the label in the middle of the nav bar
@@ -45,24 +57,61 @@ class Results extends React.Component {
 
       // transportation
       const numMiles = JSON.parse(await SecureStore.getItemAsync("numMiles"))
-      const greenAmount = await SecureStore.getItemAsync("greenAmount")
-      const summerChange = await SecureStore.getItemAsync("summerChange")
-      const mode = await SecureStore.getItemAsync("mode")
+      const greenAmount = JSON.parse(await SecureStore.getItemAsync("greenAmount"))
+      const summerChange = JSON.parse(await SecureStore.getItemAsync("summerChange"))
+      const mode = JSON.parse(await SecureStore.getItemAsync("mode"))
 
       // diet
-      const beefServings = await SecureStore.getItemAsync("beefServings")
-      const dairyServings = await SecureStore.getItemAsync("dairyServings")
+      const beefServings = JSON.parse(await SecureStore.getItemAsync("beefServings"))
+      const dairyServings = JSON.parse(await SecureStore.getItemAsync("dairyServings"))
 
       // shopping
       const shoppingFrequency = JSON.parse(await SecureStore.getItemAsync("shoppingFrequency"))
-      const articlesPerShop = await SecureStore.getItemAsync("articlesPerShop")
+      const articlesPerShop = JSON.parse(await SecureStore.getItemAsync("articlesPerShop"))
 
       // this not only changes the state but also 
       // rerenders the components in view
-      this.setState({zipCode: JSON.parse(zipCode), 
-                     numPeople: JSON.parse(numPeople), 
-                     beefServings: JSON.parse(beefServings),
-                     dairyServings: JSON.parse(dairyServings)});
+      this.setState({zipCode: zipCode, numPeople: numPeople, squareFootage: squareFootage, 
+                     numMiles: numMiles, greenAmount: greenAmount, summerChange: summerChange, mode: mode,
+                     beefServings: beefServings, dairyServings: dairyServings, 
+                     shoppingFrequency: shoppingFrequency, articlesPerShop: articlesPerShop});
+
+      //calculate
+      this.calculateDiet()
+      this.calculateShopping()
+      // insert housing
+      this.calculateTransportation()
+    }
+
+    // MARK: Do calculations
+    calculateDiet() { // calculates results with variables in this.state
+      const POUNDS_PER_BEEF_SERVING = 6.61
+      const POUNDS_PER_CHEESE_SERVING = 2.45
+
+      return ((this.state.beefServings * POUNDS_PER_BEEF_SERVING * 52) + 
+                (this.state.dairyServings * POUNDS_PER_CHEESE_SERVING * 52))
+    }
+
+    calculateShopping() {
+      const POUNDS_PER_SHIRT = 12.13
+      return (POUNDS_PER_SHIRT * 12 * this.state.shoppingFrequency * this.state.articlesPerShop)
+    }
+
+    calculateTransportation() {
+      MPG_rate = -1 // dummy bc idk if you have to initialize
+      if (this.mode == "Sedan") {
+        MPG_rate = 30
+      } else if (this.mode == "Car SUV") {
+        MPG_rate = 26.2
+      } else if (this.mode == "Truck SUV") {
+        MPG_rate = 22.4
+      } else if (this.mode == "Minivan") {
+        MPG_rate = 22.2
+      } else { // pickup truck
+        MPG_rate = 18.9
+      }
+
+      return (this.numMiles * 180 * (1/MPG_rate) * 8887) // gCO2/yr
     }
     
     render() {
@@ -77,6 +126,8 @@ class Results extends React.Component {
     }
 
 }
+
+
 
 
 export default Results;
