@@ -6,7 +6,7 @@
 // _______________TRANSPORTATION QUESTION CARD__________________
 
 import React, { Component } from 'react';
-import {StyleSheet, View} from "react-native";
+import {StyleSheet, View, TouchableHighlight} from "react-native";
 import {Icon, Button, Slider, Text} from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
 import {diagonalScale} from '../Utilities/Scaling';
@@ -27,6 +27,7 @@ class QuestionCard2 extends React.Component {
             greenAmount: 1,
             summerChange: 1,
             mode: '',
+            color: ['red', 'red', 'red', 'red', 'red'],
         }
         this.updateSliderState1 = this.updateSliderState1.bind(this)
         this.updateSliderState2 = this.updateSliderState2.bind(this)
@@ -61,6 +62,20 @@ class QuestionCard2 extends React.Component {
         return (this.state.numMiles != 0)
     }
 
+    
+    updateButton(index, mode) {
+        if (this.state.color[index] == 'red') {
+            this.state.color[index] = 'blue'
+        } else {
+            this.state.color[index] = 'red'
+        }
+        for (let i = 0; i < 5; i++) { // unselect the other
+            if (this.state.color[i] == 'blue' && i != index) { // don't change the one you just updated
+                this.state.color[i] = 'red'
+            }
+        }
+        this.setState({color: this.state.color, mode: mode})
+    }
 
     render() {
         return(
@@ -85,21 +100,26 @@ class QuestionCard2 extends React.Component {
                         </View>
 
                         <Text style = {styles.text}>{this.props.data.transportationMode}</Text>
-                        <Button
-                            title='Car SUV' buttonStyle={styles.button}// update this to move lower 
-                            onPress = {() => this.setState({mode: 'Car SUV'})}/>
-                        <Button
-                            title='Sedan' buttonStyle={styles.button}
-                            onPress = {() => this.setState({mode: 'Sedan'})}/>
-                        <Button
-                            title='Truck SUV' buttonStyle={styles.button}
-                            onPress = {() => this.setState({mode: 'Truck SUV'})}/>
-                        <Button
-                            title='Minivan' buttonStyle={styles.button} 
-                            onPress = {() => this.setState({mode: 'Minivan'})}/>
-                        <Button
-                            title='Pickup Truck' buttonStyle={styles.button} 
-                            onPress = {() => this.setState({mode: 'Pickup Truck'})}/>
+                        <TouchableHighlight style = {{backgroundColor: this.state.color[0], width: wp('40%'), marginBottom: 20, alignItems: 'center', }}
+                            onPress = {() => this.updateButton(0, 'Car SUV')} >
+                            <Text style={styles.buttonText}>Hello</Text>
+                        </TouchableHighlight>
+                        <TouchableHighlight style = {{backgroundColor: this.state.color[1], width: wp('40%'), marginBottom: 20, alignItems: 'center'}}
+                            onPress = {() => this.updateButton(1, 'Sedan')} >
+                            <Text style={styles.buttonText}>Hello</Text>
+                        </TouchableHighlight>
+                        <TouchableHighlight style = {{backgroundColor: this.state.color[2], width: wp('40%'), marginBottom: 20, alignItems: 'center'}}
+                            onPress = {() => this.updateButton(2, 'Truck SUV')} >
+                            <Text style={styles.buttonText}>Hello</Text>
+                        </TouchableHighlight>
+                        <TouchableHighlight style = {{backgroundColor: this.state.color[3], width: wp('40%'), marginBottom: 20, alignItems: 'center'}}
+                            onPress = {() => this.updateButton(3, 'Minivan')} >
+                            <Text style={styles.buttonText}>Hello</Text>
+                        </TouchableHighlight>
+                        <TouchableHighlight style = {{backgroundColor: this.state.color[4], width: wp('40%'), marginBottom: 20, alignItems: 'center'}}
+                            onPress = {() => this.updateButton(4, 'Pickup Truck')} >
+                            <Text style={styles.buttonText}>Hello</Text>
+                        </TouchableHighlight>
 
                         <Text style = {styles.text}>{this.props.data.summerChange}</Text>
                         <View style = {styles.rowStyleView}>
@@ -133,6 +153,9 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: '300'
     },
+    buttonText: {
+        color: 'white'
+    },
     rowStyleView: {
         flexDirection: 'row',
         marginVertical: 20
@@ -158,8 +181,8 @@ const styles = StyleSheet.create({
         marginRight: 4,
         width: wp('60%')
     },
-    button: { 
-        backgroundColor: 'gray', // change this 
+    button: { // not being used 
+        backgroundColor: 'gray', 
         marginBottom: 20,
         width: wp('40%')
     },
