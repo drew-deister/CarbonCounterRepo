@@ -50,8 +50,7 @@ class QuestionCard3 extends React.Component {
     }
 
     checkValid() { // do some sort of error checking here
-        return true;
-        // return (numMiles != 1)
+        return (true)
     }
 
 

@@ -6,16 +6,24 @@
 // _______________HOUSING QUESTIONS_______________
 
 import React, { Component } from 'react';
-import {StyleSheet, View} from "react-native";
+import {StyleSheet, View, TouchableHighlight} from "react-native";
+import {Text, Icon, Button, Slider} from 'react-native-elements';
 import {Header} from '../Components/Header';
 import {Separator} from '../Components/Separator';
 import {QuestionCard1} from './QuestionCard1';
 
 class Question1 extends React.Component {
+
+    constructor(props) {
+        super(props);
+        
+    }
     
     static navigationOptions = { // this is the label in the middle of the nav bar
         title: ' ',
     };
+
+    
 
     // note that the navigation prop must be passed to the Question Card
     render() {
@@ -27,6 +35,7 @@ class Question1 extends React.Component {
                 <Separator />
                 <QuestionCard1 navigation = {this.props.navigation} data = {data}/>
             </View>
+            
         )
     }
 }
@@ -45,6 +54,9 @@ const data = {
     homeSizeMax: 4000,
 
 }
+
+
+
   
 const styles = StyleSheet.create({    
     container: {

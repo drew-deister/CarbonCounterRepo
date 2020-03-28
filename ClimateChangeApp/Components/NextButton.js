@@ -8,7 +8,7 @@ const NextButton = (props) => {
   return (
     <TouchableOpacity
         onPress={props.onPress}
-        style={styles.buttonBody}>
+        style={[styles.buttonBody, props.style]}>
         <Text style={styles.buttonText}>{props.children}</Text>
         <Image style = {styles.image} source = {require('../assets/right-arrow.png')} />
     </TouchableOpacity>
