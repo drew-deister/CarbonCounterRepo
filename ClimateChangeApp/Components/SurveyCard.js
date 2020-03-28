@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 
 
 
-var images = {
+const images = {
     'Household': require('../assets/Household.png'),
     'Transportation': require('../assets/Transportation.png'),
     'Diet': require('../assets/Diet.png'),

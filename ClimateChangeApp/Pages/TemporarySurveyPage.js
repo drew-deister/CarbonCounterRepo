@@ -9,11 +9,11 @@ export default class TempPage extends Component {
 
         return (
             <SurveyCard
-                title='Diet'
-                imageName='Diet'
+                title='Transportation'
+                imageName='Transportation'
                 style={{backgroundColor: '#F0F5DF'}}
                 titleStyle={{color: '#73A388'}} >
-
+                    
                 <Text>Hello</Text>
             </SurveyCard>
             // <View style={styles.safeView}>
