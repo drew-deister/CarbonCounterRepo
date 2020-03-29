@@ -15,6 +15,11 @@ import IntroPage1 from "./Pages/IntroPage1";
 import IntroPage2 from "./Pages/IntroPage2";
 import IntroPage3 from "./Pages/IntroPage3";
 import TempPage from './Pages/TemporarySurveyPage';
+import SurveyHousehold from './Pages/SurveyHousehold';
+import SurveyTransportation from './Pages/SurveyTransportation';
+import SurveyDiet from './Pages/SurveyDiet';
+import SurveyShopping from './Pages/SurveyShopping';
+
 
 // shirom code
 global.theme = {
@@ -77,6 +82,10 @@ const AppNavigator = createStackNavigator(
     // road map for the different parts of our navigation
     Home: { screen: Home },
     TempPage: {screen: TempPage},
+    Household: {screen: SurveyHousehold},
+    Transportation: {screen: SurveyTransportation},
+    Diet: {screen: SurveyDiet},
+    Shopping: {screen: SurveyShopping},
     Question1: { screen: Question1 },
     Question2: { screen: Question2 },
     Question3: { screen: Question3 },
@@ -89,7 +98,7 @@ const AppNavigator = createStackNavigator(
     IntroPage3: { screen: IntroPage3 }
   },
   {
-    initialRouteName: "Home", // to go back to original, change from 'IntroPage1' to 'Home'
+    initialRouteName: "IntroPage1", // to go back to original, change from 'IntroPage1' to 'Home'
     headerLayoutPreset: "center",
     transitionConfig: () => ({
       screenInterpolator: StackViewStyleInterpolator.forHorizontal

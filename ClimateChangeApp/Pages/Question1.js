@@ -45,7 +45,7 @@ const data = {
     zipCode: 'Zip Code', 
     zipCodePlaceholder: 'Enter your zipcode',
 
-    homeSize: 'How big is your home (in square feet)?',
+    homeSize: 'House Size (square feet)?',
 
     numPeople: 'How many people do you live with?',
     numPeoplePlaceholder: 'Enter a number',

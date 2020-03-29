@@ -14,6 +14,8 @@ import {
     listenOrientationChange, removeOrientationListener
 } from 'react-native-responsive-screen';
 import {diagonalScale} from '../Utilities/Scaling';
+import { QuestionText } from './QuestionText';
+import PropTypes from 'prop-types';
 
 class SliderQuestion extends React.Component {
 
@@ -24,24 +26,52 @@ class SliderQuestion extends React.Component {
         }
     }
 
+    static propTypes = {
+        question: PropTypes.string,
+        minTrackColor: PropTypes.string,
+        thumbColor: PropTypes.string,
+        min: PropTypes.number,
+        max: PropTypes.number,
+        step: PropTypes.number,
+    }
+
+    static defaultProps = {
+        question: "",
+        secondaryColor: '#EB5B6D',
+        min: 1,
+        max: 100,
+        step: 1,
+    }
+
     render() {
         return (            
             <View style={styles.container}>
-                { 
-                    this.props.shouldDisplay ? // this is called a ternary operator: the text element will display if true
-                    <Text style={{
-                        color: 'white',
-                        fontSize: diagonalScale(4.5),
-                        fontWeight: 'bold'}}>{this.state.sliderValue} 
-                    </Text> : null
-                }
+                <QuestionText
+                    lines={this.props.questionLines}
+                    question={this.props.question}
+                    style={this.props.questionStyle}
+                    >
+                </QuestionText>
+                
                 <Slider style={styles.slider}
+                        maximumTrackTintColor='white'
+                        minimumTrackTintColor={this.props.secondaryColor}
+                        trackStyle={styles.track}
+                        thumbStyle={[styles.thumb, {backgroundColor: this.props.secondaryColor}]}
                         maximumValue={this.props.max}
                         minimumValue={this.props.min}
                         value = {this.state.sliderValue}
                         step={this.props.step} 
                         onValueChange={(value) => this.setState({sliderValue: value})}
                         onSlidingComplete={(value) => this.props.callback(value)}/>
+
+                { 
+                this.props.shouldDisplay ? // this is called a ternary operator: the text element will display if true
+                    <Text style={styles.sliderValue}>
+                        {this.state.sliderValue} 
+                    </Text>
+                : null
+                }
             </View>   
         )
     }
@@ -50,15 +80,25 @@ class SliderQuestion extends React.Component {
 
 export {SliderQuestion};
 
-const styles = StyleSheet.create({   
+const styles = StyleSheet.create({
+    thumb: {
+        marginTop: -15,
+    },
+    track: {
+        height: 5,
+    },
+    sliderValue: {
+        color: 'white',
+        fontSize: 20, //diagonalScale(4.5),
+        fontWeight: '600',
+    },
     container: {
         alignItems: 'center',
         flexDirection: 'column',
     },
     slider: {
-        // alignSelf: 'stretch',
-        marginHorizontal: 15,
-        width: wp('50%')
+        width: 270,//wp('72%'),   //equivalent to 270 from jenna's design
+        height: 10,
     }
 });
 

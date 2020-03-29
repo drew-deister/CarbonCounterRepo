@@ -54,14 +54,16 @@ class QuestionCard4 extends React.Component {
 
     render() {
         return(
-            <ScrollView style = {styles.scrollView}>
+            // <ScrollView style = {styles.scrollView}>
                 <View style = {styles.view}>
                     <InputQuestion 
+                        questionLines={2}
                         keyboardType = {'numeric'}
                         parentCallBack = {this.callbackFunction1}                             
                         question = {this.props.data.shoppingFrequency} 
                         placeholder = {this.props.data.shoppingFrequencyPlaceholder}/>
                     <InputQuestion 
+                        questionLines={2}
                         keyboardType = {'numeric'}
                         parentCallBack = {this.callbackFunction2}                             
                         question = {this.props.data.articlesPerShop} 
@@ -73,7 +75,7 @@ class QuestionCard4 extends React.Component {
                         title='Results '
                         onPress= {() => this.saveAndPush()}/>
                 </View> 
-            </ScrollView>
+            // </ScrollView>
         )    
     }
 

@@ -23,6 +23,7 @@ import {
     heightPercentageToDP as hp,
     listenOrientationChange, removeOrientationListener
   } from 'react-native-responsive-screen';
+import { SliderQuestion } from '../Components/SliderQuestion';
 
 class QuestionCard1 extends React.Component {
     constructor(props) {
@@ -37,6 +38,8 @@ class QuestionCard1 extends React.Component {
         }
         this.callbackFunction1 = this.callbackFunction1.bind(this); // make sure these are both correct
         this.callbackFunction2 = this.callbackFunction2.bind(this);
+        this.updateSliderState = this.updateSliderState.bind(this);
+
 
     }
 
@@ -46,6 +49,9 @@ class QuestionCard1 extends React.Component {
 
     callbackFunction2(value) {
         this.setState({numPeople: value})
+    }
+    updateSliderState(value) {
+        this.setState({sliderValue: value})
     }
     onChange(values) {
         this.setState({sliderValue: values})
@@ -57,7 +63,7 @@ class QuestionCard1 extends React.Component {
             SecureStore.setItemAsync("zipCode", JSON.stringify(this.state.zipCode)) // save to async
             SecureStore.setItemAsync("numPeople", JSON.stringify(this.state.numPeople))
             SecureStore.setItemAsync("squareFootage", JSON.stringify(this.state.sliderValue))
-            this.props.navigation.push('Question2')
+            this.props.navigation.push('Transportation')
         } else {
             alert("Please enter a valid zipcode.")
         }
@@ -65,14 +71,14 @@ class QuestionCard1 extends React.Component {
 
     // checks whether current inputs are valid
     checkValid() {
-        return ((this.state.zipCode.length >= 5) && (this.state.sliderValue != 1)) 
+        return true//((this.state.zipCode.length >= 5) && (this.state.sliderValue != 1)) 
     }
 
 
     render() {
         return(
-            <View style = {styles.view}>
-                <ScrollView style = {styles.scrollView}>
+            // <View style = {styles.view}>
+            //     <ScrollView style = {styles.scrollView}>
                     <View style = {styles.view}>
                         <InputQuestion 
                             keyboardType = {'numeric'}
@@ -83,17 +89,15 @@ class QuestionCard1 extends React.Component {
                             keyboardType = {'numeric'}
                             parentCallBack = {this.callbackFunction2} 
                             question = {this.props.data.numPeople} 
-                            placeholder = {this.props.data.numPeoplePlaceholder}/>
-                        <Text style = {styles.text}>{this.props.data.homeSize}</Text>
-                        <Text style={{
-                            color: 'white',
-                            fontSize: diagonalScale(4.5),
-                            fontWeight: 'bold'}}>{this.state.sliderValue}</Text>
-                        <Slider 
-                                width = {wp('80%')} 
-                                minimumValue={0} maximumValue={100} step = {1}
-                                value={this.state.sliderValue}
-                                onValueChange={(sliderValue) => this.setState({sliderValue})}/>
+                            placeholder = {this.props.data.numPeoplePlaceholder}
+                            questionLines={2} />
+                        
+                        <SliderQuestion
+                        //width = {wp('80%')} 
+                        question={this.props.data.homeSize}
+                        max={3000} min={800} step={1}
+                        shouldDisplay={true}
+                        callback = {this.updateSliderState} />
                         <Button
                             icon={<Icon name="arrow-forward" color="white"/>}
                             iconRight
@@ -102,8 +106,8 @@ class QuestionCard1 extends React.Component {
                             onPress= {() => this.saveAndPush()}
                         /> 
                     </View>
-                </ScrollView>
-            </View>
+            //     </ScrollView>
+            // </View>
         )    
     }
 

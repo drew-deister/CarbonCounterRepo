@@ -43,7 +43,7 @@ class QuestionCard3 extends React.Component {
         if (this.checkValid()) {
             SecureStore.setItemAsync("beefServings", JSON.stringify(this.state.beefServings))
             SecureStore.setItemAsync("dairyServings", JSON.stringify(this.state.dairyServings)) 
-            this.props.navigation.push('Question4')            
+            this.props.navigation.push('Shopping')            
             } else {
             alert('Please answer all questions.')
         }
@@ -56,14 +56,18 @@ class QuestionCard3 extends React.Component {
 
     render() {
         return(
-            <ScrollView style = {styles.scrollView}>
+            // <ScrollView style = {styles.scrollView}>
                 <View style = {styles.view}>
                     <InputQuestion 
+                        questionStyle={{color: this.props.secondaryColor}}
+                        questionLines={2}
                         keyboardType = {'numeric'}
                         parentCallBack = {this.callbackFunction1}                             
                         question = {this.props.data.beefServings} 
                         placeholder = {this.props.data.beefServingsPlaceholder}/>
                     <InputQuestion 
+                        questionStyle={{color: this.props.secondaryColor}}
+                        questionLines={2}
                         keyboardType = {'numeric'}
                         parentCallBack = {this.callbackFunction2}                             
                         question = {this.props.data.dairyServings} 
@@ -75,7 +79,7 @@ class QuestionCard3 extends React.Component {
                         title='Next '
                         onPress= {() => this.saveAndPush()}/>
                 </View> 
-            </ScrollView>
+            // </ScrollView>
         )    
     }
 

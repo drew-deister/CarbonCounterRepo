@@ -23,7 +23,7 @@ class HomeScreenActivityCard extends React.Component {
     }
     static defaultProps = {
         title: 'Activity',
-        navigateToActivity: 'Question1',    //options route? does something similar
+        navigateToActivity: 'Household',    //options route? does something similar
     }
 
     render() {

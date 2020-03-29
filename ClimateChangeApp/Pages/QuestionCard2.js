@@ -52,7 +52,7 @@ class QuestionCard2 extends React.Component {
             SecureStore.setItemAsync("greenAmount", JSON.stringify(this.state.greenAmount)) // save to async
             SecureStore.setItemAsync("summerChange", JSON.stringify(this.state.summerChange))
             SecureStore.setItemAsync("mode", JSON.stringify(this.state.mode))
-            this.props.navigation.push('Question3')
+            this.props.navigation.push('Diet')
             } else {
             alert('Please answer all questions.')
         }
@@ -79,11 +79,13 @@ class QuestionCard2 extends React.Component {
 
     render() {
         return(
-            <ScrollView style = {styles.scrollView}>
+            // <ScrollView style = {styles.scrollView}>
                     <View style = {styles.view}>
-                        <Text style = {styles.text}>{this.props.data.numMiles}</Text>
-                        <SliderQuestion
-                            max = {100} min = {0} step = {1}
+                        <SliderQuestion   
+                            question={this.props.data.numMiles}
+                            questionLines={2}
+                            secondaryColor='#F0F5DF'
+                            //max = {100} min = {0} step = {1}      //these are now default props
                             shouldDisplay = {true}
                             callback = {this.updateSliderState1}
                         />
@@ -92,9 +94,10 @@ class QuestionCard2 extends React.Component {
                         <View style = {styles.rowStyleView}>
                             <Text style = {styles.sliderText}>Not Green</Text>
                             <SliderQuestion
-                                max = {100} min = {1} step = {1}
+                                //max = {100} min = {1} step = {1}      //these are now default props
                                 shouldDisplay = {false}
                                 callback = {this.updateSliderState2}
+                                secondaryColor='#F0F5DF'
                             />
                             <Text style = {styles.sliderText}>Green</Text>
                         </View>
@@ -128,6 +131,7 @@ class QuestionCard2 extends React.Component {
                                 max = {100} min = {1} step = {1}
                                 shouldDisplay = {false}
                                 callback = {this.updateSliderState3}
+                                secondaryColor='#F0F5DF'
                             />
                             <Text style = {styles.sliderText}>More</Text>
                         </View>
@@ -139,7 +143,7 @@ class QuestionCard2 extends React.Component {
                             title='Next '
                             onPress= {() => this.saveAndPush()}/>
                     </View> 
-            </ScrollView>
+            // </ScrollView>
         )    
     }
 

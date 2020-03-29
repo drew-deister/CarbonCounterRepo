@@ -13,6 +13,7 @@ import React, { Component, useState } from 'react';
 import {StyleSheet, View} from "react-native";
 import {Button, Text, Card, Icon} from 'react-native-elements';
 import { TextInput } from 'react-native-gesture-handler';
+import { QuestionText } from './QuestionText';
 
 
 class InputQuestion extends React.Component {
@@ -31,7 +32,12 @@ class InputQuestion extends React.Component {
   render() {
     return (
       <View style={styles.view}>
-        <Text style = {styles.text}>{this.props.question}</Text>
+        <QuestionText
+            lines={this.props.questionLines}
+            question={this.props.question}
+            style={this.props.questionStyle}
+        ></QuestionText>
+        {/* <Text style = {[styles.text, this.props.questionStyle]}>{this.props.question}</Text> */}
         <TextInput 
           returnKeyType = {'done'}
           keyboardType = {this.state.keyboardType}
@@ -49,19 +55,25 @@ export { InputQuestion };
 
 const styles = StyleSheet.create({
   text: {
-    marginVertical: 8,
+    width: 245,
+    aspectRatio: 100/ 12,
+    //marginVertical: 8,
     color: 'white',
-    fontSize: 24,
-    fontWeight: '300'
+    fontSize: 20,
+    fontWeight: '600',
+    textAlignVertical: 'center',
+    
   },
   view: {
     marginVertical: 8,
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   questionInput: {
-    borderColor: 'green',
-    borderWidth: 1,
-    padding: 10
+    backgroundColor: 'white',
+    width: 270,
+    aspectRatio: 100 / 15,
+    borderRadius: 20,
+    padding: 10,
   }
 });
