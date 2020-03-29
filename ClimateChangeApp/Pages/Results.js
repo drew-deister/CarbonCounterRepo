@@ -8,17 +8,12 @@
 // re-rended automatically. 
 
 // NOTE on JSON: The values are saved with the .stringify() function, so you have to .parse() before you can
-// perform calculations on them. 
-
-
-// figure out how to make buttons select
-// resolve issue with num people
-// figure out how to index with zipcodes
+// perform calculations on them. However, this returns strings. To get ints, use parseInt()
 
 import React, { Component, useState } from 'react';
 import {StyleSheet, View, TouchableHighlight} from "react-native";
 import {Button, Text, Card, Icon} from 'react-native-elements';
-
+import ZipCode from '../Utilities/convertcsv.json'; // import JSON file
 
 import * as SecureStore from 'expo-secure-store';
 
@@ -38,7 +33,6 @@ class Results extends React.Component {
         shoppingFrequency: 0,
         articlesPerShop: 0,
         dummyNumber: 40,
-
       }
     }
     static navigationOptions = { // this is the label in the middle of the nav bar
@@ -79,7 +73,7 @@ class Results extends React.Component {
       
       this.calculateDiet()
       this.calculateShopping()
-      // insert housing
+      this.calculateHousing()
       this.calculateTransportation()
     }
 
@@ -97,6 +91,16 @@ class Results extends React.Component {
       return (POUNDS_PER_SHIRT * 12 * this.state.shoppingFrequency * this.state.articlesPerShop)
     }
 
+    calculateHousing() { // iterate through JSON file in Utilities
+      var averageHomekwhMonth = 0;
+      for (i in ZipCode) {
+          if (ZipCode[i]["Zip"] === parseInt(this.state.zipCode)) {
+            averageHomekwhMonth += ZipCode[i]["Avg Home kwh"]["month"];
+          }
+      }
+      return averageHomekwhMonth * 12; // don't actually know if this is right
+    }
+
     calculateTransportation() {
       MPG_rate = -1 // dummy bc idk if you have to initialize
       if (this.mode == "Sedan") {
@@ -110,17 +114,13 @@ class Results extends React.Component {
       } else { // pickup truck
         MPG_rate = 18.9
       }
-
-      return (this.numMiles * 180 * (1/MPG_rate) * 8887) // gCO2/yr
+      return (parseInt(this.state.numMiles) * 180 * (1/MPG_rate) * 8887) // gCO2/yr
     }
     
     render() {
       return(
         <View>
-            <Text>{this.state.zipCode}</Text>
-            <Text>{this.state.numPeople}</Text>
-            <Text>{this.state.beefServings}</Text>
-            <Text>{this.state.dairyServings}</Text>
+            <Text>Results!</Text>
         </View>
       )
     }

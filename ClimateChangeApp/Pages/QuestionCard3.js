@@ -23,8 +23,8 @@ class QuestionCard3 extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
-            beefServings: 0,
-            dairyServings: 0,
+            beefServings: -1,
+            dairyServings: -1,
         }
         this.callbackFunction1 = this.callbackFunction1.bind(this);
         this.callbackFunction2 = this.callbackFunction2.bind(this);
@@ -50,7 +50,7 @@ class QuestionCard3 extends React.Component {
     }
 
     checkValid() { // do some sort of error checking here
-        return (true)
+        return (this.state.beefServings != -1 && this.state.beefServings != -1)
     }
 
 
