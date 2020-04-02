@@ -65,9 +65,8 @@ class QuestionCard1 extends React.Component {
 
     // checks whether current inputs are valid
     checkValid() {
-        return ((this.state.zipCode.length >= 5) && (this.state.sliderValue != 1)) 
+        return ((this.state.zipCode.length == 5) && (this.state.sliderValue != 1)) 
     }
-
 
     render() {
         return(
