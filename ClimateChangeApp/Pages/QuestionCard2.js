@@ -11,6 +11,7 @@ import {Icon, Button, Slider, Text} from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
 import {diagonalScale} from '../Utilities/Scaling';
 import {SliderQuestion} from '../Components/SliderQuestion';
+import {MCQuestion} from '../Components/MCQuestion'
 import * as SecureStore from 'expo-secure-store';
 import {
     widthPercentageToDP as wp,
@@ -32,6 +33,7 @@ class QuestionCard2 extends React.Component {
         this.updateSliderState1 = this.updateSliderState1.bind(this)
         this.updateSliderState2 = this.updateSliderState2.bind(this)
         this.updateSliderState3 = this.updateSliderState3.bind(this)
+        this.updateMCState = this.updateMCState.bind(this)
     }
 
     // MARK: Update functions for slider children
@@ -43,6 +45,10 @@ class QuestionCard2 extends React.Component {
     }
     updateSliderState3(value) {
         this.setState({summerChange: value})
+    }
+
+    updateMCState(mode) {
+        this.setState({mode: mode})
     }
     
 
@@ -77,6 +83,8 @@ class QuestionCard2 extends React.Component {
         this.setState({color: this.state.color, mode: mode})
     }
 
+    
+
     render() {
         return(
             // <ScrollView style = {styles.scrollView}>
@@ -103,7 +111,14 @@ class QuestionCard2 extends React.Component {
                             />
                         </View>
 
-                        <Text style = {styles.text}>{this.props.data.transportationMode}</Text>
+                        <MCQuestion
+                            question={this.props.data.transportationMode} 
+                            questionLines={2}
+                            callback={this.updateMCState}
+                            secondaryColor='rgba(252, 205, 193, .85)'
+                        ></MCQuestion>
+
+                        {/* <Text style = {styles.text}>{this.props.data.transportationMode}</Text>
                         <TouchableHighlight style = {{backgroundColor: this.state.color[0], width: wp('40%'), marginBottom: 20, alignItems: 'center', }}
                             onPress = {() => this.updateButton(0, 'Car SUV')} >
                             <Text style={styles.buttonText}>Hello</Text>
@@ -123,7 +138,7 @@ class QuestionCard2 extends React.Component {
                         <TouchableHighlight style = {{backgroundColor: this.state.color[4], width: wp('40%'), marginBottom: 20, alignItems: 'center'}}
                             onPress = {() => this.updateButton(4, 'Pickup Truck')} >
                             <Text style={styles.buttonText}>Hello</Text>
-                        </TouchableHighlight>
+                        </TouchableHighlight> */}
 
 
                         <View style = {styles.rowStyleView}>

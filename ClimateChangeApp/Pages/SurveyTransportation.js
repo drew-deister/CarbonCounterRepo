@@ -5,7 +5,8 @@ import {QuestionCard2} from './QuestionCard2';
 
 const Household = {
     title: "Transportation",
-    backgroundColor: '#73A388'
+    backgroundColor: '#73A388',
+    secondary: '#F0F5DF',
 }
 
 
@@ -28,7 +29,10 @@ export default class TransportationSurvey extends Component {
                 imageName={Household.title}
                 style={{backgroundColor: Household.backgroundColor}} >
                     
-                <QuestionCard2 navigation = {this.props.navigation} data = {data}/>
+                <QuestionCard2
+                    navigation = {this.props.navigation}
+                    data = {data}
+                    secondaryColor = {Household.secondary}/>
             </SurveyCard>
             
         );
@@ -43,7 +47,7 @@ const data = {
     
     greenAmount: 'How much of your daily travel to school is by a \'greener\' form of transportation?' ,
 
-    transportationMode: 'Select your most common mode of transportation:',
+    transportationMode: 'What is closest to your main mode of transportation?',
 
     summerChange: 'How does your summer travel compare to your school year travel?'
 
