@@ -28,19 +28,26 @@ class SliderQuestion extends React.Component {
 
     static propTypes = {
         question: PropTypes.string,
-        minTrackColor: PropTypes.string,
-        thumbColor: PropTypes.string,
+        questionLines: PropTypes.number,
+        secondaryColor: PropTypes.string,
         min: PropTypes.number,
         max: PropTypes.number,
         step: PropTypes.number,
+        shouldDisplay: PropTypes.bool,
+        minLabel: PropTypes.string,
+        maxLabel: PropTypes.string,
     }
 
     static defaultProps = {
         question: "",
+        questionLines: 1,
         secondaryColor: '#EB5B6D',
         min: 1,
         max: 100,
         step: 1,
+        shoudlDisplay: true,
+        minLabel: "",
+        maxLabel: ""
     }
 
     render() {
@@ -53,28 +60,41 @@ class SliderQuestion extends React.Component {
                     >
                 </QuestionText>
                 
-                <Slider style={styles.slider}
-                        maximumTrackTintColor='white'
-                        minimumTrackTintColor={this.props.secondaryColor}
-                        trackStyle={styles.track}
-                        thumbStyle={[styles.thumb, {backgroundColor: this.props.secondaryColor}]}
-                        maximumValue={this.props.max}
-                        minimumValue={this.props.min}
-                        value = {this.state.sliderValue}
-                        step={this.props.step} 
-                        onValueChange={(value) => this.setState({sliderValue: value})}
-                        onSlidingComplete={(value) => this.props.callback(value)}/>
+                <View style={styles.sliderContainer}>
+                    <Slider style={styles.slider}
+                            maximumTrackTintColor='white'
+                            minimumTrackTintColor={this.props.secondaryColor}
+                            trackStyle={styles.track}
+                            thumbStyle={[styles.thumb, {backgroundColor: this.props.secondaryColor}]}
+                            maximumValue={this.props.max}
+                            minimumValue={this.props.min}
+                            value = {this.state.sliderValue}
+                            step={this.props.step} 
+                            onValueChange={(value) => this.setState({sliderValue: value})}
+                            onSlidingComplete={(value) => this.props.callback(value)}/>
+                </View>
 
-                { 
-                this.props.shouldDisplay ? // this is called a ternary operator: the text element will display if true
-                    <Text style={styles.sliderValue}>
-                        {this.state.sliderValue} 
-                    </Text>
-                : null
-                }
+                <View style={styles.sliderLabelContainer}>
+                    <Text style={styles.sliderLabel}>{this.props.minLabel}</Text>
+                    { 
+                    this.props.shouldDisplay ? // this is called a ternary operator: the text element will display if true
+                        <Text style={styles.sliderValue}>
+                            {this.state.sliderValue} 
+                        </Text>
+                    : null
+                    }
+                    <Text style={[styles.sliderLabel, {textAlign: 'right'}]}>{this.props.maxLabel}</Text>
+                </View>
+                
             </View>   
         )
     }
+}
+
+const ratio = {
+    1: {aspectRatio: 100/8},
+    2: {aspectRatio: 100/20},
+    3: {aspectRatio: 100/29},
 }
 
 
@@ -95,10 +115,28 @@ const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
         flexDirection: 'column',
+        marginBottom: 32,
+    },
+    sliderContainer: {
+        marginTop: 5,
+        marginBottom: 5,
+        width: wp('74%'),
     },
     slider: {
-        width: 270,//wp('72%'),   //equivalent to 270 from jenna's design
+        width: '100%',//wp('72%'),   //equivalent to 270 from jenna's design
         height: 10,
+    },
+    sliderLabelContainer: {
+        flexDirection: 'row',
+        width: wp('80%'),
+        justifyContent: 'space-between'
+    },
+    sliderLabel: {
+        width: wp('26%'),
+        //backgroundColor: 'blue',
+        color: 'white',
+        fontSize: 13, //diagonalScale(4.5),
+        fontWeight: '600',
     }
 });
 

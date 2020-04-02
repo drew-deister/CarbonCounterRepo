@@ -14,6 +14,11 @@ import {StyleSheet, View} from "react-native";
 import {Button, Text, Card, Icon} from 'react-native-elements';
 import { TextInput } from 'react-native-gesture-handler';
 import { QuestionText } from './QuestionText';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+  listenOrientationChange, removeOrientationListener
+} from 'react-native-responsive-screen';
 
 
 class InputQuestion extends React.Component {
@@ -39,12 +44,14 @@ class InputQuestion extends React.Component {
         ></QuestionText>
         {/* <Text style = {[styles.text, this.props.questionStyle]}>{this.props.question}</Text> */}
         <TextInput 
+          style={styles.questionInput}
           returnKeyType = {'done'}
           keyboardType = {this.state.keyboardType}
           placeholder={this.props.placeholder}
           placeholderTextColor = {'#898d91'}
           onChangeText={text => this.sendData(text)} // update parent state (QuestionCard)
-          style={styles.questionInput}></TextInput>
+          >
+        </TextInput>
       </View>
     )
   }
@@ -55,7 +62,7 @@ export { InputQuestion };
 
 const styles = StyleSheet.create({
   text: {
-    width: 245,
+    width: wp('65%'),//245,
     aspectRatio: 100/ 12,
     //marginVertical: 8,
     color: 'white',
@@ -65,14 +72,16 @@ const styles = StyleSheet.create({
     
   },
   view: {
-    marginVertical: 8,
+    //marginVertical: 8,
     flexDirection: 'column',
     alignItems: 'center',
+    marginBottom: 32,
   },
   questionInput: {
     backgroundColor: 'white',
-    width: 270,
-    aspectRatio: 100 / 15,
+    width: wp('72%'),
+    height: 40.5,
+    //aspectRatio: 100 / 15,
     borderRadius: 20,
     padding: 10,
   }

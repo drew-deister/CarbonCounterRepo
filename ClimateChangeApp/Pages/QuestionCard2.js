@@ -90,16 +90,17 @@ class QuestionCard2 extends React.Component {
                             callback = {this.updateSliderState1}
                         />
 
-                        <Text style = {styles.text}>{this.props.data.greenAmount}</Text>
                         <View style = {styles.rowStyleView}>
-                            <Text style = {styles.sliderText}>Not Green</Text>
                             <SliderQuestion
+                                question={this.props.data.greenAmount}
+                                questionLines={2}
                                 //max = {100} min = {1} step = {1}      //these are now default props
                                 shouldDisplay = {false}
                                 callback = {this.updateSliderState2}
                                 secondaryColor='#F0F5DF'
+                                minLabel="no other mode of transport"
+                                maxLabel="about half my travel is greener"
                             />
-                            <Text style = {styles.sliderText}>Green</Text>
                         </View>
 
                         <Text style = {styles.text}>{this.props.data.transportationMode}</Text>
@@ -124,16 +125,18 @@ class QuestionCard2 extends React.Component {
                             <Text style={styles.buttonText}>Hello</Text>
                         </TouchableHighlight>
 
-                        <Text style = {styles.text}>{this.props.data.summerChange}</Text>
+
                         <View style = {styles.rowStyleView}>
-                            <Text style = {styles.sliderText}>Less</Text>
                             <SliderQuestion
+                                question={this.props.data.summerChange}
+                                questionLines={3}
                                 max = {100} min = {1} step = {1}
                                 shouldDisplay = {false}
                                 callback = {this.updateSliderState3}
                                 secondaryColor='#F0F5DF'
+                                minLabel="Travel less"
+                                maxLabel="Travel more"
                             />
-                            <Text style = {styles.sliderText}>More</Text>
                         </View>
 
                         <Button
