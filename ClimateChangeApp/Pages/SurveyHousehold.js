@@ -35,6 +35,7 @@ export default class HouseHoldSurvey extends Component {
 
 }
 
+//HOUSEHOLD DATA
 const data = {
 
     zipCode: 'Zip Code', 
