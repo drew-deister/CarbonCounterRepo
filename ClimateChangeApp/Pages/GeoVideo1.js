@@ -104,27 +104,23 @@ class GeoVideo1 extends React.Component {
         <View style={styles.mainContainer}>
           <Text>Zoom to a region of the world you are curious about</Text>
 
-          {/* <Map></Map> */}
-
           <View style={styles.mapContainer}>
-            <MapView 
-              
-              style={styles.mapStyle}
-              //annotations={markers}
-              //mapType='satellite'
-              customMapStyle={mapstyle}
-              initialRegion={alps}
-              //region={this.state.location}
-              //onRegionChange={this.handleLocationChange}
-              >
-                                 {this.state.markers.map((marker, key)=> (
-                    <Marker
-                      key={key}
-                      coordinate={marker.coordinate}
-                    />
-                  ))}
+              <MapView 
+                style={styles.mapStyle}
+                mapType='satellite'
+                customMapStyle={mapstyle}
+                initialRegion={alps}
+                //region={this.state.location}
+                //onRegionChange={this.handleLocationChange}
+                >
+                    {this.state.markers.map((marker, key)=> (
+                        <Marker
+                            key={key}
+                            coordinate={marker.coordinate}/>
+                    ))}
               </MapView>
           </View>
+          
           <NextButton onPress= {() =>  
                     this.props.navigation.navigate('GeoVideo2')}>
                     Next
