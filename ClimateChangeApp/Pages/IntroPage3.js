@@ -3,6 +3,12 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { AsafNextButton } from "../Components/AsafNextButton";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+  listenOrientationChange,
+  removeOrientationListener,
+} from "react-native-responsive-screen";
 
 export default class IntroPage extends Component {
   // "main method"
@@ -41,29 +47,29 @@ const styles = StyleSheet.create({
     backgroundColor: "#F6F8EF",
     borderColor: "#707070",
     justifyContent: "space-around",
-    alignItems: "center"
+    alignItems: "center",
   },
   buttonDesign: {
     color: "#73A388",
     fontSize: 23,
     fontWeight: "600",
-    margin: 30
+    margin: 30,
   },
   Text: {
     color: "#73A388",
     fontSize: 27,
     fontWeight: "600",
     height: 170,
-    width: 290
+    width: 290,
   },
   clouds: {
     backgroundColor: "transparent",
     height: 210,
     width: 300,
     resizeMode: "cover",
-    alignItems: "center"
+    alignItems: "center",
   },
   surroundingButton: {
-    paddingTop: 60
-  }
+    paddingTop: 60,
+  },
 });

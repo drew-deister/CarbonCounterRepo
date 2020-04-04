@@ -4,10 +4,10 @@ import React from "react";
 import { Text, StyleSheet, TouchableOpacity } from "react-native";
 import {
   widthPercentageToDP as wp,
-  heightPercentageToDP as hp
+  heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
-const AsafNextButton = props => {
+const AsafNextButton = (props) => {
   return (
     <TouchableOpacity
       onPress={props.onPress}
@@ -28,14 +28,14 @@ const styles = StyleSheet.create({
     //margin around words
     borderBottomWidth: 5,
     borderColor: "white",
-    borderTopWidth: 5
+    borderTopWidth: 5,
   },
   buttonText: {
     color: "#73A388",
     fontSize: 23,
     fontWeight: "600",
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 });
 
 export { AsafNextButton };

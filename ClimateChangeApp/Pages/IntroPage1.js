@@ -1,5 +1,12 @@
 // Asaf
 
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+  listenOrientationChange,
+  removeOrientationListener,
+} from "react-native-responsive-screen";
+
 import React, { Component } from "react";
 //import HomeScreenActivityCard from '../Components/HomeScreenActivityCard';
 import {
@@ -7,7 +14,7 @@ import {
   View,
   StyleSheet,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
 // import { NextButton } from '../Components/NextButton';
 // import {Button, Text, Card, Icon} from 'react-native-elements';
@@ -39,13 +46,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 1,
-    borderColor: "#707070"
+    borderColor: "#707070",
   },
   image: {
     backgroundColor: "transparent",
     height: 133.48,
     width: 147.19,
     resizeMode: "cover",
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
 });
