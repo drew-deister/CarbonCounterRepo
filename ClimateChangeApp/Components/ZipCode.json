@@ -1,0 +1,50 @@
+[
+  {
+   "Zip": 2,
+   "state": "AK",
+   "Primary eGRID Subregion": "AKMS",
+   "Subregion annual CO2e output emission rate (lb": {
+      "MWh)": 450.1044
+   },
+   "Avg Home kwh": {
+      "month": 572
+   },
+   "KWh": {
+      "month -> MWh": {
+         "year": 6.864
+      }
+   }
+},
+ {
+   "Zip": 6,
+   "state": "AK",
+   "Primary eGRID Subregion": "AKGD",
+   "Subregion annual CO2e output emission rate (lb": {
+      "MWh)": 1259.639
+   },
+   "Avg Home kwh": {
+      "month": 572
+   },
+   "KWh": {
+      "month -> MWh": {
+         "year": 6.864
+      }
+   }
+},
+ {
+   "Zip": 7,
+   "state": "AK",
+   "Primary eGRID Subregion": "AKMS",
+   "Subregion annual CO2e output emission rate (lb": {
+      "MWh)": 450.1044
+   },
+   "Avg Home kwh": {
+      "month": 572
+   },
+   "KWh": {
+      "month -> MWh": {
+         "year": 6.864
+      }
+   }
+ }
+]

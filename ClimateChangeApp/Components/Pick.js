@@ -1,33 +1,47 @@
 import React, { Component, useState } from 'react';
-import { View, Text, Picker, StyleSheet } from 'react-native'
+import { View, Text, Picker, StyleSheet, TouchableOpacity } from 'react-native'
+import QuickPicker from 'quick-picker';
 
-class Pick extends React.PureComponent {
-   state = {user: ''}
-   updateUser = (user) => {
-      this.setState({ user: user })
-   }
-   render() {
-      return (
-         <View>
-            <Picker selectedValue = {this.state.user} onValueChange = {this.updateUser}>
-               <Picker.Item label = "Pounds of CO2 Burned" value = "lbs" />
-               <Picker.Item label = "Solar Panel Equivalence" value = "spe" />
-               <Picker.Item label = "Human Equivalence" value = "he" />
-               <Picker.Item label = "Temp Rise in 50 Years" value = "temp" />
-            </Picker>
-            // <Text style = {styles.text}>
-            // {this.state.user}
-            // </Text>
-         </View>
-      )
-   }
+export default class Pick extends React.Component {
+  state = {
+    item: {
+      value: 'Pounds of CO2 Burned',
+      label: 'salut',
+    },
+  };
+
+  _onPressButton = () => {
+    QuickPicker.open({
+      onChange: item => this.setState({ item }),
+      items: [
+        {
+          value: 'Pounds of CO2 Burned',
+          label: 'lbs',
+        },
+        {
+          value: 'Solar Panel Equivalence',
+          label: 'spe',
+        },
+        {
+          value: 'Human Equivalence',
+          label: 'he',
+        },
+        {
+          value: 'Temp Rise in 50 Years',
+          label: 'temp',
+        },
+      ],
+      item: this.state.item,
+    });
+  };
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <TouchableOpacity onPress={this._onPressButton}>
+          <Text>Click to choose your metric{this.state.item.label}</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 }
-// const styles = StyleSheet.create({
-//    text: {
-//       fontSize: 30,
-//       flex: 1,
-//       color: 'red'
-//    }
-// })
-
-export default Pick;
