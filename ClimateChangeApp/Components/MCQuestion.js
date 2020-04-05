@@ -56,8 +56,6 @@ class MCQuestion extends React.Component {
                     style={this.props.questionStyle}
                     >
                 </QuestionText>
-
-
                 
                 <View style={styles.choiceContainer}>
                     <TouchableHighlight style = {[styles.choiceButton, {backgroundColor: this.state.color[0]}]}

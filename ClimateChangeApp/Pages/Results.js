@@ -77,6 +77,7 @@ class Results extends React.Component {
       this.calculateTransportation()
     }
 
+    // == vs ===?
     // MARK: Do calculations
     calculateDiet() { // calculates results with variables in this.state
       const POUNDS_PER_BEEF_SERVING = 6.61
