@@ -10,6 +10,8 @@ import React, { Component } from "react";
 //import HomeScreenActivityCard from '../Components/HomeScreenActivityCard';
 import { View, Text, StyleSheet } from "react-native";
 import { AsafNextButton } from "../Components/AsafNextButton";
+import { InfoButton } from "../Components/InfoButton";
+
 import { widthPercentageToDP } from "react-native-responsive-screen";
 // import {Button, Text, Card, Icon} from 'react-native-elements';
 // import {
@@ -31,6 +33,8 @@ export default class IntroPage extends Component {
           to the importance of global interconnectedness of human activity and
           the environment.
         </Text>
+
+        <InfoButton style={styles.info}></InfoButton>
 
         <View style={styles.surroundingButton}>
           <AsafNextButton
@@ -81,5 +85,14 @@ const styles = StyleSheet.create({
   },
   surroundingButton: {
     paddingTop: 60,
+  },
+  info: {
+    height: 5,
+    width: 5,
+    // resizeMode: "cover",
+    // alignItems: "center",
+    // justifyContent: "space-around",
+    // alignItems: "center",
+    // backgroundColor: "transparent",
   },
 });

@@ -16,6 +16,7 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
+import { InfoButton } from "../Components/InfoButton";
 // import { NextButton } from '../Components/NextButton';
 // import {Button, Text, Card, Icon} from 'react-native-elements';
 // import {
