@@ -1,61 +1,37 @@
+// helpful video for modal: https://www.youtube.com/watch?v=Gu4rJFIiA6U
+// Use @react-native-firebase node_module
+// Note, when looking up documentation, look under Web apps.
+// Helpful firebase links:
+// https://firebase.google.com/docs/storage/web/download-files
+// https://www.youtube.com/watch?v=_GOI7h9ojr8
 import React, { Component, useState } from 'react';
-import {Dimensions, StyleSheet, View, WebView} from "react-native";
-import MapView, {Marker} from 'react-native-maps';
+import {Image, Dimensions, StyleSheet, View, WebView} from "react-native";
+import MapView, {Callout, Marker} from 'react-native-maps';
 import {Button, Text, Card, Icon} from 'react-native-elements';
-import { TextInput } from 'react-native-gesture-handler';
-//import { Video } from 'expo-av';
-import { NextButton } from '../Components/NextButton';
-//import { WebView } from 'react-native';
-import { Map } from '../Components/Map';
+import GlobeVideoModal from '../Components/GlobeVideoModal'; 
+import FirebaseConfig from '../Utilities/FirebaseConfig';
 
+//TODO: Add authentication/change read/write rules in database
 
+// Firebase App (the core Firebase SDK) is always required and
+// must be listed before other Firebase SDKs
+// Require statements are equivalent to import statements
+var firebase = require("firebase/app");
 
+// Add the Firebase products that you want to use
+require("firebase/storage");
+require("firebase/firestore");
 
+const mapstyle = require('../mapstyle.json');
+
+// starting location (change name)
 const alps = 
-  {
+{
     latitude: 46.88,
     longitude: 9.65,
     latitudeDelta: 15,
     longitudeDelta: 15,
-  }
-
-
-  let markers = [
-    {
-      coordinate: {     latitude: 45.65,
-        longitude: -78.90,}
-    }
-  ];
-
-  
-
-const mapstyle = require('../mapstyle.json');
-
-
-
-/* const allLocations = [
-  {
-    name: "Germany",
-    longitude: 51,
-    latitude: 10.5,
-  },
-  {
-    name: "France",
-    longitude: 46.2,
-    latitude: 2.2,
-  },
-  {
-    name: "Italy",
-    longitude: 41.8,
-    latitude: 12.5,
-  },
-  {
-    name: "Egypt",
-    longitude: 26.82,
-    latitude: 30.8,
-  },
-] */
-
+}
 
 class GeoVideo1 extends React.Component {
     static navigationOptions = {
@@ -66,22 +42,78 @@ class GeoVideo1 extends React.Component {
       super(props);
       this.state = {
         location: alps,
-        markers: markers
+        markersList: [],
         //locationsSeen: []
       }
-      //console.log("locationsSeen:");
-      //console.log(this.state.locationsSeen);
+      // Initialize Firebase, if statement checks if its been initialized
+      if (!firebase.apps.length) { firebase.initializeApp(FirebaseConfig.FirebaseConfigKeys); }
+      // bind GlobeVideoModal function to this.
+      this._onPressVideo = this._onPressVideo.bind(this);
+    }
+
+
+    // this sets this.state.markersList. _onPressVideo finds the download URLS separately.
+    async componentDidMount() {     
+      var firestoreRef = firebase.firestore();
+      firestoreRef.collection("Markers").get().then((querySnapshot) => {
+        const MARKERS = [];
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            MARKERS.push({
+              name: doc.id,
+              coordinates: {
+                latitude: doc.data().latitude,
+                longitude: doc.data().longitude,
+              },
+              videoFileName: doc.data().videoFileName,
+            });
+            this.setState({markersList: MARKERS});
+        });
+      });   
     }
 
     handleLocationChange = (newLocation) => {
       this.setState({ location: newLocation });
-      //this.checkLocationsSeen;
-      //console.log("location change:");
-      //console.log(this.state.location);
-      //console.log("locationsSeen:");
-      //console.log(this.state.locationsSeen); 
+      //this.checkLocationsSeen; // this is below the render 
     }; 
 
+    // retrieve download url and display in modal
+    _onPressVideo(name, videoFileName) { 
+      var storageRef = firebase.storage().ref().child('CarbonXP_Storage/' + name);
+      var videoRef = storageRef.child(videoFileName);
+      videoRef.getDownloadURL().then((url) => {
+        this.refs.globevideomodal.showGlobeVideoModal(url); 
+      });
+    }
+
+    // NOTE: The position of the GlobeVideoModal does not matter, as long as it is in the hierarchy. 
+    // The _onPressVideo function for the marker calls it with the appropriate params. 
+    render () {
+      return(
+        <View style={styles.mainContainer}>
+          <Text>Zoom to a region of the world you are curious about</Text>
+          <View style={styles.mapContainer}>
+            <MapView 
+              style={styles.mapStyle}
+              mapType='satellite'
+              customMapStyle={mapstyle}
+              initialRegion={alps}
+              >
+              {this.state.markersList.map((marker, key)=> (
+                    <Marker
+                      key={key}
+                      coordinate={marker.coordinates}
+                      onPress={() => this._onPressVideo(marker.name, marker.videoFileName)}> 
+                    </Marker>
+              ))}
+              </MapView>
+          </View>
+          <GlobeVideoModal ref={'globevideomodal'} parentObject = {this}> 
+          </GlobeVideoModal>
+        </View>
+      )
+    }
+    // idk if we'll need this but I'm keeping it just in case.
     /*checkLocationsSeen = () => {
       console.log("I gET HERE");
       var latMin = this.state.location.latitude - this.state.location.latitudeDelta;
@@ -98,40 +130,6 @@ class GeoVideo1 extends React.Component {
       this.setState({ locationsSeen: seenLocationds});
       console.log(this.state.locationsSeen); 
     }; */
-
-    render () {
-      return(
-        <View style={styles.mainContainer}>
-          <Text>Zoom to a region of the world you are curious about</Text>
-
-          {/* <Map></Map> */}
-
-          <View style={styles.mapContainer}>
-            <MapView 
-              
-              style={styles.mapStyle}
-              //annotations={markers}
-              //mapType='satellite'
-              customMapStyle={mapstyle}
-              initialRegion={alps}
-              //region={this.state.location}
-              //onRegionChange={this.handleLocationChange}
-              >
-                                 {this.state.markers.map((marker, key)=> (
-                    <Marker
-                      key={key}
-                      coordinate={marker.coordinate}
-                    />
-                  ))}
-              </MapView>
-          </View>
-          <NextButton onPress= {() =>  
-                    this.props.navigation.navigate('GeoVideo2')}>
-                    Next
-          </NextButton>
-        </View>
-      )
-    }
 }
 
 export default GeoVideo1
@@ -155,9 +153,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   mapStyle: {
-    width: 300, //Dimensions.get('window').width,
-    height: 400, //Dimensions.get('window').height,
-  }
+    width: Dimensions.get('window').width, // 320
+    height: Dimensions.get('window').height, // 450
+  }, 
 });
 
 

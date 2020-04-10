@@ -16,7 +16,6 @@ import SurveyTransportation from './Pages/SurveyTransportation';
 import SurveyDiet from './Pages/SurveyDiet';
 import SurveyShopping from './Pages/SurveyShopping';
 
-
 // shirom code
 global.theme = {
   colors: {
@@ -84,7 +83,6 @@ const AppNavigator = createStackNavigator(
     Shopping: {screen: SurveyShopping},
     Results: { screen: Results },
     GeoVideo1: { screen: GeoVideo1 },
-    GeoVideo2: { screen: GeoVideo2 },
     IntroPage1: { screen: IntroPage1 },
     IntroPage2: { screen: IntroPage2 },
     IntroPage3: { screen: IntroPage3 }

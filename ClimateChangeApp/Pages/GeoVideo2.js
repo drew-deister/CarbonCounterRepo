@@ -6,6 +6,9 @@ import { Video } from 'expo-av';
 //import { WebView } from 'react-native';
 
 const { width: DEVICE_WIDTH, height: DEVICE_HEIGHT } = Dimensions.get("window");
+////////////////////////////////////////////////
+// THIS FILE IS WORTHESS AND NEVER USED. ONLY KEEPING FOR FUTURE REFERENCE
+////////////////////////////////////////////////
 
 class GeoVideo2 extends React.Component {
     static navigationOptions = { // this is the label in the middle of the nav bar

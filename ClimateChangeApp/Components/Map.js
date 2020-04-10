@@ -1,6 +1,13 @@
 import React from 'react';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, Callout } from 'react-native-maps';
 import {StyleSheet, View} from "react-native";
+import { QuestionCard1 } from '../Pages/QuestionCard1';
+import GeoVideo2 from '../Pages/GeoVideo2';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+  listenOrientationChange, removeOrientationListener
+} from 'react-native-responsive-screen';
 
 const alps = 
   {
@@ -16,15 +23,21 @@ class Map extends React.Component {
         super(props);
         this.state = {
           location: alps,
+          markers: [{ // list of markers
+            title: 'hello',
+            coordinates: {
+              latitude: 37.78825,
+              longitude: -122.43514
+            },
+            description: 'whats up my dudes',
+          }]
         }
     }
 
     handleLocationChange = (newLocation) => {
         this.setState({ location: newLocation });
-        //this.checkLocationsSeen;
     };
 
-    //state = {  }
     render() { 
         return (  
             <View style={styles.mapContainer}>
@@ -36,16 +49,7 @@ class Map extends React.Component {
                     initialRegion={alps}
                     region={this.state.location}
                     onRegionChange={this.handleLocationChange}
-                >
-                  {this.state.markers.map(marker => (
-                    <Marker
-                      key={marker.key}
-                      coordinate={marker.coordinate}
-                      pinColor={marker.color}
-                    />
-                  ))}
-
-                </MapView>
+               />
             </View>
         )
     }
