@@ -11,9 +11,15 @@
 // perform calculations on them. However, this returns strings. To get ints, use parseInt()
 
 import React, { Component, useState } from 'react';
-import {StyleSheet, View, TouchableHighlight} from "react-native";
+import {StyleSheet, View, TouchableHighlight, ScrollView} from "react-native";
 import {Button, Text, Card, Icon} from 'react-native-elements';
+import MetricView from '../Components/MetricView';
 import ZipCode from '../Utilities/convertcsv.json'; // import JSON file
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+  listenOrientationChange, removeOrientationListener
+} from 'react-native-responsive-screen';
 
 import * as SecureStore from 'expo-secure-store';
 
@@ -118,14 +124,102 @@ class Results extends React.Component {
     }
     
     render() {
+
+  
       return(
-        <View>
-            <Text>Results!</Text>
-        </View>
+        <View style={styles.safeView}>
+                <ScrollView style={styles.scrollViewStyle} 
+                  // contentContainerStyle = {styles.containerStyle}
+                  >
+                    {/* <Image style = {styles.image} source = {images[this.props.imageName]} /> */}
+                    <View style={styles.pageHeaderContainer}>
+                      <Text>Hello</Text>
+                    </View>
+                    <View style={styles.cardStyle}>
+                       <Text style={styles.pageTitle}>Results</Text>
+                       <Text style={styles.subTitle}>from each category</Text>
+                       <View style={styles.pieChartContainer}>
+                            <Text style={{marginTop: 30, fontSize: 15, width: wp('70%')}}>
+                              put the pie chart here,
+                              then adjust styles.piechartContainer to get rid of border
+                            </Text>
+                        </View>
+
+                        <Text style={styles.pageTitle}>Metrics</Text>
+                        <MetricView metricName="SolarPanel"></MetricView>
+                        <MetricView metricName="Car" textStyle={{marginTop: -15}}></MetricView>
+                        <MetricView metricName="Tree"></MetricView>
+                        <MetricView metricName="SmartPhone"></MetricView>
+                    </View>
+                    
+                    
+
+
+                </ScrollView>
+          </View>
       )
     }
 
 }
+
+const styles = StyleSheet.create({
+  safeView: {
+      flex: 1,
+  },
+  scrollViewStyle: {
+      backgroundColor: 'white',//'#FCCCC0',
+      // borderTopRightRadius: 40,
+      // borderTopLeftRadius: 40
+  },
+  pageHeaderContainer: {
+      
+      height: wp("70%"),
+      backgroundColor: 'white',
+  },
+  cardStyle: {
+    //flex: 1,
+    borderTopRightRadius: 40,
+    borderTopLeftRadius: 40,
+    backgroundColor: '#F6F8EF',
+    //height: hp('150%'),
+    shadowOpacity: .2,
+    alignItems: 'center'
+  },
+  image: {
+      marginTop: 32,
+      height: 170,
+      width: 280,
+  },
+  containerStyle: {
+      //flexGrow: 1,
+      marginTop: 0,
+      padding: 0,
+      //justifyContent: 'space-between',
+      alignItems: 'center',
+      alignContent: 'center',
+      //backgroundColor: 'red'
+  },
+  pageTitle: {
+      marginTop: 20,
+      color: '#73A388',
+      fontSize: 42,
+      width: wp("75"),
+      fontWeight: '600',
+      textAlign: 'center',
+  },
+  subTitle: {
+    color: '#73A388',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  pieChartContainer: {
+    alignItems: 'center',
+    width: wp('90%'),
+    aspectRatio: 90/100,
+    borderColor: 'black',
+    borderWidth: 1,
+  }
+});
 
 
 

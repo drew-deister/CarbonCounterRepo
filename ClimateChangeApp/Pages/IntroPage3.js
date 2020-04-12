@@ -7,7 +7,7 @@ import { AsafNextButton } from "../Components/AsafNextButton";
 export default class IntroPage extends Component {
   // "main method"
   render() {
-    const { navigate } = this.props.navigation;
+    //const { navigate } = this.props.navigation;
     return (
       <React.Fragment>
         <View style={styles.container}>
@@ -37,9 +37,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     padding: 15,
     paddingTop: 150,
-    borderWidth: 1,
     backgroundColor: "#F6F8EF",
-    borderColor: "#707070",
     justifyContent: "space-around",
     alignItems: "center"
   },

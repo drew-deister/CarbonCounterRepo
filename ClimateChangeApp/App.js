@@ -76,7 +76,7 @@ function LogoTitle() {
 const AppNavigator = createStackNavigator(
   {
     // road map for the different parts of our navigation
-    Home: { screen: Home },
+    Home: { screen: Home, },
     TempPage: {screen: TempPage},
     Household: {screen: SurveyHousehold},
     Transportation: {screen: SurveyTransportation},
@@ -90,7 +90,8 @@ const AppNavigator = createStackNavigator(
     IntroPage3: { screen: IntroPage3 }
   },
   {
-    initialRouteName: "IntroPage1", // For functioning app, use "IntroPage1"
+    initialRouteName: "Results", // For functioning app, use "IntroPage1"
+    //headerMode: "None",
     headerLayoutPreset: "center",
     transitionConfig: () => ({
       screenInterpolator: StackViewStyleInterpolator.forHorizontal
@@ -101,11 +102,8 @@ const AppNavigator = createStackNavigator(
       headerStyle: {
         backgroundColor: "white"
       },
+      headerBackTitle: " ",
       headerTitle: LogoTitle,
-      // headerTitleStyle: {
-      //     color: 'white',
-      //     fontWeight: '500',
-      // },
       headerTintColor: "#73A388"
     }
   }

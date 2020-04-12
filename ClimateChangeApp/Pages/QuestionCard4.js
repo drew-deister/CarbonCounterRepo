@@ -10,6 +10,7 @@ import {StyleSheet, View} from "react-native";
 import { ScrollView } from 'react-native-gesture-handler';
 import * as SecureStore from 'expo-secure-store';
 import { InputQuestion } from '../Components/InputQuestion';
+import { AsafNextButton } from "../Components/AsafNextButton";
 import {Text, Icon, Button, Slider} from 'react-native-elements';
 import {
     widthPercentageToDP as wp,
@@ -48,7 +49,7 @@ class QuestionCard4 extends React.Component {
     }
 
     checkValid() { // do some sort of error checking here
-        return (this.state.articlesPerShop != -1 && this.state.shoppingFrequency != -1)
+        return true;//(this.state.articlesPerShop != -1 && this.state.shoppingFrequency != -1)
     }
 
 
@@ -68,12 +69,18 @@ class QuestionCard4 extends React.Component {
                         parentCallBack = {this.callbackFunction2}                             
                         question = {this.props.data.articlesPerShop} 
                         placeholder = {this.props.data.articlesPerShopPlaceholder}/>
-                    <Button
+
+                    <AsafNextButton
+                        onPress={() => this.saveAndPush()}
+                        textStyle={{color: this.props.backgroundColor}} >
+                            Next
+                    </AsafNextButton>
+                    {/* <Button
                         icon={<Icon name="arrow-forward" color="white"/>}
                         iconRight
                         buttonStyle={styles.nextButton}// update this to move lower 
                         title='Results '
-                        onPress= {() => this.saveAndPush()}/>
+                        onPress= {() => this.saveAndPush()}/> */}
                 </View> 
             // </ScrollView>
         )    

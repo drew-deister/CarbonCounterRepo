@@ -3,7 +3,7 @@ import {ScrollView, View, StyleSheet, Image, Text} from 'react-native';
 import SurveyCard from '../Components/SurveyCard';
 import {QuestionCard2} from './QuestionCard2';
 
-const Household = {
+const Transportation = {
     title: "Transportation",
     backgroundColor: '#73A388',
     secondary: '#F0F5DF',
@@ -25,14 +25,16 @@ export default class TransportationSurvey extends Component {
 
         return (
             <SurveyCard
-                title={Household.title}
-                imageName={Household.title}
-                style={{backgroundColor: Household.backgroundColor}} >
+                title={Transportation.title}
+                imageName={Transportation.title}
+                style={{backgroundColor: Transportation.backgroundColor}}
+                navigation = {this.props.navigation} >
                     
                 <QuestionCard2
-                    navigation = {this.props.navigation}
-                    data = {data}
-                    secondaryColor = {Household.secondary}/>
+                    navigation={this.props.navigation}
+                    data={data}
+                    backgroundColor={Transportation.backgroundColor}
+                    secondaryColor={Transportation.secondary}/>
             </SurveyCard>
             
         );

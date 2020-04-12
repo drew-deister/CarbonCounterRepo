@@ -18,9 +18,18 @@ import {
 // } from 'react-native-responsive-screen';
 
 export default class IntroPage extends Component {
+
+  // constructor(props) {
+  //   super(props);
+  //   this.props.navigation.setOptions
+  // }
+  static navigationOptions = {
+    title: 'new title'
+  }
+
   // "main method"
   render() {
-    const { navigate } = this.props.navigation;
+    //const { navigate } = this.props.navigation;
     return (
       <TouchableOpacity
         style={styles.container}
@@ -38,8 +47,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#F6F8EF",
     justifyContent: "center",
     alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#707070"
   },
   image: {
     backgroundColor: "transparent",

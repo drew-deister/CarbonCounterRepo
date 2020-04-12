@@ -24,8 +24,13 @@ import {
     listenOrientationChange, removeOrientationListener
   } from 'react-native-responsive-screen';
 import { SliderQuestion } from '../Components/SliderQuestion';
+import { AsafNextButton } from "../Components/AsafNextButton";
+
+
+
 
 class QuestionCard1 extends React.Component {
+
     constructor(props) {
         super(props);
         // this holds the state of the sub components 
@@ -71,7 +76,7 @@ class QuestionCard1 extends React.Component {
 
     // checks whether current inputs are valid
     checkValid() {
-        return ((this.state.zipCode.length == 5) && (this.state.sliderValue != 1)) 
+        return true;((this.state.zipCode.length == 5) && (this.state.sliderValue != 1)) 
     }
 
     render() {
@@ -97,13 +102,22 @@ class QuestionCard1 extends React.Component {
                         max={3000} min={800} step={1}
                         shouldDisplay={true}
                         callback = {this.updateSliderState} />
-                        <Button
+
+                        <AsafNextButton
+                            onPress={() => this.saveAndPush()}
+                            textStyle={{color: this.props.backgroundColor}}
+                            // style={{backgroundColor: this.props.backgroundColor,
+                            //         borderWidth: 1, borderTopWidth: 1, borderBottomWidth: 1}}
+                            >
+                            Next
+                        </AsafNextButton>
+                        {/* <Button
                             icon={<Icon name="arrow-forward" color="white"/>}
                             iconRight
                             buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
                             title='Next '
                             onPress= {() => this.saveAndPush()}
-                        /> 
+                        />  */}
                     </View>
             //     </ScrollView>
             // </View>
