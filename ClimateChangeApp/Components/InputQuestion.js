@@ -9,35 +9,52 @@
 // To Do:
 //    1. Implement state to keep track of user input
 
-
 import React, { Component, useState } from 'react';
 import {StyleSheet, View} from "react-native";
 import {Button, Text, Card, Icon} from 'react-native-elements';
 import { TextInput } from 'react-native-gesture-handler';
+import { QuestionText } from './QuestionText';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+  listenOrientationChange, removeOrientationListener
+} from 'react-native-responsive-screen';
 
 
 class InputQuestion extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      keyboardType: this.props.keyboardType
+    }
   }
 
   sendData = (message) => { 
     this.props.parentCallBack(message); // call the function that was binded to QuestionCard and passed through props
   }
 
+
   render() {
     return (
       <View style={styles.view}>
-        <Text style = {styles.text}>{this.props.question}</Text>
+        <QuestionText
+            lines={this.props.questionLines}
+            question={this.props.question}
+            style={this.props.questionStyle}
+        ></QuestionText>
+        {/* <Text style = {[styles.text, this.props.questionStyle]}>{this.props.question}</Text> */}
         <TextInput 
-           placeholder={this.props.placeholder}
-           placeholderTextColor = {'#898d91'}
-           onChangeText={text => this.sendData(text)} // update parent state (QuestionCard)
-           style={styles.questionInput}></TextInput>
+          style={styles.questionInput}
+          returnKeyType = {'done'}
+          keyboardType = {this.state.keyboardType}
+          placeholder={this.props.placeholder}
+          placeholderTextColor = {'#898d91'}
+          onChangeText={text => this.sendData(text)} // update parent state (QuestionCard)
+          >
+        </TextInput>
       </View>
     )
   }
-    
 }
 
 export { InputQuestion };
@@ -45,18 +62,27 @@ export { InputQuestion };
 
 const styles = StyleSheet.create({
   text: {
-    marginVertical: 8,
+    width: wp('65%'),//245,
+    aspectRatio: 100/ 12,
+    //marginVertical: 8,
     color: 'white',
-    fontSize: 24,
-    fontWeight: '300'
+    fontSize: 20,
+    fontWeight: '600',
+    textAlignVertical: 'center',
+    
   },
   view: {
-    marginVertical: 8,
-    flexDirection: 'column'
+    //marginVertical: 8,
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginBottom: 32,
   },
   questionInput: {
-    borderColor: 'green',
-    borderWidth: 1,
-    padding: 10
+    backgroundColor: 'white',
+    width: wp('72%'),
+    height: 40.5,
+    //aspectRatio: 100 / 15,
+    borderRadius: 20,
+    padding: 10,
   }
 });

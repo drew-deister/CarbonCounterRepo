@@ -1,12 +1,24 @@
 import React, { Component } from 'react';
 import HomeScreenActivityCard from '../Components/HomeScreenActivityCard';
-import {ScrollView, View, StyleSheet} from 'react-native';
+import {ScrollView, View, StyleSheet, Image} from 'react-native';
 import {Button, Text, Card, Icon} from 'react-native-elements';
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
     listenOrientationChange, removeOrientationListener
 } from 'react-native-responsive-screen';
+//import { black } from 'react-native-paper/lib/typescript/src/styles/colors';
+
+function LogoTitle() {
+    return (
+      <Image
+        style={{ width: 50, height: 50 }}
+        source={require('../assets/Logo.png')}
+      />
+    );
+  }
+
+
 
 export default class Home extends Component {
     constructor(props) {
@@ -15,36 +27,85 @@ export default class Home extends Component {
     }
 
     static navigationOptions = {
-        title: 'Welcome',
+        title: ' ',
+        headerTitle: LogoTitle
     };
 
     // "main method"
     render() {
         const {navigate} = this.props.navigation;
         return (
-            <ScrollView style = {styles.scrollview}>
-                <HomeScreenActivityCard title = {"Count some carbon!"} navigation = {this.props.navigation} />
-                <HomeScreenActivityCard title = {"Activity #2"} navigation = {this.props.navigation} />
-                <HomeScreenActivityCard title = {"Activity #3"} navigation = {this.props.navigation} />
-                <HomeScreenActivityCard title = {"Activity #4"} navigation = {this.props.navigation} />
-                <HomeScreenActivityCard title = {"Activity #5"} navigation = {this.props.navigation} />
-            </ScrollView>
+            <View style={styles.safeView}>
+                
+                <ScrollView style = {styles.scrollview} contentContainerStyle = {styles.containerStyle}>
+                    <View style = {styles.imageContainer}>
+                            <Image style = {styles.image} source = {require('../assets/Home.png')} />
+                    </View>
+                    <View style={styles.headerTextContainer}>
+                        <Text style={styles.pageTitle}>Activities</Text>
+                    </View>
+                    
+                    <HomeScreenActivityCard 
+                        title = {"Carbon Counter"}      
+                        navigateToActivity = 'Household'//'Question1'
+                        navigation = {this.props.navigation}
+                        style = {{backgroundColor: '#FCCCC0'}}
+                        />
+                        
+                    <HomeScreenActivityCard
+                        title = {"WePlanet"}
+                        navigateToActivity = 'GeoVideo1'
+                        navigation = {this.props.navigation}
+                        style = {{backgroundColor: '#73A388'}}
+                        />
+                        
+                    <HomeScreenActivityCard 
+                        // default title: 'Activity'
+                        // default navigateToActivity: 'Question1'
+                        //navigateToActivity = 'Question1'
+                        navigation = {this.props.navigation}
+                        /> 
+                    <HomeScreenActivityCard navigation = {this.props.navigation} />
+                    {/*<HomeScreenActivityCard navigation = {this.props.navigation} />*/}
+                </ScrollView>
+            </View>
+            
         );
     }
 }
 
 
 const styles = StyleSheet.create({
-    container: { // dont need this but keep it for reference sake 
-        flexDirection: 'column',
-        backgroundColor: 'red',
-        marginTop: 30,
-        height: 100,
-        borderRadius: 20,
-        justifyContent: 'center',
+    safeView: {
+        flex: 1,
+    },
+    imageContainer: {
+        height: 143,
+        width: 340,
+    },
+    containerStyle: {
+        flexGrow: 1,
+        marginTop: 0,
+        padding: 0,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        alignContent: 'center'
     },
     scrollview: {
-        marginLeft: 5,
-        marginRight: 5,
+        paddingTop: 25,
+    },
+    image: {
+        height: '130%',
+        width: '100%',
+    },
+    headerTextContainer: {
+        paddingTop: 16,
+    },
+    pageTitle: {
+        color: '#73A388',   //green
+        fontSize: 23,
+        height: 33,
+        width: 224,
+        fontWeight: '600',
     }
 });

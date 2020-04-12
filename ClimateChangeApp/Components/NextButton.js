@@ -8,7 +8,7 @@ const NextButton = (props) => {
   return (
     <TouchableOpacity
         onPress={props.onPress}
-        style={styles.buttonBody}>
+        style={[styles.buttonBody, props.style]}>
         <Text style={styles.buttonText}>{props.children}</Text>
         <Image style = {styles.image} source = {require('../assets/right-arrow.png')} />
     </TouchableOpacity>
@@ -16,9 +16,11 @@ const NextButton = (props) => {
 }
 const styles = StyleSheet.create({
   buttonBody: {
-    backgroundColor: '#00aeef',
-    width: '100%',
-    padding: 20,
+    backgroundColor: '#0B7310', //blue --> '#00aeef',
+    width: 100,
+    height: 50,
+    paddingLeft: 20,
+    paddingRight: 20,
     borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
@@ -29,11 +31,14 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
     fontWeight: '600',
+    //backgroundColor: 'green',
   },
   image: {
     // need to figure out how to resize the image 
     marginLeft: 10,
     padding: 20,
+    width: 5,
+    height: 5,
   }
 });
 
