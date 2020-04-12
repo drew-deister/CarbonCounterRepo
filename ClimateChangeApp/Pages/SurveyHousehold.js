@@ -5,8 +5,18 @@ import {QuestionCard1} from './QuestionCard1';
 
 const Household = {
     title: "Household",
-    backgroundColor: '#FCCCC0'
+    backgroundColor: '#FCCCC0',
+    secondary: '#EB5B6D'
 }
+
+function HeaderNext() {
+    return (
+      <Image
+        style={{ width: 50, height: 50 }}
+        source={require("../assets/Logo.png")}
+      />
+    );
+  }
 
 export default class HouseHoldSurvey extends Component {
 
@@ -16,7 +26,8 @@ export default class HouseHoldSurvey extends Component {
     }
     
     static navigationOptions = { // this is the label in the middle of the nav bar
-        title: ' ',
+        //title: 'hello',
+        headerRight: HeaderNext,
     };
 
     render() {
@@ -25,9 +36,15 @@ export default class HouseHoldSurvey extends Component {
             <SurveyCard
                 title={Household.title}
                 imageName={Household.title}
-                style={{backgroundColor: Household.backgroundColor}} >
+                style={{backgroundColor: Household.backgroundColor}}
+                navigation = {this.props.navigation}
+                nextScreen='Transportation'>
                     
-                <QuestionCard1 navigation = {this.props.navigation} data = {data}/>
+                <QuestionCard1
+                    navigation={this.props.navigation}
+                    data={data}
+                    backgroundColor={Household.backgroundColor}
+                    secondary={Household.secondary}/>
             </SurveyCard>
             
         );

@@ -11,6 +11,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import {Text, Icon, Button, Slider} from 'react-native-elements';
 import * as SecureStore from 'expo-secure-store';
 import { InputQuestion } from '../Components/InputQuestion';
+import { AsafNextButton } from "../Components/AsafNextButton";
 
 import {
     widthPercentageToDP as wp,
@@ -50,7 +51,7 @@ class QuestionCard3 extends React.Component {
     }
 
     checkValid() { // do some sort of error checking here
-        return (this.state.beefServings != -1 && this.state.beefServings != -1)
+        return true;//(this.state.beefServings != -1 && this.state.beefServings != -1)
     }
 
 
@@ -72,12 +73,18 @@ class QuestionCard3 extends React.Component {
                         parentCallBack = {this.callbackFunction2}                             
                         question = {this.props.data.dairyServings} 
                         placeholder = {this.props.data.dairyServingsPlaceholder}/>
-                    <Button
+
+                    <AsafNextButton
+                        onPress={() => this.saveAndPush()}
+                        textStyle={{color: this.props.secondaryColor}} >
+                            Next
+                    </AsafNextButton>
+                    {/* <Button
                         icon={<Icon name="arrow-forward" color="white"/>}
                         iconRight
                         buttonStyle={styles.nextButton}// update this to move lower 
                         title='Next '
-                        onPress= {() => this.saveAndPush()}/>
+                        onPress= {() => this.saveAndPush()}/> */}
                 </View> 
             // </ScrollView>
         )    

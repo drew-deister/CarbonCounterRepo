@@ -11,6 +11,7 @@ import {Icon, Button, Slider, Text} from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
 import {diagonalScale} from '../Utilities/Scaling';
 import {SliderQuestion} from '../Components/SliderQuestion';
+import { AsafNextButton } from "../Components/AsafNextButton";
 import {MCQuestion} from '../Components/MCQuestion'
 import * as SecureStore from 'expo-secure-store';
 import {
@@ -154,7 +155,13 @@ class QuestionCard2 extends React.Component {
                             />
                         </View>
 
-                        <Button
+                        <AsafNextButton
+                            onPress={() => this.saveAndPush()}
+                            textStyle={{color: this.props.backgroundColor}}
+                            >
+                            Next
+                        </AsafNextButton>
+                        {/* <Button
                             icon={<Icon name="arrow-forward" color="white"/>}
                             iconRight
                             buttonStyle={styles.nextButton}// update this to move lower

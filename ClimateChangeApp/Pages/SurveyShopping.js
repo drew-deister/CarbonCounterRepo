@@ -25,9 +25,13 @@ export default class ShoppingSurvey extends Component {
             <SurveyCard
                 title={Shopping.title}
                 imageName={Shopping.title}
-                style={{backgroundColor: Shopping.backgroundColor}} >
+                style={{backgroundColor: Shopping.backgroundColor}}
+                navigation = {this.props.navigation} >
                     
-                <QuestionCard4 navigation = {this.props.navigation} data = {data}/>
+                <QuestionCard4
+                    navigation={this.props.navigation}
+                    data={data}
+                    backgroundColor={Shopping.backgroundColor}/>
             </SurveyCard>
             
         );

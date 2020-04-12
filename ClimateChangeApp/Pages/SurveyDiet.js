@@ -17,7 +17,7 @@ export default class DietSurvey extends Component {
     }
     
     static navigationOptions = { // this is the label in the middle of the nav bar
-        title: ' ',
+        title: 'hello',
     };
 
     render() {
@@ -27,12 +27,14 @@ export default class DietSurvey extends Component {
                 title={Diet.title}
                 imageName={Diet.title}
                 style={{backgroundColor: Diet.backgroundColor}}
-                titleStyle={{color: Diet.secondary}}>
+                titleStyle={{color: Diet.secondary}}
+                navigation = {this.props.navigation} >
 
                     
                 <QuestionCard3 
                     navigation = {this.props.navigation} 
                     data = {data}
+                    backgroundColor={Diet.backgroundColor}
                     secondaryColor = {Diet.secondary}/>
             </SurveyCard>
             

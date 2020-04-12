@@ -15,7 +15,7 @@ import { widthPercentageToDP } from "react-native-responsive-screen";
 export default class IntroPage extends Component {
   // "main method"
   render() {
-    const { navigate } = this.props.navigation;
+    //const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
         <Text style={styles.topText}>What is Climate Cultivation?</Text>
@@ -29,7 +29,6 @@ export default class IntroPage extends Component {
         <View style={styles.surroundingButton}>
           <AsafNextButton
             onPress={() => this.props.navigation.navigate("IntroPage3")}
-            style={styles.buttonDesign}
           >
             Next
           </AsafNextButton>
@@ -45,17 +44,9 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     padding: 15,
     paddingTop: 150,
-    borderWidth: 1,
     backgroundColor: "#F6F8EF",
-    borderColor: "#707070",
     justifyContent: "space-around",
     alignItems: "center"
-  },
-  buttonDesign: {
-    color: "#73A388",
-    fontSize: 23,
-    fontWeight: "600",
-    margin: 30
   },
   topText: {
     color: "#73A388",
