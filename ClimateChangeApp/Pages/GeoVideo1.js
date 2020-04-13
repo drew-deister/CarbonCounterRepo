@@ -98,12 +98,16 @@ class GeoVideo1 extends React.Component {
               mapType='satellite'
               customMapStyle={mapstyle}
               initialRegion={alps}
+              provider='google'
+              showsCompass = {true}
+              showsBuildings = {true}
               >
               {this.state.markersList.map((marker, key)=> (
                     <Marker
                       key={key}
                       coordinate={marker.coordinates}
                       onPress={() => this._onPressVideo(marker.name, marker.videoFileName)}> 
+                      <Image source={require('../assets/marker.png')} style={{height: 35, width:35 }} />
                     </Marker>
               ))}
               </MapView>
@@ -154,7 +158,7 @@ const styles = StyleSheet.create({
   },
   mapStyle: {
     width: Dimensions.get('window').width, // 320
-    height: Dimensions.get('window').height, // 450
+    height: Dimensions.get('window').height - 25, // 450
   }, 
 });
 

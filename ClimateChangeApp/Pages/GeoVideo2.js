@@ -7,7 +7,7 @@ import { Video } from 'expo-av';
 
 const { width: DEVICE_WIDTH, height: DEVICE_HEIGHT } = Dimensions.get("window");
 ////////////////////////////////////////////////
-// THIS FILE IS WORTHESS AND NEVER USED. ONLY KEEPING FOR FUTURE REFERENCE
+// THIS FILE IS WORTHLESS AND NEVER USED. ONLY KEEPING FOR FUTURE REFERENCE
 ////////////////////////////////////////////////
 
 class GeoVideo2 extends React.Component {

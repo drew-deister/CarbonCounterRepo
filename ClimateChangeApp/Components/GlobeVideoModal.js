@@ -32,18 +32,9 @@ export default class GlobeVideoModal extends Component {
         return (
             <Modal 
                 ref = {"myModal"}
-                style = {{
-                    justifyContent: 'center',
-                    borderRadius: Platform.OS === 'ios' ? 30 : 0,
-                    shadowRadius: 10, 
-                    width: wp("80%"),
-                    height: hp("40%"),
-                }}
+                style = {styles.Modal}
                 position = 'center'
                 backdrop={true}
-                // onClosed={() => {
-                //     alert("modal closed.");
-                // }}
             >
                 <View style={styles.MainContainer}>
                     <Video
@@ -55,8 +46,7 @@ export default class GlobeVideoModal extends Component {
                     rate={1.0}
                     isMute={false}
                     volume={1.0}
-                    >
-                    </Video>
+                    />
                 </View>
             </Modal>
         );
@@ -70,9 +60,18 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-around',
         padding: 0,
-        borderColor: 'black',
-        borderWidth: 1
+        // borderColor: 'black',
+        // borderWidth: 1
       },
+    
+    Modal: {
+        justifyContent: 'center',
+        borderRadius: Platform.OS === 'ios' ? 30 : 0,
+        shadowRadius: 10, 
+        width: wp("85%"),
+        height: hp("60%"),
+        backgroundColor: '#73A388',
+    }, 
     Caption: {
         borderColor: 'black',
         borderWidth: 1,
@@ -84,9 +83,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         //justifyContent: 'center',
         //width: '100%',
-        borderColor: 'black',
-        borderWidth: 1,
+        // borderColor: 'black',
+        // borderWidth: 1,
         height: '85%', // i believe this is 85% of the parent container
-        width: '90%'
+        width: '100%'
     }
   });
