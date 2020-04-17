@@ -6,8 +6,9 @@ import {
   View,
   Alert,
   Image,
+  Dimensions,
+  Platform,
 } from "react-native";
-
 import { StyleSheet, TouchableOpacity } from "react-native";
 import {
   widthPercentageToDP as wp,
@@ -16,9 +17,10 @@ import {
 
 const InfoButton = (props) => {
   const [modalOpen, setModalOpen] = useState(false);
+  const { width } = Dimensions.get("window");
 
   return (
-    <View style={[styles.viewstyle]}>
+    <View style={styles.viewstyle}>
       <TouchableOpacity onPress={() => setModalOpen(true)}>
         <Image
           style={styles.image}
@@ -26,7 +28,12 @@ const InfoButton = (props) => {
         />
       </TouchableOpacity>
 
-      <Modal visible={modalOpen}>
+      <Modal
+        visible={modalOpen}
+        style={styles.modalBody}
+        position="center"
+        backdrop={true}
+      >
         <TouchableOpacity onPress={() => setModalOpen(false)}>
           <Image
             style={styles.secondimage}
@@ -42,12 +49,16 @@ const InfoButton = (props) => {
 
 const styles = StyleSheet.create({
   modalBody: {
-    // transparent={true:
-    // backdrop={true:,
+    justifyContent: "center",
+    borderRadius: Platform.OS === "ios" ? 30 : 0,
+    shadowRadius: 10,
+    width: wp("85%"),
+    height: hp("60%"),
+    backgroundColor: "#73A388",
   },
   image: {
     backgroundColor: "transparent",
-    //   flex: 1,
+    //flex: 1,
     height: 30,
     width: 30,
     resizeMode: "cover",
@@ -70,6 +81,7 @@ const styles = StyleSheet.create({
   viewstyle: {
     width: 100,
     height: 100,
+    backgroundColor: "blue",
   },
 });
 
