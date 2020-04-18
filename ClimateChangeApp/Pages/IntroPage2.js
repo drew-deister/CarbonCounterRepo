@@ -10,7 +10,7 @@ import React, { Component } from "react";
 //import HomeScreenActivityCard from '../Components/HomeScreenActivityCard';
 import { View, Text, StyleSheet } from "react-native";
 import { AsafNextButton } from "../Components/AsafNextButton";
-import { InfoButton } from "../Components/InfoButton";
+import InfoModal from "../Components/InfoModal";
 
 import { widthPercentageToDP } from "react-native-responsive-screen";
 // import {Button, Text, Card, Icon} from 'react-native-elements';
@@ -22,6 +22,16 @@ import { widthPercentageToDP } from "react-native-responsive-screen";
 
 export default class IntroPage extends Component {
   // "main method"
+
+  constructor(props) {
+    super(props);
+    this.onPressInfoButton = this.onPressInfoButton.bind(this);
+  }
+
+  onPressInfoButton() {
+    this.refs.infoModal.showInfoModal();
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     return (
@@ -34,16 +44,23 @@ export default class IntroPage extends Component {
           the environment.
         </Text>
 
-        <InfoButton style={styles.info}></InfoButton>
-
         <View style={styles.surroundingButton}>
-          <AsafNextButton
+          {/* <AsafNextButton
             onPress={() => this.props.navigation.navigate("IntroPage3")}
+            style={styles.buttonDesign}
+          >
+            Next
+          </AsafNextButton> */}
+
+          <AsafNextButton
+            onPress={() => this.onPressInfoButton()}
             style={styles.buttonDesign}
           >
             Next
           </AsafNextButton>
         </View>
+
+        <InfoModal ref={"infoModal"} parentObject={this}></InfoModal>
       </View>
     );
   }
