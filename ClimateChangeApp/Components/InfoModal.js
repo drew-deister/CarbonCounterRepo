@@ -15,7 +15,7 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
-export default class InfoButton extends Component {
+export default class InfoModal extends Component {
   constructor(props) {
     super(props);
   }
@@ -43,10 +43,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: Platform.OS === "ios" ? 30 : 0,
     shadowRadius: 10,
-    width: wp("85%"),
-    height: hp("60%"),
+    width: wp("70%"),
+    height: hp("40%"),
     backgroundColor: "#73A388",
   },
 });
 
-export { InfoButton };
+export { InfoModal };
