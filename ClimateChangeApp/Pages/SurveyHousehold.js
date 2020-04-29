@@ -11,6 +11,7 @@ const Household = {
 
 function HeaderNext() {
     return (
+        //this should be replaced with right facing arrow but did not receive from jenna
       <Image
         style={{ width: 50, height: 50 }}
         source={require("../assets/Logo.png")}
