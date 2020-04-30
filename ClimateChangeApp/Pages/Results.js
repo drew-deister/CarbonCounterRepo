@@ -20,8 +20,23 @@ import {
   heightPercentageToDP as hp,
   listenOrientationChange, removeOrientationListener
 } from 'react-native-responsive-screen';
+import {
+  PieChart,
+} from 'react-native-chart-kit'
+
 
 import * as SecureStore from 'expo-secure-store';
+
+//Pie chart configuration
+  const chartConfig = {
+    backgroundGradientFrom: "#1E2923",
+    backgroundGradientFromOpacity: 0,
+    backgroundGradientTo: "#08130D",
+    backgroundGradientToOpacity: 0.5,
+    color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
+    strokeWidth: 2, // optional, default 3
+    barPercentage: 0.5,
+  }
 
 class Results extends React.Component {
     constructor() {
@@ -52,13 +67,15 @@ class Results extends React.Component {
     async fetchData() { // should probably add some error handling here
       // housing
       const zipCode = JSON.parse(await SecureStore.getItemAsync("zipCode"))
-      const numPeople = JSON.parse(await SecureStore.getItemAsync("numPeople"))
+      // use 1/num people because total housing is divided by num people
+      const numPeople = 1/JSON.parse(await SecureStore.getItemAsync("numPeople"))
       const squareFootage = JSON.parse(await SecureStore.getItemAsync("squareFootage"))
 
       // transportation
       const numMiles = JSON.parse(await SecureStore.getItemAsync("numMiles"))
-      const greenAmount = JSON.parse(await SecureStore.getItemAsync("greenAmount"))
-      const summerChange = JSON.parse(await SecureStore.getItemAsync("summerChange"))
+      //multiply by .01 to make decimal
+      const greenAmount = .01*JSON.parse(await SecureStore.getItemAsync("greenAmount"))
+      const summerChange = .01*JSON.parse(await SecureStore.getItemAsync("summerChange"))
       const mode = JSON.parse(await SecureStore.getItemAsync("mode"))
 
       // diet
@@ -99,16 +116,34 @@ class Results extends React.Component {
 
     calculateHousing() { // iterate through JSON file in Utilities
       var averageHomekwhMonth = 0;
+      var multiplier = 1.0;
       for (i in ZipCode) {
           if (ZipCode[i]["Zip"] === parseInt(this.state.zipCode)) {
             averageHomekwhMonth += ZipCode[i]["Avg Home kwh"]["month"];
           }
       }
-      return averageHomekwhMonth * 12; // don't actually know if this is right
+      if (this.state.squareFootage < 800)
+      {
+        multiplier = 0.5;
+      }
+      else if (this.state.squareFootage < 1500) {
+        multiplier = 0.75;
+      }
+      else if (this.state.squareFootage < 2500) {
+        multiplier = 1.0;
+      }
+      else if (this.state.squareFootage < 4500) {
+        multiplier = 1.25;
+      }
+      else{
+        multiplier = 1.5;
+      }
+//should be divided by this.state.numPeople
+      return (multiplier * averageHomekwhMonth * 12 * this.state.numPeople);
     }
 
     calculateTransportation() {
-      MPG_rate = -1 // dummy bc idk if you have to initialize
+      MPG_rate = 1 // dummy bc idk if you have to initialize
       if (this.mode == "Sedan") {
         MPG_rate = 30
       } else if (this.mode == "Car SUV") {
@@ -120,42 +155,79 @@ class Results extends React.Component {
       } else { // pickup truck
         MPG_rate = 18.9
       }
-      return (parseInt(this.state.numMiles) * 180 * (1/MPG_rate) * 8887) // gCO2/yr
+      multiplier =  180 * (1/MPG_rate) * 8887 * 0.00220462;
+      //.75 from non summer + .25 * the change over the summer
+      summer = (.75 + .25 * this.state.summerChange)
+      //max greenamount is .5
+      green = (this.state.greenAmount + 0.5);
+      return multiplier * summer * green * this.state.numMiles;// lbsCO2/yr
     }
 
-    render() {
 
-  
+
+
+
+    render() {
+      const data = [
+        {
+          name: 'Housing',
+          percent: this.calculateHousing(),
+          color: '#FCCCC0',
+          legendFontColor: '#7F7F7F',
+          legendFontSize: 11,
+        },
+        {
+          name: 'Transportation',
+          percent: this.calculateTransportation(),
+          color: '#F08080',
+          legendFontColor: '#7F7F7F',
+          legendFontSize: 11,
+        },
+        {
+          name: 'Diet',
+          percent: this.calculateDiet(),
+          color: '#66CDAA',
+          legendFontColor: '#7F7F7F',
+          legendFontSize: 11,
+        },
+        {
+          name: 'Shopping',
+          percent: this.calculateShopping(),
+          color: '#87CEEB',
+          legendFontColor: '#7F7F7F',
+          legendFontSize: 11,
+        }
+      ]
+
       return(
         <View style={styles.safeView}>
-                <ScrollView style={styles.scrollViewStyle} 
-                  // contentContainerStyle = {styles.containerStyle}
+               <ScrollView style={styles.scrollViewStyle}
+                  contentContainerStyle = {styles.containerStyle}
                   >
-                    {/* <Image style = {styles.image} source = {images[this.props.imageName]} /> */}
-                    <View style={styles.pageHeaderContainer}>
-                      <Text>Hello</Text>
-                    </View>
-                    <View style={styles.cardStyle}>
+                   {/* <Image style = {styles.image} source = {images[this.props.imageName]} /> */}
+
+                   <View style={styles.cardStyle}>
                        <Text style={styles.pageTitle}>Results</Text>
                        <Text style={styles.subTitle}>from each category</Text>
                        <View style={styles.pieChartContainer}>
-                            <Text style={{marginTop: 30, fontSize: 15, width: wp('70%')}}>
-                              put the pie chart here,
-                              then adjust styles.piechartContainer to get rid of border
-                            </Text>
-                        </View>
-
+                       <PieChart
+                         data={data}
+                         width={wp('90%')}
+                         height={200}
+                         chartConfig={chartConfig}
+                         accessor="percent"
+                         backgroundColor="transparent"
+                         paddingLeft="15"
+                         //absolute //remove to give percentages
+                       />
+                      </View>
                         <Text style={styles.pageTitle}>Metrics</Text>
                         <MetricView metricName="SolarPanel"></MetricView>
                         <MetricView metricName="Car" textStyle={{marginTop: -15}}></MetricView>
                         <MetricView metricName="Tree"></MetricView>
                         <MetricView metricName="SmartPhone"></MetricView>
-                    </View>
-                    
-                    
-
-
-                </ScrollView>
+                   </View>
+               </ScrollView>
           </View>
       )
     }
@@ -172,7 +244,7 @@ const styles = StyleSheet.create({
       // borderTopLeftRadius: 40
   },
   pageHeaderContainer: {
-      
+
       height: wp("70%"),
       backgroundColor: 'white',
   },
@@ -215,8 +287,8 @@ const styles = StyleSheet.create({
   pieChartContainer: {
     alignItems: 'center',
     width: wp('90%'),
-    aspectRatio: 90/100,
-    borderColor: 'black',
+  //  aspectRatio: 90/100,
+    borderColor: 'transparent',
     borderWidth: 1,
   }
 });

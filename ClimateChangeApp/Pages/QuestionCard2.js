@@ -161,12 +161,6 @@ class QuestionCard2 extends React.Component {
                             >
                             Next
                         </AsafNextButton>
-                        {/* <Button
-                            icon={<Icon name="arrow-forward" color="white"/>}
-                            iconRight
-                            buttonStyle={styles.nextButton}// update this to move lower
-                            title='Next '
-                            onPress= {() => this.saveAndPush()}/>
                     </View>
             // </ScrollView>
         )

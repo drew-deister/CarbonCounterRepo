@@ -16,10 +16,10 @@ const images = {
 
 const info = {
     SolarPanel: {
-        part1: "On a sunnay day, ",
+        part1: "On a sunny day, ",
         part2: " solar panels will offset your footprint.",
     },
-        
+
     Tree: {
         part1: "Over the course of a year, ",
         part2: " 10-year-old trees would offset your emmissions",
