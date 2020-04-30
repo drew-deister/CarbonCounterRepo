@@ -94,10 +94,13 @@ class MCQuestion extends React.Component {
 export {MCQuestion};
 
 const styles = StyleSheet.create({
+    container: {
+        marginVertical: 16,
+    },
     choiceContainer: {
         alignItems: 'center',
         flexDirection: 'column',
-        marginBottom: 32,
+        //marginVertical: 16,
         //backgroundColor: 'blue'
     },
     choiceButton: {

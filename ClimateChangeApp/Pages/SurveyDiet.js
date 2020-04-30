@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import {ScrollView, View, StyleSheet, Image, Text} from 'react-native';
 import SurveyCard from '../Components/SurveyCard';
 import {QuestionCard3} from './QuestionCard3';
+import INFORMATION from '../Utilities/text.json'; // import JSON file
+
+const INFO = INFORMATION["carbonCounterScreens"]["household"];
 
 const Diet = {
     title: "Diet",

@@ -21,6 +21,8 @@ import {
   } from 'react-native-responsive-screen';
 
 
+
+
 class QuestionCard2 extends React.Component {
     constructor(props) {
         super(props);
@@ -119,28 +121,6 @@ class QuestionCard2 extends React.Component {
                             secondaryColor='rgba(252, 205, 193, .85)'
                         ></MCQuestion>
 
-                        {/* <Text style = {styles.text}>{this.props.data.transportationMode}</Text>
-                        <TouchableHighlight style = {{backgroundColor: this.state.color[0], width: wp('40%'), marginBottom: 20, alignItems: 'center', }}
-                            onPress = {() => this.updateButton(0, 'Car SUV')} >
-                            <Text style={styles.buttonText}>Hello</Text>
-                        </TouchableHighlight>
-                        <TouchableHighlight style = {{backgroundColor: this.state.color[1], width: wp('40%'), marginBottom: 20, alignItems: 'center'}}
-                            onPress = {() => this.updateButton(1, 'Sedan')} >
-                            <Text style={styles.buttonText}>Hello</Text>
-                        </TouchableHighlight>
-                        <TouchableHighlight style = {{backgroundColor: this.state.color[2], width: wp('40%'), marginBottom: 20, alignItems: 'center'}}
-                            onPress = {() => this.updateButton(2, 'Truck SUV')} >
-                            <Text style={styles.buttonText}>Hello</Text>
-                        </TouchableHighlight>
-                        <TouchableHighlight style = {{backgroundColor: this.state.color[3], width: wp('40%'), marginBottom: 20, alignItems: 'center'}}
-                            onPress = {() => this.updateButton(3, 'Minivan')} >
-                            <Text style={styles.buttonText}>Hello</Text>
-                        </TouchableHighlight>
-                        <TouchableHighlight style = {{backgroundColor: this.state.color[4], width: wp('40%'), marginBottom: 20, alignItems: 'center'}}
-                            onPress = {() => this.updateButton(4, 'Pickup Truck')} >
-                            <Text style={styles.buttonText}>Hello</Text>
-                        </TouchableHighlight> */}
-
 
                         <View style = {styles.rowStyleView}>
                             <SliderQuestion
@@ -187,7 +167,7 @@ const styles = StyleSheet.create({
     },
     rowStyleView: {
         flexDirection: 'row',
-        marginVertical: 20
+        //marginVertical: 20
     },
     view: {
         alignItems: 'center',

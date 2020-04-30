@@ -2,9 +2,12 @@ import React, {Component} from 'react';
 import {ScrollView, View, StyleSheet, Image, Text} from 'react-native';
 import SurveyCard from '../Components/SurveyCard';
 import {QuestionCard1} from './QuestionCard1';
+import INFORMATION from '../Utilities/text.json'; // import JSON file
+
+const HOUSEHOLD_INFO = INFORMATION["carbonCounterScreens"]["household"];
 
 const Household = {
-    title: "Household",
+    title: HOUSEHOLD_INFO["title"],
     backgroundColor: '#FCCCC0',
     secondary: '#EB5B6D'
 }
@@ -35,8 +38,8 @@ export default class HouseHoldSurvey extends Component {
 
         return (
             <SurveyCard
-                title={Household.title}
-                imageName={Household.title}
+                title={HOUSEHOLD_INFO["title"]}
+                imageName={HOUSEHOLD_INFO["title"]}
                 style={{backgroundColor: Household.backgroundColor}}
                 navigation = {this.props.navigation}
                 nextScreen='Transportation'>

@@ -4,6 +4,7 @@ import React, { Component } from "react";
 //import HomeScreenActivityCard from '../Components/HomeScreenActivityCard';
 import { View, Text, StyleSheet } from "react-native";
 import { AsafNextButton } from "../Components/AsafNextButton";
+import INFORMATION from '../Utilities/text.json'; // import JSON file
 import { widthPercentageToDP } from "react-native-responsive-screen";
 // import {Button, Text, Card, Icon} from 'react-native-elements';
 // import {
@@ -12,18 +13,23 @@ import { widthPercentageToDP } from "react-native-responsive-screen";
 //     listenOrientationChange, removeOrientationListener
 // } from 'react-native-responsive-screen';
 
+const INFO = INFORMATION["introScreens"]["page2"];
+
 export default class IntroPage extends Component {
+
+  
   // "main method"
   render() {
     //const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Text style={styles.topText}>What is Climate Cultivation?</Text>
+        <Text style={styles.topText}>{INFO["title"]}</Text>
 
         <Text style={styles.bottonText}>
-          Climate Cultivation is an educational app created to bring awareness
+          {INFO["description"]}
+          {/* Climate Cultivation is an educational app created to bring awareness
           to the importance of global interconnectedness of human activity and
-          the environment.
+          the environment. */}
         </Text>
 
         <View style={styles.surroundingButton}>
@@ -50,16 +56,16 @@ const styles = StyleSheet.create({
   },
   topText: {
     color: "#73A388",
-    fontSize: 50,
+    fontSize: 34,
     fontWeight: "600",
     width: 300,
-    height: 200
+    height: 100,
   },
   bottonText: {
     color: "#73A388",
-    alignItems: "center",
+    textAlign: "left",
     fontWeight: "600",
-    fontSize: 27,
+    fontSize: 23,
     width: 300,
     height: 230
   },

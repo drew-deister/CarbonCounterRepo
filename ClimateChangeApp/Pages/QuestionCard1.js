@@ -18,6 +18,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { InputQuestion } from '../Components/InputQuestion';
 import * as SecureStore from 'expo-secure-store';
 import {diagonalScale} from '../Utilities/Scaling';
+import INFORMATION from '../Utilities/text.json'; // import JSON file
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
@@ -27,6 +28,8 @@ import { SliderQuestion } from '../Components/SliderQuestion';
 import { AsafNextButton } from "../Components/AsafNextButton";
 
 
+
+const HOUSEHOLD_INFO = INFORMATION["carbonCounterScreens"]["household"];
 
 
 class QuestionCard1 extends React.Component {
@@ -87,18 +90,18 @@ class QuestionCard1 extends React.Component {
                         <InputQuestion 
                             keyboardType = {'numeric'}
                             parentCallBack = {this.callbackFunction1} 
-                            question = {this.props.data.zipCode} 
-                            placeholder = {this.props.data.zipCodePlaceholder}/>
+                            question = {HOUSEHOLD_INFO["questions"][0]} 
+                            placeholder = {HOUSEHOLD_INFO["placeholders"][0]}/>
                         <InputQuestion 
                             keyboardType = {'numeric'}
                             parentCallBack = {this.callbackFunction2} 
-                            question = {this.props.data.numPeople} 
-                            placeholder = {this.props.data.numPeoplePlaceholder}
+                            question = {HOUSEHOLD_INFO["questions"][1]} 
+                            placeholder = {HOUSEHOLD_INFO["placeholders"][1]}
                             questionLines={2} />
                         
                         <SliderQuestion
                         //width = {wp('80%')} 
-                        question={this.props.data.homeSize}
+                        question={HOUSEHOLD_INFO["questions"][2]}
                         max={3000} min={800} step={1}
                         shouldDisplay={true}
                         callback = {this.updateSliderState} />

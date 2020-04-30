@@ -77,8 +77,8 @@ const styles = StyleSheet.create({
     },
     image: {
         marginTop: 32,
-        height: 170,
-        width: 280,
+        height: 180,
+        width: 295,
     },
     containerStyle: {
         flexGrow: 1,
@@ -90,15 +90,15 @@ const styles = StyleSheet.create({
         //shadowOpacity: .1,
     },
     pageTitle: {
-        marginTop: 20,
+        marginTop: 15,
         color: 'white',
         fontSize: 42,
-        height: 33,
-        width: 224,
+
+        //width: 224,
         fontWeight: '600',
-        height: 80,
-        width: 282,
-        textAlign: 'center'
+        height: 60,
+        width: 280,
+        textAlign: 'center',
     }
 });
 

@@ -90,7 +90,7 @@ const AppNavigator = createStackNavigator(
     IntroPage3: { screen: IntroPage3 }
   },
   {
-    initialRouteName: "Results", // For functioning app, use "IntroPage1"
+    initialRouteName: "IntroPage1", // For functioning app, use "IntroPage1"
     //headerMode: "None",
     headerLayoutPreset: "center",
     transitionConfig: () => ({

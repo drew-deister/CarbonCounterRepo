@@ -76,6 +76,7 @@ class QuestionCard3 extends React.Component {
 
                     <AsafNextButton
                         onPress={() => this.saveAndPush()}
+                        viewStyle={{marginTop: 16}}
                         textStyle={{color: this.props.secondaryColor}} >
                             Next
                     </AsafNextButton>
