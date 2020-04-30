@@ -82,7 +82,7 @@ class GeoVideo1 extends React.Component {
       var storageRef = firebase.storage().ref().child('CarbonXP_Storage/' + name);
       var videoRef = storageRef.child(videoFileName);
       videoRef.getDownloadURL().then((url) => {
-        this.refs.globevideomodal.showGlobeVideoModal(url); 
+        this.refs.globevideomodal.showGlobeVideoModal(url, name); 
       });
     }
 

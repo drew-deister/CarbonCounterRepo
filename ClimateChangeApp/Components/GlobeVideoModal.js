@@ -19,11 +19,12 @@ export default class GlobeVideoModal extends Component {
         super(props);
         this.state = {
             url: '', // may want to add a default here
+            name: '',
         }
     }
 
-    showGlobeVideoModal = (url) => {
-        this.setState({url: url}); // set the url
+    showGlobeVideoModal = (url, name) => {
+        this.setState({url: url, name: name}); // set the url
         this.refs.myModal.open();
     }
 
@@ -37,6 +38,7 @@ export default class GlobeVideoModal extends Component {
                 backdrop={true}
             >
                 <View style={styles.MainContainer}>
+                    <Text style = {styles.text}>{this.state.name}</Text>
                     <Video
                     source={{ uri: this.state.url }}
                     style={styles.Video}
@@ -50,11 +52,17 @@ export default class GlobeVideoModal extends Component {
                 </View>
             </Modal>
         );
-    }
+    }   
 
 }
 
 const styles = StyleSheet.create({
+    text: {
+        color: "white",
+        fontSize: 20,
+        fontWeight: "200",
+        
+    }, 
     MainContainer: {
         flexDirection: "column",
         alignItems: 'center',
