@@ -29,11 +29,25 @@ class QuestionCard2 extends React.Component {
             summerChange: 1,
             mode: '',
             color: ['red', 'red', 'red', 'red', 'red'],
+            hasResultsBeenAccessed: "false",
         }
         this.updateSliderState1 = this.updateSliderState1.bind(this)
         this.updateSliderState2 = this.updateSliderState2.bind(this)
         this.updateSliderState3 = this.updateSliderState3.bind(this)
         this.updateMCState = this.updateMCState.bind(this)
+    }
+
+    componentDidMount() {
+        this.fetchData().done()
+        this.props.navigation.addListener('didFocus', () => { // runs every time the screen is seen
+            // The screen is focused
+            this.fetchData().done()
+        });
+    }
+
+    async fetchData() {
+        const response = JSON.parse(await SecureStore.getItemAsync("hasResultsBeenAccessed"))
+        this.setState({hasResultsBeenAccessed: response})
     }
 
     // MARK: Update functions for slider children
@@ -63,6 +77,14 @@ class QuestionCard2 extends React.Component {
             alert('Please answer all questions.')
         }
     }
+    
+    saveAndGoBackToResults() {
+        SecureStore.setItemAsync("numMiles", JSON.stringify(this.state.numMiles)) // save to async
+        SecureStore.setItemAsync("greenAmount", JSON.stringify(this.state.greenAmount)) // save to async
+        SecureStore.setItemAsync("summerChange", JSON.stringify(this.state.summerChange))
+        SecureStore.setItemAsync("mode", JSON.stringify(this.state.mode))
+        this.props.navigation.navigate('Diet')
+    }
 
     checkValid() { 
         return (this.state.numMiles != 0)
@@ -86,9 +108,19 @@ class QuestionCard2 extends React.Component {
     
 
     render() {
+        access = this.state.hasResultsBeenAccessed
         return(
             // <ScrollView style = {styles.scrollView}>
                     <View style = {styles.view}>
+                        {
+                            (access == "true") ?
+                            <Button icon={<Icon name="arrow-forward" color="white"/>}
+                            iconRight
+                            buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
+                            title='Back to results'
+                            onPress= {() => this.saveAndGoBackToResults}></Button>
+                            : null // don't do anything
+                        }
                         <SliderQuestion   
                             question={this.props.data.numMiles}
                             questionLines={2}

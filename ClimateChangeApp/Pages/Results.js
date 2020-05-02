@@ -34,7 +34,12 @@ class Results extends React.Component {
         articlesPerShop: 0,
         dummyNumber: 40,
       }
+      SecureStore.setItemAsync("hasResultsBeenAccessed", JSON.stringify("true"))
+
     }
+
+    
+
     static navigationOptions = { // this is the label in the middle of the nav bar
         title: 'Housing',    
     };
@@ -120,15 +125,49 @@ class Results extends React.Component {
     
     render() {
       return(
-        <View>
-            <Text>Results!</Text>
+        <View style = {styles.view}>
+            <Button
+              icon={<Icon name="arrow-forward" color="white"/>}
+              iconRight
+              buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
+              title='Housing'
+              onPress= {() => this.props.navigation.navigate('Household')}
+            />
+            <Button
+              icon={<Icon name="arrow-forward" color="white"/>}
+              iconRight
+              buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
+              title='Transportation'
+              onPress= {() => this.props.navigation.navigate('Transportation')}
+            />
+            <Button
+              icon={<Icon name="arrow-forward" color="white"/>}
+              iconRight
+              buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
+              title='Diet'
+              onPress= {() => this.props.navigation.navigate('Diet')}
+            />
+            <Button
+              icon={<Icon name="arrow-forward" color="white"/>}
+              iconRight
+              buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
+              title='Shopping'
+              onPress= {() => this.props.navigation.navigate('Shopping')}
+            />
         </View>
       )
     }
 
 }
 
-
+const styles = StyleSheet.create({
+  
+  view: {
+      alignItems: 'center',
+      flexDirection: 'row'
+  },
+  
+})
 
 
 export default Results;

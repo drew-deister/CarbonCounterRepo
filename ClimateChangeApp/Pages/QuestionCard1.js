@@ -1,8 +1,6 @@
 // Drew Deister
 // 1.14.2020
 
-// new
-
 // TODO: add a query for the information when the sreen is loaded?
 // note: Creating child components is generally best practices for everything on this screen.
 //       However, QuestionCard needs access to all child states, and since a child Slider component
@@ -17,7 +15,6 @@ import {Text, Icon, Button, Slider} from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
 import { InputQuestion } from '../Components/InputQuestion';
 import * as SecureStore from 'expo-secure-store';
-import {diagonalScale} from '../Utilities/Scaling';
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
@@ -35,12 +32,25 @@ class QuestionCard1 extends React.Component {
             zipCode: 0,
             numPeople: 0,
             sliderValue: 1,
+            hasResultsBeenAccessed: "false",
         }
         this.callbackFunction1 = this.callbackFunction1.bind(this); // make sure these are both correct
         this.callbackFunction2 = this.callbackFunction2.bind(this);
         this.updateSliderState = this.updateSliderState.bind(this);
+        SecureStore.setItemAsync("hasResultsBeenAccessed", JSON.stringify("false")); // this only needs to be done once, in one page
+    }
 
+    componentDidMount() {
+        this.fetchData().done()
+        this.props.navigation.addListener('didFocus', () => { // runs every time the screen is seen
+            // The screen is focused
+            this.fetchData().done()
+        });
+    }
 
+    async fetchData() {
+        const response = JSON.parse(await SecureStore.getItemAsync("hasResultsBeenAccessed"))
+        this.setState({hasResultsBeenAccessed: response})
     }
 
     callbackFunction1(value) {
@@ -63,10 +73,18 @@ class QuestionCard1 extends React.Component {
             SecureStore.setItemAsync("zipCode", JSON.stringify(this.state.zipCode)) // save to async
             SecureStore.setItemAsync("numPeople", JSON.stringify(this.state.numPeople))
             SecureStore.setItemAsync("squareFootage", JSON.stringify(this.state.sliderValue))
-            this.props.navigation.push('Transportation')
+            this.props.navigation.navigate('Transportation')
         } else {
             alert("Please enter a valid zipcode.")
         }
+    }
+
+    // only used when back to results button is visible
+    saveAndGoBackToResults() {
+        SecureStore.setItemAsync("zipCode", JSON.stringify(this.state.zipCode)) // save to async
+        SecureStore.setItemAsync("numPeople", JSON.stringify(this.state.numPeople))
+        SecureStore.setItemAsync("squareFootage", JSON.stringify(this.state.sliderValue))
+        this.props.navigation.navigate('Results')
     }
 
     // checks whether current inputs are valid
@@ -75,38 +93,44 @@ class QuestionCard1 extends React.Component {
     }
 
     render() {
+        access = this.state.hasResultsBeenAccessed
         return(
-            // <View style = {styles.view}>
-            //     <ScrollView style = {styles.scrollView}>
-                    <View style = {styles.view}>
-                        <InputQuestion 
-                            keyboardType = {'numeric'}
-                            parentCallBack = {this.callbackFunction1} 
-                            question = {this.props.data.zipCode} 
-                            placeholder = {this.props.data.zipCodePlaceholder}/>
-                        <InputQuestion 
-                            keyboardType = {'numeric'}
-                            parentCallBack = {this.callbackFunction2} 
-                            question = {this.props.data.numPeople} 
-                            placeholder = {this.props.data.numPeoplePlaceholder}
-                            questionLines={2} />
+                <View style = {styles.view}>
+                    {
+                        (access == "true") ?
+                        <Button icon={<Icon name="arrow-forward" color="white"/>}
+                        iconRight
+                        buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
+                        title='Back to results'
+                        onPress= {() => this.saveAndGoBackToResults}></Button>
+                        : null // don't do anything
+                    }               
+                    <InputQuestion 
+                        keyboardType = {'numeric'}
+                        parentCallBack = {this.callbackFunction1} 
+                        question = {this.props.data.zipCode} 
+                        placeholder = {this.props.data.zipCodePlaceholder}/>
+                    <InputQuestion 
+                        keyboardType = {'numeric'}
+                        parentCallBack = {this.callbackFunction2} 
+                        question = {this.props.data.numPeople} 
+                        placeholder = {this.props.data.numPeoplePlaceholder}
+                        questionLines={2} />
                         
-                        <SliderQuestion
+                    <SliderQuestion
                         //width = {wp('80%')} 
                         question={this.props.data.homeSize}
                         max={3000} min={800} step={1}
                         shouldDisplay={true}
                         callback = {this.updateSliderState} />
-                        <Button
-                            icon={<Icon name="arrow-forward" color="white"/>}
-                            iconRight
-                            buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
-                            title='Next '
-                            onPress= {() => this.saveAndPush()}
-                        /> 
-                    </View>
-            //     </ScrollView>
-            // </View>
+                    <Button
+                        icon={<Icon name="arrow-forward" color="white"/>}
+                        iconRight
+                        buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
+                        title='Next '
+                        onPress= {() => this.saveAndPush()}
+                    /> 
+                </View>
         )    
     }
 
