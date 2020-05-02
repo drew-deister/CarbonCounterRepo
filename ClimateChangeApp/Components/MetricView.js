@@ -16,22 +16,28 @@ const images = {
 
 const info = {
     SolarPanel: {
-        part1: "On a sunny day, ",
-        part2: " solar panels will offset your footprint.",
+        part1: "",
+        part2: " solar panels operated for a year would offset your emissions.",
     },
 
     Tree: {
-        part1: "Over the course of a year, ",
-        part2: " 10-year-old trees would offset your emmissions",
+        part1: "A tree is most efficient at CO2 removal when it reaches ten years old. It would take ",
+        part2: " 10-year-old trees would offset your emissions",
     },
     Car: {
-        part1: "Your emissions are similar to driving ",
+        part1: "Your emissions are the same as driving ",
         part2: " miles in an average sedan",
     },
     SmartPhone: {
-        part1: "In one day, charging ",
+        part1: "Charging ",
         part2: " smartphones would produce a similar amount of CO2"
     },
+}
+const multiplier = {
+  SolarPanel: 0.00172722,
+  Tree: 1/48,
+  Car: 1.1,
+  SmartPhone: 57.8,
 }
 
 class MetricView extends React.Component {
@@ -43,9 +49,11 @@ class MetricView extends React.Component {
 
     static propTypes = {
         metricName: PropTypes.string,
+        totalCO2: PropTypes.number,
     }
     static defaultProps = {
         metricName: 'Tree',
+        totalCO2: 1,
         textStyle: {},
     }
 
@@ -57,7 +65,9 @@ class MetricView extends React.Component {
                         <Image style = {styles.image} source = {images[this.props.metricName]} />
                     </View>
                     <Text style={[styles.text, this.props.textStyle]}>
-                        {info[this.props.metricName].part1}23,700{info[this.props.metricName].part2}
+                        {info[this.props.metricName].part1}
+                        {parseInt(this.props.totalCo2*multiplier[this.props.metricName])}
+                        {info[this.props.metricName].part2}
                     </Text>
 
             </View>

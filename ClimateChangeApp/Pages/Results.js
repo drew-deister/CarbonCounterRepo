@@ -163,10 +163,6 @@ class Results extends React.Component {
       return multiplier * summer * green * this.state.numMiles;// lbsCO2/yr
     }
 
-
-
-
-
     render() {
       const data = [
         {
@@ -198,14 +194,19 @@ class Results extends React.Component {
           legendFontSize: 11,
         }
       ]
-
+      var totalCO2 = this.calculateHousing() + this.calculateTransportation() + this.calculateDiet() + this.calculateShopping();
       return(
         <View style={styles.safeView}>
                <ScrollView style={styles.scrollViewStyle}
                   contentContainerStyle = {styles.containerStyle}
                   >
+                  <View style = {styles.pageHeaderContainer}>
+                    <Text style={styles.CO2Title}>
+                    Your estimated green house gas emissions are:</Text>
+                    <Text style={styles.CO2Number}>{parseInt(totalCO2)}</Text>
+                    <Text style={styles.CO2Title}> pounds of CO2 per year</Text>
+                  </View>
                    {/* <Image style = {styles.image} source = {images[this.props.imageName]} /> */}
-
                    <View style={styles.cardStyle}>
                        <Text style={styles.pageTitle}>Results</Text>
                        <Text style={styles.subTitle}>from each category</Text>
@@ -222,10 +223,10 @@ class Results extends React.Component {
                        />
                       </View>
                         <Text style={styles.pageTitle}>Metrics</Text>
-                        <MetricView metricName="SolarPanel"></MetricView>
-                        <MetricView metricName="Car" textStyle={{marginTop: -15}}></MetricView>
-                        <MetricView metricName="Tree"></MetricView>
-                        <MetricView metricName="SmartPhone"></MetricView>
+                        <MetricView metricName="SolarPanel" totalCo2 = {totalCO2}></MetricView>
+                        <MetricView metricName="Car" totalCo2 = {totalCO2} textStyle={{marginTop: -15}}></MetricView>
+                        <MetricView metricName="Tree" totalCo2 = {totalCO2}></MetricView>
+                        <MetricView metricName="SmartPhone" totalCo2 = {totalCO2}></MetricView>
                    </View>
                </ScrollView>
           </View>
@@ -244,9 +245,12 @@ const styles = StyleSheet.create({
       // borderTopLeftRadius: 40
   },
   pageHeaderContainer: {
-
-      height: wp("70%"),
+      marginTop: 32,
+      alignItems: 'center',
+      alignContent: 'center',
+      height: wp("50%"),
       backgroundColor: 'white',
+      width: wp('70%')
   },
   cardStyle: {
     //flex: 1,
@@ -271,19 +275,38 @@ const styles = StyleSheet.create({
       alignContent: 'center',
       //backgroundColor: 'red'
   },
+  CO2Number:
+  {
+      color: '#73A388',
+      padding: 10,
+      fontSize: 46,
+      fontWeight: 'bold',
+      width: wp("75"),
+      textAlign: 'center',
+},
   pageTitle: {
       marginTop: 20,
       color: '#73A388',
       fontSize: 42,
+      //fontWeight: 'bold',
       width: wp("75"),
       fontWeight: '600',
       textAlign: 'center',
+  },
+  CO2Title: {
+    color: '#73A388',
+    fontSize: 22,
+    fontWeight: '600',
+    fontStyle: 'italic',
+    textAlign: 'center',
   },
   subTitle: {
     color: '#73A388',
     fontSize: 16,
     fontWeight: '600',
+    textAlign: 'center',
   },
+
   pieChartContainer: {
     alignItems: 'center',
     width: wp('90%'),
