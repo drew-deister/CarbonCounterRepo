@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {ScrollView, View, StyleSheet, Image, Text} from 'react-native';
 import SurveyCard from '../Components/SurveyCard';
-import {QuestionCard1} from './QuestionCard1';
+import {QuestionCardHousing} from './QuestionCard1Housing';
 import INFORMATION from '../Utilities/text.json'; // import JSON file
 
 const HOUSEHOLD_INFO = INFORMATION["carbonCounterScreens"]["household"];
 
 const Household = {
-    title: HOUSEHOLD_INFO["title"],
+    title: "Household",
     backgroundColor: '#FCCCC0',
     secondary: '#EB5B6D'
 }
@@ -22,7 +22,7 @@ function HeaderNext() {
     );
   }
 
-export default class HouseHoldSurvey extends Component {
+export default class HouseholdSurvey extends Component {
 
     constructor(props) {
         super(props);
@@ -44,30 +44,13 @@ export default class HouseHoldSurvey extends Component {
                 navigation = {this.props.navigation}
                 nextScreen='Transportation'>
                     
-                <QuestionCard1
+                <QuestionCardHousing
                     navigation={this.props.navigation}
-                    data={data}
                     backgroundColor={Household.backgroundColor}
                     secondary={Household.secondary}/>
             </SurveyCard>
             
         );
     }
-
-}
-
-//HOUSEHOLD DATA
-const data = {
-
-    zipCode: 'Zip Code', 
-    zipCodePlaceholder: 'Enter your zipcode',
-
-    homeSize: 'House Size (square feet)?',
-
-    numPeople: 'How many people do you live with?',
-    numPeoplePlaceholder: 'Enter a number',
-
-    homeSizeMin: 0,
-    homeSizeMax: 4000,
 
 }

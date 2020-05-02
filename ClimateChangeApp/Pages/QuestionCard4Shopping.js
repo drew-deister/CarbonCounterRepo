@@ -3,55 +3,56 @@
 
 // see QuestionCard1 for more thorough documentation
 
-// _______________DIET QUESTION CARD__________________
+// _______________SHOPPING QUESTION CARD__________________
 
 import React, { Component } from 'react';
 import {StyleSheet, View} from "react-native";
 import { ScrollView } from 'react-native-gesture-handler';
-import {Text, Icon, Button, Slider} from 'react-native-elements';
 import * as SecureStore from 'expo-secure-store';
 import { InputQuestion } from '../Components/InputQuestion';
 import { AsafNextButton } from "../Components/AsafNextButton";
-
+import {Text, Icon, Button, Slider} from 'react-native-elements';
+import INFORMATION from '../Utilities/text.json'; // import JSON file
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
     listenOrientationChange, removeOrientationListener
   } from 'react-native-responsive-screen';
 
+const SHOPPING_INFO = INFORMATION["carbonCounterScreens"]["shopping"];
 
-class QuestionCard3 extends React.Component {
+
+class QuestionCardShopping extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
-            beefServings: -1,
-            dairyServings: -1,
+            shoppingFrequency: -1,
+            articlesPerShop: -1,
         }
         this.callbackFunction1 = this.callbackFunction1.bind(this);
         this.callbackFunction2 = this.callbackFunction2.bind(this);
     }
 
     callbackFunction1(value) {
-        this.setState({beefServings: value})
+        this.setState({shoppingFrequency: value})
     }
 
     callbackFunction2(value) {
-        this.setState({dairyServings: value})
+        this.setState({articlesPerShop: value})
     }
-
 
     saveAndPush() { // change this to some checkvalue function
         if (this.checkValid()) {
-            SecureStore.setItemAsync("beefServings", JSON.stringify(this.state.beefServings))
-            SecureStore.setItemAsync("dairyServings", JSON.stringify(this.state.dairyServings)) 
-            this.props.navigation.push('Shopping')            
+            SecureStore.setItemAsync("shoppingFrequency", JSON.stringify(this.state.shoppingFrequency))
+            SecureStore.setItemAsync("articlesPerShop", JSON.stringify(this.state.articlesPerShop))
+            this.props.navigation.push('Results')            
             } else {
             alert('Please answer all questions.')
         }
     }
 
     checkValid() { // do some sort of error checking here
-        return true;//(this.state.beefServings != -1 && this.state.beefServings != -1)
+        return true;//(this.state.articlesPerShop != -1 && this.state.shoppingFrequency != -1)
     }
 
 
@@ -60,32 +61,27 @@ class QuestionCard3 extends React.Component {
             // <ScrollView style = {styles.scrollView}>
                 <View style = {styles.view}>
                     <InputQuestion 
-                        questionStyle={{color: this.props.secondaryColor}}
-                        questionLines={2}
+                        questionLines={3}
                         keyboardType = {'numeric'}
                         parentCallBack = {this.callbackFunction1}                             
-                        question = {this.props.data.beefServings} 
-                        placeholder = {this.props.data.beefServingsPlaceholder}/>
-                    <InputQuestion 
-                        questionStyle={{color: this.props.secondaryColor}}
+                        question = {SHOPPING_INFO["questions"][0]} 
+                        placeholder = {SHOPPING_INFO["placeholders"][0]}/>
+
+                    {/* LUCAS       -       Leah had us delete this question. 
+                                            Once you see this, if you agree, delete the following commented out code*/ } 
+                    {/* <InputQuestion 
                         questionLines={2}
                         keyboardType = {'numeric'}
                         parentCallBack = {this.callbackFunction2}                             
-                        question = {this.props.data.dairyServings} 
-                        placeholder = {this.props.data.dairyServingsPlaceholder}/>
+                        question = {this.props.data.articlesPerShop} 
+                        placeholder = {this.props.data.articlesPerShopPlaceholder}/> */}
 
                     <AsafNextButton
                         onPress={() => this.saveAndPush()}
                         viewStyle={{marginTop: 16}}
-                        textStyle={{color: this.props.secondaryColor}} >
+                        textStyle={{color: this.props.backgroundColor}} >
                             Next
                     </AsafNextButton>
-                    {/* <Button
-                        icon={<Icon name="arrow-forward" color="white"/>}
-                        iconRight
-                        buttonStyle={styles.nextButton}// update this to move lower 
-                        title='Next '
-                        onPress= {() => this.saveAndPush()}/> */}
                 </View> 
             // </ScrollView>
         )    
@@ -116,19 +112,12 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 50,
 
     },
-    button: { 
-        backgroundColor: 'gray', // change this 
-        marginBottom: 20,
-        width: wp('40%')
-    },
     nextButton: {
         backgroundColor: 'gray',
         marginVertical: 50,
         width: wp('55%')
     },
-
-    
 })
 
 
-export {QuestionCard3};
+export {QuestionCardShopping};

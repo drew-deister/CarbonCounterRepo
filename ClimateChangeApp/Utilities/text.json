@@ -52,28 +52,27 @@
             "title": "Transportation",
             "questions": [
                 "Approximately how many miles do you travel (round trip) to school on an average day?",
-                "How much of your daily travel to school is by a 'greener' form?",
                 "What is closest to your primary mode of transportation?",
                 "How does your summer travel compare to your school year travel?"
             ],
             "sliderMin": [
                 "NONE",
-                "no other mode of transport",
                 "NONE",
                 "Travel less"
             ],
             "sliderMax": [
                 "NONE",
-                "about half my travel is greener",
                 "None",
                 "Travel more"
             ],
             "MCOptions": [
-                "Car SUV",
-                "Sedan",
-                "Truck SUV",
+                "Regular sedan or wagon",
+                "Car type SUV (e.g., RAV4, Ford Escape)",
+                "Truck type SUV (e.g., Chevy Suburban, Nissan Titan)",
                 "Minivan",
-                "Pickup Truck"
+                "Pickup truck (e.g., Ford F-150)",
+                "Train or bus",
+                "Bicycle or walk"
             ],
             "info": [
                 {

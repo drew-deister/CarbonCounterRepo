@@ -32,7 +32,7 @@ import { AsafNextButton } from "../Components/AsafNextButton";
 const HOUSEHOLD_INFO = INFORMATION["carbonCounterScreens"]["household"];
 
 
-class QuestionCard1 extends React.Component {
+class QuestionCardHousing extends React.Component {
 
     constructor(props) {
         super(props);
@@ -149,4 +149,4 @@ const styles = StyleSheet.create({
 })
 
 
-export {QuestionCard1};
+export {QuestionCardHousing};

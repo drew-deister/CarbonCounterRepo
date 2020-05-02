@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {ScrollView, View, StyleSheet, Image, Text} from 'react-native';
 import SurveyCard from '../Components/SurveyCard';
-import {QuestionCard2} from './QuestionCard2';
+import {QuestionCardTransportation} from './QuestionCard2Transportation';
 
 const Transportation = {
     title: "Transportation",
@@ -30,9 +30,8 @@ export default class TransportationSurvey extends Component {
                 style={{backgroundColor: Transportation.backgroundColor}}
                 navigation = {this.props.navigation} >
                     
-                <QuestionCard2
+                <QuestionCardTransportation
                     navigation={this.props.navigation}
-                    data={data}
                     backgroundColor={Transportation.backgroundColor}
                     secondaryColor={Transportation.secondary}/>
             </SurveyCard>
@@ -42,16 +41,4 @@ export default class TransportationSurvey extends Component {
 
 }
 
-
-//TRANSPORTATION DATA
-const data = {
-    numMiles: 'How many miles do you travel on a typical school day?', 
-    
-    greenAmount: 'How much of your daily travel to school is by a \'greener\' form of transportation?' ,
-
-    transportationMode: 'What is closest to your main mode of transportation?',
-
-    summerChange: 'How does your summer travel compare to your school year travel?'
-
-}
 

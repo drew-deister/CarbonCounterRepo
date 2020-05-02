@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {ScrollView, View, StyleSheet, Image, Text} from 'react-native';
 import SurveyCard from '../Components/SurveyCard';
-import {QuestionCard4} from './QuestionCard4';
+import {QuestionCardShopping} from './QuestionCard4Shopping';
 
 const Shopping = {
     title: "Shopping",
@@ -28,26 +28,12 @@ export default class ShoppingSurvey extends Component {
                 style={{backgroundColor: Shopping.backgroundColor}}
                 navigation = {this.props.navigation} >
                     
-                <QuestionCard4
+                <QuestionCardShopping
                     navigation={this.props.navigation}
-                    data={data}
                     backgroundColor={Shopping.backgroundColor}/>
             </SurveyCard>
             
         );
     }
-
-}
-
-// SHOPPING DATA
-const data = {
-
-    shoppingFrequency: 'How many times a month do you buy new clothes?',
-
-    shoppingFrequencyPlaceholder: 'Enter a number...',
-    
-    articlesPerShop: 'How many articles of clothing per shopping experience?',   
-
-    articlesPerShopPlaceholder: 'Enter a number...',
 
 }

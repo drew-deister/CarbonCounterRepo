@@ -11,10 +11,10 @@ import IntroPage1 from "./Pages/IntroPage1";
 import IntroPage2 from "./Pages/IntroPage2";
 import IntroPage3 from "./Pages/IntroPage3";
 import TempPage from './Pages/TemporarySurveyPage';
-import SurveyHousehold from './Pages/SurveyHousehold';
-import SurveyTransportation from './Pages/SurveyTransportation';
-import SurveyDiet from './Pages/SurveyDiet';
-import SurveyShopping from './Pages/SurveyShopping';
+import SurveyHousehold from './Pages/Survey1Household';
+import SurveyTransportation from './Pages/Survey2Transportation';
+import SurveyDiet from './Pages/Survey3Diet';
+import SurveyShopping from './Pages/Survey4Shopping';
 
 
 // shirom code
