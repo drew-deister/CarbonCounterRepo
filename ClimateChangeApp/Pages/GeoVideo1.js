@@ -114,7 +114,7 @@ class GeoVideo1 extends React.Component {
               </MapView>
               {
                 !(this.state.hasMarkerBeenPressed)
-                ? <Text style={styles.overlay}>Zoom to a region of the world you are curious about!</Text>
+                ? <Text style={styles.overlay}>Tap on a marker to hear about a part of the world you are curious about!</Text>
                 : null
               }
           </View>
