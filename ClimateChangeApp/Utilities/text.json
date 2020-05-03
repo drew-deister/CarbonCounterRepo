@@ -1,16 +1,19 @@
 
 
 {
-    "introScreens": {
-        "page2": {
+    "introScreens": [
+        {
+            "title": "No text on this screen"
+        },
+        {
             "title": "What is CarbonXP?",
             "description": "Carbon XP is an educational tool created to bring awareness to the interconnectedness between human activity and our environment"
         },
-
-        "page3": {
+        {
             "description": "Use this platform to learn about a few of the ways your daily activities create greenhouse gas emissions, and to hear directly from people all over the planet about climate change."
         }
-    },
+
+    ],
     
     "carbonCounterScreens": {
         "intro": {

@@ -7,7 +7,6 @@
 
 import React, { Component } from 'react';
 import {StyleSheet, View} from "react-native";
-import { ScrollView } from 'react-native-gesture-handler';
 import {Text, Icon, Button, Slider} from 'react-native-elements';
 import * as SecureStore from 'expo-secure-store';
 import { InputQuestion } from '../Components/InputQuestion';
@@ -59,7 +58,7 @@ class QuestionCardDiet extends React.Component {
 
     render() {
         return(
-            // <ScrollView style = {styles.scrollView}>
+
                 <View style = {styles.view}>
                     <InputQuestion 
                         questionStyle={{color: this.props.secondaryColor}}
@@ -82,14 +81,9 @@ class QuestionCardDiet extends React.Component {
                         textStyle={{color: this.props.secondaryColor}} >
                             Next
                     </AsafNextButton>
-                    {/* <Button
-                        icon={<Icon name="arrow-forward" color="white"/>}
-                        iconRight
-                        buttonStyle={styles.nextButton}// update this to move lower 
-                        title='Next '
-                        onPress= {() => this.saveAndPush()}/> */}
+
                 </View> 
-            // </ScrollView>
+
         )    
     }
 
@@ -97,39 +91,9 @@ class QuestionCardDiet extends React.Component {
 
 
 const styles = StyleSheet.create({
-    text: {
-        marginVertical: 8,
-        color: 'white',
-        fontSize: 24,
-        fontWeight: '300'
-    },
-    rowStyleView: {
-        flexDirection: 'row',
-        marginVertical: 20
-    },
     view: {
         alignItems: 'center',
-    },
-    scrollView: {
-        backgroundColor: '#0B7310',
-        width: wp('100%'),
-        padding: 20,
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 50,
-
-    },
-    button: { 
-        backgroundColor: 'gray', // change this 
-        marginBottom: 20,
-        width: wp('40%')
-    },
-    nextButton: {
-        backgroundColor: 'gray',
-        marginVertical: 50,
-        width: wp('55%')
-    },
-
-    
+    } 
 })
 
 

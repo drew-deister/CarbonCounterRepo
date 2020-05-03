@@ -9,13 +9,7 @@ import {
   Image,
   TouchableOpacity
 } from "react-native";
-// import { NextButton } from '../Components/NextButton';
-// import {Button, Text, Card, Icon} from 'react-native-elements';
-// import {
-//     widthPercentageToDP as wp,
-//     heightPercentageToDP as hp,
-//     listenOrientationChange, removeOrientationListener
-// } from 'react-native-responsive-screen';
+
 
 export default class IntroPage extends Component {
 

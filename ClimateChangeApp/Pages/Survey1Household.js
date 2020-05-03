@@ -31,7 +31,7 @@ export default class HouseholdSurvey extends Component {
     
     static navigationOptions = { // this is the label in the middle of the nav bar
         //title: 'hello',
-        headerRight: HeaderNext,
+        // headerRight: HeaderNext,
     };
 
     render() {

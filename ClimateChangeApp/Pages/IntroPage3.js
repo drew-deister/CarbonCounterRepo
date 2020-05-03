@@ -3,30 +3,44 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { AsafNextButton } from "../Components/AsafNextButton";
+import INFORMATION from '../Utilities/text.json'; // import JSON file
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+  listenOrientationChange, removeOrientationListener
+} from 'react-native-responsive-screen';
+
+const INFO = INFORMATION["introScreens"][2];
 
 export default class IntroPage extends Component {
   // "main method"
   render() {
     //const { navigate } = this.props.navigation;
     return (
-      <React.Fragment>
         <View style={styles.container}>
-          <Image style={styles.clouds} source={require("../assets/Home.png")} />
 
-          <Text style={styles.Text}>
-            Use this platform to learn about your effect on the Earth, other
-            country’s stand on climate change, and what you can do to help!
-          </Text>
-          <View style={styles.surroundingButton}>
-            <AsafNextButton
-              onPress={() => this.props.navigation.navigate("Home")}
-              style={styles.buttonDesign}
-            >
-              Let's Get Started
-            </AsafNextButton>
-          </View>
+            <View style={{flex: 295, alignItems: 'center'}}>
+                <View style={styles.imageContainer}>
+                      <Image style={styles.clouds} source={require("../assets/Introduction.png")} />
+                </View>
+            </View>
+
+            <View style={{flex: 270, justifyContent: 'center'}}>
+                <Text style={styles.Text}>
+                  {INFO["description"]}
+                </Text>
+            </View> 
+
+
+            <View style={{flex: 200, justifyContent: 'center'}}>
+                <AsafNextButton
+                  onPress={() => this.props.navigation.navigate("Home")}
+                  style={styles.buttonDesign}
+                >
+                    Let's Get Started
+                </AsafNextButton>
+            </View>
         </View>
-      </React.Fragment>
     );
   }
 }
@@ -35,31 +49,25 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    padding: 15,
-    paddingTop: 150,
     backgroundColor: "#F6F8EF",
-    justifyContent: "space-around",
-    alignItems: "center"
+    alignItems: "center",
   },
-  buttonDesign: {
-    color: "#73A388",
-    fontSize: 23,
-    fontWeight: "600",
-    margin: 30
+  imageContainer: {
+      marginTop: 25,
+      alignItems: "center",
+      height: wp("53%"), // ratio of height : width should be 
+      width: wp("94%"),  //       wp("50%") : wp("90%") ish
   },
   Text: {
     color: "#73A388",
-    fontSize: 27,
+    fontSize: 18,
     fontWeight: "600",
-    height: 170,
-    width: 290
+    width: wp("82%"),
   },
   clouds: {
-    backgroundColor: "transparent",
-    height: 210,
-    width: 300,
-    resizeMode: "cover",
-    alignItems: "center"
+    height: "100%",
+    width: "100%",
+    marginLeft: 5,
   },
   surroundingButton: {
     paddingTop: 60

@@ -8,8 +8,6 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, TouchableHighlight} from "react-native";
 import {Icon, Button, Slider, Text} from 'react-native-elements';
-import { ScrollView } from 'react-native-gesture-handler';
-import {diagonalScale} from '../Utilities/Scaling';
 import {SliderQuestion} from '../Components/SliderQuestion';
 import { AsafNextButton } from "../Components/AsafNextButton";
 import {MCQuestion} from '../Components/MCQuestion'
@@ -75,7 +73,6 @@ class QuestionCardTransportation extends React.Component {
 
     render() {
         return(
-            // <ScrollView style = {styles.scrollView}>
                     <View style = {styles.view}>
                         <SliderQuestion   
                             question={TRANSPORTATION_INFO["questions"][0]}
@@ -147,7 +144,6 @@ class QuestionCardTransportation extends React.Component {
                         </AsafNextButton>
 
                     </View> 
-            // </ScrollView>
         )    
     }
 
@@ -155,53 +151,12 @@ class QuestionCardTransportation extends React.Component {
 
 
 const styles = StyleSheet.create({
-    text: {
-        marginVertical: 8,
-        color: 'white',
-        fontSize: 24,
-        fontWeight: '300'
-    },
-    buttonText: {
-        color: 'white'
-    },
     rowStyleView: {
         flexDirection: 'row',
-        //marginVertical: 20
     },
     view: {
         alignItems: 'center',
-    },
-    scrollView: {
-        backgroundColor: '#0B7310',
-        width: wp('100%'),
-        padding: 20,
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 50,
-
-    },
-    sliderText: {
-        color: 'white',
-        fontSize: 18,
-        fontWeight: '300'
-    },
-    slider: {
-        marginLeft: 4,
-        marginRight: 4,
-        width: wp('60%')
-    },
-    button: { // not being used 
-        backgroundColor: 'gray', 
-        marginBottom: 20,
-        width: wp('40%')
-    },
-    nextButton: {
-        backgroundColor: 'gray',
-        marginBottom: 80,
-        marginTop: 50,
-        width: wp('55%')
-    },
-
-    
+    },    
 })
 
 

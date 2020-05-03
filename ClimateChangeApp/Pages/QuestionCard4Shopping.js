@@ -7,7 +7,6 @@
 
 import React, { Component } from 'react';
 import {StyleSheet, View} from "react-native";
-import { ScrollView } from 'react-native-gesture-handler';
 import * as SecureStore from 'expo-secure-store';
 import { InputQuestion } from '../Components/InputQuestion';
 import { AsafNextButton } from "../Components/AsafNextButton";
@@ -58,7 +57,6 @@ class QuestionCardShopping extends React.Component {
 
     render() {
         return(
-            // <ScrollView style = {styles.scrollView}>
                 <View style = {styles.view}>
                     <InputQuestion 
                         questionLines={3}
@@ -83,7 +81,6 @@ class QuestionCardShopping extends React.Component {
                             Next
                     </AsafNextButton>
                 </View> 
-            // </ScrollView>
         )    
     }
 
@@ -91,32 +88,9 @@ class QuestionCardShopping extends React.Component {
 
 
 const styles = StyleSheet.create({
-    text: {
-        marginVertical: 8,
-        color: 'white',
-        fontSize: 24,
-        fontWeight: '300'
-    },
-    rowStyleView: {
-        flexDirection: 'row',
-        marginVertical: 20
-    },
     view: {
         alignItems: 'center',
-    },
-    scrollView: {
-        backgroundColor: '#0B7310',
-        width: wp('100%'),
-        padding: 20,
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 50,
-
-    },
-    nextButton: {
-        backgroundColor: 'gray',
-        marginVertical: 50,
-        width: wp('55%')
-    },
+    }
 })
 
 
