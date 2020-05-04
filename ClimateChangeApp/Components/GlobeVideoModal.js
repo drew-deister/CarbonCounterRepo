@@ -45,14 +45,14 @@ export default class GlobeVideoModal extends Component {
                     <TouchableOpacity
                         style={{
                             position: 'absolute',
-                            right: 10,
+                            right: 22,
                             top: 3,
                         }}
                         onPress={() => {
                             this.closeModal()}}>
                         <Image
                             style={[styles.modalBackIcon]}
-                            source={require('../assets/cancelButton2.png')} // update image
+                            source={require('../assets/cancelButton1.png')} // update image
                         /> 
                     </TouchableOpacity>
                     <Text style = {styles.text}>{this.state.name}</Text>
