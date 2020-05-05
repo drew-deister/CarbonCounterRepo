@@ -5,6 +5,7 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { AsafNextButton } from "../Components/AsafNextButton";
 import { widthPercentageToDP } from "react-native-responsive-screen";
+
 // import {Button, Text, Card, Icon} from 'react-native-elements';
 // import {
 //     widthPercentageToDP as wp,
@@ -25,7 +26,6 @@ export default class IntroPage extends Component {
           to the importance of global interconnectedness of human activity and
           the environment.
         </Text>
-
         <View style={styles.surroundingButton}>
           <AsafNextButton
             onPress={() => this.props.navigation.navigate("IntroPage3")}

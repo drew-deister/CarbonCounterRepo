@@ -9,6 +9,8 @@ import {
   Image,
   TouchableOpacity
 } from "react-native";
+import ChangeLogo from '../Components/ChangeLogo';
+
 // import { NextButton } from '../Components/NextButton';
 // import {Button, Text, Card, Icon} from 'react-native-elements';
 // import {
@@ -31,12 +33,17 @@ export default class IntroPage extends Component {
   render() {
     //const { navigate } = this.props.navigation;
     return (
-      <TouchableOpacity
-        style={styles.container}
-        onPress={() => this.props.navigation.navigate("IntroPage2")}
-      >
-        <Image style={styles.image} source={require("../assets/Logo.png")} />
-      </TouchableOpacity>
+      <View style={styles.container}>
+        <TouchableOpacity
+          style={styles.container}
+          onPress={() => this.props.navigation.navigate("IntroPage2")}
+        >
+          <Image style={styles.image} source={require("../assets/Logo.png")} />
+        </TouchableOpacity>
+        <View style={styles.container}>
+          <ChangeLogo />
+        </View>
+      </View>
     );
   }
 }
