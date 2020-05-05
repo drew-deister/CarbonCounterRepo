@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
   },
   pageTitle: {
     color: "#73A388", //green
+    // color: "red",
     fontSize: 23,
     height: 33,
     width: 224,

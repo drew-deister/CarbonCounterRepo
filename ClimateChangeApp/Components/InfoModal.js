@@ -1,15 +1,7 @@
 import Modal from "react-native-modalbox";
 import React, { Component, useState } from "react";
-import {
-  Text,
-  TouchableHighlight,
-  View,
-  Alert,
-  Image,
-  Dimensions,
-  Platform,
-} from "react-native";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { Text, Platform } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -19,7 +11,6 @@ export default class InfoModal extends Component {
   constructor(props) {
     super(props);
   }
-
   showInfoModal = () => {
     this.refs.myModal.open();
   };
@@ -32,7 +23,9 @@ export default class InfoModal extends Component {
         position="center"
         backdrop={true}
       >
-        <Text> shiffrin is a virgin</Text>
+        <View style={styles.textContainer}>
+          <Text style={styles.modalText}>{this.props.children} </Text>
+        </View>
       </Modal>
     );
   }
@@ -43,9 +36,20 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: Platform.OS === "ios" ? 30 : 0,
     shadowRadius: 10,
-    width: wp("70%"),
+    width: wp("80%"),
     height: hp("40%"),
-    backgroundColor: "#73A388",
+    backgroundColor: "#F6F8EF",
+  },
+  textContainer: {
+    width: "100%",
+    alignItems: "center",
+  },
+  modalText: {
+    // color: "#73A388",
+    color: "black",
+    fontSize: 23,
+    width: "100%",
+    textAlign: "left",
   },
 });
 
