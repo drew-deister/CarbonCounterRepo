@@ -9,13 +9,6 @@ import {
   listenOrientationChange, removeOrientationListener
 } from 'react-native-responsive-screen';
 
-const alps = 
-  {
-    latitude: 46.88,
-    longitude: 9.65,
-    latitudeDelta: 15,
-    longitudeDelta: 15,
-  }
 
 const alps = {
   latitude: 46.88,
