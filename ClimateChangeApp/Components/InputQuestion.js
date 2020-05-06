@@ -75,11 +75,11 @@ const styles = StyleSheet.create({
     //marginVertical: 8,
     flexDirection: 'column',
     alignItems: 'center',
-    marginBottom: 32,
+    marginVertical: 16,
   },
   questionInput: {
     backgroundColor: 'white',
-    width: wp('72%'),
+    width: wp('74%'),
     height: 40.5,
     //aspectRatio: 100 / 15,
     borderRadius: 20,

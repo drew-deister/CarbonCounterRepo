@@ -14,18 +14,25 @@
 import React, { Component } from 'react';
 import {StyleSheet, View} from "react-native";
 import {Text, Icon, Button, Slider} from 'react-native-elements';
-import { ScrollView } from 'react-native-gesture-handler';
 import { InputQuestion } from '../Components/InputQuestion';
 import * as SecureStore from 'expo-secure-store';
 import {diagonalScale} from '../Utilities/Scaling';
+import INFORMATION from '../Utilities/text.json'; // import JSON file
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
     listenOrientationChange, removeOrientationListener
   } from 'react-native-responsive-screen';
 import { SliderQuestion } from '../Components/SliderQuestion';
+import { AsafNextButton } from "../Components/AsafNextButton";
 
-class QuestionCard1 extends React.Component {
+
+
+const HOUSEHOLD_INFO = INFORMATION["carbonCounterScreens"]["household"];
+
+
+class QuestionCardHousing extends React.Component {
+
     constructor(props) {
         super(props);
         // this holds the state of the sub components 
@@ -71,42 +78,38 @@ class QuestionCard1 extends React.Component {
 
     // checks whether current inputs are valid
     checkValid() {
-        return ((this.state.zipCode.length == 5) && (this.state.sliderValue != 1)) 
+        return true;((this.state.zipCode.length == 5) && (this.state.sliderValue != 1)) 
     }
 
     render() {
         return(
-            // <View style = {styles.view}>
-            //     <ScrollView style = {styles.scrollView}>
-                    <View style = {styles.view}>
-                        <InputQuestion 
-                            keyboardType = {'numeric'}
-                            parentCallBack = {this.callbackFunction1} 
-                            question = {this.props.data.zipCode} 
-                            placeholder = {this.props.data.zipCodePlaceholder}/>
-                        <InputQuestion 
-                            keyboardType = {'numeric'}
-                            parentCallBack = {this.callbackFunction2} 
-                            question = {this.props.data.numPeople} 
-                            placeholder = {this.props.data.numPeoplePlaceholder}
-                            questionLines={2} />
-                        
-                        <SliderQuestion
-                        //width = {wp('80%')} 
-                        question={this.props.data.homeSize}
-                        max={3000} min={800} step={1}
-                        shouldDisplay={true}
-                        callback = {this.updateSliderState} />
-                        <Button
-                            icon={<Icon name="arrow-forward" color="white"/>}
-                            iconRight
-                            buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
-                            title='Next '
-                            onPress= {() => this.saveAndPush()}
-                        /> 
-                    </View>
-            //     </ScrollView>
-            // </View>
+            <View style = {styles.view}>
+                <InputQuestion 
+                    keyboardType = {'numeric'}
+                    parentCallBack = {this.callbackFunction1} 
+                    question = {HOUSEHOLD_INFO["questions"][0]} 
+                    placeholder = {HOUSEHOLD_INFO["placeholders"][0]}/>
+                <InputQuestion 
+                    keyboardType = {'numeric'}
+                    parentCallBack = {this.callbackFunction2} 
+                    question = {HOUSEHOLD_INFO["questions"][1]} 
+                    placeholder = {HOUSEHOLD_INFO["placeholders"][1]}
+                    questionLines={2} />
+                
+                <SliderQuestion
+                    //width = {wp('80%')} 
+                    question={HOUSEHOLD_INFO["questions"][2]}
+                    max={4000} min={600} step={1}
+                    shouldDisplay={true}
+                    callback = {this.updateSliderState} />
+
+                <AsafNextButton
+                    onPress={() => this.saveAndPush()}
+                    textStyle={{color: this.props.backgroundColor}}
+                    >
+                    Next
+                </AsafNextButton>
+            </View>
         )    
     }
 
@@ -114,22 +117,10 @@ class QuestionCard1 extends React.Component {
 
 
 const styles = StyleSheet.create({
-    text: {
-        marginVertical: 8,
-        color: 'white',
-        fontSize: 24,
-        fontWeight: '300'
-    },
     view: {
         alignItems: 'center'
-    },
-    scrollView: {
-        backgroundColor: '#0B7310',
-        width: wp('100%'),
-        padding: 20,
-        borderRadius: 50,
     }
 })
 
 
-export {QuestionCard1};
+export {QuestionCardHousing};

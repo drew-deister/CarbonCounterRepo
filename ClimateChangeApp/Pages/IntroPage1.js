@@ -17,6 +17,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { InfoButton } from "../Components/InfoButton";
+import ChangeLogo from '../Components/ChangeLogo';
+
 // import { NextButton } from '../Components/NextButton';
 // import {Button, Text, Card, Icon} from 'react-native-elements';
 // import {
@@ -26,16 +28,30 @@ import { InfoButton } from "../Components/InfoButton";
 // } from 'react-native-responsive-screen';
 
 export default class IntroPage extends Component {
+
+  // constructor(props) {
+  //   super(props);
+  //   this.props.navigation.setOptions
+  // }
+  static navigationOptions = {
+    title: 'new title'
+  }
+
   // "main method"
   render() {
-    const { navigate } = this.props.navigation;
+    //const { navigate } = this.props.navigation;
     return (
-      <TouchableOpacity
-        style={styles.container}
-        onPress={() => this.props.navigation.navigate("IntroPage2")}
-      >
-        <Image style={styles.image} source={require("../assets/Logo.png")} />
-      </TouchableOpacity>
+      <View style={styles.container}>
+        <TouchableOpacity
+          style={styles.container}
+          onPress={() => this.props.navigation.navigate("IntroPage2")}
+        >
+          <Image style={styles.image} source={require("../assets/Logo.png")} />
+        </TouchableOpacity>
+        <View style={styles.container}>
+          <ChangeLogo />
+        </View>
+      </View>
     );
   }
 }
@@ -46,8 +62,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#F6F8EF",
     justifyContent: "center",
     alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#707070",
+    // borderWidth: 1,
+    // borderColor: "#707070",
   },
   image: {
     backgroundColor: "transparent",

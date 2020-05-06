@@ -6,6 +6,7 @@
 import React, { Component } from 'react';
 import {ScrollView, Text, StyleSheet, View, Image} from "react-native";
 import PropTypes from 'prop-types';
+import { AsafNextButton } from "./AsafNextButton";
 
 
 
@@ -30,12 +31,14 @@ class SurveyCard extends React.Component {
     static propTypes = {
         title: PropTypes.string,
         imageSrc: PropTypes.string,
+        // nextScreen: PropTypes.string,
     }
     static defaultProps = {
         title: 'Household',
         imageName: 'Household',
         style: {},                      //used to change backgroundColor
         titleStyle: {},                 //used to change title text color
+        // nextScreen: 'Home',
     }
 
 
@@ -48,6 +51,11 @@ class SurveyCard extends React.Component {
                     <View>
                         {this.props.children}
                     </View>
+                    {/* <AsafNextButton
+                            onPress={() => this.props.navigation.push(this.props.nextScreen)}
+                            >
+                            Next
+                    </AsafNextButton> */}
 
                 </ScrollView>
             </View>
@@ -59,17 +67,18 @@ class SurveyCard extends React.Component {
 const styles = StyleSheet.create({
     safeView: {
         flex: 1,
+        shadowOpacity: .2
     },
     scrollViewStyle: {
         marginTop: 35,
         backgroundColor: '#FCCCC0',
         borderTopRightRadius: 40,
-        borderTopLeftRadius: 40
+        borderTopLeftRadius: 40,
     },
     image: {
         marginTop: 32,
-        height: 170,
-        width: 280,
+        height: 180,
+        width: 295,
     },
     containerStyle: {
         flexGrow: 1,
@@ -77,18 +86,19 @@ const styles = StyleSheet.create({
         padding: 0,
         //justifyContent: 'space-between',
         alignItems: 'center',
-        alignContent: 'center'
+        alignContent: 'center',
+        //shadowOpacity: .1,
     },
     pageTitle: {
-        marginTop: 20,
+        marginTop: 15,
         color: 'white',
         fontSize: 42,
-        height: 33,
-        width: 224,
+
+        //width: 224,
         fontWeight: '600',
-        height: 80,
-        width: 282,
-        textAlign: 'center'
+        height: 60,
+        width: 280,
+        textAlign: 'center',
     }
 });
 

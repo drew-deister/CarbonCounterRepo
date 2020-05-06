@@ -1,11 +1,5 @@
 // Asaf
 
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-  listenOrientationChange,
-  removeOrientationListener,
-} from "react-native-responsive-screen";
 import React, { Component } from "react";
 //import HomeScreenActivityCard from '../Components/HomeScreenActivityCard';
 import {
@@ -19,8 +13,17 @@ import {
 import { AsafNextButton } from "../Components/AsafNextButton";
 import InfoModal from "../Components/InfoModal";
 import { Left } from "native-base";
+import INFORMATION from '../Utilities/text.json'; // import JSON file
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+  listenOrientationChange, removeOrientationListener
+} from 'react-native-responsive-screen';
+
+const INFO = INFORMATION["introScreens"][1];
 
 export default class IntroPage extends Component {
+
   // "main method"
 
   // constructor(props) {
@@ -67,8 +70,34 @@ export default class IntroPage extends Component {
         >
           Asaf Is a virgin
         </InfoModal>
+
+    {/* //const { navigate } = this.props.navigation;
+    return (
+      <View style={styles.container}>
+          <View style={{
+                    flex: 295,
+                    justifyContent: "flex-end",
+                    }}>
+              <Text style={styles.topText}>{INFO["title"]}</Text>
+          </View>
+
+          <View style={{flex: 270, justifyContent: "center"}}>
+              <Text style={styles.bottomText}>
+                  {INFO["description"]}
+              </Text>
+          </View>
+      
+
+          <View style={{flex: 200, justifyContent: "center"}}>
+              <AsafNextButton
+                onPress={() => this.props.navigation.navigate("IntroPage3")}
+              >
+                  Next
+              </AsafNextButton>
+          </View> */}
       </View>
     );
+    
   }
 }
 
@@ -78,14 +107,14 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
-  topText: {
-    marginTop: 100,
-    fontSize: 50,
-    fontWeight: "bold",
-    color: "#73A388",
-    textAlign: "left",
-    alignContent: "center",
-  },
+  // topText: {
+  //   marginTop: 100,
+  //   fontSize: 50,
+  //   fontWeight: "bold",
+  //   color: "#73A388",
+  //   textAlign: "left",
+  //   alignContent: "center",
+  // },
   modalButtonContainer: {
     width: "20%",
     height: "10%",
@@ -97,11 +126,30 @@ const styles = StyleSheet.create({
     height: 70,
     width: 70,
   },
+  // bottomText: {
+  //   color: "#73A388",
+  //   fontSize: 23,
+  //   alignItems: "center",
+  //   textAlign: "left",
+  // },
+  container: {
+    flex: 1,
+    flexDirection: "column",
+    backgroundColor: "#F6F8EF",
+
+    alignItems: "center"
+  },
+  topText: {
+    color: "#73A388",
+    fontSize: 34,
+    paddingBottom: 20,
+    fontWeight: "bold",
+  },
   bottomText: {
     color: "#73A388",
-    fontSize: 23,
-    alignItems: "center",
     textAlign: "left",
+    fontWeight: "600",
+    fontSize: 20,
+    width: wp("82%") //300,
   },
-  buttonDesign: {},
 });
