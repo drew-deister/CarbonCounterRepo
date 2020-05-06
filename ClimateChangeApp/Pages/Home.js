@@ -1,35 +1,34 @@
-import React, { Component } from 'react';
-import HomeScreenActivityCard from '../Components/HomeScreenActivityCard';
-import {ScrollView, View, StyleSheet, Image} from 'react-native';
-import {Button, Text, Card, Icon} from 'react-native-elements';
+import React, { Component } from "react";
+import HomeScreenActivityCard from "../Components/HomeScreenActivityCard";
+import { ScrollView, View, StyleSheet, Image } from "react-native";
+import { Button, Text, Card, Icon } from "react-native-elements";
 import {
-    widthPercentageToDP as wp,
-    heightPercentageToDP as hp,
-    listenOrientationChange, removeOrientationListener
-} from 'react-native-responsive-screen';
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+  listenOrientationChange,
+  removeOrientationListener,
+} from "react-native-responsive-screen";
 //import { black } from 'react-native-paper/lib/typescript/src/styles/colors';
 
 function LogoTitle() {
-    return (
-      <Image
-        style={{ width: 50, height: 50 }}
-        source={require('../assets/Logo.png')}
-      />
-    );
-  }
-
-
+  return (
+    <Image
+      style={{ width: 50, height: 50 }}
+      source={require("../assets/Logo.png")}
+    />
+  );
+}
 
 export default class Home extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
-    static navigationOptions = {
-        title: ' ',
-        headerTitle: LogoTitle
-    };
+  static navigationOptions = {
+    title: " ",
+    headerTitle: LogoTitle,
+  };
 
     // "main method"
     render() {
@@ -47,7 +46,7 @@ export default class Home extends Component {
                     
                     <HomeScreenActivityCard 
                         title = {"Carbon Counter"}      
-                        navigateToActivity = 'Household'//'Question1'
+                        navigateToActivity = 'CarbonCounter'//'Question1'
                         navigation = {this.props.navigation}
                         style = {{backgroundColor: '#FCCCC0'}}
                         />
@@ -74,14 +73,13 @@ export default class Home extends Component {
     }
 }
 
-
 const styles = StyleSheet.create({
     safeView: {
         flex: 1,
     },
     imageContainer: {
-        height: 143,
-        width: 340,
+        height: wp("38.85%"), // ratio of height : width should be 
+        width: wp("92%"),     //       wp("38%") : wp("90%")
     },
     containerStyle: {
         flexGrow: 1,

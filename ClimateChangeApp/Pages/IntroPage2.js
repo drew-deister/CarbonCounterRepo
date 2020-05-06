@@ -2,77 +2,154 @@
 
 import React, { Component } from "react";
 //import HomeScreenActivityCard from '../Components/HomeScreenActivityCard';
-import { View, Text, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  Button,
+} from "react-native";
 import { AsafNextButton } from "../Components/AsafNextButton";
-import { widthPercentageToDP } from "react-native-responsive-screen";
-// import {Button, Text, Card, Icon} from 'react-native-elements';
-// import {
-//     widthPercentageToDP as wp,
-//     heightPercentageToDP as hp,
-//     listenOrientationChange, removeOrientationListener
-// } from 'react-native-responsive-screen';
+import InfoModal from "../Components/InfoModal";
+import { Left } from "native-base";
+import INFORMATION from '../Utilities/text.json'; // import JSON file
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+  listenOrientationChange, removeOrientationListener
+} from 'react-native-responsive-screen';
+
+const INFO = INFORMATION["introScreens"][1];
 
 export default class IntroPage extends Component {
+
   // "main method"
+
+  // constructor(props) {
+  //   super(props);
+  //   this.onPressInfoButton = this.onPressInfoButton.bind(this);
+  // }
+
+  // onPressInfoButton() {
+  //   this.refs.infoModal.showInfoModal();
+  // }
+
   render() {
-    const { navigate } = this.props.navigation;
+    // return (
+    //   <View style={styles.mainContainer}>
+    //     <Text style={styles.topText}>What is CarbonXD?</Text>
+
+    //     <TouchableOpacity
+    //       style={styles.modalButtonContainer}
+    //       onPress={() => this.refs.infoModal.showInfoModal()}
+    //     >
+    //       <Image
+    //         style={styles.infoImage}
+    //         source={require("../assets/informationbutton.png")}
+    //       />
+    //     </TouchableOpacity>
+
+    //     <Text style={styles.bottomText}>
+    //       CarbonXD is an educational app created to bring awareness to the
+    //       importance of global internconnectedness of human activity and the
+    //       environment.
+    //     </Text>
+
+    //     <AsafNextButton
+    //       onPress={() => this.props.navigation.navigate("IntroPage3")}
+    //       style={styles.buttonDesign}
+    //     >
+    //       Next
+    //     </AsafNextButton>
+
+    //     <InfoModal
+    //       ref={"infoModal"}
+    //       parentObject={this}
+    //       style={StyleSheet.modalText}
+    //     >
+    //       Asaf Is a virgin
+    //     </InfoModal>
+
+    //const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Text style={styles.topText}>What is Climate Cultivation?</Text>
+          <View style={{
+                    flex: 295,
+                    justifyContent: "flex-end",
+                    }}>
+              <Text style={styles.topText}>{INFO["title"]}</Text>
+          </View>
 
-        <Text style={styles.bottonText}>
-          Climate Cultivation is an educational app created to bring awareness
-          to the importance of global interconnectedness of human activity and
-          the environment.
-        </Text>
+          <View style={{flex: 270, justifyContent: "center"}}>
+              <Text style={styles.bottomText}>
+                  {INFO["description"]}
+              </Text>
+          </View>
+      
 
-        <View style={styles.surroundingButton}>
-          <AsafNextButton
-            onPress={() => this.props.navigation.navigate("IntroPage3")}
-            style={styles.buttonDesign}
-          >
-            Next
-          </AsafNextButton>
-        </View>
+          <View style={{flex: 200, justifyContent: "center"}}>
+              <AsafNextButton
+                onPress={() => this.props.navigation.navigate("IntroPage3")}
+              >
+                  Next
+              </AsafNextButton>
+          </View>
       </View>
     );
+    
   }
 }
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    backgroundColor: "#F6F8EF",
+    width: "100%",
+    height: "100%",
+  },
+  // topText: {
+  //   marginTop: 100,
+  //   fontSize: 50,
+  //   fontWeight: "bold",
+  //   color: "#73A388",
+  //   textAlign: "left",
+  //   alignContent: "center",
+  // },
+  modalButtonContainer: {
+    width: "20%",
+    height: "10%",
+    backgroundColor: "yellow",
+    alignItems: "center",
+    margin: "15%",
+  },
+  infoImage: {
+    height: 70,
+    width: 70,
+  },
+  // bottomText: {
+  //   color: "#73A388",
+  //   fontSize: 23,
+  //   alignItems: "center",
+  //   textAlign: "left",
+  // },
   container: {
     flex: 1,
     flexDirection: "column",
-    padding: 15,
-    paddingTop: 150,
-    borderWidth: 1,
     backgroundColor: "#F6F8EF",
-    borderColor: "#707070",
-    justifyContent: "space-around",
+
     alignItems: "center"
-  },
-  buttonDesign: {
-    color: "#73A388",
-    fontSize: 23,
-    fontWeight: "600",
-    margin: 30
   },
   topText: {
     color: "#73A388",
-    fontSize: 50,
-    fontWeight: "600",
-    width: 300,
-    height: 200
+    fontSize: 34,
+    paddingBottom: 20,
+    fontWeight: "bold",
   },
-  bottonText: {
+  bottomText: {
     color: "#73A388",
-    alignItems: "center",
+    textAlign: "left",
     fontWeight: "600",
-    fontSize: 27,
-    width: 300,
-    height: 230
+    fontSize: 20,
+    width: wp("82%") //300,
   },
-  surroundingButton: {
-    paddingTop: 60
-  }
 });

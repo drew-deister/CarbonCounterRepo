@@ -1,25 +1,31 @@
 // Asaf's Button
 
 import React from "react";
-import { Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import {
   widthPercentageToDP as wp,
-  heightPercentageToDP as hp
+  heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
-const AsafNextButton = props => {
+const AsafNextButton = (props) => {
   return (
-    <TouchableOpacity
-      onPress={props.onPress}
-      style={[styles.buttonBody, props.style]}
-    >
-      <Text style={styles.buttonText}>{props.children}</Text>
-    </TouchableOpacity>
+    <View style={[styles.shadow, props.viewStyle]}>
+      <TouchableOpacity
+        onPress={props.onPress}
+        style={[styles.buttonBody, props.style]}
+      >
+        <Text style={[styles.buttonText, props.textStyle]}>{props.children}</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
 // this is good style
 const styles = StyleSheet.create({
+  shadow: {
+    shadowOpacity: .2,
+    shadowOffset: {width: 0, height: 1},
+  },
   buttonBody: {
     backgroundColor: "#FFFFFF",
     borderRadius: 50,
@@ -28,13 +34,17 @@ const styles = StyleSheet.create({
     //margin around words
     borderBottomWidth: 5,
     borderColor: "white",
-    borderTopWidth: 5
+    borderTopWidth: 5,
+    marginTop: 10,
+    marginBottom: 30,
+    //shadowOpacity: 1,
   },
   buttonText: {
     color: "#73A388",
-    fontSize: 23,
+    fontSize: 20,
     fontWeight: "600",
-    textAlign: "center"
+    textAlign: "center",
+    textAlignVertical: "center"
   }
 });
 

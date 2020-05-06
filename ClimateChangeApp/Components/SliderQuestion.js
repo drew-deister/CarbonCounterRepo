@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
         flexDirection: 'column',
-        marginBottom: 32,
+        marginVertical: 16,
     },
     sliderContainer: {
         marginTop: 5,
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     },
     sliderLabelContainer: {
         flexDirection: 'row',
-        width: wp('80%'),
+        width: wp('74%'),
         justifyContent: 'space-between'
     },
     sliderLabel: {

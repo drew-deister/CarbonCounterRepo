@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         width: 270,
         aspectRatio: 100/ 11,
         color: 'white',
-        fontSize: 19,
+        fontSize: 18,
         fontWeight: '600',
         textAlignVertical: 'center',
         

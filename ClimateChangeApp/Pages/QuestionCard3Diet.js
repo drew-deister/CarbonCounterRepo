@@ -7,10 +7,11 @@
 
 import React, { Component } from 'react';
 import {StyleSheet, View} from "react-native";
-import { ScrollView } from 'react-native-gesture-handler';
 import {Text, Icon, Button, Slider} from 'react-native-elements';
 import * as SecureStore from 'expo-secure-store';
 import { InputQuestion } from '../Components/InputQuestion';
+import { AsafNextButton } from "../Components/AsafNextButton";
+import INFORMATION from '../Utilities/text.json'; // import JSON file
 
 import {
     widthPercentageToDP as wp,
@@ -18,8 +19,9 @@ import {
     listenOrientationChange, removeOrientationListener
   } from 'react-native-responsive-screen';
 
+const DIET_INFO = INFORMATION["carbonCounterScreens"]["diet"];
 
-class QuestionCard3 extends React.Component {
+class QuestionCardDiet extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
@@ -50,36 +52,38 @@ class QuestionCard3 extends React.Component {
     }
 
     checkValid() { // do some sort of error checking here
-        return (this.state.beefServings != -1 && this.state.beefServings != -1)
+        return true;//(this.state.beefServings != -1 && this.state.beefServings != -1)
     }
 
 
     render() {
         return(
-            // <ScrollView style = {styles.scrollView}>
+
                 <View style = {styles.view}>
                     <InputQuestion 
                         questionStyle={{color: this.props.secondaryColor}}
                         questionLines={2}
                         keyboardType = {'numeric'}
                         parentCallBack = {this.callbackFunction1}                             
-                        question = {this.props.data.beefServings} 
-                        placeholder = {this.props.data.beefServingsPlaceholder}/>
+                        question = {DIET_INFO["questions"][0]} 
+                        placeholder = {DIET_INFO["placeholders"][0]}/>
                     <InputQuestion 
                         questionStyle={{color: this.props.secondaryColor}}
-                        questionLines={2}
+                        questionLines={3}
                         keyboardType = {'numeric'}
                         parentCallBack = {this.callbackFunction2}                             
-                        question = {this.props.data.dairyServings} 
-                        placeholder = {this.props.data.dairyServingsPlaceholder}/>
-                    <Button
-                        icon={<Icon name="arrow-forward" color="white"/>}
-                        iconRight
-                        buttonStyle={styles.nextButton}// update this to move lower 
-                        title='Next '
-                        onPress= {() => this.saveAndPush()}/>
+                        question = {DIET_INFO["questions"][1]} 
+                        placeholder = {DIET_INFO["placeholders"][1]}/>
+
+                    <AsafNextButton
+                        onPress={() => this.saveAndPush()}
+                        viewStyle={{marginTop: 16}}
+                        textStyle={{color: this.props.secondaryColor}} >
+                            Next
+                    </AsafNextButton>
+
                 </View> 
-            // </ScrollView>
+
         )    
     }
 
@@ -87,40 +91,10 @@ class QuestionCard3 extends React.Component {
 
 
 const styles = StyleSheet.create({
-    text: {
-        marginVertical: 8,
-        color: 'white',
-        fontSize: 24,
-        fontWeight: '300'
-    },
-    rowStyleView: {
-        flexDirection: 'row',
-        marginVertical: 20
-    },
     view: {
         alignItems: 'center',
-    },
-    scrollView: {
-        backgroundColor: '#0B7310',
-        width: wp('100%'),
-        padding: 20,
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 50,
-
-    },
-    button: { 
-        backgroundColor: 'gray', // change this 
-        marginBottom: 20,
-        width: wp('40%')
-    },
-    nextButton: {
-        backgroundColor: 'gray',
-        marginVertical: 50,
-        width: wp('55%')
-    },
-
-    
+    } 
 })
 
 
-export {QuestionCard3};
+export {QuestionCardDiet};
