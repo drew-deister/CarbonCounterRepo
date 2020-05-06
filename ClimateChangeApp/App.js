@@ -6,7 +6,6 @@ import {StackViewStyleInterpolator} from 'react-navigation-stack'
 import Home from './Pages/Home';
 import Results from './Pages/Results';
 import GeoVideo1 from './Pages/GeoVideo1';
-import GeoVideo2 from './Pages/GeoVideo2';
 import IntroPage1 from "./Pages/IntroPage1";
 import IntroPage2 from "./Pages/IntroPage2";
 import IntroPage3 from "./Pages/IntroPage3";
@@ -15,6 +14,7 @@ import SurveyHousehold from './Pages/SurveyHousehold';
 import SurveyTransportation from './Pages/SurveyTransportation';
 import SurveyDiet from './Pages/SurveyDiet';
 import SurveyShopping from './Pages/SurveyShopping';
+import MapIntroPage from './Pages/MapIntroPage';
 
 // shirom code
 global.theme = {
@@ -82,6 +82,7 @@ const AppNavigator = createStackNavigator(
     Diet: {screen: SurveyDiet},
     Shopping: {screen: SurveyShopping},
     Results: { screen: Results },
+    MapIntroPage: {screen: MapIntroPage},
     GeoVideo1: { screen: GeoVideo1 },
     IntroPage1: { screen: IntroPage1 },
     IntroPage2: { screen: IntroPage2 },

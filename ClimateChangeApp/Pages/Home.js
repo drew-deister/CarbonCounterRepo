@@ -54,7 +54,7 @@ export default class Home extends Component {
                         
                     <HomeScreenActivityCard
                         title = {"WePlanet"}
-                        navigateToActivity = 'GeoVideo1'
+                        navigateToActivity = 'MapIntroPage'
                         navigation = {this.props.navigation}
                         style = {{backgroundColor: '#73A388'}}
                         />

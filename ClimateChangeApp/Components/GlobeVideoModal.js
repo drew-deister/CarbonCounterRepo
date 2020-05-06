@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {
     AppRegistry, Flatlist, StyleSheet, Text, View, Image, Alert,
-    Platform, TouchableHighlight, Dimensions, TextInput
+    Platform, TouchableOpacity, Dimensions, TextInput
 } from 'react-native';
 import Modal from 'react-native-modalbox';
 import Button from 'react-native-button';
@@ -28,6 +28,10 @@ export default class GlobeVideoModal extends Component {
         this.refs.myModal.open();
     }
 
+    closeModal() {
+        this.refs.myModal.close()
+    }
+
     render() {
         const { width } = Dimensions.get('window');
         return (
@@ -38,6 +42,19 @@ export default class GlobeVideoModal extends Component {
                 backdrop={true}
             >
                 <View style={styles.MainContainer}>
+                    <TouchableOpacity
+                        style={{
+                            position: 'absolute',
+                            right: 22,
+                            top: 3,
+                        }}
+                        onPress={() => {
+                            this.closeModal()}}>
+                        <Image
+                            style={[styles.modalBackIcon]}
+                            source={require('../assets/cancelButton1.png')} // update image
+                        /> 
+                    </TouchableOpacity>
                     <Text style = {styles.text}>{this.state.name}</Text>
                     <Video
                     source={{ uri: this.state.url }}
@@ -57,11 +74,16 @@ export default class GlobeVideoModal extends Component {
 }
 
 const styles = StyleSheet.create({
+    
+    topView: {
+        width: '100%',
+        flexDirection: 'row',
+        backgroundColor: 'blue'
+    },
     text: {
         color: "white",
         fontSize: 20,
         fontWeight: "200",
-        
     }, 
     MainContainer: {
         flexDirection: "column",

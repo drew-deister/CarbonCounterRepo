@@ -5,7 +5,7 @@
 // https://firebase.google.com/docs/storage/web/download-files
 // https://www.youtube.com/watch?v=_GOI7h9ojr8
 import React, { Component, useState } from 'react';
-import {Image, Dimensions, StyleSheet, View, WebView} from "react-native";
+import {Image, Dimensions, StyleSheet, View, TouchableOpacity} from "react-native";
 import MapView, {Callout, Marker} from 'react-native-maps';
 import {Button, Text, Card, Icon} from 'react-native-elements';
 import GlobeVideoModal from '../Components/GlobeVideoModal'; 
@@ -42,6 +42,7 @@ class GeoVideo1 extends React.Component {
       super(props);
       this.state = {
         location: alps,
+        hasMarkerBeenPressed: false,
         markersList: [],
         //locationsSeen: []
       }
@@ -79,6 +80,7 @@ class GeoVideo1 extends React.Component {
 
     // retrieve download url and display in modal
     _onPressVideo(name, videoFileName) { 
+      this.setState({hasMarkerBeenPressed: true})
       var storageRef = firebase.storage().ref().child('CarbonXP_Storage/' + name);
       var videoRef = storageRef.child(videoFileName);
       videoRef.getDownloadURL().then((url) => {
@@ -91,7 +93,6 @@ class GeoVideo1 extends React.Component {
     render () {
       return(
         <View style={styles.mainContainer}>
-          <Text>Zoom to a region of the world you are curious about</Text>
           <View style={styles.mapContainer}>
             <MapView 
               style={styles.mapStyle}
@@ -111,6 +112,11 @@ class GeoVideo1 extends React.Component {
                     </Marker>
               ))}
               </MapView>
+              {
+                !(this.state.hasMarkerBeenPressed)
+                ? <Text style={styles.overlay}>Tap on a marker to hear about a part of the world you are curious about!</Text>
+                : null
+              }
           </View>
           <GlobeVideoModal ref={'globevideomodal'} parentObject = {this}> 
           </GlobeVideoModal>
@@ -160,6 +166,15 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width, // 320
     height: Dimensions.get('window').height - 25, // 450
   }, 
+  overlay: {
+    position: 'absolute',
+    top: 50,
+    color: 'white',
+    fontSize: 18,
+    fontWeight: "600",
+    padding: 5,
+    textAlign: 'center'
+  },
 });
 
 
