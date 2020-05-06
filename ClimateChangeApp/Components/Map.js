@@ -1,7 +1,6 @@
 import React from 'react';
 import MapView, { Marker, Callout } from 'react-native-maps';
 import {StyleSheet, View} from "react-native";
-import { QuestionCard1 } from '../Pages/QuestionCard1';
 import GeoVideo2 from '../Pages/GeoVideo2';
 import {
   widthPercentageToDP as wp,
