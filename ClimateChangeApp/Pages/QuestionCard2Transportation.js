@@ -8,12 +8,11 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, TouchableHighlight} from "react-native";
 import {Icon, Button, Slider, Text} from 'react-native-elements';
-import { ScrollView } from 'react-native-gesture-handler';
-import {diagonalScale} from '../Utilities/Scaling';
 import {SliderQuestion} from '../Components/SliderQuestion';
 import { AsafNextButton } from "../Components/AsafNextButton";
 import {MCQuestion} from '../Components/MCQuestion'
 import * as SecureStore from 'expo-secure-store';
+import INFORMATION from '../Utilities/text.json'; // import JSON file
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
@@ -21,7 +20,10 @@ import {
   } from 'react-native-responsive-screen';
 
 
-class QuestionCard2 extends React.Component {
+const TRANSPORTATION_INFO = INFORMATION["carbonCounterScreens"]["transportation"];
+
+
+class QuestionCardTransportation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -67,39 +69,24 @@ class QuestionCard2 extends React.Component {
 
     checkValid() {
         return (this.state.numMiles != 0)
-    }
-
-
-    updateButton(index, mode) {
-        if (this.state.color[index] == 'red') {
-            this.state.color[index] = 'blue'
-        } else {
-            this.state.color[index] = 'red'
-        }
-        for (let i = 0; i < 5; i++) { // unselect the other
-            if (this.state.color[i] == 'blue' && i != index) { // don't change the one you just updated
-                this.state.color[i] = 'red'
-            }
-        }
-        this.setState({color: this.state.color, mode: mode})
-    }
-
-
+    } 
 
     render() {
         return(
-            // <ScrollView style = {styles.scrollView}>
                     <View style = {styles.view}>
-                        <SliderQuestion
-                            question={this.props.data.numMiles}
-                            questionLines={2}
+                        <SliderQuestion   
+                            question={TRANSPORTATION_INFO["questions"][0]}
+                            questionLines={3}
+                            questionStyle={{fontSize: 18}}
                             secondaryColor='#F0F5DF'
                             //max = {100} min = {0} step = {1}      //these are now default props
                             shouldDisplay = {true}
                             callback = {this.updateSliderState1}
                         />
 
-                        <View style = {styles.rowStyleView}>
+                        {/* LUCAS       -       Leah had us delete this question. 
+                                                Once you see this, if you agree, delete the following commented out code*/ }
+                        {/* <View style = {styles.rowStyleView}>
                             <SliderQuestion
                                 question={this.props.data.greenAmount}
                                 questionLines={2}
@@ -110,48 +97,42 @@ class QuestionCard2 extends React.Component {
                                 minLabel="no other mode of transport"
                                 maxLabel="about half my travel is greener"
                             />
-                        </View>
+                        </View> */}
 
+
+                        {/* FIXME       -------------------------------------/*
+                                    -   Problem: Some of the answer options
+                                        don't fit well on the screens
+                                    -   We need to ask Leah if its possible to
+                                        shorten the MCOptions (the answers to
+                                        he transportation question)
+                                    -   Alternatively, we could add an "info"
+                                        button to a few of the answers
+                                        */
+                                        }
                         <MCQuestion
-                            question={this.props.data.transportationMode}
+                            question={TRANSPORTATION_INFO["questions"][1]} 
                             questionLines={2}
+                            questionStyle={{fontSize: 18}}
+                            answerOptions={TRANSPORTATION_INFO["MCOptions"]}
+                            answerStyle={[{}, {fontSize: 14}, {fontSize: 12}, 
+                                {}, {fontSize: 16}, {}, ]}
                             callback={this.updateMCState}
                             secondaryColor='rgba(252, 205, 193, .85)'
                         ></MCQuestion>
 
-                        {/* <Text style = {styles.text}>{this.props.data.transportationMode}</Text>
-                        <TouchableHighlight style = {{backgroundColor: this.state.color[0], width: wp('40%'), marginBottom: 20, alignItems: 'center', }}
-                            onPress = {() => this.updateButton(0, 'Car SUV')} >
-                            <Text style={styles.buttonText}>Hello</Text>
-                        </TouchableHighlight>
-                        <TouchableHighlight style = {{backgroundColor: this.state.color[1], width: wp('40%'), marginBottom: 20, alignItems: 'center'}}
-                            onPress = {() => this.updateButton(1, 'Sedan')} >
-                            <Text style={styles.buttonText}>Hello</Text>
-                        </TouchableHighlight>
-                        <TouchableHighlight style = {{backgroundColor: this.state.color[2], width: wp('40%'), marginBottom: 20, alignItems: 'center'}}
-                            onPress = {() => this.updateButton(2, 'Truck SUV')} >
-                            <Text style={styles.buttonText}>Hello</Text>
-                        </TouchableHighlight>
-                        <TouchableHighlight style = {{backgroundColor: this.state.color[3], width: wp('40%'), marginBottom: 20, alignItems: 'center'}}
-                            onPress = {() => this.updateButton(3, 'Minivan')} >
-                            <Text style={styles.buttonText}>Hello</Text>
-                        </TouchableHighlight>
-                        <TouchableHighlight style = {{backgroundColor: this.state.color[4], width: wp('40%'), marginBottom: 20, alignItems: 'center'}}
-                            onPress = {() => this.updateButton(4, 'Pickup Truck')} >
-                            <Text style={styles.buttonText}>Hello</Text>
-                        </TouchableHighlight> */}
-
 
                         <View style = {styles.rowStyleView}>
                             <SliderQuestion
-                                question={this.props.data.summerChange}
+                                question={TRANSPORTATION_INFO["questions"][2]}
                                 questionLines={3}
+                                questionStyle={{fontSize: 18}}
                                 max = {100} min = {1} step = {1}
                                 shouldDisplay = {false}
                                 callback = {this.updateSliderState3}
                                 secondaryColor='#F0F5DF'
-                                minLabel="Travel less"
-                                maxLabel="Travel more"
+                                minLabel={TRANSPORTATION_INFO["sliderMin"][2]}
+                                maxLabel={TRANSPORTATION_INFO["sliderMax"][2]}
                             />
                         </View>
 
@@ -161,63 +142,20 @@ class QuestionCard2 extends React.Component {
                             >
                             Next
                         </AsafNextButton>
-                    </View>
-            // </ScrollView>
-        )
+                    </View> 
+        )    
     }
-
 }
 
 
 const styles = StyleSheet.create({
-    text: {
-        marginVertical: 8,
-        color: 'white',
-        fontSize: 24,
-        fontWeight: '300'
-    },
-    buttonText: {
-        color: 'white'
-    },
     rowStyleView: {
         flexDirection: 'row',
-        marginVertical: 20
     },
     view: {
         alignItems: 'center',
-    },
-    scrollView: {
-        backgroundColor: '#0B7310',
-        width: wp('100%'),
-        padding: 20,
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 50,
-
-    },
-    sliderText: {
-        color: 'white',
-        fontSize: 18,
-        fontWeight: '300'
-    },
-    slider: {
-        marginLeft: 4,
-        marginRight: 4,
-        width: wp('60%')
-    },
-    button: { // not being used
-        backgroundColor: 'gray',
-        marginBottom: 20,
-        width: wp('40%')
-    },
-    nextButton: {
-        backgroundColor: 'gray',
-        marginBottom: 80,
-        marginTop: 50,
-        width: wp('55%')
-    },
-
-
+    },    
 })
 
 
-export {QuestionCard2};
+export {QuestionCardTransportation};

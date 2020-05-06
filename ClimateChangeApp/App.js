@@ -10,12 +10,11 @@ import GeoVideo2 from './Pages/GeoVideo2';
 import IntroPage1 from "./Pages/IntroPage1";
 import IntroPage2 from "./Pages/IntroPage2";
 import IntroPage3 from "./Pages/IntroPage3";
-import TempPage from './Pages/TemporarySurveyPage';
-import SurveyHousehold from './Pages/SurveyHousehold';
-import SurveyTransportation from './Pages/SurveyTransportation';
-import SurveyDiet from './Pages/SurveyDiet';
-import SurveyShopping from './Pages/SurveyShopping';
-
+import SurveyHousehold from './Pages/Survey1Household';
+import SurveyTransportation from './Pages/Survey2Transportation';
+import SurveyDiet from './Pages/Survey3Diet';
+import SurveyShopping from './Pages/Survey4Shopping';
+import CarbonCounterIntroPage from './Pages/CarbonCounterIntro';
 
 // shirom code
 global.theme = {
@@ -77,7 +76,7 @@ const AppNavigator = createStackNavigator(
   {
     // road map for the different parts of our navigation
     Home: { screen: Home, },
-    TempPage: {screen: TempPage},
+    CarbonCounter: {screen: CarbonCounterIntroPage},
     Household: {screen: SurveyHousehold},
     Transportation: {screen: SurveyTransportation},
     Diet: {screen: SurveyDiet},
@@ -100,7 +99,8 @@ const AppNavigator = createStackNavigator(
       // these will be augmented by the navigation options of the respective screens
       // https://reactnavigation.org/docs/en/headers.html
       headerStyle: {
-        backgroundColor: "white"
+        backgroundColor: "white",
+        borderBottomWidth: 0,
       },
       headerBackTitle: " ",
       headerTitle: LogoTitle,

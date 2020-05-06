@@ -7,19 +7,21 @@
 
 import React, { Component } from 'react';
 import {StyleSheet, View} from "react-native";
-import { ScrollView } from 'react-native-gesture-handler';
 import * as SecureStore from 'expo-secure-store';
 import { InputQuestion } from '../Components/InputQuestion';
 import { AsafNextButton } from "../Components/AsafNextButton";
 import {Text, Icon, Button, Slider} from 'react-native-elements';
+import INFORMATION from '../Utilities/text.json'; // import JSON file
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
     listenOrientationChange, removeOrientationListener
   } from 'react-native-responsive-screen';
 
+const SHOPPING_INFO = INFORMATION["carbonCounterScreens"]["shopping"];
 
-class QuestionCard4 extends React.Component {
+
+class QuestionCardShopping extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
@@ -55,34 +57,30 @@ class QuestionCard4 extends React.Component {
 
     render() {
         return(
-            // <ScrollView style = {styles.scrollView}>
                 <View style = {styles.view}>
                     <InputQuestion 
-                        questionLines={2}
+                        questionLines={3}
                         keyboardType = {'numeric'}
                         parentCallBack = {this.callbackFunction1}                             
-                        question = {this.props.data.shoppingFrequency} 
-                        placeholder = {this.props.data.shoppingFrequencyPlaceholder}/>
-                    <InputQuestion 
+                        question = {SHOPPING_INFO["questions"][0]} 
+                        placeholder = {SHOPPING_INFO["placeholders"][0]}/>
+
+                    {/* LUCAS       -       Leah had us delete this question. 
+                                            Once you see this, if you agree, delete the following commented out code*/ } 
+                    {/* <InputQuestion 
                         questionLines={2}
                         keyboardType = {'numeric'}
                         parentCallBack = {this.callbackFunction2}                             
                         question = {this.props.data.articlesPerShop} 
-                        placeholder = {this.props.data.articlesPerShopPlaceholder}/>
+                        placeholder = {this.props.data.articlesPerShopPlaceholder}/> */}
 
                     <AsafNextButton
                         onPress={() => this.saveAndPush()}
+                        viewStyle={{marginTop: 16}}
                         textStyle={{color: this.props.backgroundColor}} >
                             Next
                     </AsafNextButton>
-                    {/* <Button
-                        icon={<Icon name="arrow-forward" color="white"/>}
-                        iconRight
-                        buttonStyle={styles.nextButton}// update this to move lower 
-                        title='Results '
-                        onPress= {() => this.saveAndPush()}/> */}
                 </View> 
-            // </ScrollView>
         )    
     }
 
@@ -90,33 +88,10 @@ class QuestionCard4 extends React.Component {
 
 
 const styles = StyleSheet.create({
-    text: {
-        marginVertical: 8,
-        color: 'white',
-        fontSize: 24,
-        fontWeight: '300'
-    },
-    rowStyleView: {
-        flexDirection: 'row',
-        marginVertical: 20
-    },
     view: {
         alignItems: 'center',
-    },
-    scrollView: {
-        backgroundColor: '#0B7310',
-        width: wp('100%'),
-        padding: 20,
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 50,
-
-    },
-    nextButton: {
-        backgroundColor: 'gray',
-        marginVertical: 50,
-        width: wp('55%')
-    },
+    }
 })
 
 
-export {QuestionCard4};
+export {QuestionCardShopping};

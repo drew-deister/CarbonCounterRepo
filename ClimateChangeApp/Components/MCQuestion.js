@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, TouchableHighlight} from "react-native";
-import {Text, Card, Icon, Button, Slider} from 'react-native-elements';
+import {Text, Card, Icon, Button, Slider, ListItem, List} from 'react-native-elements';
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
@@ -9,13 +9,16 @@ import {
 import {diagonalScale} from '../Utilities/Scaling';
 import { QuestionText } from './QuestionText';
 import PropTypes from 'prop-types';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+
+const DEFAULT_ANSWER_COLOR = 'rgba(255, 255, 255, .52)';
 
 class MCQuestion extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            color: ['rgba(255, 255, 255, .52)', 'rgba(255, 255, 255, .52)', 'rgba(255, 255, 255, .52)', 'rgba(255, 255, 255, .52)', 'rgba(255, 255, 255, .52)'],
+            color: [],
         }
     }
 
@@ -23,24 +26,47 @@ class MCQuestion extends React.Component {
     static propTypes = {
         question: PropTypes.string,
         questionLines: PropTypes.number,
+        defaultColor: PropTypes.string,
         secondaryColor: PropTypes.string,
+        answerOptions: PropTypes.array
     }
 
     static defaultProps = {
         question: "",
         questionLines: 1,
+        defaultAnswerColor: 'rgba(255, 255, 255, .52)',
         secondaryColor: 'rgba(252, 205, 193, .85)',
+        answerOptions: ["answer1", "answer2", "answer3"]
+    }
+
+    // This makes an answer option for each str in AnswerOptions prop,
+    // and sets color to default
+    // basics of looping in react: https://flaviocopes.com/react-how-to-loop/
+    makeAnswerOptions() {
+        const answersList = []
+        for (let i = 0; i < this.props.answerOptions.length; ++i) {
+            this.state.color.push(this.props.defaultAnswerColor)
+            answersList.push(
+                <TouchableHighlight 
+                    style = {[styles.choiceButton, {backgroundColor: this.state.color[i]}]}
+                    onPress = {() => this.updateButton(i, this.props.answerOptions[i])}
+                    key = {i} >
+                    <Text style={[styles.buttonText, this.props.answerStyle[i]]}>{this.props.answerOptions[i]}</Text>
+                </TouchableHighlight>
+            )
+        }
+        return answersList;
     }
 
     updateButton(index, mode) {
-        if (this.state.color[index] == 'rgba(255, 255, 255, .52)') {
+        if (this.state.color[index] == this.props.defaultAnswerColor) {
             this.state.color[index] = this.props.secondaryColor
         } else {
-            this.state.color[index] = 'rgba(255, 255, 255, .52)'
+            this.state.color[index] = this.props.defaultAnswerColor
         }
-        for (let i = 0; i < 5; i++) { // unselect the other
+        for (let i = 0; i < this.props.answerOptions.length; i++) { // unselect the other
             if (this.state.color[i] == this.props.secondaryColor && i != index) { // don't change the one you just updated
-                this.state.color[i] = 'rgba(255, 255, 255, .52)'
+                this.state.color[i] = this.props.defaultAnswerColor
             }
         }
         this.setState({color: this.state.color})
@@ -48,6 +74,13 @@ class MCQuestion extends React.Component {
     }
 
     render() {
+        
+
+        // basics of looping in react: https://flaviocopes.com/react-how-to-loop/
+        // answers gets rendered later in file
+        const answers = this.makeAnswerOptions();
+        
+
         return (            
             <View style={styles.container}>
                 <QuestionText
@@ -57,33 +90,10 @@ class MCQuestion extends React.Component {
                     >
                 </QuestionText>
 
-
-                
                 <View style={styles.choiceContainer}>
-                    <TouchableHighlight style = {[styles.choiceButton, {backgroundColor: this.state.color[0]}]}
-                            onPress = {() => this.updateButton(0, 'Car SUV')} >
-                            <Text style={styles.buttonText}>Car SUV</Text>
-                        </TouchableHighlight>
-                        <TouchableHighlight style = {[styles.choiceButton, {backgroundColor: this.state.color[1]}]}
-                            onPress = {() => this.updateButton(1, 'Sedan')} >
-                            <Text style={styles.buttonText}>Sedan</Text>
-                        </TouchableHighlight>
-                        <TouchableHighlight style = {[styles.choiceButton, {backgroundColor: this.state.color[2]}]}
-                            onPress = {() => this.updateButton(2, 'Truck SUV')} >
-                            <Text style={styles.buttonText}>Truck SUV</Text>
-                        </TouchableHighlight>
-                        <TouchableHighlight style = {[styles.choiceButton, {backgroundColor: this.state.color[3]}]}
-                            onPress = {() => this.updateButton(3, 'Minivan')} >
-                            <Text style={styles.buttonText}>Minivan</Text>
-                        </TouchableHighlight>
-                        <TouchableHighlight style = {[styles.choiceButton, {backgroundColor: this.state.color[4]}]}
-                            onPress = {() => this.updateButton(4, 'Pickup Truck')} >
-                            <Text style={styles.buttonText}>Pickup Truck</Text>
-                        </TouchableHighlight>
-
+                    {answers}
                 </View>
 
-                
             </View>   
         )
     }
@@ -94,10 +104,13 @@ class MCQuestion extends React.Component {
 export {MCQuestion};
 
 const styles = StyleSheet.create({
+    container: {
+        marginVertical: 16,
+    },
     choiceContainer: {
         alignItems: 'center',
         flexDirection: 'column',
-        marginBottom: 32,
+        //marginVertical: 16,
         //backgroundColor: 'blue'
     },
     choiceButton: {

@@ -14,10 +14,10 @@
 import React, { Component } from 'react';
 import {StyleSheet, View} from "react-native";
 import {Text, Icon, Button, Slider} from 'react-native-elements';
-import { ScrollView } from 'react-native-gesture-handler';
 import { InputQuestion } from '../Components/InputQuestion';
 import * as SecureStore from 'expo-secure-store';
 import {diagonalScale} from '../Utilities/Scaling';
+import INFORMATION from '../Utilities/text.json'; // import JSON file
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
@@ -28,8 +28,10 @@ import { AsafNextButton } from "../Components/AsafNextButton";
 
 
 
+const HOUSEHOLD_INFO = INFORMATION["carbonCounterScreens"]["household"];
 
-class QuestionCard1 extends React.Component {
+
+class QuestionCardHousing extends React.Component {
 
     constructor(props) {
         super(props);
@@ -81,46 +83,33 @@ class QuestionCard1 extends React.Component {
 
     render() {
         return(
-            // <View style = {styles.view}>
-            //     <ScrollView style = {styles.scrollView}>
-                    <View style = {styles.view}>
-                        <InputQuestion 
-                            keyboardType = {'numeric'}
-                            parentCallBack = {this.callbackFunction1} 
-                            question = {this.props.data.zipCode} 
-                            placeholder = {this.props.data.zipCodePlaceholder}/>
-                        <InputQuestion 
-                            keyboardType = {'numeric'}
-                            parentCallBack = {this.callbackFunction2} 
-                            question = {this.props.data.numPeople} 
-                            placeholder = {this.props.data.numPeoplePlaceholder}
-                            questionLines={2} />
-                        
-                        <SliderQuestion
-                        //width = {wp('80%')} 
-                        question={this.props.data.homeSize}
-                        max={3000} min={800} step={1}
-                        shouldDisplay={true}
-                        callback = {this.updateSliderState} />
+            <View style = {styles.view}>
+                <InputQuestion 
+                    keyboardType = {'numeric'}
+                    parentCallBack = {this.callbackFunction1} 
+                    question = {HOUSEHOLD_INFO["questions"][0]} 
+                    placeholder = {HOUSEHOLD_INFO["placeholders"][0]}/>
+                <InputQuestion 
+                    keyboardType = {'numeric'}
+                    parentCallBack = {this.callbackFunction2} 
+                    question = {HOUSEHOLD_INFO["questions"][1]} 
+                    placeholder = {HOUSEHOLD_INFO["placeholders"][1]}
+                    questionLines={2} />
+                
+                <SliderQuestion
+                    //width = {wp('80%')} 
+                    question={HOUSEHOLD_INFO["questions"][2]}
+                    max={4000} min={600} step={1}
+                    shouldDisplay={true}
+                    callback = {this.updateSliderState} />
 
-                        <AsafNextButton
-                            onPress={() => this.saveAndPush()}
-                            textStyle={{color: this.props.backgroundColor}}
-                            // style={{backgroundColor: this.props.backgroundColor,
-                            //         borderWidth: 1, borderTopWidth: 1, borderBottomWidth: 1}}
-                            >
-                            Next
-                        </AsafNextButton>
-                        {/* <Button
-                            icon={<Icon name="arrow-forward" color="white"/>}
-                            iconRight
-                            buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
-                            title='Next '
-                            onPress= {() => this.saveAndPush()}
-                        />  */}
-                    </View>
-            //     </ScrollView>
-            // </View>
+                <AsafNextButton
+                    onPress={() => this.saveAndPush()}
+                    textStyle={{color: this.props.backgroundColor}}
+                    >
+                    Next
+                </AsafNextButton>
+            </View>
         )    
     }
 
@@ -128,22 +117,10 @@ class QuestionCard1 extends React.Component {
 
 
 const styles = StyleSheet.create({
-    text: {
-        marginVertical: 8,
-        color: 'white',
-        fontSize: 24,
-        fontWeight: '300'
-    },
     view: {
         alignItems: 'center'
-    },
-    scrollView: {
-        backgroundColor: '#0B7310',
-        width: wp('100%'),
-        padding: 20,
-        borderRadius: 50,
     }
 })
 
 
-export {QuestionCard1};
+export {QuestionCardHousing};

@@ -47,7 +47,7 @@ export default class Home extends Component {
                     
                     <HomeScreenActivityCard 
                         title = {"Carbon Counter"}      
-                        navigateToActivity = 'Household'//'Question1'
+                        navigateToActivity = 'CarbonCounter'//'Question1'
                         navigation = {this.props.navigation}
                         style = {{backgroundColor: '#FCCCC0'}}
                         />
@@ -80,8 +80,8 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     imageContainer: {
-        height: 143,
-        width: 340,
+        height: wp("38.85%"), // ratio of height : width should be 
+        width: wp("92%"),     //       wp("38%") : wp("90%")
     },
     containerStyle: {
         flexGrow: 1,

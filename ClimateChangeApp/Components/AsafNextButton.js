@@ -9,7 +9,7 @@ import {
 
 const AsafNextButton = props => {
   return (
-    <View style={styles.shadow}>
+    <View style={[styles.shadow, props.viewStyle]}>
       <TouchableOpacity
         onPress={props.onPress}
         style={[styles.buttonBody, props.style]}
