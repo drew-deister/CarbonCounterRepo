@@ -46,20 +46,18 @@ class Results extends React.Component {
         numPeople: 0,
         squareFootage: 0,
         numMiles: 0,
-        greenAmount: 0,
         summerChange: 0,
         mode: '',
         beefServings: 0,
         dairyServings: 0,
         shoppingFrequency: 0,
-        articlesPerShop: 0,
         dummyNumber: 40,
       }
       SecureStore.setItemAsync("hasResultsBeenAccessed", JSON.stringify("true"))
 
     }
 
-    
+
 
     static navigationOptions = { // this is the label in the middle of the nav bar
         title: 'Housing',
@@ -79,9 +77,8 @@ class Results extends React.Component {
       // transportation
       const numMiles = JSON.parse(await SecureStore.getItemAsync("numMiles"))
       //multiply by .01 to make decimal
-      const greenAmount = .01*JSON.parse(await SecureStore.getItemAsync("greenAmount"))
-      const summerChange = .01*JSON.parse(await SecureStore.getItemAsync("summerChange"))
       const mode = JSON.parse(await SecureStore.getItemAsync("mode"))
+      const summerChange = .01 * JSON.parse(await SecureStore.getItemAsync("summerChange"))
 
       // diet
       const beefServings = JSON.parse(await SecureStore.getItemAsync("beefServings"))
@@ -89,14 +86,13 @@ class Results extends React.Component {
 
       // shopping
       const shoppingFrequency = JSON.parse(await SecureStore.getItemAsync("shoppingFrequency"))
-      const articlesPerShop = JSON.parse(await SecureStore.getItemAsync("articlesPerShop"))
 
       // this not only changes the state but also
       // rerenders the components in view
       this.setState({zipCode: zipCode, numPeople: numPeople, squareFootage: squareFootage,
-                     numMiles: numMiles, greenAmount: greenAmount, summerChange: summerChange, mode: mode,
+                     numMiles: numMiles, summerChange: summerChange, mode: mode,
                      beefServings: beefServings, dairyServings: dairyServings,
-                     shoppingFrequency: shoppingFrequency, articlesPerShop: articlesPerShop});
+                     shoppingFrequency: shoppingFrequency});
 
 
       this.calculateDiet()
@@ -117,12 +113,13 @@ class Results extends React.Component {
 
     calculateShopping() {
       const POUNDS_PER_SHIRT = 12.13
-      return (POUNDS_PER_SHIRT * 12 * this.state.shoppingFrequency * this.state.articlesPerShop)
+      return (POUNDS_PER_SHIRT * 12 * this.state.shoppingFrequency * 4)
     }
 
     calculateHousing() { // iterate through JSON file in Utilities
       var averageHomekwhMonth = 0;
       var multiplier = 1.0;
+      var i;
       for (i in ZipCode) {
           if (ZipCode[i]["Zip"] === parseInt(this.state.zipCode)) {
             averageHomekwhMonth += ZipCode[i]["Avg Home kwh"]["month"];
@@ -144,29 +141,31 @@ class Results extends React.Component {
       else{
         multiplier = 1.5;
       }
-//should be divided by this.state.numPeople
       return (multiplier * averageHomekwhMonth * 12 * this.state.numPeople);
     }
 
     calculateTransportation() {
-      MPG_rate = 1 // dummy bc idk if you have to initialize
-      if (this.mode == "Sedan") {
+      var MPG_rate = 1 // dummy bc idk if you have to initialize
+      if (this.mode == "Regular sedan or wagon") {
         MPG_rate = 30
-      } else if (this.mode == "Car SUV") {
+      } else if (this.mode == "Car type SUV (e.g., RAV4, Ford Escape)") {
         MPG_rate = 26.2
-      } else if (this.mode == "Truck SUV") {
+      } else if (this.mode == "Truck type SUV (e.g., Chevy Suburban, Nissan Titan)") {
         MPG_rate = 22.4
       } else if (this.mode == "Minivan") {
         MPG_rate = 22.2
-      } else { // pickup truck
+      } else if (this.mode == "Pickup truck (e.g., Ford F-150)"){
+        MPG_rate = 18.9
+    } else if (this.mode == "Train or bus") {
+      return this.state.numMiles * 180 * 0.5 * (.75 + .25 * (this.state.summerChange + .5))
+    }
+      else { // pickup truck
         MPG_rate = 18.9
       }
-      multiplier =  180 * (1/MPG_rate) * 8887 * 0.00220462;
+      var multiplier =  180 * (1/MPG_rate) * 8887 * 0.00220462;
       //.75 from non summer + .25 * the change over the summer
-      summer = (.75 + .25 * this.state.summerChange)
-      //max greenamount is .5
-      green = (this.state.greenAmount + 0.5);
-      return multiplier * summer * green * this.state.numMiles;// lbsCO2/yr
+      var summer = (.75 + (.25 * this.state.summerChange))
+      return multiplier * summer  * this.state.numMiles;// lbsCO2/yr
     }
 
     render() {
@@ -238,35 +237,35 @@ class Results extends React.Component {
                   <Button
                       icon={<Icon name="arrow-forward" color="white"/>}
                       iconRight
-                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
+                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower
                       title='Housing'
                       onPress= {() => this.props.navigation.navigate('Household')}
                   />
                   <Button
                       icon={<Icon name="arrow-forward" color="white"/>}
                       iconRight
-                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
+                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower
                       title='Transportation'
                       onPress= {() => this.props.navigation.navigate('Transportation')}
                   />
                   <Button
                       icon={<Icon name="arrow-forward" color="white"/>}
                       iconRight
-                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
+                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower
                       title='Diet'
                       onPress= {() => this.props.navigation.navigate('Diet')}
                   />
                   <Button
                       icon={<Icon name="arrow-forward" color="white"/>}
                       iconRight
-                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
+                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower
                       title='Shopping'
                       onPress= {() => this.props.navigation.navigate('Shopping')}
                   />
-               
+
                    </View>
 
-              </ScrollView> 
+              </ScrollView>
           </View>
       )
     }
@@ -274,7 +273,7 @@ class Results extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  
+
 view: {
     alignItems: 'center',
     flexDirection: 'row'

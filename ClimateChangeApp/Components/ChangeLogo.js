@@ -40,8 +40,8 @@ class ChangeLogo extends React.Component {
     }
     static defaultProps = {
         developedBy: true, //true if would like it say Devloped By above the logo
-        diameter: wp("50%"), //diameter of logo
-        fontSize: 20,
+        diameter: wp("25%"), //diameter of logo
+        fontSize: 18,
         alignItems: 'center', //has the values as alignItems in the flexbox
         source: logo,
     }
