@@ -39,13 +39,16 @@ class QuestionCardShopping extends React.Component {
         if (this.checkValid()) {
             SecureStore.setItemAsync("shoppingFrequency", JSON.stringify(this.state.shoppingFrequency))
             this.props.navigation.push('Results')
-            } else {
-            alert('Please answer all questions.')
-        }
+            }
     }
 
     checkValid() { // do some sort of error checking here
-        return true;//(this.state.articlesPerShop != -1 && this.state.shoppingFrequency != -1)
+      if (this.state.shoppingFrequency < 0)
+      {
+        alert ("Please enter your shopping frequency.")
+        return false;
+      }
+      return true
     }
 
 
@@ -59,7 +62,7 @@ class QuestionCardShopping extends React.Component {
                         question = {SHOPPING_INFO["questions"][0]}
                         placeholder = {SHOPPING_INFO["placeholders"][0]}/>
 
-                  
+
                     <AsafNextButton
                         onPress={() => this.saveAndPush()}
                         viewStyle={{marginTop: 16}}

@@ -23,6 +23,7 @@ import {
   } from 'react-native-responsive-screen';
 import { SliderQuestion } from '../Components/SliderQuestion';
 import { AsafNextButton } from "../Components/AsafNextButton";
+import ZipCode from '../Utilities/convertcsv.json'; // import JSON file
 
 
 
@@ -33,10 +34,10 @@ class QuestionCardHousing extends React.Component {
 
     constructor(props) {
         super(props);
-        // this holds the state of the sub components 
+        // this holds the state of the sub components
         // it is superior to letting the subcompents manage themselves because we can access their states
         // and save them when the next button is pushed
-        this.state = { 
+        this.state = {
             zipCode: 0,
             numPeople: 0,
             sliderValue: 1,
@@ -77,13 +78,12 @@ class QuestionCardHousing extends React.Component {
 
     // called when next button is pushed
     saveAndPush() {
+
         if (this.checkValid()) {
             SecureStore.setItemAsync("zipCode", JSON.stringify(this.state.zipCode)) // save to async
             SecureStore.setItemAsync("numPeople", JSON.stringify(this.state.numPeople))
             SecureStore.setItemAsync("squareFootage", JSON.stringify(this.state.sliderValue))
             this.props.navigation.navigate('Transportation')
-        } else {
-            alert("Please enter a valid zipcode.")
         }
     }
 
@@ -97,7 +97,29 @@ class QuestionCardHousing extends React.Component {
 
     // checks whether current inputs are valid
     checkValid() {
-        return true;((this.state.zipCode.length == 5) && (this.state.sliderValue != 1)) 
+      var averageHomekwhMonth = 0;
+      var i;
+      for (i in ZipCode) {
+          if (ZipCode[i]["Zip"] === parseInt(this.state.zipCode)) {
+            averageHomekwhMonth += ZipCode[i]["Avg Home kwh"]["month"];
+          }
+      }
+      if (averageHomekwhMonth === 0)
+      {
+        alert ("Please enter a valid zip code.")
+        return false;
+      }
+      if (this.state.numPeople <= 0)
+      {
+        alert ("Please enter a positive number for the number of people that you live with.")
+        return false;
+      }
+      if (this.state.sliderValue === 1)
+      {
+        alert ("Please enter the size of your home size.")
+        return false;
+      }
+      return true;
     }
 
     render() {
@@ -108,25 +130,25 @@ class QuestionCardHousing extends React.Component {
                 //         (access == "true") ?
                 //         <Button icon={<Icon name="arrow-forward" color="white"/>}
                 //         iconRight
-                //         buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
+                //         buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower
                 //         title='Back to results'
                 //         onPress= {() => this.saveAndGoBackToResults}></Button>
                 //         : null // don't do anything
-                //     }               
-                //     <InputQuestion 
+                //     }
+                //     <InputQuestion
                 //         keyboardType = {'numeric'}
-                //         parentCallBack = {this.callbackFunction1} 
-                //         question = {this.props.data.zipCode} 
+                //         parentCallBack = {this.callbackFunction1}
+                //         question = {this.props.data.zipCode}
                 //         placeholder = {this.props.data.zipCodePlaceholder}/>
-                //     <InputQuestion 
+                //     <InputQuestion
                 //         keyboardType = {'numeric'}
-                //         parentCallBack = {this.callbackFunction2} 
-                //         question = {this.props.data.numPeople} 
+                //         parentCallBack = {this.callbackFunction2}
+                //         question = {this.props.data.numPeople}
                 //         placeholder = {this.props.data.numPeoplePlaceholder}
                 //         questionLines={2} />
-                        
+
                 //     <SliderQuestion
-                //         //width = {wp('80%')} 
+                //         //width = {wp('80%')}
                 //         question={this.props.data.homeSize}
                 //         max={3000} min={800} step={1}
                 //         shouldDisplay={true}
@@ -134,35 +156,35 @@ class QuestionCardHousing extends React.Component {
                 //     <Button
                 //         icon={<Icon name="arrow-forward" color="white"/>}
                 //         iconRight
-                //         buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
+                //         buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower
                 //         title='Next '
                 //         onPress= {() => this.saveAndPush()}
-                //     /> 
+                //     />
                 // </View>
             <View style = {styles.view}>
                 {
                     (access == "true") ?
                     <Button icon={<Icon name="arrow-forward" color="white"/>}
                     iconRight
-                    buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
+                    buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower
                     title='Back to results'
                     onPress= {() => this.saveAndGoBackToResults}></Button>
                     : null // don't do anything
-                }  
-                <InputQuestion 
+                }
+                <InputQuestion
                     keyboardType = {'numeric'}
-                    parentCallBack = {this.callbackFunction1} 
-                    question = {HOUSEHOLD_INFO["questions"][0]} 
+                    parentCallBack = {this.callbackFunction1}
+                    question = {HOUSEHOLD_INFO["questions"][0]}
                     placeholder = {HOUSEHOLD_INFO["placeholders"][0]}/>
-                <InputQuestion 
+                <InputQuestion
                     keyboardType = {'numeric'}
-                    parentCallBack = {this.callbackFunction2} 
-                    question = {HOUSEHOLD_INFO["questions"][1]} 
+                    parentCallBack = {this.callbackFunction2}
+                    question = {HOUSEHOLD_INFO["questions"][1]}
                     placeholder = {HOUSEHOLD_INFO["placeholders"][1]}
                     questionLines={2} />
-                
+
                 <SliderQuestion
-                    //width = {wp('80%')} 
+                    //width = {wp('80%')}
                     question={HOUSEHOLD_INFO["questions"][2]}
                     max={4000} min={600} step={1}
                     shouldDisplay={true}
@@ -175,7 +197,7 @@ class QuestionCardHousing extends React.Component {
                     Next
                 </AsafNextButton>
             </View>
-        )    
+        )
     }
 
 }

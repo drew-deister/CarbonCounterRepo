@@ -56,13 +56,16 @@ class QuestionCardTransportation extends React.Component {
             SecureStore.setItemAsync("mode", JSON.stringify(this.state.mode))
             SecureStore.setItemAsync("summerChange", JSON.stringify(this.state.summerChange))
             this.props.navigation.push('Diet')
-            } else {
-            alert('Please answer all questions.')
-        }
+            }
     }
 
     checkValid() {
-        return (this.state.numMiles != 0)
+      if (this.state.mode === '')
+      {
+        alert ("Please enter your primary form of transportation.")
+        return false;
+      }
+      return true;
     }
 
     render() {

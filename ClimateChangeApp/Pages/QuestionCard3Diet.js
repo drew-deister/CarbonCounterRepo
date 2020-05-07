@@ -24,7 +24,7 @@ const DIET_INFO = INFORMATION["carbonCounterScreens"]["diet"];
 class QuestionCardDiet extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             beefServings: -1,
             dairyServings: -1,
         }
@@ -44,15 +44,24 @@ class QuestionCardDiet extends React.Component {
     saveAndPush() { // change this to some checkvalue function
         if (this.checkValid()) {
             SecureStore.setItemAsync("beefServings", JSON.stringify(this.state.beefServings))
-            SecureStore.setItemAsync("dairyServings", JSON.stringify(this.state.dairyServings)) 
-            this.props.navigation.push('Shopping')            
-            } else {
-            alert('Please answer all questions.')
-        }
+            SecureStore.setItemAsync("dairyServings", JSON.stringify(this.state.dairyServings))
+            this.props.navigation.push('Shopping')
+            }
     }
 
     checkValid() { // do some sort of error checking here
-        return true;//(this.state.beefServings != -1 && this.state.beefServings != -1)
+      if (this.state.beefServings < 0)
+      {
+        alert ("Please enter the number of beef servings you consume.")
+        return false;
+      }
+
+      if (this.state.dairyServings < 0)
+      {
+        alert ("Please enter the number of dairy servings you consume.")
+        return false;
+      }
+      return true;
     }
 
 
@@ -60,19 +69,19 @@ class QuestionCardDiet extends React.Component {
         return(
 
                 <View style = {styles.view}>
-                    <InputQuestion 
+                    <InputQuestion
                         questionStyle={{color: this.props.secondaryColor}}
                         questionLines={2}
                         keyboardType = {'numeric'}
-                        parentCallBack = {this.callbackFunction1}                             
-                        question = {DIET_INFO["questions"][0]} 
+                        parentCallBack = {this.callbackFunction1}
+                        question = {DIET_INFO["questions"][0]}
                         placeholder = {DIET_INFO["placeholders"][0]}/>
-                    <InputQuestion 
+                    <InputQuestion
                         questionStyle={{color: this.props.secondaryColor}}
                         questionLines={3}
                         keyboardType = {'numeric'}
-                        parentCallBack = {this.callbackFunction2}                             
-                        question = {DIET_INFO["questions"][1]} 
+                        parentCallBack = {this.callbackFunction2}
+                        question = {DIET_INFO["questions"][1]}
                         placeholder = {DIET_INFO["placeholders"][1]}/>
 
                     <AsafNextButton
@@ -82,9 +91,9 @@ class QuestionCardDiet extends React.Component {
                             Next
                     </AsafNextButton>
 
-                </View> 
+                </View>
 
-        )    
+        )
     }
 
 }
@@ -93,7 +102,7 @@ class QuestionCardDiet extends React.Component {
 const styles = StyleSheet.create({
     view: {
         alignItems: 'center',
-    } 
+    }
 })
 
 
