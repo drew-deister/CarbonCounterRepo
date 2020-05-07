@@ -73,13 +73,20 @@ class MCQuestion extends React.Component {
         this.props.callback(mode)
     }
 
-    render() {
-        
+    updateButtonAfterResultsAccessed(index, mode) {
+        this.state.color[index] = this.props.secondaryColor
+        for (let i = 0; i < this.props.answerOptions.length; i++) { // unselect the other
+            if (this.state.color[i] == this.props.secondaryColor && i != index) { // don't change the one you just updated
+                this.state.color[i] = this.props.defaultAnswerColor
+            }
+        }
+    }  
 
+
+    render() {
         // basics of looping in react: https://flaviocopes.com/react-how-to-loop/
         // answers gets rendered later in file
         const answers = this.makeAnswerOptions();
-        
 
         return (            
             <View style={styles.container}>

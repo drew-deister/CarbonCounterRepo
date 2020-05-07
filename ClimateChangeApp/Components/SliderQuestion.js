@@ -50,6 +50,10 @@ class SliderQuestion extends React.Component {
         maxLabel: ""
     }
 
+    changeValue(value) {
+        this.setState({sliderValue: value})
+    } 
+
     render() {
         return (            
             <View style={styles.container}>

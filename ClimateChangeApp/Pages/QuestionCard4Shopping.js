@@ -26,10 +26,29 @@ class QuestionCardShopping extends React.Component {
         super(props);
         this.state = { 
             shoppingFrequency: -1,
-            articlesPerShop: -1,
+            articlesPerShop: -1, // don't think you need this
+            hasResultsBeenAccessed: "false",
         }
         this.callbackFunction1 = this.callbackFunction1.bind(this);
         this.callbackFunction2 = this.callbackFunction2.bind(this);
+    }
+
+    componentDidMount() {
+        this.fetchData().done()
+        this.props.navigation.addListener('didFocus', () => { // runs every time the screen is seen
+            // The screen is focused
+            this.fetchData().done()
+        });
+    }
+
+    async fetchData() {
+        const results = JSON.parse(await SecureStore.getItemAsync("hasResultsBeenAccessed"))
+        this.setState({hasResultsBeenAccessed: results})
+        if (results == "true") { // change the children to what the user selected if the user has accessed Results
+            const shoppingFrequency = JSON.parse(await SecureStore.getItemAsync("shoppingFrequency"))
+            this.setState({shoppingFrequency: shoppingFrequency})
+            this.refs.q1.changeText(shoppingFrequency)
+        }
     }
 
     callbackFunction1(value) {
@@ -43,11 +62,18 @@ class QuestionCardShopping extends React.Component {
     saveAndPush() { // change this to some checkvalue function
         if (this.checkValid()) {
             SecureStore.setItemAsync("shoppingFrequency", JSON.stringify(this.state.shoppingFrequency))
-            SecureStore.setItemAsync("articlesPerShop", JSON.stringify(this.state.articlesPerShop))
-            this.props.navigation.push('Results')            
+            SecureStore.setItemAsync("articlesPerShop", JSON.stringify(this.state.articlesPerShop)) // dont need this
+            this.props.navigation.navigate('Results')            
             } else {
             alert('Please answer all questions.')
         }
+    }
+
+    // only used when back to results button is visible
+    saveAndGoBackToResults() {
+        SecureStore.setItemAsync("shoppingFrequency", JSON.stringify(this.state.shoppingFrequency))
+        SecureStore.setItemAsync("articlesPerShop", JSON.stringify(this.state.articlesPerShop))
+        this.props.navigation.navigate('Results') // you took results off the stack so must re-push
     }
 
     checkValid() { // do some sort of error checking here
@@ -56,9 +82,20 @@ class QuestionCardShopping extends React.Component {
 
 
     render() {
+        var access = this.state.hasResultsBeenAccessed
         return(
                 <View style = {styles.view}>
+                    { // can move this where we want it
+                        (access == "true") ?
+                        <Button icon={<Icon name="arrow-forward" color="white"/>}
+                        iconRight
+                        buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
+                        title='Back to results'
+                        onPress= {() => this.saveAndGoBackToResults}></Button>
+                        : null // don't do anything
+                    } 
                     <InputQuestion 
+                        ref = {'q1'}
                         questionLines={3}
                         keyboardType = {'numeric'}
                         parentCallBack = {this.callbackFunction1}                             
