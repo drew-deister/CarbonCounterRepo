@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import {ScrollView, View, StyleSheet, Image, Text} from 'react-native';
 import SurveyCard from '../Components/SurveyCard';
 import {QuestionCardShopping} from './QuestionCard4Shopping';
+import INFORMATION from '../Utilities/text';
+
+const SHOPPING_INFO = INFORMATION["carbonCounterScreens"]["shopping"]
 
 const Shopping = {
     title: "Shopping",
@@ -26,7 +29,11 @@ export default class ShoppingSurvey extends Component {
                 title={Shopping.title}
                 imageName={Shopping.title}
                 style={{backgroundColor: Shopping.backgroundColor}}
-                navigation = {this.props.navigation} >
+                navigation = {this.props.navigation}
+                infoArr={SHOPPING_INFO["info"]}
+                infoTypeArr={SHOPPING_INFO["infoTypes"]}
+                modalBackgroundColor = {Shopping.backgroundColor}
+                modalTextColor = "white">
                     
                 <QuestionCardShopping
                     navigation={this.props.navigation}

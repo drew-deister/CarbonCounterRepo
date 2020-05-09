@@ -85,6 +85,7 @@ class QuestionCardHousing extends React.Component {
         } else {
             alert("Please enter a valid zipcode.")
         }
+        
     }
 
     // only used when back to results button is visible

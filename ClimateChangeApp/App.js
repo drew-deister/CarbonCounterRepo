@@ -5,8 +5,8 @@ import {createStackNavigator} from 'react-navigation-stack';
 import {StackViewStyleInterpolator} from 'react-navigation-stack'
 import Home from './Pages/Home';
 import Results from './Pages/Results';
-import MapIntroPage from './Pages/MapIntroPage';
-import GeoVideo1 from './Pages/GeoVideo1';
+import WePlanetIntroPage from './Pages/WePlanetIntro';
+import WePlanetMain from './Pages/WePlanetMain';
 import IntroPage1 from "./Pages/IntroPage1";
 import IntroPage2 from "./Pages/IntroPage2";
 import IntroPage3 from "./Pages/IntroPage3";
@@ -82,8 +82,8 @@ const AppNavigator = createStackNavigator(
     Diet: {screen: SurveyDiet},
     Shopping: {screen: SurveyShopping},
     Results: { screen: Results },
-    MapIntroPage: {screen: MapIntroPage},
-    GeoVideo1: { screen: GeoVideo1 },
+    WePlanet: {screen: WePlanetIntroPage},
+    WePlanetMain: {screen: WePlanetMain},
     IntroPage1: { screen: IntroPage1 },
     IntroPage2: { screen: IntroPage2 },
     IntroPage3: { screen: IntroPage3 }

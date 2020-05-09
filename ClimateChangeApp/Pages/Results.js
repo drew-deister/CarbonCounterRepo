@@ -11,10 +11,13 @@
 // perform calculations on them. However, this returns strings. To get ints, use parseInt()
 
 import React, { Component, useState } from 'react';
-import {StyleSheet, View, TouchableHighlight, ScrollView} from "react-native";
+import {StyleSheet, View, TouchableHighlight, ScrollView, TouchableOpacity, Image} from "react-native";
 import {Button, Text, Card, Icon} from 'react-native-elements';
 import MetricView from '../Components/MetricView';
 import ZipCode from '../Utilities/convertcsv.json'; // import JSON file
+import INFORMATION from '../Utilities/text.json';
+import { InfoModal } from '../Components/InfoModal';
+import ParagraphView from '../Components/ParagraphView';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -23,6 +26,8 @@ import {
 import {
   PieChart,
 } from 'react-native-chart-kit'
+
+const Results_Info = INFORMATION["carbonCounterScreens"]["results"]
 
 
 import * as SecureStore from 'expo-secure-store';
@@ -169,6 +174,15 @@ class Results extends React.Component {
       return multiplier * summer * green * this.state.numMiles;// lbsCO2/yr
     }
 
+  showInfoModalAndDisableScroll() {
+      this.setState({showingModal: true})
+      this.refs.infoModal.showInfoModal()
+  }
+
+  enableScroll() {
+      this.setState({showingModal: false})
+  }
+
     render() {
       const data = [
         {
@@ -209,12 +223,26 @@ class Results extends React.Component {
                   <View style = {styles.pageHeaderContainer}>
                     <Text style={styles.CO2Title}>
                     Your estimated green house gas emissions are:</Text>
-                    <Text style={styles.CO2Number}>{parseInt(totalCO2)}</Text>
+                    <View style={styles.CO2NumberContainer}>
+                        <Text style={styles.CO2Number}>{parseInt(totalCO2)}</Text>
+                        <View style={styles.infoButtonContainer}>
+                            <TouchableOpacity
+                            style={styles.modalButtonContainer}
+                            onPress={() => this.showInfoModalAndDisableScroll()}
+                            >
+                                <Image
+                                    style={styles.infoImage}
+                                    source={require("../assets/informationbutton.png")}
+                                />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
                     <Text style={styles.CO2Title}> pounds of CO2 per year</Text>
                   </View>
                    {/* <Image style = {styles.image} source = {images[this.props.imageName]} /> */}
                    <View style={styles.cardStyle}>
-                       <Text style={styles.pageTitle}>Results</Text>
+                        <Text style={styles.pageTitle}>Results</Text>
+
                        <Text style={styles.subTitle}>from each category</Text>
                        <View style={styles.pieChartContainer}>
                        <PieChart
@@ -267,6 +295,21 @@ class Results extends React.Component {
                    </View>
 
               </ScrollView> 
+
+              <InfoModal
+                        ref={"infoModal"}
+                        parentObject={this}
+                        onClosed={() => this.enableScroll()}
+                        modalStyle={{backgroundColor: '#F6F8EF'}}
+                        xMarkStyle={{color: '#73A388'}}
+                     >
+                        <ParagraphView 
+                            infoArr={Results_Info["info"]}
+                            infoTypeArr={Results_Info["infoTypes"]}
+                            textStyle={{color: '#73A388'}}
+                            />
+                        
+                </InfoModal>
           </View>
       )
     }
@@ -325,14 +368,18 @@ containerStyle: {
     alignContent: 'center',
     //backgroundColor: 'red'
 },
-
+CO2NumberContainer: {
+    flexDirection: 'row',
+    alignItems: "center",
+    justifyContent: "center",
+},
 CO2Number:
 {
     color: '#73A388',
     padding: 10,
     fontSize: 46,
     fontWeight: 'bold',
-    width: wp("75"),
+    // width: wp("75"),
     textAlign: 'center',
 },
   pageTitle: {
@@ -343,6 +390,7 @@ CO2Number:
       width: wp("75"),
       fontWeight: '600',
       textAlign: 'center',
+      // backgroundColor: "red",
   },
   CO2Title: {
     color: '#73A388',
@@ -364,7 +412,24 @@ CO2Number:
   //  aspectRatio: 90/100,
     borderColor: 'transparent',
     borderWidth: 1,
-  }
+  },
+  
+modalButtonContainer: {
+  width: "100%",
+  height: "100%",
+  alignItems: "center",
+},
+infoImage: {
+  height: "100%",
+  width: "100%",
+},
+infoButtonContainer: {
+  borderRadius: 13,
+  marginLeft: 5,
+  height: 25,
+  width: 25,
+  backgroundColor: "#73A388"
+}
 });
 
 

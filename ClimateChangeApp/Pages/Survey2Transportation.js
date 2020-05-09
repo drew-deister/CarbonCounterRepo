@@ -2,6 +2,10 @@ import React, {Component} from 'react';
 import {ScrollView, View, StyleSheet, Image, Text} from 'react-native';
 import SurveyCard from '../Components/SurveyCard';
 import {QuestionCardTransportation} from './QuestionCard2Transportation';
+import INFORMATION from '../Utilities/text';
+
+const TRANSPORTATION_INFO = INFORMATION["carbonCounterScreens"]["transportation"];
+
 
 const Transportation = {
     title: "Transportation",
@@ -28,7 +32,12 @@ export default class TransportationSurvey extends Component {
                 title={Transportation.title}
                 imageName={Transportation.title}
                 style={{backgroundColor: Transportation.backgroundColor}}
-                navigation = {this.props.navigation} >
+                navigation = {this.props.navigation}
+                infoArr={TRANSPORTATION_INFO["info"]}
+                infoTypeArr={TRANSPORTATION_INFO["infoTypes"]}
+                modalBackgroundColor = {Transportation.secondary}
+                modalTextColor = {Transportation.backgroundColor}
+                >
                     
                 <QuestionCardTransportation
                     navigation={this.props.navigation}

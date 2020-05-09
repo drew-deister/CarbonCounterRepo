@@ -6,6 +6,8 @@ import INFORMATION from '../Utilities/text.json'; // import JSON file
 
 const HOUSEHOLD_INFO = INFORMATION["carbonCounterScreens"]["household"];
 
+
+
 const Household = {
     title: "Household",
     backgroundColor: '#FCCCC0',
@@ -42,12 +44,17 @@ export default class HouseholdSurvey extends Component {
                 imageName={HOUSEHOLD_INFO["title"]}
                 style={{backgroundColor: Household.backgroundColor}}
                 navigation = {this.props.navigation}
-                nextScreen='Transportation'>
+                nextScreen='Transportation'
+                infoArr={HOUSEHOLD_INFO["info"]}
+                infoTypeArr={HOUSEHOLD_INFO["infoTypes"]}
+                modalBackgroundColor = {Household.secondary}
+                modalTextColor = "white">
                     
                 <QuestionCardHousing
                     navigation={this.props.navigation}
                     backgroundColor={Household.backgroundColor}
-                    secondary={Household.secondary}/>
+                    secondary={Household.secondary}
+                    />
             </SurveyCard>
             
         );

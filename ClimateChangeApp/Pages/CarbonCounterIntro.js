@@ -7,6 +7,8 @@ import {
     heightPercentageToDP as hp,
     listenOrientationChange, removeOrientationListener
   } from 'react-native-responsive-screen';
+import { InfoModal } from "../Components/InfoModal";
+import ParagraphView from "../Components/ParagraphView";
 
 const INFO = INFORMATION["carbonCounterScreens"]["intro"];
 
@@ -45,7 +47,8 @@ export default class CarbonCounterIntroPage extends Component {
                 <View style={{flex: 200, justifyContent: "center"}}>
                     <AsafNextButton 
                         style = {{marginBottom: 0}}
-                        // onPress={() => this.props.navigation.navigate("Household")}
+                        
+                        onPress={() => this.refs.infoModal.showInfoModal()}
                     >
                         Why Carbon?
                     </AsafNextButton>
@@ -55,6 +58,19 @@ export default class CarbonCounterIntroPage extends Component {
                         Continue
                     </AsafNextButton>
                 </View>
+                <InfoModal
+                    ref={"infoModal"}
+                    parentObject={this}
+                    modalStyle={{backgroundColor: "#F6F8EF"}}
+                    xMarkStyle={{color: "#73A388"}}
+                >
+                    <ParagraphView 
+                        infoArr={INFO["info"]}
+                        infoTypeArr={INFO["infoTypes"]}
+                        textStyle={{color: "#73A388"}}
+                        />
+
+                </InfoModal>
             </View>
             
         );
@@ -67,7 +83,6 @@ const styles = StyleSheet.create({
       flex: 1,
       flexDirection: "column",
       backgroundColor: "#F6F8EF",
-  
       alignItems: "center"
     },
     topText: {

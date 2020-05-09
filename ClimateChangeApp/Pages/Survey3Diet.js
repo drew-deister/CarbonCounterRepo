@@ -4,7 +4,7 @@ import SurveyCard from '../Components/SurveyCard';
 import {QuestionCardDiet} from './QuestionCard3Diet';
 import INFORMATION from '../Utilities/text.json'; // import JSON file
 
-const INFO = INFORMATION["carbonCounterScreens"]["household"];
+const DIET_INFO = INFORMATION["carbonCounterScreens"]["diet"];
 
 const Diet = {
     title: "Diet",
@@ -31,7 +31,11 @@ export default class DietSurvey extends Component {
                 imageName={Diet.title}
                 style={{backgroundColor: Diet.backgroundColor}}
                 titleStyle={{color: Diet.secondary}}
-                navigation = {this.props.navigation} >
+                navigation = {this.props.navigation}
+                infoArr={DIET_INFO["info"]}
+                infoTypeArr={DIET_INFO["infoTypes"]}
+                modalBackgroundColor = {Diet.backgroundColor}
+                modalTextColor = {Diet.secondary}>
 
                     
                 <QuestionCardDiet 

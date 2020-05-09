@@ -53,7 +53,7 @@ export default class Home extends Component {
                         
                     <HomeScreenActivityCard
                         title = {"WePlanet"}
-                        navigateToActivity = 'MapIntroPage'
+                        navigateToActivity = 'WePlanet'
                         navigation = {this.props.navigation}
                         style = {{backgroundColor: '#73A388'}}
                         />
