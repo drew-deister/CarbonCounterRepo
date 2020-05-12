@@ -31,6 +31,7 @@ const Results_Info = INFORMATION["carbonCounterScreens"]["results"]
 
 
 import * as SecureStore from 'expo-secure-store';
+import { AsafNextButton } from '../Components/AsafNextButton';
 
 //Pie chart configuration
   const chartConfig = {
@@ -217,19 +218,22 @@ class Results extends React.Component {
       var totalCO2 = this.calculateHousing() + this.calculateTransportation() + this.calculateDiet() + this.calculateShopping();
       return(
         <View style={styles.safeView}>
-               <ScrollView style={styles.scrollViewStyle}
-                  contentContainerStyle = {styles.containerStyle}
-                  >
-                  <View style = {styles.pageHeaderContainer}>
+            <ScrollView style={styles.scrollViewStyle}
+                        contentContainerStyle = {styles.containerStyle}>
+                
+                <View style = {styles.pageHeaderContainer}>
                     <Text style={styles.CO2Title}>
-                    Your estimated green house gas emissions are:</Text>
+                        Your estimated green house gas emissions are:
+                    </Text>
+
                     <View style={styles.CO2NumberContainer}>
                         <Text style={styles.CO2Number}>{parseInt(totalCO2)}</Text>
+
                         <View style={styles.infoButtonContainer}>
                             <TouchableOpacity
-                            style={styles.modalButtonContainer}
-                            onPress={() => this.showInfoModalAndDisableScroll()}
-                            >
+                                style={styles.modalButtonContainer}
+                                onPress={() => this.showInfoModalAndDisableScroll()}>
+
                                 <Image
                                     style={styles.infoImage}
                                     source={require("../assets/informationbutton.png")}
@@ -237,80 +241,82 @@ class Results extends React.Component {
                             </TouchableOpacity>
                         </View>
                     </View>
+
                     <Text style={styles.CO2Title}> pounds of CO2 per year</Text>
-                  </View>
-                   {/* <Image style = {styles.image} source = {images[this.props.imageName]} /> */}
-                   <View style={styles.cardStyle}>
-                        <Text style={styles.pageTitle}>Results</Text>
+                </View>
 
-                       <Text style={styles.subTitle}>from each category</Text>
-                       <View style={styles.pieChartContainer}>
-                       <PieChart
-                         data={data}
-                         width={wp('90%')}
-                         height={200}
-                         chartConfig={chartConfig}
-                         accessor="percent"
-                         backgroundColor="transparent"
-                         paddingLeft="15"
-                         //absolute //remove to give percentages
-                       />
-                      </View>
+                <View style={styles.cardStyle}>
+                    <Text style={styles.pageTitle}>Results</Text>
+                    <Text style={styles.subTitle}>from each category</Text>
+
+                    <View style={styles.pieChartContainer}>
+                        <PieChart data={data}
+                                  width={wp('90%')}
+                                  height={200}
+                                  chartConfig={chartConfig}
+                                  accessor="percent"
+                                  backgroundColor="transparent"
+                                  paddingLeft="15"
+                          //absolute //remove to give percentages
+                          />
+                    </View>
+
+                    <View style={styles.metricsContainer}>
                         <Text style={styles.pageTitle}>Metrics</Text>
-                        <MetricView metricName="SolarPanel" totalCo2 = {totalCO2}></MetricView>
-                        <MetricView metricName="Car" totalCo2 = {totalCO2} textStyle={{marginTop: -15}}></MetricView>
-                        <MetricView metricName="Tree" totalCo2 = {totalCO2}></MetricView>
-                        <MetricView metricName="SmartPhone" totalCo2 = {totalCO2}></MetricView>
+                        <MetricView metricName="SolarPanel" totalCo2 = {totalCO2}/>
+                        <MetricView metricName="Car" totalCo2 = {totalCO2} 
+                                    textStyle={{marginTop: -15}}/>
+                        <MetricView metricName="Tree" totalCo2 = {totalCO2}/>
+                        <MetricView metricName="SmartPhone" totalCo2 = {totalCO2}
+                                    containerStyle={{marginBottom: 20}}/>
+                        <MetricView metricName="SolidCarbon" totalCo2 = {totalCO2}
+                                    containerStyle={{marginBottom: 20}}/>
+                    </View> 
 
+                    <View style={styles.goBackContainer}>
+                        <Text style={styles.pageTitle}>Go Back</Text>
+                  
+                        <AsafNextButton
+                            onPress= {() => this.props.navigation.navigate('Household')}
+                            style={{marginBottom: 10, marginTop: 25, backgroundColor: "#EB5B6D", borderColor: "#EB5B6D"}}
+                            textStyle={{color: 'white'}}>
+                            Household
+                        </AsafNextButton>
+                        <AsafNextButton
+                            onPress= {() => this.props.navigation.navigate('Transportation')}
+                            style={{marginBottom: 10, backgroundColor: "#73A388", borderColor: "#73A388"}}
+                            textStyle={{color: 'white'}}>
+                            Transportation
+                        </AsafNextButton>
+                        <AsafNextButton
+                            onPress= {() => this.props.navigation.navigate('Diet')}
+                            style={{marginBottom: 10, backgroundColor: "#A3BEAD", borderColor: "#A3BEAD"}}
+                            textStyle={{color: 'white'}}>
+                            Diet
+                        </AsafNextButton>
+                        <AsafNextButton
+                            onPress= {() => this.props.navigation.navigate('Shopping')}
+                            style={{marginBottom: 10, backgroundColor: "#9AD1F2", borderColor: "#9AD1F2"}}
+                            textStyle={{color: 'white'}}>
+                            Shopping
+                        </AsafNextButton>
 
-                  <Button
-                      icon={<Icon name="arrow-forward" color="white"/>}
-                      iconRight
-                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
-                      title='Housing'
-                      onPress= {() => this.props.navigation.navigate('Household')}
-                  />
-                  <Button
-                      icon={<Icon name="arrow-forward" color="white"/>}
-                      iconRight
-                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
-                      title='Transportation'
-                      onPress= {() => this.props.navigation.navigate('Transportation')}
-                  />
-                  <Button
-                      icon={<Icon name="arrow-forward" color="white"/>}
-                      iconRight
-                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
-                      title='Diet'
-                      onPress= {() => this.props.navigation.navigate('Diet')}
-                  />
-                  <Button
-                      icon={<Icon name="arrow-forward" color="white"/>}
-                      iconRight
-                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
-                      title='Shopping'
-                      onPress= {() => this.props.navigation.navigate('Shopping')}
-                  />
+                    </View>
                
-                   </View>
+                </View>
 
-              </ScrollView> 
+            </ScrollView> 
 
-              <InfoModal
-                        ref={"infoModal"}
+            <InfoModal  ref={"infoModal"}
                         parentObject={this}
                         onClosed={() => this.enableScroll()}
                         modalStyle={{backgroundColor: '#F6F8EF'}}
-                        xMarkStyle={{color: '#73A388'}}
-                     >
-                        <ParagraphView 
-                            infoArr={Results_Info["info"]}
-                            infoTypeArr={Results_Info["infoTypes"]}
-                            textStyle={{color: '#73A388'}}
-                            />
-                        
-                </InfoModal>
-          </View>
+                        xMarkStyle={{color: '#73A388'}}>
+                <ParagraphView  infoArr={Results_Info["info"]}
+                                infoTypeArr={Results_Info["infoTypes"]}
+                                textStyle={{color: '#73A388'}}/>     
+            </InfoModal>
+        </View>
       )
     }
 
@@ -340,6 +346,29 @@ pageHeaderContainer: {
     height: wp("50%"),
     backgroundColor: 'white',
     width: wp('70%')
+},
+
+goBackContainer: {
+    marginTop: 32,
+    paddingTop: 20,
+    borderTopColor: 'white',
+    borderTopWidth: 3,
+    alignItems: 'center',
+    alignContent: 'center',
+    // height: wp("20%"),
+    // backgroundColor: 'white',
+    marginBottom: hp("10%"),
+    width: wp('85%')
+},
+
+metricsContainer: {
+    marginTop: 36,
+    paddingTop: 28,
+    borderTopColor: 'white',
+    borderTopWidth: 3,
+    // backgroundColor: 'white',
+    width: wp("85%"),
+    alignItems: 'center'
 },
 
 cardStyle: {
@@ -388,7 +417,7 @@ CO2Number:
       fontSize: 42,
       //fontWeight: 'bold',
       width: wp("75"),
-      fontWeight: '600',
+      fontWeight: '700',
       textAlign: 'center',
       // backgroundColor: "red",
   },
@@ -422,13 +451,14 @@ modalButtonContainer: {
 infoImage: {
   height: "100%",
   width: "100%",
+  tintColor: "#73A388",
 },
 infoButtonContainer: {
   borderRadius: 13,
   marginLeft: 5,
   height: 25,
   width: 25,
-  backgroundColor: "#73A388"
+  // backgroundColor: "#73A388"
 }
 });
 

@@ -3,6 +3,9 @@ import {ScrollView, View, StyleSheet, Image, Text} from 'react-native';
 import SurveyCard from '../Components/SurveyCard';
 import {QuestionCardShopping} from './QuestionCard4Shopping';
 import INFORMATION from '../Utilities/text';
+import HeaderRightArrow from '../Components/HeaderRightArrow';
+import HeaderBackArrow from '../Components/HeaderBackArrow';
+import HeaderLeafLogo from '../Components/HeaderLeafLogo';
 
 const SHOPPING_INFO = INFORMATION["carbonCounterScreens"]["shopping"]
 
@@ -19,7 +22,12 @@ export default class ShoppingSurvey extends Component {
     }
     
     static navigationOptions = { // this is the label in the middle of the nav bar
-        title: ' ',
+        headerTitle: <HeaderLeafLogo tintColor='#2F5A8A'/>,
+        headerStyle: {backgroundColor: 'white', height: 45, borderBottomWidth: 0},
+        headerTintColor: '#2F5A8A',
+        headerRight: <HeaderRightArrow  tintColor='#2F5A8A'
+                                        onPress={() => console.log("Hello")}/>,
+        headerBackImage: <HeaderBackArrow tintColor='#2F5A8A'/>
     };
 
     render() {

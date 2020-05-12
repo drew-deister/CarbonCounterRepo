@@ -65,9 +65,17 @@ const styles = StyleSheet.create({
 function LogoTitle() {
   return (
     <Image
-      style={{ width: 50, height: 50 }}
-      source={require("./assets/Logo.png")}
+      style={{ width: 200, height: 40 }}
+      source={require("./assets/CarbonXP_Logos/NameLogo_Light.png")}
     />
+  );
+}
+
+function backArrow() {
+  return (
+    <Image
+        style={{ width: 30, height: 30, tintColor: '#F0F5DF'}}
+        source={require("./assets/LeftBlueArrow.png")}/>
   );
 }
 
@@ -75,7 +83,7 @@ function LogoTitle() {
 const AppNavigator = createStackNavigator(
   {
     // road map for the different parts of our navigation
-    Home: { screen: Home, },
+    Home: { screen: Home },
     CarbonCounter: {screen: CarbonCounterIntroPage},
     Household: {screen: SurveyHousehold},
     Transportation: {screen: SurveyTransportation},
@@ -89,6 +97,11 @@ const AppNavigator = createStackNavigator(
     IntroPage3: { screen: IntroPage3 }
   },
   {
+    cardStyle: {
+        // shadowColor: 'black',
+        // shadowOpacity: .5,
+        // shadowRadius: 10,
+    },
     initialRouteName: "IntroPage1", // For functioning app, use "IntroPage1"
     //headerMode: "None",
     headerLayoutPreset: "center",
@@ -99,12 +112,13 @@ const AppNavigator = createStackNavigator(
       // these will be augmented by the navigation options of the respective screens
       // https://reactnavigation.org/docs/en/headers.html
       headerStyle: {
-        backgroundColor: "white",
+        backgroundColor: "#73A388",
         borderBottomWidth: 0,
       },
       headerBackTitle: " ",
       headerTitle: LogoTitle,
-      headerTintColor: "#73A388"
+      headerTintColor: '#F0F5DF',
+      headerBackImage: backArrow
     }
   }
 );

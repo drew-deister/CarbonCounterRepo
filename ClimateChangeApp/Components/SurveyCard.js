@@ -39,6 +39,7 @@ class SurveyCard extends React.Component {
     static defaultProps = {
         title: 'Household',
         imageName: 'Household',
+        infoImageStyle: {},
         style: {},                      //used to change backgroundColor
         titleStyle: {},                 //used to change title text color
         // nextScreen: 'Home',
@@ -69,7 +70,7 @@ class SurveyCard extends React.Component {
                             onPress={() => this.showInfoModalAndDisableScroll()}
                             >
                                 <Image
-                                    style={styles.infoImage}
+                                    style={[styles.infoImage, this.props.infoImageStyle]}
                                     source={require("../assets/informationbutton.png")}
                                 />
                             </TouchableOpacity>
@@ -163,8 +164,9 @@ const styles = StyleSheet.create({
       },
     infoButtonContainer: {
         marginLeft: 5,
-        height: 20,
-        width: 20,
+        marginTop: 5,
+        height: 25,
+        width: 25,
     }
 });
 

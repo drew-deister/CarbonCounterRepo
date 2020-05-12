@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet, Text, Image} from 'react-native';
 import { AsafNextButton } from "../Components/AsafNextButton";
 import INFORMATION from '../Utilities/text.json'; // import JSON file
 import {
@@ -13,6 +13,17 @@ import ParagraphView from "../Components/ParagraphView";
 const INFO = INFORMATION["carbonCounterScreens"]["intro"];
 
 
+function LogoTitle() {
+    return (
+        //this should be replaced with right facing arrow but did not receive from jenna
+      <Image
+        style={{ width: 43, height: 43 }}
+        source={require("../assets/CarbonXP_Logos/LeafLogo_2_Light.png")}
+      />
+    );
+  }
+
+
 export default class CarbonCounterIntroPage extends Component {
 
     constructor(props) {
@@ -21,8 +32,9 @@ export default class CarbonCounterIntroPage extends Component {
     }
     
     static navigationOptions = { // this is the label in the middle of the nav bar
-        //title: 'hello',
-        //headerRight: HeaderNext,
+        headerTitle: LogoTitle,
+        headerStyle: {backgroundColor: "#73A388", height: 45},
+        
     };
 
     render() {

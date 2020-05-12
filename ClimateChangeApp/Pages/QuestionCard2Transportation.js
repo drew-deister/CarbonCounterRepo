@@ -18,6 +18,7 @@ import {
     heightPercentageToDP as hp,
     listenOrientationChange, removeOrientationListener
   } from 'react-native-responsive-screen';
+import { throwIfAudioIsDisabled } from 'expo-av/build/Audio/AudioAvailability';
 
 
 const TRANSPORTATION_INFO = INFORMATION["carbonCounterScreens"]["transportation"];
@@ -32,11 +33,35 @@ class QuestionCardTransportation extends React.Component {
             summerChange: 1,
             mode: '',
             color: ['red', 'red', 'red', 'red', 'red'],
+            hasResultsBeenAccessed: "false",
         }
         this.updateSliderState1 = this.updateSliderState1.bind(this)
         this.updateSliderState2 = this.updateSliderState2.bind(this)
         this.updateSliderState3 = this.updateSliderState3.bind(this)
         this.updateMCState = this.updateMCState.bind(this)
+    }
+
+    componentDidMount() {
+        this.fetchData().done()
+        this.props.navigation.addListener('didFocus', () => { // runs every time the screen is seen
+            // The screen is focused
+            this.fetchData().done()
+        });
+    }
+
+    async fetchData() {
+        const results = JSON.parse(await SecureStore.getItemAsync("hasResultsBeenAccessed"))
+        this.setState({hasResultsBeenAccessed: results})
+        if (results == "true") { // change the children to what the user selected if the user has accessed Results
+            const numMiles = JSON.parse(await SecureStore.getItemAsync("numMiles"))
+            const greenAmount = JSON.parse(await SecureStore.getItemAsync("greenAmount")) // don't need?
+            const summerChange = JSON.parse(await SecureStore.getItemAsync("summerChange"))
+            const mode = JSON.parse(await SecureStore.getItemAsync("mode"))
+            this.setState({numMiles: numMiles, greenAmount: greenAmount, summerChange: summerChange, mode: mode})
+            this.refs.slider1.changeValue(numMiles)
+            this.refs.slider2.changeValue(summerChange)
+            this.refs.MCQuestion.updateButtonAfterResultsAccessed(TRANSPORTATION_INFO["MCOptions"].indexOf(mode), mode)
+        }
     }
 
     // MARK: Update functions for slider children
@@ -61,10 +86,21 @@ class QuestionCardTransportation extends React.Component {
             SecureStore.setItemAsync("greenAmount", JSON.stringify(this.state.greenAmount)) // save to async
             SecureStore.setItemAsync("summerChange", JSON.stringify(this.state.summerChange))
             SecureStore.setItemAsync("mode", JSON.stringify(this.state.mode))
-            this.props.navigation.push('Diet')
+            this.props.navigation.navigate('Diet')
             } else {
             alert('Please answer all questions.')
         }
+    }
+
+    // only used when back to results button is visible
+    saveAndGoBackToResults() {
+        SecureStore.setItemAsync("numMiles", JSON.stringify(this.state.numMiles)) // save to async
+        SecureStore.setItemAsync("greenAmount", JSON.stringify(this.state.greenAmount)) // save to async
+        SecureStore.setItemAsync("summerChange", JSON.stringify(this.state.summerChange))
+        SecureStore.setItemAsync("mode", JSON.stringify(this.state.mode))
+        this.props.navigation.navigate('Diet')
+        this.props.navigation.navigate('Shopping')
+        this.props.navigation.navigate('Results') // you took results off the stack so must re-push
     }
 
     checkValid() {
@@ -72,9 +108,22 @@ class QuestionCardTransportation extends React.Component {
     } 
 
     render() {
+        var access = this.state.hasResultsBeenAccessed
         return(
                     <View style = {styles.view}>
+                        { // can move this where we want it
+                            (access == "true") ?
+                            <AsafNextButton 
+                                onPress= {() => this.saveAndGoBackToResults()}
+                                style={{backgroundColor: this.props.secondaryColor, marginBottom: 0}}
+                                textStyle={{color: this.props.backgroundColor}}>
+
+                                Back to results
+                            </AsafNextButton>
+                            : null // don't do anything
+                        } 
                         <SliderQuestion   
+                            ref = {'slider1'}
                             question={TRANSPORTATION_INFO["questions"][0]}
                             questionLines={3}
                             questionStyle={{fontSize: 18}}
@@ -111,6 +160,7 @@ class QuestionCardTransportation extends React.Component {
                                         */
                                         }
                         <MCQuestion
+                            ref = {'MCQuestion'}
                             question={TRANSPORTATION_INFO["questions"][1]} 
                             questionLines={2}
                             questionStyle={{fontSize: 18}}
@@ -124,6 +174,7 @@ class QuestionCardTransportation extends React.Component {
 
                         <View style = {styles.rowStyleView}>
                             <SliderQuestion
+                                ref = {'slider2'}
                                 question={TRANSPORTATION_INFO["questions"][2]}
                                 questionLines={3}
                                 questionStyle={{fontSize: 18}}

@@ -180,7 +180,33 @@
                 "header",
                 "body",
                 "body"
-            ]
+            ],
+            "metricView": {
+                "SolarPanel": [
+                    "",
+                    " solar panels operated for a year would offset your emissions."
+                ],
+            
+                "Tree": [
+                    "A tree is most efficient at CO2 removal when it reaches ten years old. It would take ",
+                    " 10-year-old trees one full year to remove your emissions."
+                ],
+                "Car": [
+                    "You produce the same emissions as driving an average car ",
+                    " miles."
+                ],
+                "SmartPhone": [
+                    "your emissions are equal to the emissions produced from charging ",
+                    " smart phones."
+                ],
+                "SolidCarbon": [
+                    "Carbon dioxide is a gas that contains one carbon atom and two oxygen atoms. If all the carbon atoms in the GHGs from your emissions profile were put together in a solid chunk, it would be equivalent to a ",
+                    " pound bag of carbon (think of charcoal briquettes for grilling, which are made of 50-95% carbon) or coal."
+                ]
+
+
+            }
+            
 
         }
 

@@ -107,15 +107,15 @@ const styles = StyleSheet.create({
     textAlign: "left",
   },
   xMarkPosition: {
-    marginLeft: 10,
-    marginTop: 10,
+    marginLeft: 15,
+    marginTop: 5,
   },
   xMark: {
     color: "#73A388",
     fontSize: 34,
     fontWeight: "900",
-    marginBottom: -15,
-    paddingBottom: -20,
+    // marginBottom: -15,
+    // paddingBottom: -20,
   }
 });
 
