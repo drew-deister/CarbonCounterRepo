@@ -6,33 +6,18 @@ import {
     heightPercentageToDP as hp,
     listenOrientationChange, removeOrientationListener
   } from 'react-native-responsive-screen';
+import INFORMATION from '../Utilities/text.json'
+
+metricViewInfo = INFORMATION["carbonCounterScreens"]["results"]["metricView"];
 
 const images = {
     'SolarPanel': require('../assets/SolarPanel.png'),
     'Car': require('../assets/Car.png'),
-    'Tree': require('../assets/Logo.png'),
+    'Tree': require('../assets/Tree.png'),
     'SmartPhone': require('../assets/iPhone.png'),
+    'SolidCarbon': require('../assets/Charcoal.png')
 }
 
-const info = {
-    SolarPanel: {
-        part1: "",
-        part2: " solar panels operated for a year would offset your emissions.",
-    },
-
-    Tree: {
-        part1: "A tree is most efficient at CO2 removal when it reaches ten years old. It would take ",
-        part2: " 10-year-old trees would offset your emissions",
-    },
-    Car: {
-        part1: "Your emissions are the same as driving ",
-        part2: " miles in an average sedan",
-    },
-    SmartPhone: {
-        part1: "Charging ",
-        part2: " smartphones would produce a similar amount of CO2"
-    },
-}
 const multiplier = {
   SolarPanel: 0.00172722,
   Tree: 1/48,
@@ -60,14 +45,16 @@ class MetricView extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <View style={[styles.container, this.props.containerStyle]}>
                     <View style={styles.shadow}>
                         <Image style = {styles.image} source = {images[this.props.metricName]} />
                     </View>
                     <Text style={[styles.text, this.props.textStyle]}>
-                        {info[this.props.metricName].part1}
-                        {parseInt(this.props.totalCo2*multiplier[this.props.metricName])}
-                        {info[this.props.metricName].part2}
+                        {metricViewInfo[this.props.metricName][0]}
+                        <Text style={styles.number}>
+                            {parseInt(this.props.totalCo2*multiplier[this.props.metricName])}
+                        </Text>
+                        {metricViewInfo[this.props.metricName][1]}
                     </Text>
 
             </View>
@@ -94,7 +81,12 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: '600',
         textAlign: 'center',
-      },
+    },
+    number: {
+        color: '#73A388',
+        fontSize: 18,
+        fontWeight: '700',
+    },
     shadow: {
         shadowOpacity: .1,
     }

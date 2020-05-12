@@ -30,7 +30,6 @@ const HOUSEHOLD_INFO = INFORMATION["carbonCounterScreens"]["household"];
 
 
 class QuestionCardHousing extends React.Component {
-
     constructor(props) {
         super(props);
         // this holds the state of the sub components 
@@ -45,10 +44,10 @@ class QuestionCardHousing extends React.Component {
         this.callbackFunction1 = this.callbackFunction1.bind(this); // make sure these are both correct
         this.callbackFunction2 = this.callbackFunction2.bind(this);
         this.updateSliderState = this.updateSliderState.bind(this);
-        SecureStore.setItemAsync("hasResultsBeenAccessed", JSON.stringify("false")); // this only needs to be done once, in one page
     }
 
     componentDidMount() {
+        SecureStore.setItemAsync("hasResultsBeenAccessed", JSON.stringify("false")); // this only needs to be done once, in one page
         this.fetchData().done()
         this.props.navigation.addListener('didFocus', () => { // runs every time the screen is seen
             // The screen is focused
@@ -57,8 +56,17 @@ class QuestionCardHousing extends React.Component {
     }
 
     async fetchData() {
-        const response = JSON.parse(await SecureStore.getItemAsync("hasResultsBeenAccessed"))
-        this.setState({hasResultsBeenAccessed: response})
+        const results = JSON.parse(await SecureStore.getItemAsync("hasResultsBeenAccessed"))
+        this.setState({hasResultsBeenAccessed: results})
+        if (results == "true") { // change the children to what the user selected if the user has accessed Results
+            const zipCode = JSON.parse(await SecureStore.getItemAsync("zipCode"))
+            const numPeople = JSON.parse(await SecureStore.getItemAsync("numPeople"))
+            const squareFootage = JSON.parse(await SecureStore.getItemAsync("squareFootage"))
+            this.setState({zipCode: zipCode, numPeople: numPeople, squareFootage: squareFootage})
+            this.refs.q1.changeText(zipCode)
+            this.refs.q2.changeText(numPeople)
+            this.refs.slider.changeValue(squareFootage)
+        }
     }
 
     callbackFunction1(value) {
@@ -85,6 +93,7 @@ class QuestionCardHousing extends React.Component {
         } else {
             alert("Please enter a valid zipcode.")
         }
+        
     }
 
     // only used when back to results button is visible
@@ -92,7 +101,10 @@ class QuestionCardHousing extends React.Component {
         SecureStore.setItemAsync("zipCode", JSON.stringify(this.state.zipCode)) // save to async
         SecureStore.setItemAsync("numPeople", JSON.stringify(this.state.numPeople))
         SecureStore.setItemAsync("squareFootage", JSON.stringify(this.state.sliderValue))
-        this.props.navigation.navigate('Results')
+        this.props.navigation.navigate('Transportation')
+        this.props.navigation.navigate('Diet')
+        this.props.navigation.navigate('Shopping')
+        this.props.navigation.navigate('Results') // you took results off the stack so must re-push
     }
 
     // checks whether current inputs are valid
@@ -101,60 +113,28 @@ class QuestionCardHousing extends React.Component {
     }
 
     render() {
-        access = this.state.hasResultsBeenAccessed
+        var access = this.state.hasResultsBeenAccessed
         return(
-                // <View style = {styles.view}>
-                //     {
-                //         (access == "true") ?
-                //         <Button icon={<Icon name="arrow-forward" color="white"/>}
-                //         iconRight
-                //         buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
-                //         title='Back to results'
-                //         onPress= {() => this.saveAndGoBackToResults}></Button>
-                //         : null // don't do anything
-                //     }               
-                //     <InputQuestion 
-                //         keyboardType = {'numeric'}
-                //         parentCallBack = {this.callbackFunction1} 
-                //         question = {this.props.data.zipCode} 
-                //         placeholder = {this.props.data.zipCodePlaceholder}/>
-                //     <InputQuestion 
-                //         keyboardType = {'numeric'}
-                //         parentCallBack = {this.callbackFunction2} 
-                //         question = {this.props.data.numPeople} 
-                //         placeholder = {this.props.data.numPeoplePlaceholder}
-                //         questionLines={2} />
-                        
-                //     <SliderQuestion
-                //         //width = {wp('80%')} 
-                //         question={this.props.data.homeSize}
-                //         max={3000} min={800} step={1}
-                //         shouldDisplay={true}
-                //         callback = {this.updateSliderState} />
-                //     <Button
-                //         icon={<Icon name="arrow-forward" color="white"/>}
-                //         iconRight
-                //         buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
-                //         title='Next '
-                //         onPress= {() => this.saveAndPush()}
-                //     /> 
-                // </View>
             <View style = {styles.view}>
-                {
+                { // can move this where we want it
                     (access == "true") ?
-                    <Button icon={<Icon name="arrow-forward" color="white"/>}
-                    iconRight
-                    buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
-                    title='Back to results'
-                    onPress= {() => this.saveAndGoBackToResults}></Button>
+                    <AsafNextButton 
+                        onPress= {() => this.saveAndGoBackToResults()}
+                        style={{backgroundColor: this.props.secondary, marginBottom: 0}}
+                        textStyle={{color: 'white'}}>
+
+                        Back to results
+                    </AsafNextButton>
                     : null // don't do anything
                 }  
                 <InputQuestion 
+                    ref = {'q1'}
                     keyboardType = {'numeric'}
                     parentCallBack = {this.callbackFunction1} 
                     question = {HOUSEHOLD_INFO["questions"][0]} 
                     placeholder = {HOUSEHOLD_INFO["placeholders"][0]}/>
                 <InputQuestion 
+                    ref = {'q2'}
                     keyboardType = {'numeric'}
                     parentCallBack = {this.callbackFunction2} 
                     question = {HOUSEHOLD_INFO["questions"][1]} 
@@ -162,7 +142,7 @@ class QuestionCardHousing extends React.Component {
                     questionLines={2} />
                 
                 <SliderQuestion
-                    //width = {wp('80%')} 
+                    ref = {'slider'}
                     question={HOUSEHOLD_INFO["questions"][2]}
                     max={4000} min={600} step={1}
                     shouldDisplay={true}

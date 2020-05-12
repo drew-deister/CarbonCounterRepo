@@ -11,8 +11,11 @@ import {
   listenOrientationChange,
   removeOrientationListener,
 } from "react-native-responsive-screen";
+import HeaderRightArrow from '../Components/HeaderRightArrow';
+import HeaderBackArrow from '../Components/HeaderBackArrow';
+import HeaderLeafLogo from '../Components/HeaderLeafLogo';
 
-const INFO = INFORMATION["carbonCounterScreens"]["household"];
+const DIET_INFO = INFORMATION["carbonCounterScreens"]["diet"];
 
 const Diet = {
   title: "Diet",
@@ -21,31 +24,41 @@ const Diet = {
 };
 
 export default class DietSurvey extends Component {
-  constructor(props) {
-    super(props);
-  }
+    constructor(props) {
+        super(props);
+        
+    }
+    
+    static navigationOptions = { // this is the label in the middle of the nav bar
+        headerTitle: <HeaderLeafLogo tintColor='#73A388'/>,
+        headerStyle: {backgroundColor: 'white', height: 45, borderBottomWidth: 0},
+        headerTintColor: '#73A388',
+        headerRight: <HeaderRightArrow  tintColor='#73A388'
+                                        onPress={() => console.log("Hello")}/>,
+        headerBackImage: <HeaderBackArrow tintColor='#73A388'/>
+    };
 
-  static navigationOptions = {
-    // this is the label in the middle of the nav bar
-    title: "hello",
-  };
+    render() {
 
-  render() {
-    return (
-      <SurveyCard
-        title={Diet.title}
-        imageName={Diet.title}
-        style={{ backgroundColor: Diet.backgroundColor }}
-        titleStyle={{ color: Diet.secondary }}
-        navigation={this.props.navigation}
-      >
-        <QuestionCardDiet
-          navigation={this.props.navigation}
-          backgroundColor={Diet.backgroundColor}
-          secondaryColor={Diet.secondary}
-        />
+        return (
+            <SurveyCard
+                title={Diet.title}
+                imageName={Diet.title}
+                style={{backgroundColor: Diet.backgroundColor}}
+                titleStyle={{color: Diet.secondary}}
+                infoImageStyle={{tintColor: '#73A388'}}
+                navigation = {this.props.navigation}
+                infoArr={DIET_INFO["info"]}
+                infoTypeArr={DIET_INFO["infoTypes"]}
+                modalBackgroundColor = {Diet.backgroundColor}
+                modalTextColor = {Diet.secondary}>
 
-        <View style={styles.progressBar}>
+                    
+                <QuestionCardDiet 
+                    navigation = {this.props.navigation} 
+                    backgroundColor={Diet.backgroundColor}
+                    secondaryColor = {Diet.secondary}/>
+          <View style={styles.progressBar}>
           <Progress.Bar
             progress={0.5}
             width={null}
@@ -59,6 +72,9 @@ export default class DietSurvey extends Component {
   }
 }
 
+
+        
+
 const styles = StyleSheet.create({
   progressBar: {
     width: wp("100%"),
@@ -69,3 +85,4 @@ const styles = StyleSheet.create({
     //borderRadius: 100,
   },
 });
+    

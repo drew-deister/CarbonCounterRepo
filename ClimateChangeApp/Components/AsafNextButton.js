@@ -30,13 +30,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     borderRadius: 50,
     width: wp("50%"),
+    height: 35,
     shadowColor: "#F0F0F0",
-    //margin around words
-    borderBottomWidth: 5,
-    borderColor: "white",
-    borderTopWidth: 5,
+    backgroundColor: "white",
     marginTop: 10,
     marginBottom: 30,
+    justifyContent: 'center',
     //shadowOpacity: 1,
   },
   buttonText: {

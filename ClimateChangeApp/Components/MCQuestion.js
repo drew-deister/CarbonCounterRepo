@@ -88,22 +88,69 @@ class MCQuestion extends React.Component {
     this.props.callback(mode);
   }
 
-  render() {
-    // basics of looping in react: https://flaviocopes.com/react-how-to-loop/
-    // answers gets rendered later in file
-    const answers = this.makeAnswerOptions();
 
-    return (
-      <View style={styles.container}>
-        <QuestionText
-          lines={this.props.questionLines}
-          question={this.props.question}
-          style={this.props.questionStyle}
-        ></QuestionText>
-        <View style={styles.choiceContainer}>{answers}</View>
-      </View>
-    );
-  }
+    // basics of looping in react: https://flaviocopes.com/react-how-to-loop/
+    makeAnswerOptions() {
+        const answersList = []
+        for (let i = 0; i < this.props.answerOptions.length; ++i) {
+            this.state.color.push(this.props.defaultAnswerColor)
+            answersList.push(
+                <TouchableHighlight 
+                    style = {[styles.choiceButton, {backgroundColor: this.state.color[i]}]}
+                    onPress = {() => this.updateButton(i, this.props.answerOptions[i])}
+                    key = {i} >
+                    <Text style={[styles.buttonText, this.props.answerStyle[i]]}>{this.props.answerOptions[i]}</Text>
+                </TouchableHighlight>
+            )
+        }
+        return answersList;
+    }
+
+    updateButton(index, mode) {
+        if (this.state.color[index] == this.props.defaultAnswerColor) {
+            this.state.color[index] = this.props.secondaryColor
+        } else {
+            this.state.color[index] = this.props.defaultAnswerColor
+        }
+        for (let i = 0; i < this.props.answerOptions.length; i++) { // unselect the other
+            if (this.state.color[i] == this.props.secondaryColor && i != index) { // don't change the one you just updated
+                this.state.color[i] = this.props.defaultAnswerColor
+            }
+        }
+        this.setState({color: this.state.color})
+        this.props.callback(mode)
+    }
+
+    updateButtonAfterResultsAccessed(index, mode) {
+        this.state.color[index] = this.props.secondaryColor
+        for (let i = 0; i < this.props.answerOptions.length; i++) { // unselect the other
+            if (this.state.color[i] == this.props.secondaryColor && i != index) { // don't change the one you just updated
+                this.state.color[i] = this.props.defaultAnswerColor
+            }
+        }
+    }  
+
+
+    render() {
+        // basics of looping in react: https://flaviocopes.com/react-how-to-loop/
+        // answers gets rendered later in file
+        const answers = this.makeAnswerOptions();
+
+        return (            
+            <View style={styles.container}>
+                <QuestionText
+                    lines={this.props.questionLines}
+                    question={this.props.question}
+                    style={this.props.questionStyle}
+                    >
+                </QuestionText>
+                <View style={styles.choiceContainer}>
+                    {answers}
+                </View>
+
+            </View>   
+        )
+    }
 }
 
 export { MCQuestion };

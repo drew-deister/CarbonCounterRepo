@@ -11,8 +11,13 @@ import {
   listenOrientationChange,
   removeOrientationListener,
 } from "react-native-responsive-screen";
+import HeaderRightArrow from '../Components/HeaderRightArrow';
+import HeaderBackArrow from '../Components/HeaderBackArrow';
+import HeaderLeafLogo from '../Components/HeaderLeafLogo';
 
 const HOUSEHOLD_INFO = INFORMATION["carbonCounterScreens"]["household"];
+
+
 
 const Household = {
   title: "Household",
@@ -20,43 +25,46 @@ const Household = {
   secondary: "#EB5B6D",
 };
 
-function HeaderNext() {
-  return (
-    //this should be replaced with right facing arrow but did not receive from jenna
-    <Image
-      style={{ width: 50, height: 50 }}
-      source={require("../assets/Logo.png")}
-    />
-  );
-}
-
 export default class HouseholdSurvey extends Component {
   constructor(props) {
     super(props);
   }
 
-  static navigationOptions = {
-    // this is the label in the middle of the nav bar
-    //title: 'hello',
-    // headerRight: HeaderNext,
-  };
+ 
 
-  render() {
-    return (
-      <SurveyCard
-        title={HOUSEHOLD_INFO["title"]}
-        imageName={HOUSEHOLD_INFO["title"]}
-        style={{ backgroundColor: Household.backgroundColor }}
-        navigation={this.props.navigation}
-        nextScreen="Transportation"
-      >
-        <QuestionCardHousing
-          navigation={this.props.navigation}
-          backgroundColor={Household.backgroundColor}
-          secondary={Household.secondary}
-        />
+    
+    static navigationOptions = { // this is the label in the middle of the nav bar
+        headerTitle: <HeaderLeafLogo tintColor="#EB5B6D"/>,
+        headerStyle: {backgroundColor: 'white', height: 45, borderBottomWidth: 0},
+        headerTintColor: '#EB5B6D',
+        headerRight: <HeaderRightArrow  tintColor='#EB5B6D'
+                                        onPress={() => console.log("Hello")}/>,
+        headerBackImage: <HeaderBackArrow tintColor='#EB5B6D'/>
+    };
 
-        <View style={styles.progressBar}>
+    render() {
+
+        
+        return (
+            <SurveyCard
+                ref={'survey'}
+                title={HOUSEHOLD_INFO["title"]}
+                imageName={HOUSEHOLD_INFO["title"]}
+                style={{backgroundColor: Household.backgroundColor}}
+                navigation = {this.props.navigation}
+                nextScreen='Transportation'
+                infoArr={HOUSEHOLD_INFO["info"]}
+                infoTypeArr={HOUSEHOLD_INFO["infoTypes"]}
+                modalBackgroundColor = {Household.secondary}
+                modalTextColor = "white">
+                    
+                <QuestionCardHousing
+                    ref={"questionCard"}
+                    navigation={this.props.navigation}
+                    backgroundColor={Household.backgroundColor}
+                    secondary={Household.secondary}
+                    />
+            <View style={styles.progressBar}>
           <Progress.Bar
             progress={0}
             width={null}
@@ -65,9 +73,11 @@ export default class HouseholdSurvey extends Component {
           />
         </View>
       </SurveyCard>
-    );
-  }
-}
+            
+        );
+    }
+
+}     
 
 const styles = StyleSheet.create({
   progressBar: {

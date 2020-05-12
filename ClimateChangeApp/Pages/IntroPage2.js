@@ -24,64 +24,26 @@ const INFO = INFORMATION["introScreens"][1];
 
 export default class IntroPage extends Component {
 
-  // "main method"
 
-  // constructor(props) {
-  //   super(props);
-  //   this.onPressInfoButton = this.onPressInfoButton.bind(this);
-  // }
-
-  // onPressInfoButton() {
-  //   this.refs.infoModal.showInfoModal();
-  // }
-
+  static navigationOptions = {
+    // headerTitle: 'new title',
+    headerShown: false
+  }
+  
   render() {
-    // return (
-    //   <View style={styles.mainContainer}>
-    //     <Text style={styles.topText}>What is CarbonXD?</Text>
-
-    //     <TouchableOpacity
-    //       style={styles.modalButtonContainer}
-    //       onPress={() => this.refs.infoModal.showInfoModal()}
-    //     >
-    //       <Image
-    //         style={styles.infoImage}
-    //         source={require("../assets/informationbutton.png")}
-    //       />
-    //     </TouchableOpacity>
-
-    //     <Text style={styles.bottomText}>
-    //       CarbonXD is an educational app created to bring awareness to the
-    //       importance of global internconnectedness of human activity and the
-    //       environment.
-    //     </Text>
-
-    //     <AsafNextButton
-    //       onPress={() => this.props.navigation.navigate("IntroPage3")}
-    //       style={styles.buttonDesign}
-    //     >
-    //       Next
-    //     </AsafNextButton>
-
-    //     <InfoModal
-    //       ref={"infoModal"}
-    //       parentObject={this}
-    //       style={StyleSheet.modalText}
-    //     >
-    //       Asaf Is a virgin
-    //     </InfoModal>
 
     //const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
           <View style={{
                     flex: 295,
-                    justifyContent: "flex-end",
+                    justifyContent: "flex-end", alignItems: "center"
                     }}>
-              <Text style={styles.topText}>{INFO["title"]}</Text>
+              <Image style={{height: 200, width: 200}} source={require("../assets/CarbonXP_Logos/LeafLogo_2_Dark.png")}></Image>
           </View>
 
           <View style={{flex: 270, justifyContent: "center"}}>
+               <Text style={styles.topText}>{INFO["title"]}</Text>
               <Text style={styles.bottomText}>
                   {INFO["description"]}
               </Text>
@@ -102,41 +64,10 @@ export default class IntroPage extends Component {
 }
 
 const styles = StyleSheet.create({
-  mainContainer: {
-    backgroundColor: "#F6F8EF",
-    width: "100%",
-    height: "100%",
-  },
-  // topText: {
-  //   marginTop: 100,
-  //   fontSize: 50,
-  //   fontWeight: "bold",
-  //   color: "#73A388",
-  //   textAlign: "left",
-  //   alignContent: "center",
-  // },
-  modalButtonContainer: {
-    width: "20%",
-    height: "10%",
-    backgroundColor: "yellow",
-    alignItems: "center",
-    margin: "15%",
-  },
-  infoImage: {
-    height: 70,
-    width: 70,
-  },
-  // bottomText: {
-  //   color: "#73A388",
-  //   fontSize: 23,
-  //   alignItems: "center",
-  //   textAlign: "left",
-  // },
   container: {
     flex: 1,
     flexDirection: "column",
     backgroundColor: "#F6F8EF",
-
     alignItems: "center"
   },
   topText: {
@@ -144,6 +75,7 @@ const styles = StyleSheet.create({
     fontSize: 34,
     paddingBottom: 20,
     fontWeight: "bold",
+    // backgroundColor: "blue"
   },
   bottomText: {
     color: "#73A388",
