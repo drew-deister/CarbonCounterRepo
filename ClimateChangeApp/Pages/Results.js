@@ -11,7 +11,7 @@
 // perform calculations on them. However, this returns strings. To get ints, use parseInt()
 
 import React, { Component, useState } from 'react';
-import {StyleSheet, View, TouchableHighlight, ScrollView} from "react-native";
+import {StyleSheet, View, TouchableHighlight, ScrollView, Image} from "react-native";
 import {Button, Text, Card, Icon} from 'react-native-elements';
 import MetricView from '../Components/MetricView';
 import ZipCode from '../Utilities/convertcsv.json'; // import JSON file
@@ -262,6 +262,14 @@ class Results extends React.Component {
                       buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
                       title='Shopping'
                       onPress= {() => this.props.navigation.navigate('Shopping')}
+                  />
+
+                  <Button
+                      icon={<Image source={require("../assets/social-media.png")} />}
+                      iconRight
+                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
+                      title='Go Home'
+                      onPress= {() => this.props.navigation.navigate('Home')}
                   />
                
                    </View>

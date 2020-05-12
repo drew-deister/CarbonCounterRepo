@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 import { AsafNextButton } from "../Components/AsafNextButton";
 import INFORMATION from '../Utilities/text.json'; // import JSON file
+import * as SecureStore from 'expo-secure-store';
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
@@ -15,13 +16,33 @@ export default class CarbonCounterIntroPage extends Component {
 
     constructor(props) {
         super(props);
-        
     }
     
     static navigationOptions = { // this is the label in the middle of the nav bar
         //title: 'hello',
         //headerRight: HeaderNext,
     };
+
+    resume() {
+        this.props.navigation.navigate("Household")
+        // I'm not sure if there will ever be an edge case where this is necessary, but just in case.
+        SecureStore.setItemAsync("hasHousingBeenAccessed", JSON.stringify("true"))
+        SecureStore.setItemAsync("hasTransportationBeenAccessed", JSON.stringify("true"))
+        SecureStore.setItemAsync("hasDietBeenAccessed", JSON.stringify("true"))
+        SecureStore.setItemAsync("hasShoppingBeenAccessed", JSON.stringify("true"))
+        // Do this no matter what
+        SecureStore.setItemAsync("hasResultsBeenAccessed", JSON.stringify("false"))
+    }
+
+    newSurvey() {
+        this.props.navigation.navigate("Household")
+        SecureStore.setItemAsync("hasHousingBeenAccessed", JSON.stringify("false"))
+        SecureStore.setItemAsync("hasTransportationBeenAccessed", JSON.stringify("false"))
+        SecureStore.setItemAsync("hasDietBeenAccessed", JSON.stringify("false"))
+        SecureStore.setItemAsync("hasShoppingBeenAccessed", JSON.stringify("false"))
+        // Do this no matter what
+        SecureStore.setItemAsync("hasResultsBeenAccessed", JSON.stringify("false"))
+    }
 
     render() {
 
@@ -50,9 +71,15 @@ export default class CarbonCounterIntroPage extends Component {
                         Why Carbon?
                     </AsafNextButton>
                     <AsafNextButton
-                        onPress={() => this.props.navigation.navigate("Household")}
+                        style = {{marginBottom: 0}}
+                        onPress={() => this.newSurvey()}
                     >
-                        Continue
+                        New Survey
+                    </AsafNextButton>
+                    <AsafNextButton
+                        onPress={() => this.resume()}
+                    >
+                        Resume
                     </AsafNextButton>
                 </View>
             </View>

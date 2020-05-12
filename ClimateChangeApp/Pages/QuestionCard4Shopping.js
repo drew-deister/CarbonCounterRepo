@@ -28,6 +28,7 @@ class QuestionCardShopping extends React.Component {
             shoppingFrequency: -1,
             articlesPerShop: -1, // don't think you need this
             hasResultsBeenAccessed: "false",
+            hasShoppingBeenAccessed: "false",
         }
         this.callbackFunction1 = this.callbackFunction1.bind(this);
         this.callbackFunction2 = this.callbackFunction2.bind(this);
@@ -43,8 +44,9 @@ class QuestionCardShopping extends React.Component {
 
     async fetchData() {
         const results = JSON.parse(await SecureStore.getItemAsync("hasResultsBeenAccessed"))
-        this.setState({hasResultsBeenAccessed: results})
-        if (results == "true") { // change the children to what the user selected if the user has accessed Results
+        const thisPage = JSON.parse(await SecureStore.getItemAsync("hasShoppingBeenAccessed"))
+        this.setState({hasResultsBeenAccessed: results, hasShoppingBeenAccessed: thisPage})
+        if (results == "true" || thisPage == "true") { // change the children to what the user selected if the user has accessed Results
             const shoppingFrequency = JSON.parse(await SecureStore.getItemAsync("shoppingFrequency"))
             this.setState({shoppingFrequency: shoppingFrequency})
             this.refs.q1.changeText(shoppingFrequency)
@@ -63,6 +65,7 @@ class QuestionCardShopping extends React.Component {
         if (this.checkValid()) {
             SecureStore.setItemAsync("shoppingFrequency", JSON.stringify(this.state.shoppingFrequency))
             SecureStore.setItemAsync("articlesPerShop", JSON.stringify(this.state.articlesPerShop)) // dont need this
+            SecureStore.setItemAsync("hasShoppingBeenAccessed", JSON.stringify("true"))
             this.props.navigation.navigate('Results')            
             } else {
             alert('Please answer all questions.')

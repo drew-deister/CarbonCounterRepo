@@ -6,7 +6,6 @@
 // _______________DIET QUESTION CARD__________________
 
 
-
 import React, { Component } from 'react';
 import {StyleSheet, View} from "react-native";
 import {Text, Icon, Button, Slider} from 'react-native-elements';
@@ -30,6 +29,7 @@ class QuestionCardDiet extends React.Component {
             beefServings: -1,
             dairyServings: -1,
             hasResultsBeenAccessed: "false",
+            hasDietBeenAccessed: "false",
         }
         this.callbackFunction1 = this.callbackFunction1.bind(this);
         this.callbackFunction2 = this.callbackFunction2.bind(this);
@@ -46,8 +46,9 @@ class QuestionCardDiet extends React.Component {
 
     async fetchData() {
         const results = JSON.parse(await SecureStore.getItemAsync("hasResultsBeenAccessed"))
-        this.setState({hasResultsBeenAccessed: results})
-        if (results == "true") { // change the children to what the user selected if the user has accessed Results
+        const thisPage = JSON.parse(await SecureStore.getItemAsync("hasDietBeenAccessed"))
+        this.setState({hasResultsBeenAccessed: results, hasDietBeenAccessed: thisPage})
+        if (results == "true" || thisPage == "true") { // change the children to what the user selected if the user has accessed Results
             const beefServings = JSON.parse(await SecureStore.getItemAsync("beefServings"))
             const dairyServings = JSON.parse(await SecureStore.getItemAsync("dairyServings"))
             this.setState({beefServings: beefServings, dairyServings: dairyServings})
@@ -69,7 +70,8 @@ class QuestionCardDiet extends React.Component {
     saveAndPush() { // change this to some checkvalue function
         if (this.checkValid()) {
             SecureStore.setItemAsync("beefServings", JSON.stringify(this.state.beefServings))
-            SecureStore.setItemAsync("dairyServings", JSON.stringify(this.state.dairyServings)) 
+            SecureStore.setItemAsync("dairyServings", JSON.stringify(this.state.dairyServings))
+            SecureStore.setItemAsync("hasDietBeenAccessed", JSON.stringify("true"))
             this.props.navigation.navigate('Shopping')            
             } else {
             alert('Please answer all questions.')
