@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, Image} from "react-native";
 import {Text, Card, Icon} from 'react-native-elements';
-import {HomeScreenActivityButton} from "./HomeScreenActivityButton"
+// import {HomeScreenActivityButton} from "./HomeScreenActivityButton"
 import {Alert} from "react-native";
 import { heightPercentageToDP } from 'react-native-responsive-screen';
 import PropTypes from 'prop-types';

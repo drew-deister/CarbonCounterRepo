@@ -13,8 +13,8 @@ import {
 function LogoTitle() {
   return (
     <Image
-      style={{ width: 50, height: 50 }}
-      source={require("../assets/Logo.png")}
+      style={{ width: 200, height: 40 }}
+      source={require("../assets/CarbonXP_Logos/NameLogo_Light.png")}
     />
   );
 }
@@ -28,6 +28,8 @@ export default class Home extends Component {
   static navigationOptions = {
     title: " ",
     headerTitle: LogoTitle,
+    headerStyle: {backgroundColor: '#73A388',  height: 45, borderBottomWidth: 0},
+    headerLeft: null
   };
 
     // "main method"
@@ -53,7 +55,7 @@ export default class Home extends Component {
                         
                     <HomeScreenActivityCard
                         title = {"WePlanet"}
-                        navigateToActivity = 'MapIntroPage'
+                        navigateToActivity = 'WePlanet'
                         navigation = {this.props.navigation}
                         style = {{backgroundColor: '#73A388'}}
                         />

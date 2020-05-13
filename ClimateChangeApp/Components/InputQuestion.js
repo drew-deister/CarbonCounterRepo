@@ -25,12 +25,19 @@ class InputQuestion extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      keyboardType: this.props.keyboardType
+      keyboardType: this.props.keyboardType,
+      txt: "",
     }
   }
 
   sendData = (message) => { 
+    this.setState({txt: message})
     this.props.parentCallBack(message); // call the function that was binded to QuestionCard and passed through props
+  }
+
+  // there may be a problem here will saving not sure 
+  changeText(value) { // parent will call this to manually override 
+    this.setState({txt: value});
   }
 
 
@@ -44,10 +51,12 @@ class InputQuestion extends React.Component {
         ></QuestionText>
         {/* <Text style = {[styles.text, this.props.questionStyle]}>{this.props.question}</Text> */}
         <TextInput 
+          ref = {'textInput'}
           style={styles.questionInput}
           returnKeyType = {'done'}
           keyboardType = {this.state.keyboardType}
           placeholder={this.props.placeholder}
+          value = {this.state.txt}
           placeholderTextColor = {'#898d91'}
           onChangeText={text => this.sendData(text)} // update parent state (QuestionCard)
           >

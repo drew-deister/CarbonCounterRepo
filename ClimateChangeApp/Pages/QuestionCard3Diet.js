@@ -5,6 +5,8 @@
 
 // _______________DIET QUESTION CARD__________________
 
+
+
 import React, { Component } from 'react';
 import {StyleSheet, View} from "react-native";
 import {Text, Icon, Button, Slider} from 'react-native-elements';
@@ -27,10 +29,33 @@ class QuestionCardDiet extends React.Component {
         this.state = {
             beefServings: -1,
             dairyServings: -1,
+            hasResultsBeenAccessed: "false",
         }
         this.callbackFunction1 = this.callbackFunction1.bind(this);
         this.callbackFunction2 = this.callbackFunction2.bind(this);
     }
+
+
+    componentDidMount() {
+        this.fetchData().done()
+        this.props.navigation.addListener('didFocus', () => { // runs every time the screen is seen
+            // The screen is focused
+            this.fetchData().done()
+        });
+    }
+
+    async fetchData() {
+        const results = JSON.parse(await SecureStore.getItemAsync("hasResultsBeenAccessed"))
+        this.setState({hasResultsBeenAccessed: results})
+        if (results == "true") { // change the children to what the user selected if the user has accessed Results
+            const beefServings = JSON.parse(await SecureStore.getItemAsync("beefServings"))
+            const dairyServings = JSON.parse(await SecureStore.getItemAsync("dairyServings"))
+            this.setState({beefServings: beefServings, dairyServings: dairyServings})
+            this.refs.q1.changeText(beefServings)
+            this.refs.q2.changeText(dairyServings)
+        }
+    }
+
 
     callbackFunction1(value) {
         this.setState({beefServings: value})
@@ -44,9 +69,26 @@ class QuestionCardDiet extends React.Component {
     saveAndPush() { // change this to some checkvalue function
         if (this.checkValid()) {
             SecureStore.setItemAsync("beefServings", JSON.stringify(this.state.beefServings))
+<<<<<<< HEAD
             SecureStore.setItemAsync("dairyServings", JSON.stringify(this.state.dairyServings))
             this.props.navigation.push('Shopping')
             }
+=======
+            SecureStore.setItemAsync("dairyServings", JSON.stringify(this.state.dairyServings)) 
+            this.props.navigation.navigate('Shopping')            
+            } else {
+            alert('Please answer all questions.')
+        }
+>>>>>>> master
+    }
+
+    // only used when back to results button is visible
+    saveAndGoBackToResults() {
+        console.log("should be pushing")
+        SecureStore.setItemAsync("beefServings", JSON.stringify(this.state.beefServings))
+        SecureStore.setItemAsync("dairyServings", JSON.stringify(this.state.dairyServings)) 
+        this.props.navigation.navigate('Shopping')  
+        this.props.navigation.navigate('Results') // you took results off the stack so must re-push
     }
 
     checkValid() { // do some sort of error checking here
@@ -66,17 +108,39 @@ class QuestionCardDiet extends React.Component {
 
 
     render() {
+        var access = this.state.hasResultsBeenAccessed
         return(
 
                 <View style = {styles.view}>
+<<<<<<< HEAD
                     <InputQuestion
+=======
+                    { // can move this where we want it
+                        (access == "true") ?
+                        <AsafNextButton 
+                                onPress= {() => this.saveAndGoBackToResults()}
+                                style={{backgroundColor: this.props.secondaryColor, marginBottom: 0}}
+                                textStyle={{color: "white"}}>
+
+                                Back to results
+                        </AsafNextButton>
+                        : null // don't do anything
+                    } 
+                    <InputQuestion 
+                        ref = {'q1'}
+>>>>>>> master
                         questionStyle={{color: this.props.secondaryColor}}
                         questionLines={2}
                         keyboardType = {'numeric'}
                         parentCallBack = {this.callbackFunction1}
                         question = {DIET_INFO["questions"][0]}
                         placeholder = {DIET_INFO["placeholders"][0]}/>
+<<<<<<< HEAD
                     <InputQuestion
+=======
+                    <InputQuestion 
+                        ref = {'q2'}
+>>>>>>> master
                         questionStyle={{color: this.props.secondaryColor}}
                         questionLines={3}
                         keyboardType = {'numeric'}
