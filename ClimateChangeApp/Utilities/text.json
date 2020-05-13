@@ -14,7 +14,7 @@
         }
 
     ],
-    
+
     "carbonCounterScreens": {
         "intro": {
             "title": "Carbon Counter",
@@ -22,12 +22,12 @@
             "disclaimerTitle": "Note: ",
             "disclaimer": "this activity captures just a few activities and is not a total picture of your carbon footprint, it is just an estimate of one slice of your life"
         },
-        
+
         "household": {
             "title": "Household",
             "questions": [
                 "Zip Code",
-                "How many people do you live with?",
+                "How many other people do you live with?",
                 "House size (square feet)?"
             ],
             "placeholders": [
@@ -48,7 +48,7 @@
                     "section": "Who you live with",
                     "text": "If you live with others in the home, then all the energy used in your home is not just for you, others get the benefit from that same amount of energy used. The number of people in your household is used to calculate the emissions that should be attributable just to you."
                 }
-            ] 
+            ]
         },
 
         "transportation": {
@@ -82,7 +82,7 @@
                     "section": "Transportation",
                     "text": "In this section, we assume that your primary use of transportation modes is to get to school and back. Then, we factored in a multiplier of that number based on your response regarding summer travel patterns."
                 }
-            ] 
+            ]
         },
 
         "diet": {
@@ -120,7 +120,7 @@
                         "Many people are also working on novel solutions that would not depend on changing dietary preferences around the world."
                     ]
                 }
-            ] 
+            ]
         },
 
         "shopping": {
@@ -140,8 +140,8 @@
                         "There are many people in the world working hard to change the way we make and transport things, what happens to things at the end of their useful lives, and where we get the energy to make the things we enjoy. We do not have to go without the things we like or that make life easier in order to address climate change."
                     ]
                 }
- 
-            ] 
+
+            ]
         }
 
     }

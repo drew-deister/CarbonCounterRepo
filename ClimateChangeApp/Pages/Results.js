@@ -71,7 +71,7 @@ class Results extends React.Component {
       // housing
       const zipCode = JSON.parse(await SecureStore.getItemAsync("zipCode"))
       // use 1/num people because total housing is divided by num people
-      const numPeople = 1/JSON.parse(await SecureStore.getItemAsync("numPeople"))
+      const numPeople = 1/(1+JSON.parse(await SecureStore.getItemAsync("numPeople")))
       const squareFootage = JSON.parse(await SecureStore.getItemAsync("squareFootage"))
 
       // transportation
