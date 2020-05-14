@@ -11,9 +11,9 @@ import {
   listenOrientationChange,
   removeOrientationListener,
 } from "react-native-responsive-screen";
-import HeaderRightArrow from '../Components/HeaderRightArrow';
-import HeaderBackArrow from '../Components/HeaderBackArrow';
-import HeaderLeafLogo from '../Components/HeaderLeafLogo';
+import HeaderRightArrow from "../Components/HeaderRightArrow";
+import HeaderBackArrow from "../Components/HeaderBackArrow";
+import HeaderLeafLogo from "../Components/HeaderLeafLogo";
 
 const DIET_INFO = INFORMATION["carbonCounterScreens"]["diet"];
 
@@ -24,65 +24,71 @@ const Diet = {
 };
 
 export default class DietSurvey extends Component {
-    constructor(props) {
-        super(props);
-        
-    }
-    
-    static navigationOptions = { // this is the label in the middle of the nav bar
-        headerTitle: <HeaderLeafLogo tintColor='#73A388'/>,
-        headerStyle: {backgroundColor: 'white', height: 45, borderBottomWidth: 0},
-        headerTintColor: '#73A388',
-        headerRight: <HeaderRightArrow  tintColor='#73A388'
-                                        onPress={() => console.log("Hello")}/>,
-        headerBackImage: <HeaderBackArrow tintColor='#73A388'/>
-    };
+  constructor(props) {
+    super(props);
+  }
 
-    render() {
+  static navigationOptions = {
+    // this is the label in the middle of the nav bar
+    headerTitle: <HeaderLeafLogo tintColor="#73A388" />,
+    headerStyle: { backgroundColor: "white", height: 45, borderBottomWidth: 0 },
+    headerTintColor: "#73A388",
+    headerRight: (
+      <HeaderRightArrow
+        tintColor="#73A388"
+        onPress={() => console.log("Hello")}
+      />
+    ),
+    headerBackImage: <HeaderBackArrow tintColor="#73A388" />,
+  };
 
-        return (
-            <SurveyCard
-                title={Diet.title}
-                imageName={Diet.title}
-                style={{backgroundColor: Diet.backgroundColor}}
-                titleStyle={{color: Diet.secondary}}
-                infoImageStyle={{tintColor: '#73A388'}}
-                navigation = {this.props.navigation}
-                infoArr={DIET_INFO["info"]}
-                infoTypeArr={DIET_INFO["infoTypes"]}
-                modalBackgroundColor = {Diet.backgroundColor}
-                modalTextColor = {Diet.secondary}>
-
-                    
-                <QuestionCardDiet 
-                    navigation = {this.props.navigation} 
-                    backgroundColor={Diet.backgroundColor}
-                    secondaryColor = {Diet.secondary}/>
-          <View style={styles.progressBar}>
+  render() {
+    return (
+      <View style={styles.viewContainer}>
+        <SurveyCard
+          title={Diet.title}
+          imageName={Diet.title}
+          style={{ backgroundColor: Diet.backgroundColor }}
+          titleStyle={{ color: Diet.secondary }}
+          infoImageStyle={{ tintColor: "#73A388" }}
+          navigation={this.props.navigation}
+          infoArr={DIET_INFO["info"]}
+          infoTypeArr={DIET_INFO["infoTypes"]}
+          modalBackgroundColor={Diet.backgroundColor}
+          modalTextColor={Diet.secondary}
+        >
+          <QuestionCardDiet
+            navigation={this.props.navigation}
+            backgroundColor={Diet.backgroundColor}
+            secondaryColor={Diet.secondary}
+          />
+        </SurveyCard>
+        <View style={styles.progressBar}>
           <Progress.Bar
             progress={0.5}
             width={null}
             borderColor={"#73A388"}
-            borderWidth={1}
+            borderWidth={2}
             color={"#73A388"}
           />
         </View>
-      </SurveyCard>
+      </View>
     );
   }
 }
 
-
-        
-
 const styles = StyleSheet.create({
+  viewContainer: {
+    flex: 1,
+  },
   progressBar: {
-    width: wp("100%"),
-    //height: wp("100%"),
     backgroundColor: "#FFFFFF",
-    padding: 50,
-    opacity: 0.8,
-    //borderRadius: 100,
+    padding: "2%",
+    paddingLeft: "3%",
+    paddingRight: "3%",
+    opacity: 0.7,
+    flex: 0.1,
+    justifyContent: "center",
+    alignContent: "center",
   },
 });
-    
