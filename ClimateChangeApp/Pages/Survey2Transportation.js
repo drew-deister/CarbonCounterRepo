@@ -55,6 +55,7 @@ export default class TransportationSurvey extends Component {
           infoTypeArr={TRANSPORTATION_INFO["infoTypes"]}
           modalBackgroundColor={Transportation.secondary}
           modalTextColor={Transportation.backgroundColor}
+          progress={.25}
         >
           <QuestionCardTransportation
             navigation={this.props.navigation}
@@ -63,7 +64,7 @@ export default class TransportationSurvey extends Component {
           />
         </SurveyCard>
 
-        <View style={styles.progressBar}>
+        {/* <View style={styles.progressBar}>
           <Progress.Bar
             progress={0.25}
             width={null}
@@ -71,7 +72,7 @@ export default class TransportationSurvey extends Component {
             borderWidth={2}
             color={"#73A388"}
           />
-        </View>
+        </View> */}
       </View>
 
       // <SurveyCard

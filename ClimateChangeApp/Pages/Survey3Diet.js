@@ -56,6 +56,7 @@ export default class DietSurvey extends Component {
           infoTypeArr={DIET_INFO["infoTypes"]}
           modalBackgroundColor={Diet.backgroundColor}
           modalTextColor={Diet.secondary}
+          progress={.5}
         >
           <QuestionCardDiet
             navigation={this.props.navigation}
@@ -63,15 +64,7 @@ export default class DietSurvey extends Component {
             secondaryColor={Diet.secondary}
           />
         </SurveyCard>
-        <View style={styles.progressBar}>
-          <Progress.Bar
-            progress={0.5}
-            width={null}
-            borderColor={"#73A388"}
-            borderWidth={2}
-            color={"#73A388"}
-          />
-        </View>
+        
       </View>
     );
   }

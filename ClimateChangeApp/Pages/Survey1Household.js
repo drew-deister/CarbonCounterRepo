@@ -70,7 +70,7 @@ export default class HouseholdSurvey extends Component {
           />
         </SurveyCard>
 
-        <View style={styles.progressBar}>
+        {/* <View style={styles.progressBar}>
           <Progress.Bar
             progress={0}
             width={null}
@@ -78,7 +78,7 @@ export default class HouseholdSurvey extends Component {
             borderWidth={2}
             color={"#73A388"}
           />
-        </View>
+        </View> */}
       </View>
     );
   }

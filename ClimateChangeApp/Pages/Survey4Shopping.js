@@ -55,21 +55,14 @@ export default class ShoppingSurvey extends Component {
           infoTypeArr={SHOPPING_INFO["infoTypes"]}
           modalBackgroundColor={Shopping.backgroundColor}
           modalTextColor="white"
+          progress={.75}
         >
           <QuestionCardShopping
             navigation={this.props.navigation}
             backgroundColor={Shopping.backgroundColor}
           />
         </SurveyCard>
-        <View style={styles.progressBar}>
-          <Progress.Bar
-            progress={0.75}
-            width={null}
-            borderColor={"#73A388"}
-            borderWidth={2}
-            color={"#73A388"}
-          />
-        </View>
+        
       </View>
     );
   }
