@@ -10,6 +10,14 @@ import { AsafNextButton } from "./AsafNextButton";
 import { InfoModal } from "./InfoModal";
 import { Row } from 'native-base';
 import ParagraphView from "./ParagraphView";
+import * as Progress from "react-native-progress";
+import WePlanetIntroPage from '../Pages/WePlanetIntro';
+import {
+    widthPercentageToDP as wp,
+    heightPercentageToDP as hp,
+    listenOrientationChange,
+    removeOrientationListener,
+  } from "react-native-responsive-screen";
 
 
 const images = {
@@ -108,6 +116,16 @@ class SurveyCard extends React.Component {
 
                 </ScrollView>
 
+                <View style={styles.progressBarContainer}>
+                    <Progress.Bar
+                        progress={this.props.progress}
+                        width={null}
+                        borderColor={"#F0F5DF"}
+                        borderWidth={2}
+                        color={"#F0F5DF"}
+                    />
+                </View>
+
                 <InfoModal
                         ref={"infoModal"}
                         parentObject={this}
@@ -186,7 +204,14 @@ const styles = StyleSheet.create({
         marginTop: 5,
         height: 25,
         width: 25,
+    },
+    progressBarContainer: {
+        height: 60,
+        justifyContent: 'center',
+        paddingHorizontal: wp("8%"),
+        opacity: .8,
+        backgroundColor: "#73A388"
     }
-});
+    });
 
 export default SurveyCard;
