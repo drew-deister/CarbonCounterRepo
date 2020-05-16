@@ -263,45 +263,48 @@ class Results extends React.Component {
 
                     <View style={styles.metricsContainer}>
                         <Text style={styles.pageTitle}>Metrics</Text>
-                        <MetricView metricName="SolarPanel" totalCo2 = {totalCO2}/>
-                        <MetricView metricName="Car" totalCo2 = {totalCO2} 
-                                    textStyle={{marginTop: -15}}/>
-                        <MetricView metricName="Tree" totalCo2 = {totalCO2}/>
-                        <MetricView metricName="SmartPhone" totalCo2 = {totalCO2}
-                                    containerStyle={{marginBottom: 20}}/>
-                        <MetricView metricName="SolidCarbon" totalCo2 = {totalCO2}
-                                    containerStyle={{marginBottom: 20}}/>
-                    </View> 
-
-                    <View style={styles.goBackContainer}>
-                        <Text style={styles.pageTitle}>Go Back</Text>
-                  
-                        <AsafNextButton
-                            onPress= {() => this.props.navigation.navigate('Household')}
-                            style={{marginBottom: 10, marginTop: 25, backgroundColor: "#EB5B6D", borderColor: "#EB5B6D"}}
-                            textStyle={{color: 'white'}}>
-                            Household
-                        </AsafNextButton>
-                        <AsafNextButton
-                            onPress= {() => this.props.navigation.navigate('Transportation')}
-                            style={{marginBottom: 10, backgroundColor: "#73A388", borderColor: "#73A388"}}
-                            textStyle={{color: 'white'}}>
-                            Transportation
-                        </AsafNextButton>
-                        <AsafNextButton
-                            onPress= {() => this.props.navigation.navigate('Diet')}
-                            style={{marginBottom: 10, backgroundColor: "#A3BEAD", borderColor: "#A3BEAD"}}
-                            textStyle={{color: 'white'}}>
-                            Diet
-                        </AsafNextButton>
-                        <AsafNextButton
-                            onPress= {() => this.props.navigation.navigate('Shopping')}
-                            style={{marginBottom: 10, backgroundColor: "#9AD1F2", borderColor: "#9AD1F2"}}
-                            textStyle={{color: 'white'}}>
-                            Shopping
-                        </AsafNextButton>
-
+                        <MetricView metricName="SolarPanel" totalCo2 = {totalCO2}></MetricView>
+                        <MetricView metricName="Car" totalCo2 = {totalCO2} textStyle={{marginTop: -15}}></MetricView>
+                        <MetricView metricName="Tree" totalCo2 = {totalCO2}></MetricView>
+                        <MetricView metricName="SmartPhone" totalCo2 = {totalCO2}></MetricView>
                     </View>
+
+                  <Button
+                      icon={<Icon name="arrow-forward" color="white"/>}
+                      iconRight
+                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
+                      title='Housing'
+                      onPress= {() => this.props.navigation.navigate('Household')}
+                  />
+                  <Button
+                      icon={<Icon name="arrow-forward" color="white"/>}
+                      iconRight
+                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
+                      title='Transportation'
+                      onPress= {() => this.props.navigation.navigate('Transportation')}
+                  />
+                  <Button
+                      icon={<Icon name="arrow-forward" color="white"/>}
+                      iconRight
+                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
+                      title='Diet'
+                      onPress= {() => this.props.navigation.navigate('Diet')}
+                  />
+                  <Button
+                      icon={<Icon name="arrow-forward" color="white"/>}
+                      iconRight
+                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
+                      title='Shopping'
+                      onPress= {() => this.props.navigation.navigate('Shopping')}
+                  />
+
+                  <Button
+                      icon={<Image source={require("../assets/social-media.png")} />}
+                      iconRight
+                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
+                      title='Go Home'
+                      onPress= {() => this.props.navigation.navigate('Home')}
+                  />
                
                 </View>
 

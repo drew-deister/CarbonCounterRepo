@@ -8,7 +8,6 @@
 
 // _______________HOUSING QUESTION CARD__________________
 
-
 import React, { Component } from 'react';
 import {StyleSheet, View} from "react-native";
 import {Text, Icon, Button, Slider} from 'react-native-elements';
@@ -25,7 +24,6 @@ import { SliderQuestion } from '../Components/SliderQuestion';
 import { AsafNextButton } from "../Components/AsafNextButton";
 
 
-
 const HOUSEHOLD_INFO = INFORMATION["carbonCounterScreens"]["household"];
 
 
@@ -40,6 +38,7 @@ class QuestionCardHousing extends React.Component {
             numPeople: 0,
             sliderValue: 1,
             hasResultsBeenAccessed: "false",
+            hasHousingBeenAccessed: "false",
         }
         this.callbackFunction1 = this.callbackFunction1.bind(this); // make sure these are both correct
         this.callbackFunction2 = this.callbackFunction2.bind(this);
@@ -47,7 +46,6 @@ class QuestionCardHousing extends React.Component {
     }
 
     componentDidMount() {
-        SecureStore.setItemAsync("hasResultsBeenAccessed", JSON.stringify("false")); // this only needs to be done once, in one page
         this.fetchData().done()
         this.props.navigation.addListener('didFocus', () => { // runs every time the screen is seen
             // The screen is focused
@@ -57,8 +55,10 @@ class QuestionCardHousing extends React.Component {
 
     async fetchData() {
         const results = JSON.parse(await SecureStore.getItemAsync("hasResultsBeenAccessed"))
-        this.setState({hasResultsBeenAccessed: results})
-        if (results == "true") { // change the children to what the user selected if the user has accessed Results
+        const thisPage = JSON.parse(await SecureStore.getItemAsync("hasHousingBeenAccessed"))
+        console.log("thispage: " + thisPage)
+        this.setState({hasResultsBeenAccessed: results, hasHousingBeenAccessed: thisPage})
+        if (results == "true" || thisPage == "true") { // change the children to what the user selected if the user has accessed Results or this page
             const zipCode = JSON.parse(await SecureStore.getItemAsync("zipCode"))
             const numPeople = JSON.parse(await SecureStore.getItemAsync("numPeople"))
             const squareFootage = JSON.parse(await SecureStore.getItemAsync("squareFootage"))
@@ -89,6 +89,7 @@ class QuestionCardHousing extends React.Component {
             SecureStore.setItemAsync("zipCode", JSON.stringify(this.state.zipCode)) // save to async
             SecureStore.setItemAsync("numPeople", JSON.stringify(this.state.numPeople))
             SecureStore.setItemAsync("squareFootage", JSON.stringify(this.state.sliderValue))
+            SecureStore.setItemAsync("hasHousingBeenAccessed", JSON.stringify("true"))
             this.props.navigation.navigate('Transportation')
         } else {
             alert("Please enter a valid zipcode.")

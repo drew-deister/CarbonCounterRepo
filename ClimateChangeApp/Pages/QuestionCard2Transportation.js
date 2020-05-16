@@ -34,6 +34,7 @@ class QuestionCardTransportation extends React.Component {
             mode: '',
             color: ['red', 'red', 'red', 'red', 'red'],
             hasResultsBeenAccessed: "false",
+            hasTransportationBeenAccessed: "false",
         }
         this.updateSliderState1 = this.updateSliderState1.bind(this)
         this.updateSliderState2 = this.updateSliderState2.bind(this)
@@ -51,8 +52,9 @@ class QuestionCardTransportation extends React.Component {
 
     async fetchData() {
         const results = JSON.parse(await SecureStore.getItemAsync("hasResultsBeenAccessed"))
-        this.setState({hasResultsBeenAccessed: results})
-        if (results == "true") { // change the children to what the user selected if the user has accessed Results
+        const thisPage = JSON.parse(await SecureStore.getItemAsync("hasTransportationBeenAccessed"))
+        this.setState({hasResultsBeenAccessed: results, hasTransportationBeenAccessed: thisPage})
+        if (results == "true" || thisPage == "true") { // change the children to what the user selected if the user has accessed Results
             const numMiles = JSON.parse(await SecureStore.getItemAsync("numMiles"))
             const greenAmount = JSON.parse(await SecureStore.getItemAsync("greenAmount")) // don't need?
             const summerChange = JSON.parse(await SecureStore.getItemAsync("summerChange"))
@@ -86,6 +88,7 @@ class QuestionCardTransportation extends React.Component {
             SecureStore.setItemAsync("greenAmount", JSON.stringify(this.state.greenAmount)) // save to async
             SecureStore.setItemAsync("summerChange", JSON.stringify(this.state.summerChange))
             SecureStore.setItemAsync("mode", JSON.stringify(this.state.mode))
+            SecureStore.setItemAsync("hasTransportationBeenAccessed", JSON.stringify("true"))
             this.props.navigation.navigate('Diet')
             } else {
             alert('Please answer all questions.')
