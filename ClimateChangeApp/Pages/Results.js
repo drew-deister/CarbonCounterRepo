@@ -73,6 +73,7 @@ class Results extends React.Component {
 
     componentDidMount() { // this is automatically called by the compiler
       this.fetchData().done()
+      this.flashScroll();
     }
 
     async fetchData() { // should probably add some error handling here
@@ -189,10 +190,6 @@ class Results extends React.Component {
       this._scrollView = scrollView;
   };
 
-  componentDidMount() {
-      this.flashScroll();
-  
-  }
 
   flashScroll() {
     setTimeout(() => {
