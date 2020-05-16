@@ -8,6 +8,11 @@ import {
   } from 'react-native-responsive-screen';
 
 
+const images = {
+    'Cards': require('../assets/Cards.png'),
+    'Baseball': require('../assets/Baseball.png'),
+}
+
 class ParagraphView extends React.Component {
 
     constructor(props) {
@@ -23,72 +28,47 @@ class ParagraphView extends React.Component {
     static defaultProps = {
         infoArr: ["Header Info", "Body Info", "Header Info", "Body Info"],
         infoTypeArr: ["header", "body", "header", "body"],
+        infoImageArr: [ ],
         textStyle: {color: "white"},
         
     }
 
     makeInfoSections() {
+        if (this.props.infoImageArr.length === 0) {
+            this.setImageArrToNull();
+        }
+
         const infoList = []
         for (let i = 0; i < this.props.infoArr.length; ++i) {
             infoList.push(
-                <Text key={i} style={[styles[this.props.infoTypeArr[i]], this.props.textStyle]}>{this.props.infoArr[i]}</Text>
+                <View key={i} style={styles.individualTextContainer}>
+                    <Text style={[styles[this.props.infoTypeArr[i]], this.props.textStyle]}>{this.props.infoArr[i]}</Text>
+                         
+                    {
+                        this.props.infoImageArr[i] ?
+                        <View style={styles.imageContainer}>
+                            {/* <Text>{this.props.infoImageArr[i]}</Text> */}
+                            <Image style={styles.image}
+                                source={images[this.props.infoImageArr[i]]}></Image>
+                        </View>
+                        
+                        : null
+
+                    }
+                </View>
             )
         }
         return infoList;
     }
 
-
-    makeAllSections() {
-        const infoList = []
+    setImageArrToNull() {
         for (let i = 0; i < this.props.infoArr.length; ++i) {
-            if (this.props.infoTypeArr[i] == "body") {
-                infoList.push(this.makeBody(i))
-            } else if (this.props.infoTypeArr[i] == "header") {
-                infoList.push(this.makeHeader(i))
-            } else if (this.props.infoTypeArr[i] == "subheader") {
-                infoList.push(this.makeSubheader(i))
-            } else if (this.props.infoTypeArr[i] == "subbody") {
-                infoList.push(this.makeSubbody(i))
-            } else {
-                infoList.push(this.makeInvalidTypeError(i))
-            } 
-            
+            this.props.infoImageArr.push(null);
         }
-        return infoList;
     }
 
-    
 
-    makeHeader(i) {
-        return (
-            <Text key={i} style={styles["header"]}>{this.props.infoArr[i]}</Text>
-        )
-    }
 
-    makeSubheader(i) {
-        return(
-            <Text key={i} style={styles.subheader}>{this.props.infoArr[i]}</Text>
-        )
-    }
-
-    makeBody(i) {
-        return (
-            <Text key={i} style={styles.body}>{this.props.infoArr[i]}</Text>
-        )
-    }
-
-    makeSubbody(i) {
-        return (
-            <Text key={i} style={styles.subbody}>{this.props.infoArr[i]}</Text>
-        )
-    }
-
-    makeInvalidTypeError(i) {
-        console.log("invalid infoTypeArr value at index: ", i)
-        return (
-            <Text key={i}>invalid infoTypeArr value at index: {i}</Text>
-        )
-    }
 
 
     render() {
@@ -99,7 +79,6 @@ class ParagraphView extends React.Component {
         return (
             <View style={styles.container}>
                 {formattedInfo}
-
             </View>
         )
     }
@@ -112,9 +91,17 @@ const styles = StyleSheet.create({
         width: "90%",
 
     },
+    individualTextContainer: {
+        flexDirection: "row",
+    },
     image: {
-        width: wp("35%"),
-        height: wp("25%"),//100,
+        width: wp("21%"),
+        height: wp("21%"),//100,
+    },
+    imageContainer: {
+        flex: 3,
+        justifyContent: "center",
+        alignItems: "center"
     },
     text: {
         marginTop: 5,
@@ -140,6 +127,7 @@ const styles = StyleSheet.create({
         fontSize: 22,
         marginBottom: 10,
         fontWeight: "600",
+        width: "100%"
     },
     body: { 
         color: "#73A388",
@@ -156,9 +144,14 @@ const styles = StyleSheet.create({
         // paddingTop: 20,
         fontWeight: "600",
         fontSize: 18,
+        // width: "60%",
         // width: wp("82%") //300,
-        marginBottom: 20
+        marginBottom: 20,
+        flex: 7,
     },
+    subbodyWithImage: {
+
+    }
 });
 
 export default ParagraphView;

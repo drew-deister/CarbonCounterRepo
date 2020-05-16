@@ -43,6 +43,7 @@ export default class DietSurvey extends Component {
                 navigation = {this.props.navigation}
                 infoArr={DIET_INFO["info"]}
                 infoTypeArr={DIET_INFO["infoTypes"]}
+                infoImageArr={DIET_INFO["infoImages"]}
                 modalBackgroundColor = {Diet.backgroundColor}
                 modalTextColor = {Diet.secondary}>
 

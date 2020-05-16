@@ -184,6 +184,22 @@ class Results extends React.Component {
       this.setState({showingModal: false})
   }
 
+  setScrollView = scrollView => {
+    // NOTE: scrollView will be null when the component is unmounted
+      this._scrollView = scrollView;
+  };
+
+  componentDidMount() {
+      this.flashScroll();
+  
+  }
+
+  flashScroll() {
+    setTimeout(() => {
+        this._scrollView.flashScrollIndicators();
+    }, 200)
+  }
+
     render() {
       const data = [
         {
@@ -219,7 +235,8 @@ class Results extends React.Component {
       return(
         <View style={styles.safeView}>
             <ScrollView style={styles.scrollViewStyle}
-                        contentContainerStyle = {styles.containerStyle}>
+                        contentContainerStyle = {styles.containerStyle}
+                        ref={this.setScrollView}>
                 
                 <View style = {styles.pageHeaderContainer}>
                     <Text style={styles.CO2Title}>
