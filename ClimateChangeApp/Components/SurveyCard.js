@@ -54,12 +54,30 @@ class SurveyCard extends React.Component {
         this.setState({showingModal: false})
     }
 
+    setScrollView = scrollView => {
+        // NOTE: scrollView will be null when the component is unmounted
+        this._scrollView = scrollView;
+      };
+
+    componentDidMount() {
+        this.flashScroll();
+        
+      }
+    
+      flashScroll() {
+        setTimeout(() => {
+            this._scrollView.flashScrollIndicators();
+
+        }, 200)
+      }
+
     render() {
         return (
             <View style={styles.safeView}>
                 <ScrollView style={[styles.scrollViewStyle, this.props.style]}
                             contentContainerStyle = {styles.containerStyle}
-                            scrollEnabled={!this.state.showingModal}>
+                            scrollEnabled={!this.state.showingModal}
+                            ref={this.setScrollView}>
                     <Image style = {styles.image} source = {images[this.props.imageName]} />
                     <View style={styles.titleContainer}>
                         <Text style={[styles.pageTitle, this.props.titleStyle]}>{this.props.title}</Text>
@@ -100,6 +118,7 @@ class SurveyCard extends React.Component {
                         <ParagraphView 
                             infoArr={this.props.infoArr}
                             infoTypeArr={this.props.infoTypeArr}
+                            infoImageArr={this.props.infoImageArr}
                             textStyle={{color: this.props.modalTextColor}}
                             />
                         

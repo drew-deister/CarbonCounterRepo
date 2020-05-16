@@ -73,6 +73,7 @@ class Results extends React.Component {
 
     componentDidMount() { // this is automatically called by the compiler
       this.fetchData().done()
+      this.flashScroll();
     }
 
     async fetchData() { // should probably add some error handling here
@@ -184,6 +185,18 @@ class Results extends React.Component {
       this.setState({showingModal: false})
   }
 
+  setScrollView = scrollView => {
+    // NOTE: scrollView will be null when the component is unmounted
+      this._scrollView = scrollView;
+  };
+
+
+  flashScroll() {
+    setTimeout(() => {
+        this._scrollView.flashScrollIndicators();
+    }, 200)
+  }
+
     render() {
       const data = [
         {
@@ -219,7 +232,8 @@ class Results extends React.Component {
       return(
         <View style={styles.safeView}>
             <ScrollView style={styles.scrollViewStyle}
-                        contentContainerStyle = {styles.containerStyle}>
+                        contentContainerStyle = {styles.containerStyle}
+                        ref={this.setScrollView}>
                 
                 <View style = {styles.pageHeaderContainer}>
                     <Text style={styles.CO2Title}>
@@ -261,50 +275,66 @@ class Results extends React.Component {
                           />
                     </View>
 
+
                     <View style={styles.metricsContainer}>
                         <Text style={styles.pageTitle}>Metrics</Text>
-                        <MetricView metricName="SolarPanel" totalCo2 = {totalCO2}></MetricView>
-                        <MetricView metricName="Car" totalCo2 = {totalCO2} textStyle={{marginTop: -15}}></MetricView>
-                        <MetricView metricName="Tree" totalCo2 = {totalCO2}></MetricView>
-                        <MetricView metricName="SmartPhone" totalCo2 = {totalCO2}></MetricView>
-                    </View>
+                        <MetricView metricName="SolarPanel" totalCo2 = {totalCO2}/>
+                        <MetricView metricName="Car" totalCo2 = {totalCO2} 
+                                    textStyle={{marginTop: -15}}/>
+                        <MetricView metricName="Tree" totalCo2 = {totalCO2}/>
+                        <MetricView metricName="SmartPhone" totalCo2 = {totalCO2}
+                                    containerStyle={{marginBottom: 20}}/>
+                        <MetricView metricName="SolidCarbon" totalCo2 = {totalCO2}
+                                    containerStyle={{marginBottom: 20}}/>
+                    </View> 
 
-                  <Button
-                      icon={<Icon name="arrow-forward" color="white"/>}
-                      iconRight
-                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
-                      title='Housing'
-                      onPress= {() => this.props.navigation.navigate('Household')}
-                  />
-                  <Button
-                      icon={<Icon name="arrow-forward" color="white"/>}
-                      iconRight
-                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
-                      title='Transportation'
-                      onPress= {() => this.props.navigation.navigate('Transportation')}
-                  />
-                  <Button
-                      icon={<Icon name="arrow-forward" color="white"/>}
-                      iconRight
-                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
-                      title='Diet'
-                      onPress= {() => this.props.navigation.navigate('Diet')}
-                  />
-                  <Button
-                      icon={<Icon name="arrow-forward" color="white"/>}
-                      iconRight
-                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
-                      title='Shopping'
-                      onPress= {() => this.props.navigation.navigate('Shopping')}
-                  />
 
-                  <Button
+                    <View style={styles.goBackContainer}>
+                        <Text style={styles.pageTitle}>Go Back</Text>
+                  
+                        <AsafNextButton
+                            onPress= {() => this.props.navigation.navigate('Household')}
+                            style={{marginBottom: 10, marginTop: 25, backgroundColor: "#EB5B6D", borderColor: "#EB5B6D"}}
+                            textStyle={{color: 'white'}}>
+                            Household
+                        </AsafNextButton>
+                        <AsafNextButton
+                            onPress= {() => this.props.navigation.navigate('Transportation')}
+                            style={{marginBottom: 10, backgroundColor: "#73A388", borderColor: "#73A388"}}
+                            textStyle={{color: 'white'}}>
+                            Transportation
+                        </AsafNextButton>
+                        <AsafNextButton
+                            onPress= {() => this.props.navigation.navigate('Diet')}
+                            style={{marginBottom: 10, backgroundColor: "#A3BEAD", borderColor: "#A3BEAD"}}
+                            textStyle={{color: 'white'}}>
+                            Diet
+                        </AsafNextButton>
+                        <AsafNextButton
+                            onPress= {() => this.props.navigation.navigate('Shopping')}
+                            style={{marginBottom: 10, backgroundColor: "#9AD1F2", borderColor: "#9AD1F2"}}
+                            textStyle={{color: 'white'}}>
+                            Shopping
+                        </AsafNextButton>
+
+                        <AsafNextButton
+                            onPress= {() => this.props.navigation.navigate('Home')}
+                            style={{marginBottom: 10, marginTop: 40}}
+                            // textStyle={{color: 'white'}}
+                            >
+                            Go Home
+                        </AsafNextButton>
+
+
+                        {/* <Button
                       icon={<Image source={require("../assets/social-media.png")} />}
                       iconRight
                       buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
                       title='Go Home'
                       onPress= {() => this.props.navigation.navigate('Home')}
-                  />
+                  /> */}
+
+                    </View>
                
                 </View>
 

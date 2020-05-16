@@ -80,7 +80,6 @@ class QuestionCardDiet extends React.Component {
 
     // only used when back to results button is visible
     saveAndGoBackToResults() {
-        console.log("should be pushing")
         SecureStore.setItemAsync("beefServings", JSON.stringify(this.state.beefServings))
         SecureStore.setItemAsync("dairyServings", JSON.stringify(this.state.dairyServings)) 
         this.props.navigation.navigate('Shopping')  

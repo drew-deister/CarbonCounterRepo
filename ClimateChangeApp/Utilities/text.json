@@ -145,7 +145,23 @@
                 "body",
                 "body",
                 "body"
+            ],
+            "infoImages": [
+                null,
+                null,
+                null,
+                "Cards",
+                null,
+                null,
+                "Baseball",
+                null,
+                null,
+                null,
+                null,
+                null
+
             ]
+
         },
 
         "shopping": {
@@ -210,5 +226,133 @@
 
         }
 
+    },
+
+    "creditScreen": {
+        "title": "Credit",
+
+        "contributions": {
+            "stakeHolders": "CarbonXP was built in concert with the Vanderbilt Climate Change Initiative, The Curb Center, Dr. Leah A. Dundon, and Charles Doktycz",
+            "other": [
+                "Jenna Tanner",
+                ", Graphic Designer",
+                "Josh Lipsey",
+                ", Video Editor"
+            ],
+            "emails": {
+                "LeahDundon": "mailto:leah.a.dundon@vanderbilt.edu",
+                "CharlesDoktycz": "mailto:charles.j.doktycz@vanderbilt.edu",
+                "JennaTanner": "mailto:tannJenn@umich.edu",
+                "JoshLipsey": "mailto:joshua.m.lipsey@vanderbilt.edu"
+            }
+
+                
+        },
+
+        "Change++": {
+
+            "info": [
+
+                "This app was developed by Change++, a student-run organization at Vanderbilt University that builds software for nonprofits in the Nashville area and across the country.",
+                "If you have a potential project, visit ",
+                "changeplupus.org",
+                " for more details on how to contact us!",
+                "With questions about this app, contact Change++ Project Manager, Ethan Shifrin, at Ethan.shifrin@vanderbilt.edu"
+            ],
+
+            "website": "https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&ved=2ahUKEwjQ7MjagrfpAhWRK80KHU3vBugQFjACegQIBRAB&url=http%3A%2F%2Fchangeplusplus.org%2F&usg=AOvVaw3apCQvfl-qJ2Cnbj3cWJtS",
+
+            "team": [
+                "CarbonXP Software Development Team:",
+                "Ethan Shifrin",
+                ", Project Manager and Software Developer",
+                "Drew Deister",
+                ", Lead Software Developer",
+                "Lucas Goldman",
+                ", Software Developer",
+                "Asaf Roth",
+                ", Software Developer"
+
+            ],
+            "emails": {
+                "EthanShifrin": "mailto:Ethan.Shifrin@vanderbilt.edu",
+                "DrewDeister": "mailto:Andrew.z.Deister@vanderbilt.edu",
+                "LucasGoldman": "mailto:lucas.r.goldman@vanderbilt.edu",
+                "AsafRoth": "mailto:asaf.roth@vanderbilt.edu"
+            }
+
+        },
+
+        "DataSources" : {
+            "title": "Data Sources",
+            "description": "The calculations used in this app were developed through data and information obtained from the below sources.  If you have any questions please contact leah.a.dundon@vanderbilt.edu.",
+            "sources": [
+                {
+                    "main": "Center for Sustainable Systems, University of Michigan. 2019. “Carbon Footprint Factsheet.” Pub. No. CSS09-05, available April 28, 2020 at ",
+                    "shortened-link": "css.umich.edu",
+                    "actual-link": "http://css.umich.edu/sites/default/files/Carbon%20Footprint_CSS09-05_e2019.pdf",
+                    "has-link": true
+                },
+                {
+                    "main": "Heller, M. and Center for Sustainable Systems, University of Michigan (2017).  Food Product Environmental Footprint Literature Summary: Packaging and Wasted Food, available at ",
+                    "shortened-link": "www.oregon.gov",
+                    "actual-link": "https://www.oregon.gov/deq/FilterDocs/PEF-Packaging-FullReport.pdf",
+                    "has-link": true
+                },
+                {
+                    "main": "Kirchain, R., Olivetti, E., Miller, T. 2015.  Sustainable Apparel Materials, Materials Systems Laboratory, Massachusetts Institute of Technology, available April 18, 2020 at  ",
+                    "shortened-link": "globalcompostproject.org",
+                    "actual-link": "http://globalcompostproject.org/wp-content/uploads/2015/10/SustainableApparelMaterials.pdf",
+                    "has-link": true
+                },
+                {
+                    "main": "Moore, M. (2019). Per capita meat consumption in Bangladesh 2017, by type.  Statista, ",
+                    "shortened-link": "www.statista.com",
+                    "actual-link": "https://www.statista.com/statistics/756875/bangladesh-meat-consumption-per-capita-by-type/#statisticContainer",
+                    "has-link": true
+                },
+                {
+                    "main": "OECD-FAO (Organization for Economic Co-operation and Development – Food and Agriculture Organization of the United Nations) 2017.  Agricultural Outlook 2018-2026, Commodity Snapshots, available April 18, 2020 at ",
+                    "shortened-link": "www.fao.org",
+                    "actual-link": "http://www.fao.org/3/a-BT090e.pdf",
+                    "has-link": true
+                },
+                {
+                    "main": "United States Department of Transportation, Federal Transit Administration (2010).  Public Transportation’s Role in Responding to Climate Change, available April 18, 2020 at ",
+                    "shortened-link": "www.transit.dot.gov",
+                    "actual-link": "https://www.transit.dot.gov/sites/fta.dot.gov/files/docs/PublicTransportationsRoleInRespondingToClimateChange2010.pdf ",
+                    "has-link": true
+                },
+                {
+                    "main": "United States Environmental Protection Agency (EPA), 2020.  Greenhouse Gas Equivalencies Calculator, available April 18, 2020 at ",
+                    "shortened-link": "www.epa.gov",
+                    "actual-link": "https://www.epa.gov/energy/greenhouse-gas-equivalencies-calculator",
+                    "has-link": true
+                },
+                {
+                    "main": "United States Environmental Protection Agency (2019).  Automotive Trends Report, EPA-420-R-19-002",
+                    "shortened-link": "",
+                    "actual-link": "",
+                    "has-link": false
+                },
+                {
+                    "main": "United States Environmental Protection Agency (2020).  eGrid Summary Tables 2018, created March 9, 2020, available April 18, 2020 at ",
+                    "shortened-link": "www.epa.gov",
+                    "actual-link": "https://www.epa.gov/sites/production/files/2020-01/documents/egrid2018_summary_tables.pdf",
+                    "has-link": true
+                },
+                {
+                    "main": "United States Energy Information Administration (2020). Electric Sales, Revenue, and Average Price, 2018 Average Monthly Bill – Residential, available April 18, 2020 at  ",
+                    "shortened-link": "www.eia.gov",
+                    "actual-link": "https://www.eia.gov/electricity/sales_revenue_price/pdf/table5_a.pdf",
+                    "has-link": true
+                }
+
+            ]
+        }
+        
+        
+
+            
     }
 }

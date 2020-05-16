@@ -28,10 +28,7 @@ export default class InfoModal extends Component {
   };
 
   closeModal() {
-      console.log(this.refs)
       this.refs.myModal.close();
-      console.log("hello")
-      // console.log(this.refs)
   }
 
   setScrollView = scrollView => {

@@ -7,6 +7,7 @@ import Home from './Pages/Home';
 import Results from './Pages/Results';
 import WePlanetIntroPage from './Pages/WePlanetIntro';
 import WePlanetMain from './Pages/WePlanetMain';
+import Credit from './Pages/Credit';
 import IntroPage1 from "./Pages/IntroPage1";
 import IntroPage2 from "./Pages/IntroPage2";
 import IntroPage3 from "./Pages/IntroPage3";
@@ -83,6 +84,9 @@ function backArrow() {
 const AppNavigator = createStackNavigator(
   {
     // road map for the different parts of our navigation
+    IntroPage1: { screen: IntroPage1 },
+    IntroPage2: { screen: IntroPage2 },
+    IntroPage3: { screen: IntroPage3 },
     Home: { screen: Home },
     CarbonCounter: {screen: CarbonCounterIntroPage},
     Household: {screen: SurveyHousehold},
@@ -92,9 +96,7 @@ const AppNavigator = createStackNavigator(
     Results: { screen: Results },
     WePlanet: {screen: WePlanetIntroPage},
     WePlanetMain: {screen: WePlanetMain},
-    IntroPage1: { screen: IntroPage1 },
-    IntroPage2: { screen: IntroPage2 },
-    IntroPage3: { screen: IntroPage3 }
+    Credit: {screen: Credit}
   },
   {
     cardStyle: {
