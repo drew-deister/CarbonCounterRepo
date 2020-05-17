@@ -52,10 +52,9 @@ class QuestionCardTransportation extends React.Component {
         this.setState({hasResultsBeenAccessed: results})
         if (results == "true") { // change the children to what the user selected if the user has accessed Results
             const numMiles = JSON.parse(await SecureStore.getItemAsync("numMiles"))
-            const greenAmount = JSON.parse(await SecureStore.getItemAsync("greenAmount")) // don't need?
             const summerChange = JSON.parse(await SecureStore.getItemAsync("summerChange"))
             const mode = JSON.parse(await SecureStore.getItemAsync("mode"))
-            this.setState({numMiles: numMiles, greenAmount: greenAmount, summerChange: summerChange, mode: mode})
+            this.setState({numMiles: numMiles, summerChange: summerChange, mode: mode})
             this.refs.slider1.changeValue(numMiles)
             this.refs.slider2.changeValue(summerChange)
             this.refs.MCQuestion.updateButtonAfterResultsAccessed(TRANSPORTATION_INFO["MCOptions"].indexOf(mode), mode)
@@ -86,7 +85,6 @@ class QuestionCardTransportation extends React.Component {
     // only used when back to results button is visible
     saveAndGoBackToResults() {
         SecureStore.setItemAsync("numMiles", JSON.stringify(this.state.numMiles)) // save to async
-        SecureStore.setItemAsync("greenAmount", JSON.stringify(this.state.greenAmount)) // save to async
         SecureStore.setItemAsync("summerChange", JSON.stringify(this.state.summerChange))
         SecureStore.setItemAsync("mode", JSON.stringify(this.state.mode))
         this.props.navigation.navigate('Diet')

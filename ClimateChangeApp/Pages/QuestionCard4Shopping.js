@@ -57,7 +57,6 @@ class QuestionCardShopping extends React.Component {
     saveAndPush() { // change this to some checkvalue function
         if (this.checkValid()) {
             SecureStore.setItemAsync("shoppingFrequency", JSON.stringify(this.state.shoppingFrequency))
-            SecureStore.setItemAsync("articlesPerShop", JSON.stringify(this.state.articlesPerShop)) // dont need this
             this.props.navigation.navigate('Results')
             }
     }
@@ -65,7 +64,6 @@ class QuestionCardShopping extends React.Component {
     // only used when back to results button is visible
     saveAndGoBackToResults() {
         SecureStore.setItemAsync("shoppingFrequency", JSON.stringify(this.state.shoppingFrequency))
-        SecureStore.setItemAsync("articlesPerShop", JSON.stringify(this.state.articlesPerShop))
         this.props.navigation.navigate('Results') // you took results off the stack so must re-push
     }
 
