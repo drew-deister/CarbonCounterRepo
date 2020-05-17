@@ -9,10 +9,11 @@
 // _______________HOUSING QUESTION CARD__________________
 
 import React, { Component } from 'react';
-import {StyleSheet, View} from "react-native";
+import {StyleSheet, View, KeyboardAvoidingView} from "react-native";
 import {Text, Icon, Button, Slider} from 'react-native-elements';
 import { InputQuestion } from '../Components/InputQuestion';
 import * as SecureStore from 'expo-secure-store';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 // import {diagonalScale} from '../Utilities/Scaling';
 import INFORMATION from '../Utilities/text.json'; // import JSON file
 import {

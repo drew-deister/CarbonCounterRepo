@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     height: 35,
     shadowColor: "#F0F0F0",
     backgroundColor: "white",
-    marginTop: 10,
+    marginTop: 8,
     marginBottom: 30,
     justifyContent: 'center',
     //shadowOpacity: 1,

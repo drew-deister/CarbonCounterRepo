@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   imageContainer: {
-      marginTop: 25,
+      marginTop: 80,
       alignItems: "center",
       height: wp("53%"), // ratio of height : width should be 
       width: wp("94%"),  //       wp("50%") : wp("90%") ish

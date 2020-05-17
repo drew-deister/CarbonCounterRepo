@@ -68,7 +68,6 @@ class MCQuestion extends React.Component {
         </TouchableHighlight>
       );
     }
-    return answersList;
   }
 
   updateButton(index, mode) {

@@ -20,7 +20,7 @@ export default class WePlanetIntroPage extends Component {
           <View style={{ flex: 200,
                          justifyContent: "flex-end"}}>
 
-              <Text style={styles.topText}>Climate Change is a Global Issue.</Text>
+              <Text style={styles.topText}>Climate Change is a global issue.</Text>
           </View>
 
 

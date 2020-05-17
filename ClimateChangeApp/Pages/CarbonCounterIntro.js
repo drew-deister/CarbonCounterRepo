@@ -51,7 +51,6 @@ export default class CarbonCounterIntroPage extends Component {
     async fetchData() {
         const hasHousingBeenAccessed = JSON.parse(await SecureStore.getItemAsync("hasHousingBeenAccessed"))
         if (hasHousingBeenAccessed == "true") {
-            console.log("THIS IS TRUE")
             this.setState({hasDoneSurveyBefore: "true"})
         }
     }
