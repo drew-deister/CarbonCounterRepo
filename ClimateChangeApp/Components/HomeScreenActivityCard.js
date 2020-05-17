@@ -53,7 +53,9 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         backgroundColor: '#9AD1F2', 
         alignItems: 'center',
-        justifyContent: "flex-end"
+        justifyContent: "flex-end",
+        // shadowOpacity: .2,
+        // shadowRadius: 2,
         // backgroundColor: 'blue'
     },
     activityTitle:{

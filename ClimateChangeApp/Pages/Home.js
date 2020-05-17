@@ -155,17 +155,18 @@ const styles = StyleSheet.create({
         backgroundColor: '#F0F5DF', 
         alignItems: 'center',
         borderColor: '#73A388',
-        borderWidth: 2,
+        // shadowRadius: 4,
+        shadowOpacity: .2,
+        // borderWidth: 2,
         alignItems: 'center',
         justifyContent: 'center'
         // justifyContent: "flex-end"
-        // backgroundColor: 'blue'
     },
     creditText: {
         // width: "75%", //211,
         color: '#73A388',
         fontSize: 20,
-        fontWeight: '500',
+        fontWeight: '600',
         
     }
 });
