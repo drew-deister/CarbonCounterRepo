@@ -27,8 +27,8 @@ class QuestionCardDiet extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            beefServings: -1,
-            dairyServings: -1,
+            beefServings: '',
+            dairyServings: '',
             hasResultsBeenAccessed: "false",
         }
         this.callbackFunction1 = this.callbackFunction1.bind(this);
@@ -84,24 +84,34 @@ class QuestionCardDiet extends React.Component {
     }
 
     checkValid() { // do some sort of error checking here
-      if (this.state.beefServings < 0)
+      if (this.state.beefServings === '')
       {
         alert ("Please enter the number of beef servings you consume.")
         return false;
       }
-      if (isNaN(this.state.beefServings))
+      if (isNaN(parseInt(this.state.beefServings)))
       {
         alert ("Please enter a number for the quantity of beef servings you consume.")
         return false;
       }
-      if (this.state.dairyServings < 0)
+      if (parseInt(this.state.beefServings) < 0)
+      {
+        alert ("Please enter a non negative number for the quantity of beef servings you consume.")
+        return false;
+      }
+      if (this.state.dairyServings === '')
       {
         alert ("Please enter the number of dairy servings you consume.")
         return false;
       }
-      if (isNaN(this.state.dairyServings))
+      if (isNaN(parseInt(this.state.dairyServings)))
       {
         alert ("Please enter a number for the quantity of dairy servings you consume.")
+        return false;
+      }
+      if (parseInt(this.state.dairyServings) < 0)
+      {
+        alert ("Please enter a non negative number for the quantity of dairy servings you consume.")
         return false;
       }
       return true;

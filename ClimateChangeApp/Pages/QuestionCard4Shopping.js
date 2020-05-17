@@ -25,7 +25,7 @@ class QuestionCardShopping extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            shoppingFrequency: -1,
+            shoppingFrequency: '',
             hasResultsBeenAccessed: "false",
         }
         this.callbackFunction1 = this.callbackFunction1.bind(this);
@@ -68,14 +68,19 @@ class QuestionCardShopping extends React.Component {
     }
 
     checkValid() { // do some sort of error checking here
-      if (this.state.shoppingFrequency < 0)
+      if (this.state.shoppingFrequency === '')
       {
         alert ("Please enter your shopping frequency.")
         return false;
       }
-      if (isNaN(this.state.shoppingFrequency))
+      if (isNaN(parseInt(this.state.shoppingFrequency)))
       {
         alert ("Please enter a number for your shopping frequency.")
+        return false;
+      }
+      if (parseInt(this.state.shoppingFrequency) < 0 )
+      {
+        alert ("Please enter a non negative number for your shopping frequency.")
         return false;
       }
       return true

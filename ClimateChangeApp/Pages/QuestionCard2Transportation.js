@@ -23,7 +23,6 @@ import { throwIfAudioIsDisabled } from 'expo-av/build/Audio/AudioAvailability';
 
 const TRANSPORTATION_INFO = INFORMATION["carbonCounterScreens"]["transportation"];
 
-
 class QuestionCardTransportation extends React.Component {
     constructor(props) {
         super(props);
@@ -67,7 +66,7 @@ class QuestionCardTransportation extends React.Component {
     }
 
     updateMCState(mode) {
-        this.setState({mode: mode})
+      this.setState({mode: mode})
     }
     updateSliderState2(value) {
         this.setState({summerChange: value})
@@ -78,6 +77,7 @@ class QuestionCardTransportation extends React.Component {
         if (this.checkValid()) {
             SecureStore.setItemAsync("numMiles", JSON.stringify(this.state.numMiles)) // save to async
             SecureStore.setItemAsync("mode", JSON.stringify(this.state.mode))
+            SecureStore.setItemAsync("summerChange", JSON.stringify(this.state.summerChange))
             this.props.navigation.navigate('Diet')
             }
     }
@@ -100,7 +100,7 @@ class QuestionCardTransportation extends React.Component {
       }
       if (this.state.numMiles === 0)
       {
-        alert ("Please input how many miles you drive.")
+        alert ("Please input how many miles you travel.")
         return false;
       }
       return true;

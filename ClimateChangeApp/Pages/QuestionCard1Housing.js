@@ -38,7 +38,7 @@ class QuestionCardHousing extends React.Component {
         // and save them when the next button is pushed
         this.state = {
             zipCode: 0,
-            numPeople: 0,
+            numPeople: '',
             sliderValue: 1,
             hasResultsBeenAccessed: "false",
         }
@@ -121,19 +121,24 @@ class QuestionCardHousing extends React.Component {
         alert ("Please enter a valid zip code.")
         return false;
       }
-      if (isNaN(this.state.numPeople))
+      if (this.state.numPeople === '')
+      {
+        alert ("Please enter how many people you live with.")
+        return false;
+      }
+      if (isNaN(parseInt(this.state.numPeople)))
       {
         alert ("Please enter a number for how many people you live with.")
         return false;
       }
-      if (this.state.numPeople <= 0)
+      if (parseInt(this.state.numPeople) < 0)
       {
-        alert ("Please enter a positive number for how many people that you live with.")
+        alert ("Please enter a non negative number for how many people that you live with.")
         return false;
       }
       if (this.state.sliderValue === 1)
       {
-        alert ("Please enter the size of your home size.")
+        alert ("If you aren't sure what the size of your home is, please guess.")
         return false;
       }
       return true;
