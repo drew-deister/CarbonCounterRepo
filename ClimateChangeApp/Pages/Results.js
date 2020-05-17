@@ -259,7 +259,7 @@ class Results extends React.Component {
 
                 <View style={styles.cardStyle}>
                     <Text style={styles.pageTitle}>Results</Text>
-                    <Text style={styles.subTitle}>from each category</Text>
+                    <Text style={styles.bottomText}>from each category</Text>
 
                     <View style={styles.pieChartContainer}>
                         <PieChart data={data}
@@ -271,7 +271,14 @@ class Results extends React.Component {
                                   paddingLeft="15"
                           //absolute //remove to give percentages
                           />
+
+                        <View style={{width: wp("75%"), marginTop: 10}}>
+                           <Text style={styles.bottomText}>To learn more about a specifc category, click on the "info" button next to the title of any of the previous pages</Text>
+                        </View>
                     </View>
+
+                    
+                  
 
 
                     <View style={styles.metricsContainer}>
@@ -289,6 +296,7 @@ class Results extends React.Component {
 
                     <View style={styles.goBackContainer}>
                         <Text style={styles.pageTitle}>Go Back</Text>
+                        <Text style={styles.bottomText}>Go back and change your answers to see how it affects the results!</Text>
                   
                         <AsafNextButton
                             onPress= {() => this.props.navigation.navigate('Household')}
@@ -459,11 +467,12 @@ CO2Number:
     fontStyle: 'italic',
     textAlign: 'center',
   },
-  subTitle: {
+  bottomText: {
     color: '#73A388',
     fontSize: 16,
     fontWeight: '600',
     textAlign: 'center',
+    
   },
 
   pieChartContainer: {

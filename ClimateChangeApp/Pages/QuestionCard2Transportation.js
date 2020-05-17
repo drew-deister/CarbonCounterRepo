@@ -23,23 +23,19 @@ import { throwIfAudioIsDisabled } from 'expo-av/build/Audio/AudioAvailability';
 
 const TRANSPORTATION_INFO = INFORMATION["carbonCounterScreens"]["transportation"];
 
-
 class QuestionCardTransportation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            numMiles: 1,
-            greenAmount: 1,
+            numMiles: 0,
             summerChange: 1,
             mode: '',
             color: ['red', 'red', 'red', 'red', 'red'],
             hasResultsBeenAccessed: "false",
-            hasTransportationBeenAccessed: "false",
         }
         this.updateSliderState1 = this.updateSliderState1.bind(this)
-        this.updateSliderState2 = this.updateSliderState2.bind(this)
-        this.updateSliderState3 = this.updateSliderState3.bind(this)
         this.updateMCState = this.updateMCState.bind(this)
+        this.updateSliderState2 = this.updateSliderState2.bind(this)
     }
 
     componentDidMount() {
@@ -52,14 +48,12 @@ class QuestionCardTransportation extends React.Component {
 
     async fetchData() {
         const results = JSON.parse(await SecureStore.getItemAsync("hasResultsBeenAccessed"))
-        const thisPage = JSON.parse(await SecureStore.getItemAsync("hasTransportationBeenAccessed"))
-        this.setState({hasResultsBeenAccessed: results, hasTransportationBeenAccessed: thisPage})
-        if (results == "true" || thisPage == "true") { // change the children to what the user selected if the user has accessed Results
+        this.setState({hasResultsBeenAccessed: results})
+        if (results == "true") { // change the children to what the user selected if the user has accessed Results
             const numMiles = JSON.parse(await SecureStore.getItemAsync("numMiles"))
-            const greenAmount = JSON.parse(await SecureStore.getItemAsync("greenAmount")) // don't need?
             const summerChange = JSON.parse(await SecureStore.getItemAsync("summerChange"))
             const mode = JSON.parse(await SecureStore.getItemAsync("mode"))
-            this.setState({numMiles: numMiles, greenAmount: greenAmount, summerChange: summerChange, mode: mode})
+            this.setState({numMiles: numMiles, summerChange: summerChange, mode: mode})
             this.refs.slider1.changeValue(numMiles)
             this.refs.slider2.changeValue(summerChange)
             this.refs.MCQuestion.updateButtonAfterResultsAccessed(TRANSPORTATION_INFO["MCOptions"].indexOf(mode), mode)
@@ -70,44 +64,44 @@ class QuestionCardTransportation extends React.Component {
     updateSliderState1(value) {
         this.setState({numMiles: value})
     }
-    updateSliderState2(value) {
-        this.setState({greenAmount: value})
+
+    updateMCState(mode) {
+      this.setState({mode: mode})
     }
-    updateSliderState3(value) {
+    updateSliderState2(value) {
         this.setState({summerChange: value})
     }
 
-    updateMCState(mode) {
-        this.setState({mode: mode})
-    }
 
     saveAndPush() { // change this to some checkvalue function
         if (this.checkValid()) {
             SecureStore.setItemAsync("numMiles", JSON.stringify(this.state.numMiles)) // save to async
-            SecureStore.setItemAsync("greenAmount", JSON.stringify(this.state.greenAmount)) // save to async
-            SecureStore.setItemAsync("summerChange", JSON.stringify(this.state.summerChange))
             SecureStore.setItemAsync("mode", JSON.stringify(this.state.mode))
-            SecureStore.setItemAsync("hasTransportationBeenAccessed", JSON.stringify("true"))
+            SecureStore.setItemAsync("summerChange", JSON.stringify(this.state.summerChange))
             this.props.navigation.navigate('Diet')
-            } else {
-            alert('Please answer all questions.')
-        }
+            }
     }
 
     // only used when back to results button is visible
     saveAndGoBackToResults() {
-        SecureStore.setItemAsync("numMiles", JSON.stringify(this.state.numMiles)) // save to async
-        SecureStore.setItemAsync("greenAmount", JSON.stringify(this.state.greenAmount)) // save to async
-        SecureStore.setItemAsync("summerChange", JSON.stringify(this.state.summerChange))
-        SecureStore.setItemAsync("mode", JSON.stringify(this.state.mode))
-        this.props.navigation.navigate('Diet')
+        this.saveAndPush()
         this.props.navigation.navigate('Shopping')
         this.props.navigation.navigate('Results') // you took results off the stack so must re-push
     }
 
     checkValid() {
-        return (this.state.numMiles != 0)
-    } 
+      if (this.state.mode === '')
+      {
+        alert ("Please enter your primary form of transportation.")
+        return false;
+      }
+      if (this.state.numMiles === 0)
+      {
+        alert ("Please input how many miles you travel.")
+        return false;
+      }
+      return true;
+    }
 
     render() {
         var access = this.state.hasResultsBeenAccessed
@@ -115,7 +109,7 @@ class QuestionCardTransportation extends React.Component {
                     <View style = {styles.view}>
                         { // can move this where we want it
                             (access == "true") ?
-                            <AsafNextButton 
+                            <AsafNextButton
                                 onPress= {() => this.saveAndGoBackToResults()}
                                 style={{backgroundColor: this.props.secondaryColor, marginBottom: 0}}
                                 textStyle={{color: this.props.backgroundColor}}>
@@ -123,32 +117,18 @@ class QuestionCardTransportation extends React.Component {
                                 Back to results
                             </AsafNextButton>
                             : null // don't do anything
-                        } 
-                        <SliderQuestion   
+                        }
+                        <SliderQuestion
                             ref = {'slider1'}
                             question={TRANSPORTATION_INFO["questions"][0]}
                             questionLines={3}
                             questionStyle={{fontSize: 18}}
                             secondaryColor='#F0F5DF'
-                            //max = {100} min = {0} step = {1}      //these are now default props
+                            fixedDecimals = {1}
+                            max = {20} min = {0.5} step = {.5}      //these are now default props
                             shouldDisplay = {true}
                             callback = {this.updateSliderState1}
                         />
-
-                        {/* LUCAS       -       Leah had us delete this question. 
-                                                Once you see this, if you agree, delete the following commented out code*/ }
-                        {/* <View style = {styles.rowStyleView}>
-                            <SliderQuestion
-                                question={this.props.data.greenAmount}
-                                questionLines={2}
-                                //max = {100} min = {1} step = {1}      //these are now default props
-                                shouldDisplay = {false}
-                                callback = {this.updateSliderState2}
-                                secondaryColor='#F0F5DF'
-                                minLabel="no other mode of transport"
-                                maxLabel="about half my travel is greener"
-                            />
-                        </View> */}
 
 
                         {/* FIXME       -------------------------------------/*
@@ -163,12 +143,12 @@ class QuestionCardTransportation extends React.Component {
                                         }
                         <MCQuestion
                             ref = {'MCQuestion'}
-                            question={TRANSPORTATION_INFO["questions"][1]} 
+                            question={TRANSPORTATION_INFO["questions"][1]}
                             questionLines={2}
                             questionStyle={{fontSize: 18}}
                             answerOptions={TRANSPORTATION_INFO["MCOptions"]}
-                            answerStyle={[{}, {fontSize: 14}, {fontSize: 12}, 
-                                {}, {fontSize: 16}, {}, ]}
+                            answerStyle={[{}, {}, {},
+                                {}, {}, {}, ]}
                             callback={this.updateMCState}
                             secondaryColor='rgba(252, 205, 193, .85)'
                         ></MCQuestion>
@@ -182,7 +162,7 @@ class QuestionCardTransportation extends React.Component {
                                 questionStyle={{fontSize: 18}}
                                 max = {100} min = {1} step = {1}
                                 shouldDisplay = {false}
-                                callback = {this.updateSliderState3}
+                                callback = {this.updateSliderState2}
                                 secondaryColor='#F0F5DF'
                                 minLabel={TRANSPORTATION_INFO["sliderMin"][2]}
                                 maxLabel={TRANSPORTATION_INFO["sliderMax"][2]}
@@ -195,8 +175,8 @@ class QuestionCardTransportation extends React.Component {
                             >
                             Next
                         </AsafNextButton>
-                    </View> 
-        )    
+                    </View>
+        )
     }
 }
 
@@ -207,7 +187,7 @@ const styles = StyleSheet.create({
     },
     view: {
         alignItems: 'center',
-    },    
+    },
 })
 
 
