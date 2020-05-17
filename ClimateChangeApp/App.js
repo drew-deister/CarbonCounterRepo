@@ -104,7 +104,7 @@ const AppNavigator = createStackNavigator(
         // shadowOpacity: .5,
         // shadowRadius: 10,
     },
-    initialRouteName: "WePlanet", // For functioning app, use "IntroPage1"
+    initialRouteName: "Home", // For functioning app, use "IntroPage1"
     //headerMode: "None",
     headerLayoutPreset: "center",
     transitionConfig: () => ({
