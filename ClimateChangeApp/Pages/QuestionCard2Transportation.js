@@ -100,6 +100,8 @@ class QuestionCardTransportation extends React.Component {
         SecureStore.setItemAsync("greenAmount", JSON.stringify(this.state.greenAmount)) // save to async
         SecureStore.setItemAsync("summerChange", JSON.stringify(this.state.summerChange))
         SecureStore.setItemAsync("mode", JSON.stringify(this.state.mode))
+        this.props.navigation.navigate('Diet')
+        this.props.navigation.navigate('Shopping')
         this.props.navigation.navigate('Results') // you took results off the stack so must re-push
     }
 
@@ -113,11 +115,13 @@ class QuestionCardTransportation extends React.Component {
                     <View style = {styles.view}>
                         { // can move this where we want it
                             (access == "true") ?
-                            <Button icon={<Icon name="arrow-forward" color="white"/>}
-                            iconRight
-                            buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
-                            title='Back to results'
-                            onPress= {() => this.saveAndGoBackToResults}></Button>
+                            <AsafNextButton 
+                                onPress= {() => this.saveAndGoBackToResults()}
+                                style={{backgroundColor: this.props.secondaryColor, marginBottom: 0}}
+                                textStyle={{color: this.props.backgroundColor}}>
+
+                                Back to results
+                            </AsafNextButton>
                             : null // don't do anything
                         } 
                         <SliderQuestion   

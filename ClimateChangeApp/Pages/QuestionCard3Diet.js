@@ -80,9 +80,9 @@ class QuestionCardDiet extends React.Component {
 
     // only used when back to results button is visible
     saveAndGoBackToResults() {
-        console.log("should be pushing")
         SecureStore.setItemAsync("beefServings", JSON.stringify(this.state.beefServings))
         SecureStore.setItemAsync("dairyServings", JSON.stringify(this.state.dairyServings)) 
+        this.props.navigation.navigate('Shopping')  
         this.props.navigation.navigate('Results') // you took results off the stack so must re-push
     }
 
@@ -98,11 +98,13 @@ class QuestionCardDiet extends React.Component {
                 <View style = {styles.view}>
                     { // can move this where we want it
                         (access == "true") ?
-                        <Button icon={<Icon name="arrow-forward" color="white"/>}
-                        iconRight
-                        buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
-                        title='Back to results'
-                        onPress= {() => this.saveAndGoBackToResults()}></Button>
+                        <AsafNextButton 
+                                onPress= {() => this.saveAndGoBackToResults()}
+                                style={{backgroundColor: this.props.secondaryColor, marginBottom: 0}}
+                                textStyle={{color: "white"}}>
+
+                                Back to results
+                        </AsafNextButton>
                         : null // don't do anything
                     } 
                     <InputQuestion 

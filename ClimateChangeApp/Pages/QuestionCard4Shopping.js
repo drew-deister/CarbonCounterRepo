@@ -88,15 +88,7 @@ class QuestionCardShopping extends React.Component {
         var access = this.state.hasResultsBeenAccessed
         return(
                 <View style = {styles.view}>
-                    { // can move this where we want it
-                        (access == "true") ?
-                        <Button icon={<Icon name="arrow-forward" color="white"/>}
-                        iconRight
-                        buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
-                        title='Back to results'
-                        onPress= {() => this.saveAndGoBackToResults}></Button>
-                        : null // don't do anything
-                    } 
+                    
                     <InputQuestion 
                         ref = {'q1'}
                         questionLines={3}
@@ -114,12 +106,24 @@ class QuestionCardShopping extends React.Component {
                         question = {this.props.data.articlesPerShop} 
                         placeholder = {this.props.data.articlesPerShopPlaceholder}/> */}
 
-                    <AsafNextButton
+                    { // can move this where we want it
+                        (access == "true") ?
+                        <AsafNextButton 
+                                onPress= {() => this.saveAndGoBackToResults()}
+                                style={{backgroundColor: "#73A388", marginBottom: 0}}
+                                textStyle={{color: "white"}}>
+
+                                Back to results
+                        </AsafNextButton>
+                        : 
+                        <AsafNextButton
                         onPress={() => this.saveAndPush()}
                         viewStyle={{marginTop: 16}}
                         textStyle={{color: this.props.backgroundColor}} >
                             Next
-                    </AsafNextButton>
+                        </AsafNextButton>
+                    }       
+                    
                 </View> 
         )    
     }

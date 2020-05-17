@@ -5,8 +5,9 @@ import {createStackNavigator} from 'react-navigation-stack';
 import {StackViewStyleInterpolator} from 'react-navigation-stack'
 import Home from './Pages/Home';
 import Results from './Pages/Results';
-import MapIntroPage from './Pages/MapIntroPage';
-import GeoVideo1 from './Pages/GeoVideo1';
+import WePlanetIntroPage from './Pages/WePlanetIntro';
+import WePlanetMain from './Pages/WePlanetMain';
+import Credit from './Pages/Credit';
 import IntroPage1 from "./Pages/IntroPage1";
 import IntroPage2 from "./Pages/IntroPage2";
 import IntroPage3 from "./Pages/IntroPage3";
@@ -65,9 +66,17 @@ const styles = StyleSheet.create({
 function LogoTitle() {
   return (
     <Image
-      style={{ width: 50, height: 50 }}
-      source={require("./assets/Logo.png")}
+      style={{ width: 200, height: 40 }}
+      source={require("./assets/CarbonXP_Logos/NameLogo_Light.png")}
     />
+  );
+}
+
+function backArrow() {
+  return (
+    <Image
+        style={{ width: 30, height: 30, tintColor: '#F0F5DF'}}
+        source={require("./assets/LeftBlueArrow.png")}/>
   );
 }
 
@@ -75,20 +84,26 @@ function LogoTitle() {
 const AppNavigator = createStackNavigator(
   {
     // road map for the different parts of our navigation
-    Home: { screen: Home, },
+    IntroPage1: { screen: IntroPage1 },
+    IntroPage2: { screen: IntroPage2 },
+    IntroPage3: { screen: IntroPage3 },
+    Home: { screen: Home },
     CarbonCounter: {screen: CarbonCounterIntroPage},
     Household: {screen: SurveyHousehold},
     Transportation: {screen: SurveyTransportation},
     Diet: {screen: SurveyDiet},
     Shopping: {screen: SurveyShopping},
     Results: { screen: Results },
-    MapIntroPage: {screen: MapIntroPage},
-    GeoVideo1: { screen: GeoVideo1 },
-    IntroPage1: { screen: IntroPage1 },
-    IntroPage2: { screen: IntroPage2 },
-    IntroPage3: { screen: IntroPage3 }
+    WePlanet: {screen: WePlanetIntroPage},
+    WePlanetMain: {screen: WePlanetMain},
+    Credit: {screen: Credit}
   },
   {
+    cardStyle: {
+        // shadowColor: 'black',
+        // shadowOpacity: .5,
+        // shadowRadius: 10,
+    },
     initialRouteName: "IntroPage1", // For functioning app, use "IntroPage1"
     //headerMode: "None",
     headerLayoutPreset: "center",
@@ -99,12 +114,13 @@ const AppNavigator = createStackNavigator(
       // these will be augmented by the navigation options of the respective screens
       // https://reactnavigation.org/docs/en/headers.html
       headerStyle: {
-        backgroundColor: "white",
+        backgroundColor: "#73A388",
         borderBottomWidth: 0,
       },
       headerBackTitle: " ",
       headerTitle: LogoTitle,
-      headerTintColor: "#73A388"
+      headerTintColor: '#F0F5DF',
+      headerBackImage: backArrow
     }
   }
 );

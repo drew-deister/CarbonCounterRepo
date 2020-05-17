@@ -11,10 +11,13 @@
 // perform calculations on them. However, this returns strings. To get ints, use parseInt()
 
 import React, { Component, useState } from 'react';
-import {StyleSheet, View, TouchableHighlight, ScrollView, Image} from "react-native";
+import {StyleSheet, View, TouchableHighlight, ScrollView, TouchableOpacity, Image} from "react-native";
 import {Button, Text, Card, Icon} from 'react-native-elements';
 import MetricView from '../Components/MetricView';
 import ZipCode from '../Utilities/convertcsv.json'; // import JSON file
+import INFORMATION from '../Utilities/text.json';
+import { InfoModal } from '../Components/InfoModal';
+import ParagraphView from '../Components/ParagraphView';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -24,8 +27,11 @@ import {
   PieChart,
 } from 'react-native-chart-kit'
 
+const Results_Info = INFORMATION["carbonCounterScreens"]["results"]
+
 
 import * as SecureStore from 'expo-secure-store';
+import { AsafNextButton } from '../Components/AsafNextButton';
 
 //Pie chart configuration
   const chartConfig = {
@@ -65,6 +71,7 @@ class Results extends React.Component {
 
     componentDidMount() { // this is automatically called by the compiler
       this.fetchData().done()
+      this.flashScroll();
     }
 
     async fetchData() { // should probably add some error handling here
@@ -167,6 +174,27 @@ class Results extends React.Component {
       return multiplier * summer * green * this.state.numMiles;// lbsCO2/yr
     }
 
+  showInfoModalAndDisableScroll() {
+      this.setState({showingModal: true})
+      this.refs.infoModal.showInfoModal()
+  }
+
+  enableScroll() {
+      this.setState({showingModal: false})
+  }
+
+  setScrollView = scrollView => {
+    // NOTE: scrollView will be null when the component is unmounted
+      this._scrollView = scrollView;
+  };
+
+
+  flashScroll() {
+    setTimeout(() => {
+        this._scrollView.flashScrollIndicators();
+    }, 200)
+  }
+
     render() {
       const data = [
         {
@@ -201,79 +229,125 @@ class Results extends React.Component {
       var totalCO2 = this.calculateHousing() + this.calculateTransportation() + this.calculateDiet() + this.calculateShopping();
       return(
         <View style={styles.safeView}>
-               <ScrollView style={styles.scrollViewStyle}
-                  contentContainerStyle = {styles.containerStyle}
-                  >
-                  <View style = {styles.pageHeaderContainer}>
+            <ScrollView style={styles.scrollViewStyle}
+                        contentContainerStyle = {styles.containerStyle}
+                        ref={this.setScrollView}>
+                
+                <View style = {styles.pageHeaderContainer}>
                     <Text style={styles.CO2Title}>
-                    Your estimated green house gas emissions are:</Text>
-                    <Text style={styles.CO2Number}>{parseInt(totalCO2)}</Text>
+                        Your estimated green house gas emissions are:
+                    </Text>
+
+                    <View style={styles.CO2NumberContainer}>
+                        <Text style={styles.CO2Number}>{parseInt(totalCO2)}</Text>
+
+                        <View style={styles.infoButtonContainer}>
+                            <TouchableOpacity
+                                style={styles.modalButtonContainer}
+                                onPress={() => this.showInfoModalAndDisableScroll()}>
+
+                                <Image
+                                    style={styles.infoImage}
+                                    source={require("../assets/informationbutton.png")}
+                                />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+
                     <Text style={styles.CO2Title}> pounds of CO2 per year</Text>
-                  </View>
-                   {/* <Image style = {styles.image} source = {images[this.props.imageName]} /> */}
-                   <View style={styles.cardStyle}>
-                       <Text style={styles.pageTitle}>Results</Text>
-                       <Text style={styles.subTitle}>from each category</Text>
-                       <View style={styles.pieChartContainer}>
-                       <PieChart
-                         data={data}
-                         width={wp('90%')}
-                         height={200}
-                         chartConfig={chartConfig}
-                         accessor="percent"
-                         backgroundColor="transparent"
-                         paddingLeft="15"
-                         //absolute //remove to give percentages
-                       />
-                      </View>
+                </View>
+
+                <View style={styles.cardStyle}>
+                    <Text style={styles.pageTitle}>Results</Text>
+                    <Text style={styles.subTitle}>from each category</Text>
+
+                    <View style={styles.pieChartContainer}>
+                        <PieChart data={data}
+                                  width={wp('90%')}
+                                  height={200}
+                                  chartConfig={chartConfig}
+                                  accessor="percent"
+                                  backgroundColor="transparent"
+                                  paddingLeft="15"
+                          //absolute //remove to give percentages
+                          />
+                    </View>
+
+
+                    <View style={styles.metricsContainer}>
                         <Text style={styles.pageTitle}>Metrics</Text>
-                        <MetricView metricName="SolarPanel" totalCo2 = {totalCO2}></MetricView>
-                        <MetricView metricName="Car" totalCo2 = {totalCO2} textStyle={{marginTop: -15}}></MetricView>
-                        <MetricView metricName="Tree" totalCo2 = {totalCO2}></MetricView>
-                        <MetricView metricName="SmartPhone" totalCo2 = {totalCO2}></MetricView>
+                        <MetricView metricName="SolarPanel" totalCo2 = {totalCO2}/>
+                        <MetricView metricName="Car" totalCo2 = {totalCO2} 
+                                    textStyle={{marginTop: -15}}/>
+                        <MetricView metricName="Tree" totalCo2 = {totalCO2}/>
+                        <MetricView metricName="SmartPhone" totalCo2 = {totalCO2}
+                                    containerStyle={{marginBottom: 20}}/>
+                        <MetricView metricName="SolidCarbon" totalCo2 = {totalCO2}
+                                    containerStyle={{marginBottom: 20}}/>
+                    </View> 
 
 
-                  <Button
-                      icon={<Icon name="arrow-forward" color="white"/>}
-                      iconRight
-                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
-                      title='Housing'
-                      onPress= {() => this.props.navigation.navigate('Household')}
-                  />
-                  <Button
-                      icon={<Icon name="arrow-forward" color="white"/>}
-                      iconRight
-                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
-                      title='Transportation'
-                      onPress= {() => this.props.navigation.navigate('Transportation')}
-                  />
-                  <Button
-                      icon={<Icon name="arrow-forward" color="white"/>}
-                      iconRight
-                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
-                      title='Diet'
-                      onPress= {() => this.props.navigation.navigate('Diet')}
-                  />
-                  <Button
-                      icon={<Icon name="arrow-forward" color="white"/>}
-                      iconRight
-                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
-                      title='Shopping'
-                      onPress= {() => this.props.navigation.navigate('Shopping')}
-                  />
+                    <View style={styles.goBackContainer}>
+                        <Text style={styles.pageTitle}>Go Back</Text>
+                  
+                        <AsafNextButton
+                            onPress= {() => this.props.navigation.navigate('Household')}
+                            style={{marginBottom: 10, marginTop: 25, backgroundColor: "#EB5B6D", borderColor: "#EB5B6D"}}
+                            textStyle={{color: 'white'}}>
+                            Household
+                        </AsafNextButton>
+                        <AsafNextButton
+                            onPress= {() => this.props.navigation.navigate('Transportation')}
+                            style={{marginBottom: 10, backgroundColor: "#73A388", borderColor: "#73A388"}}
+                            textStyle={{color: 'white'}}>
+                            Transportation
+                        </AsafNextButton>
+                        <AsafNextButton
+                            onPress= {() => this.props.navigation.navigate('Diet')}
+                            style={{marginBottom: 10, backgroundColor: "#A3BEAD", borderColor: "#A3BEAD"}}
+                            textStyle={{color: 'white'}}>
+                            Diet
+                        </AsafNextButton>
+                        <AsafNextButton
+                            onPress= {() => this.props.navigation.navigate('Shopping')}
+                            style={{marginBottom: 10, backgroundColor: "#9AD1F2", borderColor: "#9AD1F2"}}
+                            textStyle={{color: 'white'}}>
+                            Shopping
+                        </AsafNextButton>
 
-                  <Button
+                        <AsafNextButton
+                            onPress= {() => this.props.navigation.navigate('Home')}
+                            style={{marginBottom: 10, marginTop: 40}}
+                            // textStyle={{color: 'white'}}
+                            >
+                            Go Home
+                        </AsafNextButton>
+
+
+                        {/* <Button
                       icon={<Image source={require("../assets/social-media.png")} />}
                       iconRight
                       buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
                       title='Go Home'
                       onPress= {() => this.props.navigation.navigate('Home')}
-                  />
-               
-                   </View>
+                  /> */}
 
-              </ScrollView> 
-          </View>
+                    </View>
+               
+                </View>
+
+            </ScrollView> 
+
+            <InfoModal  ref={"infoModal"}
+                        parentObject={this}
+                        onClosed={() => this.enableScroll()}
+                        modalStyle={{backgroundColor: '#F6F8EF'}}
+                        xMarkStyle={{color: '#73A388'}}>
+                <ParagraphView  infoArr={Results_Info["info"]}
+                                infoTypeArr={Results_Info["infoTypes"]}
+                                textStyle={{color: '#73A388'}}/>     
+            </InfoModal>
+        </View>
       )
     }
 
@@ -305,6 +379,29 @@ pageHeaderContainer: {
     width: wp('70%')
 },
 
+goBackContainer: {
+    marginTop: 32,
+    paddingTop: 20,
+    borderTopColor: 'white',
+    borderTopWidth: 3,
+    alignItems: 'center',
+    alignContent: 'center',
+    // height: wp("20%"),
+    // backgroundColor: 'white',
+    marginBottom: hp("10%"),
+    width: wp('85%')
+},
+
+metricsContainer: {
+    marginTop: 36,
+    paddingTop: 28,
+    borderTopColor: 'white',
+    borderTopWidth: 3,
+    // backgroundColor: 'white',
+    width: wp("85%"),
+    alignItems: 'center'
+},
+
 cardStyle: {
   //flex: 1,
   borderTopRightRadius: 40,
@@ -331,14 +428,18 @@ containerStyle: {
     alignContent: 'center',
     //backgroundColor: 'red'
 },
-
+CO2NumberContainer: {
+    flexDirection: 'row',
+    alignItems: "center",
+    justifyContent: "center",
+},
 CO2Number:
 {
     color: '#73A388',
     padding: 10,
     fontSize: 46,
     fontWeight: 'bold',
-    width: wp("75"),
+    // width: wp("75"),
     textAlign: 'center',
 },
   pageTitle: {
@@ -347,8 +448,9 @@ CO2Number:
       fontSize: 42,
       //fontWeight: 'bold',
       width: wp("75"),
-      fontWeight: '600',
+      fontWeight: '700',
       textAlign: 'center',
+      // backgroundColor: "red",
   },
   CO2Title: {
     color: '#73A388',
@@ -370,7 +472,25 @@ CO2Number:
   //  aspectRatio: 90/100,
     borderColor: 'transparent',
     borderWidth: 1,
-  }
+  },
+  
+modalButtonContainer: {
+  width: "100%",
+  height: "100%",
+  alignItems: "center",
+},
+infoImage: {
+  height: "100%",
+  width: "100%",
+  tintColor: "#73A388",
+},
+infoButtonContainer: {
+  borderRadius: 13,
+  marginLeft: 5,
+  height: 25,
+  width: 25,
+  // backgroundColor: "#73A388"
+}
 });
 
 

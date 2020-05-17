@@ -34,7 +34,8 @@ export default class IntroPage extends Component {
   //   this.props.navigation.setOptions
   // }
   static navigationOptions = {
-    title: 'new title'
+      // headerTitle: 'new title',
+      headerShown: false
   }
 
   // "main method"
@@ -46,7 +47,7 @@ export default class IntroPage extends Component {
           style={styles.container}
           onPress={() => this.props.navigation.navigate("IntroPage2")}
         >
-          <Image style={styles.image} source={require("../assets/Logo.png")} />
+          <Image style={styles.image} source={require("../assets/CarbonXP_Logos/CxpLogo_Dark.png")} />
         </TouchableOpacity>
         <View style={styles.container}>
           <ChangeLogo />
@@ -67,8 +68,8 @@ const styles = StyleSheet.create({
   },
   image: {
     backgroundColor: "transparent",
-    height: 133.48,
-    width: 147.19,
+    height: 200,//133.48,
+    width: 200,//147.19,
     resizeMode: "cover",
     alignItems: "center",
   },

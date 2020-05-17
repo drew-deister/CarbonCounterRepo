@@ -40,6 +40,7 @@ export default class GlobeVideoModal extends Component {
                 style = {styles.Modal}
                 position = 'center'
                 backdrop={true}
+                swipeToClose={false}
             >
                 <View style={styles.MainContainer}>
                     <TouchableOpacity

@@ -93,6 +93,7 @@ class QuestionCardHousing extends React.Component {
         } else {
             alert("Please enter a valid zipcode.")
         }
+        
     }
 
     // only used when back to results button is visible
@@ -100,6 +101,9 @@ class QuestionCardHousing extends React.Component {
         SecureStore.setItemAsync("zipCode", JSON.stringify(this.state.zipCode)) // save to async
         SecureStore.setItemAsync("numPeople", JSON.stringify(this.state.numPeople))
         SecureStore.setItemAsync("squareFootage", JSON.stringify(this.state.sliderValue))
+        this.props.navigation.navigate('Transportation')
+        this.props.navigation.navigate('Diet')
+        this.props.navigation.navigate('Shopping')
         this.props.navigation.navigate('Results') // you took results off the stack so must re-push
     }
 
@@ -114,11 +118,13 @@ class QuestionCardHousing extends React.Component {
             <View style = {styles.view}>
                 { // can move this where we want it
                     (access == "true") ?
-                    <Button icon={<Icon name="arrow-forward" color="white"/>}
-                    iconRight
-                    buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
-                    title='Back to results'
-                    onPress= {() => this.saveAndGoBackToResults()}></Button>
+                    <AsafNextButton 
+                        onPress= {() => this.saveAndGoBackToResults()}
+                        style={{backgroundColor: this.props.secondary, marginBottom: 0}}
+                        textStyle={{color: 'white'}}>
+
+                        Back to results
+                    </AsafNextButton>
                     : null // don't do anything
                 }  
                 <InputQuestion 

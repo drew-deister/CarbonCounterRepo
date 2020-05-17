@@ -1,14 +1,18 @@
 //Originally created by Drew
-//Adopted by Ethan
+//Edited by Ethan
 
 import React, { Component } from 'react';
 import {StyleSheet, View, Image} from "react-native";
 import {Text, Card, Icon} from 'react-native-elements';
-import {HomeScreenActivityButton} from "./HomeScreenActivityButton"
 import {Alert} from "react-native";
 import { heightPercentageToDP } from 'react-native-responsive-screen';
 import PropTypes from 'prop-types';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import {
+    widthPercentageToDP as wp,
+    heightPercentageToDP as hp,
+    listenOrientationChange, removeOrientationListener
+  } from 'react-native-responsive-screen';
 
 
 class HomeScreenActivityCard extends React.Component {
@@ -28,7 +32,7 @@ class HomeScreenActivityCard extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <View style={[styles.container, this.props.containerStyle]}>
                 <TouchableOpacity style={[styles.button, this.props.style]}
                     onPress={() => this.props.navigation.navigate(this.props.navigateToActivity)}>
                     <Text style={styles.activityTitle}>{this.props.title}</Text>
@@ -44,19 +48,22 @@ const styles = StyleSheet.create({
         paddingVertical: 16,
     },
     button: {
-        width: 271,
-        height: 146,
+        width: wp("75%"), //271
+        height: hp("22%"),//146,
         borderRadius: 30,
         backgroundColor: '#9AD1F2', 
         alignItems: 'center',
+        justifyContent: "flex-end"
+        // backgroundColor: 'blue'
     },
     activityTitle:{
-        marginTop: 100,
-        height: 33,
-        width: 211,
+        marginBottom: 18,
+        // height: 26,
+        width: "75%", //211,
         color: 'white',
         fontSize: 23,
         fontWeight: '600',
+        // backgroundColor: 'blue' 
       }
     
 });

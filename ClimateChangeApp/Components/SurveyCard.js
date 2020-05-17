@@ -9,7 +9,15 @@ import PropTypes from 'prop-types';
 import { AsafNextButton } from "./AsafNextButton";
 import { InfoModal } from "./InfoModal";
 import { Row } from 'native-base';
-
+import ParagraphView from "./ParagraphView";
+import * as Progress from "react-native-progress";
+import WePlanetIntroPage from '../Pages/WePlanetIntro';
+import {
+    widthPercentageToDP as wp,
+    heightPercentageToDP as hp,
+    listenOrientationChange,
+    removeOrientationListener,
+  } from "react-native-responsive-screen";
 
 
 const images = {
@@ -26,7 +34,8 @@ class SurveyCard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            imageSrc: '../assets/Household.png'
+            //used to determine whether ScrollView can be scrolled
+            showingModal: false
         };
         //nextScreen: props.children;
     }
@@ -38,47 +47,45 @@ class SurveyCard extends React.Component {
     static defaultProps = {
         title: 'Household',
         imageName: 'Household',
+        infoImageStyle: {},
         style: {},                      //used to change backgroundColor
         titleStyle: {},                 //used to change title text color
         // nextScreen: 'Home',
     }
 
-    //     <TouchableOpacity
-    //       style={styles.modalButtonContainer}
-    //       onPress={() => this.refs.infoModal.showInfoModal()}
-    //     >
-    //       <Image
-    //         style={styles.infoImage}
-    //         source={require("../assets/informationbutton.png")}
-    //       />
-    //     </TouchableOpacity>
+    showInfoModalAndDisableScroll() {
+        this.setState({showingModal: true})
+        this.refs.infoModal.showInfoModal()
+    }
 
-    //     <Text style={styles.bottomText}>
-    //       CarbonXD is an educational app created to bring awareness to the
-    //       importance of global internconnectedness of human activity and the
-    //       environment.
-    //     </Text>
+    enableScroll() {
+        this.setState({showingModal: false})
+    }
 
-    //     <AsafNextButton
-    //       onPress={() => this.props.navigation.navigate("IntroPage3")}
-    //       style={styles.buttonDesign}
-    //     >
-    //       Next
-    //     </AsafNextButton>
+    setScrollView = scrollView => {
+        // NOTE: scrollView will be null when the component is unmounted
+        this._scrollView = scrollView;
+      };
 
-        // <InfoModal
-        //   ref={"infoModal"}
-        //   parentObject={this}
-        //   style={StyleSheet.modalText}
-        // >
-        //   Asaf Is a virgin
-        // </InfoModal>
+    componentDidMount() {
+        this.flashScroll();
+        
+      }
+    
+      flashScroll() {
+        setTimeout(() => {
+            this._scrollView.flashScrollIndicators();
 
+        }, 200)
+      }
 
     render() {
         return (
             <View style={styles.safeView}>
-                <ScrollView style={[styles.scrollViewStyle, this.props.style]} contentContainerStyle = {styles.containerStyle}>
+                <ScrollView style={[styles.scrollViewStyle, this.props.style]}
+                            contentContainerStyle = {styles.containerStyle}
+                            scrollEnabled={!this.state.showingModal}
+                            ref={this.setScrollView}>
                     <Image style = {styles.image} source = {images[this.props.imageName]} />
                     <View style={styles.titleContainer}>
                         <Text style={[styles.pageTitle, this.props.titleStyle]}>{this.props.title}</Text>
@@ -86,23 +93,17 @@ class SurveyCard extends React.Component {
                         <View style={styles.infoButtonContainer}>
                             <TouchableOpacity
                             style={styles.modalButtonContainer}
-                            onPress={() => this.refs.infoModal.showInfoModal()}
+                            onPress={() => this.showInfoModalAndDisableScroll()}
                             >
-                            <Image
-                                style={styles.infoImage}
-                                source={require("../assets/informationbutton.png")}
-                            />
+                                <Image
+                                    style={[styles.infoImage, this.props.infoImageStyle]}
+                                    source={require("../assets/informationbutton.png")}
+                                />
                             </TouchableOpacity>
                         </View>
                     </View>
 
-                    <InfoModal
-                        ref={"infoModal"}
-                        parentObject={this}
-                        style={StyleSheet.modalText}
-                     >
-                        Asaf Is cool
-                    </InfoModal>
+                    
 
                     <View>
                         {this.props.children}
@@ -114,6 +115,32 @@ class SurveyCard extends React.Component {
                     </AsafNextButton> */}
 
                 </ScrollView>
+
+                <View style={styles.progressBarContainer}>
+                    <Progress.Bar
+                        progress={this.props.progress}
+                        width={null}
+                        borderColor={"#F0F5DF"}
+                        borderWidth={2}
+                        color={"#F0F5DF"}
+                    />
+                </View>
+
+                <InfoModal
+                        ref={"infoModal"}
+                        parentObject={this}
+                        onClosed={() => this.enableScroll()}
+                        modalStyle={{backgroundColor: this.props.modalBackgroundColor}}
+                        xMarkStyle={{color: this.props.modalTextColor}}
+                     >
+                        <ParagraphView 
+                            infoArr={this.props.infoArr}
+                            infoTypeArr={this.props.infoTypeArr}
+                            infoImageArr={this.props.infoImageArr}
+                            textStyle={{color: this.props.modalTextColor}}
+                            />
+                        
+                </InfoModal>
             </View>
         )
     }
@@ -123,10 +150,12 @@ class SurveyCard extends React.Component {
 const styles = StyleSheet.create({
     safeView: {
         flex: 1,
-        shadowOpacity: .2
+        shadowOpacity: .2,
+        borderTopRightRadius: 40,
+        borderTopLeftRadius: 40,
     },
     scrollViewStyle: {
-        marginTop: 35,
+        marginTop: 18,
         backgroundColor: '#FCCCC0',
         borderTopRightRadius: 40,
         borderTopLeftRadius: 40,
@@ -165,16 +194,24 @@ const styles = StyleSheet.create({
         width: "100%",
         height: "100%",
         alignItems: "center",
-        margin: "15%",
     },
     infoImage: {
         height: "100%",
         width: "100%",
       },
     infoButtonContainer: {
-        height: 20,
-        width: 20,
+        marginLeft: 5,
+        marginTop: 5,
+        height: 25,
+        width: 25,
+    },
+    progressBarContainer: {
+        height: 60,
+        justifyContent: 'center',
+        paddingHorizontal: wp("8%"),
+        opacity: .8,
+        backgroundColor: "#73A388"
     }
-});
+    });
 
 export default SurveyCard;
