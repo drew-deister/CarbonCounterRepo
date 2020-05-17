@@ -52,6 +52,8 @@ class SliderQuestion extends React.Component {
 
     changeValue(value) {
         this.setState({sliderValue: value})
+        // impportant: Ensures parent state is updated every time sliderState is updated
+        this.props.callback(value)
     } 
 
     render() {

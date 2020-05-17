@@ -68,15 +68,6 @@ class MCQuestion extends React.Component {
         </TouchableHighlight>
       );
     }
-<<<<<<< HEAD
-
-    static propTypes = {
-        question: PropTypes.string,
-        questionLines: PropTypes.number,
-        defaultColor: PropTypes.string,
-        secondaryColor: PropTypes.string,
-        answerOptions: PropTypes.array
-=======
     return answersList;
   }
 
@@ -85,7 +76,6 @@ class MCQuestion extends React.Component {
       this.state.color[index] = this.props.secondaryColor;
     } else {
       this.state.color[index] = this.props.defaultAnswerColor;
->>>>>>> c6eda92aa68387fe9620873efd8dc29c87ca9d44
     }
     for (let i = 0; i < this.props.answerOptions.length; i++) {
       // unselect the other

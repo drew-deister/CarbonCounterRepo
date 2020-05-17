@@ -59,15 +59,24 @@ export default class CarbonCounterIntroPage extends Component {
     resume() {
         this.props.navigation.navigate("Household")
         // I'm not sure if there will ever be an edge case where this is necessary, but just in case.
-        SecureStore.setItemAsync("hasHousingBeenAccessed", JSON.stringify("true"))
-        SecureStore.setItemAsync("hasTransportationBeenAccessed", JSON.stringify("true"))
-        SecureStore.setItemAsync("hasDietBeenAccessed", JSON.stringify("true"))
-        SecureStore.setItemAsync("hasShoppingBeenAccessed", JSON.stringify("true"))
+        // SecureStore.setItemAsync("hasHousingBeenAccessed", JSON.stringify("true"))
+        // SecureStore.setItemAsync("hasTransportationBeenAccessed", JSON.stringify("true"))
+        // SecureStore.setItemAsync("hasDietBeenAccessed", JSON.stringify("true"))
+        // SecureStore.setItemAsync("hasShoppingBeenAccessed", JSON.stringify("true"))
         // NOTE: dont change hasResultsBeenAccessed in SecureStore
     }
 
     newSurvey() {
         this.props.navigation.navigate("Household")
+        SecureStore.setItemAsync("hasHousingBeenAccessed", JSON.stringify("false"))
+        SecureStore.setItemAsync("hasTransportationBeenAccessed", JSON.stringify("false"))
+        SecureStore.setItemAsync("hasDietBeenAccessed", JSON.stringify("false"))
+        SecureStore.setItemAsync("hasShoppingBeenAccessed", JSON.stringify("false"))
+        // Do this no matter what
+        SecureStore.setItemAsync("hasResultsBeenAccessed", JSON.stringify("false"))
+    }
+
+    clear() {
         SecureStore.setItemAsync("hasHousingBeenAccessed", JSON.stringify("false"))
         SecureStore.setItemAsync("hasTransportationBeenAccessed", JSON.stringify("false"))
         SecureStore.setItemAsync("hasDietBeenAccessed", JSON.stringify("false"))
@@ -95,6 +104,14 @@ export default class CarbonCounterIntroPage extends Component {
                 </View>
             
                 <View style={{flex: 200, justifyContent: "center"}}>
+                <AsafNextButton 
+                        style = {{marginBottom: 0}}
+                        textStyle = {{fontSize: 14}}
+                        
+                        onPress={() => this.clear()}
+                    >
+                        Clear (for development)
+                    </AsafNextButton>
                     <AsafNextButton 
                         style = {{marginBottom: 0}}
                         
