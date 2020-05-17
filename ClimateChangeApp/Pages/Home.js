@@ -48,7 +48,7 @@ export default class Home extends Component {
                     
                     <HomeScreenActivityCard 
                         title = {"Carbon Counter"}      
-                        navigateToActivity = 'CarbonCounter'//'Question1'
+                        navigateToActivity = 'CarbonCounter'
                         navigation = {this.props.navigation}
                         style = {{backgroundColor: '#FCCCC0'}}
                         />

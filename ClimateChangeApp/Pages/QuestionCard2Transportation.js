@@ -84,12 +84,17 @@ class QuestionCardTransportation extends React.Component {
 
     // only used when back to results button is visible
     saveAndGoBackToResults() {
-        SecureStore.setItemAsync("numMiles", JSON.stringify(this.state.numMiles)) // save to async
-        SecureStore.setItemAsync("summerChange", JSON.stringify(this.state.summerChange))
-        SecureStore.setItemAsync("mode", JSON.stringify(this.state.mode))
-        this.props.navigation.navigate('Diet')
+        this.saveAndPush()
         this.props.navigation.navigate('Shopping')
         this.props.navigation.navigate('Results') // you took results off the stack so must re-push
+
+
+    //     SecureStore.setItemAsync("numMiles", JSON.stringify(this.state.numMiles)) // save to async
+    //     SecureStore.setItemAsync("summerChange", JSON.stringify(this.state.summerChange))
+    //     SecureStore.setItemAsync("mode", JSON.stringify(this.state.mode))
+    //     this.props.navigation.navigate('Diet')
+    //     this.props.navigation.navigate('Shopping')
+    //     this.props.navigation.navigate('Results') // you took results off the stack so must re-push
     }
 
     checkValid() {
@@ -127,7 +132,8 @@ class QuestionCardTransportation extends React.Component {
                             questionLines={3}
                             questionStyle={{fontSize: 18}}
                             secondaryColor='#F0F5DF'
-                            //max = {100} min = {0} step = {1}      //these are now default props
+                            fixedDecimals = {1}
+                            max = {20} min = {0.5} step = {.5}      //these are now default props
                             shouldDisplay = {true}
                             callback = {this.updateSliderState1}
                         />
@@ -149,8 +155,8 @@ class QuestionCardTransportation extends React.Component {
                             questionLines={2}
                             questionStyle={{fontSize: 18}}
                             answerOptions={TRANSPORTATION_INFO["MCOptions"]}
-                            answerStyle={[{}, {fontSize: 14}, {fontSize: 12},
-                                {}, {fontSize: 16}, {}, ]}
+                            answerStyle={[{}, {}, {},
+                                {}, {}, {}, ]}
                             callback={this.updateMCState}
                             secondaryColor='rgba(252, 205, 193, .85)'
                         ></MCQuestion>

@@ -98,13 +98,21 @@ class QuestionCardHousing extends React.Component {
 
     // only used when back to results button is visible
     saveAndGoBackToResults() {
-        SecureStore.setItemAsync("zipCode", JSON.stringify(this.state.zipCode)) // save to async
-        SecureStore.setItemAsync("numPeople", JSON.stringify(this.state.numPeople))
-        SecureStore.setItemAsync("squareFootage", JSON.stringify(this.state.sliderValue))
-        this.props.navigation.navigate('Transportation')
+        this.saveAndPush();
         this.props.navigation.navigate('Diet')
         this.props.navigation.navigate('Shopping')
         this.props.navigation.navigate('Results') // you took results off the stack so must re-push
+       
+
+        // if (this.checkValid()) {
+        //     SecureStore.setItemAsync("zipCode", JSON.stringify(this.state.zipCode)) // save to async
+        //     SecureStore.setItemAsync("numPeople", JSON.stringify(this.state.numPeople))
+        //     SecureStore.setItemAsync("squareFootage", JSON.stringify(this.state.sliderValue))
+        //     this.props.navigation.navigate('Transportation')
+        //     this.props.navigation.navigate('Diet')
+        //     this.props.navigation.navigate('Shopping')
+        //     this.props.navigation.navigate('Results') // you took results off the stack so must re-push
+        // }  
     }
 
     // checks whether current inputs are valid

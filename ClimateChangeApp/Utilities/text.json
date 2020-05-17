@@ -90,11 +90,11 @@
                 "Travel more"
             ],
             "MCOptions": [
-                "Regular sedan or wagon",
-                "Car type SUV (e.g., RAV4, Ford Escape)",
-                "Truck type SUV (e.g., Chevy Suburban, Nissan Titan)",
+                "Regular car",
+                "Small SUV (Ford Escape)",
+                "Large SUV (Chevy Suburban)",
                 "Minivan",
-                "Pickup truck (e.g., Ford F-150)",
+                "Pickup truck (Ford F-150)",
                 "Train or bus",
                 "Bicycle or walk"
             ],

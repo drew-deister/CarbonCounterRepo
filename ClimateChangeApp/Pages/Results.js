@@ -99,7 +99,7 @@ class Results extends React.Component {
                      numMiles: numMiles, summerChange: summerChange, mode: mode,
                      beefServings: beefServings, dairyServings: dairyServings,
                      shoppingFrequency: shoppingFrequency});
-
+      
 
       this.calculateDiet()
       this.calculateShopping()
@@ -152,17 +152,17 @@ class Results extends React.Component {
 
     calculateTransportation() {
       var MPG_rate = 1 // dummy bc idk if you have to initialize
-      if (this.mode == "Regular sedan or wagon") {
+      if (this.state.mode == "Regular car") {
         MPG_rate = 30
-      } else if (this.mode == "Car type SUV (e.g., RAV4, Ford Escape)") {
+      } else if (this.state.mode == "Small SUV (Ford Escape)") {
         MPG_rate = 26.2
-      } else if (this.mode == "Truck type SUV (e.g., Chevy Suburban, Nissan Titan)") {
+      } else if (this.state.mode == "Large SUV (Chevy Suburban)") {
         MPG_rate = 22.4
-      } else if (this.mode == "Minivan") {
+      } else if (this.state.mode == "Minivan") {
         MPG_rate = 22.2
-      } else if (this.mode == "Pickup truck (e.g., Ford F-150)"){
+      } else if (this.state.mode == "Pickup truck (Ford F-150)"){
         MPG_rate = 18.9
-    } else if (this.mode == "Train or bus") {
+    } else if (this.state.mode == "Train or bus") {
       return this.state.numMiles * 180 * 0.5 * (.75 + .25 * (this.state.summerChange + .5))
     }
       else { // pickup truck

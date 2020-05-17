@@ -63,8 +63,8 @@ class QuestionCardShopping extends React.Component {
 
     // only used when back to results button is visible
     saveAndGoBackToResults() {
-        SecureStore.setItemAsync("shoppingFrequency", JSON.stringify(this.state.shoppingFrequency))
-        this.props.navigation.navigate('Results') // you took results off the stack so must re-push
+        this.saveAndPush()
+         // from this page, goBackToResults is exact same as next
     }
 
     checkValid() { // do some sort of error checking here
