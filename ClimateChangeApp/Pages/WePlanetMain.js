@@ -52,6 +52,26 @@ class GeoVideo1 extends React.Component {
       this._onPressVideo = this._onPressVideo.bind(this);
     }
 
+    // this sets this.state.markersList. _onPressVideo finds the download URLS separately.
+    // async componentWillMount() {     
+    //   var firestoreRef = firebase.firestore();
+    //   firestoreRef.collection("Markers").get().then((querySnapshot) => {
+    //     const MARKERS = [];
+    //     querySnapshot.forEach((doc) => {
+    //         // doc.data() is never undefined for query doc snapshots
+    //         MARKERS.push({
+    //           name: doc.id,
+    //           coordinates: {
+    //             latitude: doc.data().latitude,
+    //             longitude: doc.data().longitude,
+    //           },
+    //           videoFileName: doc.data().videoFileName,
+    //         });
+    //         this.setState({markersList: MARKERS});
+    //     });
+    //   });   
+    // }
+
 
     // this sets this.state.markersList. _onPressVideo finds the download URLS separately.
     async componentDidMount() {     
