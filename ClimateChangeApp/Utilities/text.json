@@ -232,7 +232,12 @@
         "title": "Credit",
 
         "contributions": {
-            "stakeHolders": "CarbonXP was built in concert with the Vanderbilt Climate Change Initiative, The Curb Center, Dr. Leah A. Dundon, and Charles Doktycz",
+            "stakeHolders": [
+                "CarbonXP was built in concert with the Vanderbilt Climate Change Initiative, The Curb Center, ",
+                "Dr. Leah A. Dundon",
+                ", and ",
+                "Charles Doktycz"
+            ],
             "other": [
                 "Jenna Tanner",
                 ", Graphic Designer",
@@ -320,7 +325,7 @@
                 {
                     "main": "United States Department of Transportation, Federal Transit Administration (2010).  Public Transportation’s Role in Responding to Climate Change, available April 18, 2020 at ",
                     "shortened-link": "www.transit.dot.gov",
-                    "actual-link": "https://www.transit.dot.gov/sites/fta.dot.gov/files/docs/PublicTransportationsRoleInRespondingToClimateChange2010.pdf ",
+                    "actual-link": "https://www.transit.dot.gov/sites/fta.dot.gov/files/docs/PublicTransportationsRoleInRespondingToClimateChange2010.pdf",
                     "has-link": true
                 },
                 {

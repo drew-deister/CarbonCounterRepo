@@ -17,6 +17,7 @@ import InfoModal from "../Components/InfoModal";
 import { Left } from "native-base";
 import INFORMATION from '../Utilities/text.json'; // import JSON file
 import TextWithEmbeddedLink from '../Components/TextWithEmbeddedLink';
+import TextLink from '../Components/TextLink';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -68,6 +69,8 @@ export default class CreditPage extends Component {
                   ref={this.setScrollView}
               >
                 <Text style={styles.topText}>{CREDIT_INFO["title"]}</Text>
+
+                {/* This app was developed by Change++... */}
                 <View style={{flexDirection: "row"}}>
                     <Text style={[styles.bottomText, styles.paragraphEnd, {flex: 7}]}>
                       {CHANGE["info"][0]}
@@ -79,6 +82,7 @@ export default class CreditPage extends Component {
                     </View>
                 </View>
                 
+                {/* If you have a potential project... */}
                 <TextWithEmbeddedLink
                     textArr={[CHANGE["info"][1], CHANGE["info"][2], CHANGE["info"][3]]}
                     linkIndex={1}
@@ -86,15 +90,24 @@ export default class CreditPage extends Component {
                     textStyle={[styles.bottomText, styles.paragraphEnd]}
                 />
 
+              {/* CarbonXP was built it concert with... */}
                 <Text style={[styles.bottomText, styles.paragraphEnd]}>
-                      {CREDIT_INFO["contributions"]["stakeHolders"]}
+                    {CREDIT_INFO["contributions"]["stakeHolders"][0]}
+                    <TextLink link={CREDIT_INFO["contributions"]["emails"]["LeahDundon"]}>
+                        {CREDIT_INFO["contributions"]["stakeHolders"][1]}
+                    </TextLink>
+                    {CREDIT_INFO["contributions"]["stakeHolders"][2]}
+                    <TextLink link={CREDIT_INFO["contributions"]["emails"]["CharlesDoktycz"]}>
+                        {CREDIT_INFO["contributions"]["stakeHolders"][3]}
+                    </TextLink>
                 </Text>
 
-
+                {/* With questions about this app... */}
                 <Text style={[styles.bottomText, styles.paragraphEnd]}>
                     {CHANGE["info"][4]}
                 </Text>
 
+                {/* CarbonXP Software Development Team:... */}
                 <View style={styles.paragraphEnd}>
                     <Text style={styles.bottomText}> {CHANGE["team"][0]}</Text>
                     <TextWithEmbeddedLink
@@ -123,34 +136,29 @@ export default class CreditPage extends Component {
                       />
                 </View>
 
+                {/* Important Contributions:... */}
                 <View style={styles.paragraphEnd}>
-                    <Text style={styles.bottomText}>Important Contributions</Text>
+                    <Text style={styles.bottomText}>Important Contributions:</Text>
                     <TextWithEmbeddedLink
                       textArr={[CREDIT_INFO["contributions"]["other"][0],CREDIT_INFO["contributions"]["other"][1]]}
                       linkIndex={0}
-                      link={CHANGE["emails"]["JennaTanner"]}
+                      link={CREDIT_INFO["contributions"]["emails"]["JennaTanner"]}
                       textStyle={[styles.bottomText, styles.indent]}
                       />
                     <TextWithEmbeddedLink
                       textArr={[CREDIT_INFO["contributions"]["other"][2],CREDIT_INFO["contributions"]["other"][3]]}
                       linkIndex={0}
-                      link={CHANGE["emails"]["JoshLipsey"]}
+                      link={CREDIT_INFO["contributions"]["emails"]["JoshLipsey"]}
                       textStyle={[styles.bottomText, styles.indent]}
                       />
                 </View>
 
-                    
+                {/* Data Sources... */}
                 <DataSources
                     headerStyle={styles.topText}
                     descriptionStyle={[styles.bottomText, styles.paragraphEnd]}
                     sourceStyle={[styles.sourceText, styles.paragraphEnd]}
-                >
-
-                </DataSources>
-
-
-
-                
+                />
               </ScrollView>
           </View>
       

@@ -33,12 +33,12 @@ export default class HouseholdSurvey extends Component {
     headerTitle: <HeaderLeafLogo tintColor="#EB5B6D" />,
     headerStyle: { backgroundColor: "white", height: 45, borderBottomWidth: 0 },
     headerTintColor: "#EB5B6D",
-    headerRight: (
-      <HeaderRightArrow
-        tintColor="#EB5B6D"
-        onPress={() => console.log("Hello")}
-      />
-    ),
+    // headerRight: (
+    //   <HeaderRightArrow
+    //     tintColor="#EB5B6D"
+    //     onPress={() => console.log("Hello")}
+    //   />
+    // ),
     headerBackImage: <HeaderBackArrow tintColor="#EB5B6D" />,
   };
 

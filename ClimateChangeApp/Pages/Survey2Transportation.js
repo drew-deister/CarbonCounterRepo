@@ -34,12 +34,12 @@ export default class TransportationSurvey extends Component {
     headerTitle: <HeaderLeafLogo tintColor="#73A388" />,
     headerStyle: { backgroundColor: "white", height: 45, borderBottomWidth: 0 },
     headerTintColor: "#73A388",
-    headerRight: (
-      <HeaderRightArrow
-        tintColor="#73A388"
-        onPress={() => console.log("Hello")}
-      />
-    ),
+    // headerRight: (
+    //   <HeaderRightArrow
+    //     tintColor="#73A388"
+    //     onPress={() => console.log("Hello")}
+    //   />
+    // ),
     headerBackImage: <HeaderBackArrow tintColor="#73A388" />,
   };
 

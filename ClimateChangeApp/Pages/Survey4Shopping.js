@@ -32,12 +32,12 @@ export default class ShoppingSurvey extends Component {
     headerTitle: <HeaderLeafLogo tintColor="#2F5A8A" />,
     headerStyle: { backgroundColor: "white", height: 45, borderBottomWidth: 0 },
     headerTintColor: "#2F5A8A",
-    headerRight: (
-      <HeaderRightArrow
-        tintColor="#2F5A8A"
-        onPress={() => console.log("Hello")}
-      />
-    ),
+    // headerRight: (
+    //   <HeaderRightArrow
+    //     tintColor="#2F5A8A"
+    //     onPress={() => console.log("Hello")}
+    //   />
+    // ),
     headerBackImage: <HeaderBackArrow tintColor="#2F5A8A" />,
   };
 
