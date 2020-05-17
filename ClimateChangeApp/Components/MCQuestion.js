@@ -22,7 +22,6 @@ class MCQuestion extends React.Component {
         }
     }
 
-
     static propTypes = {
         question: PropTypes.string,
         questionLines: PropTypes.number,

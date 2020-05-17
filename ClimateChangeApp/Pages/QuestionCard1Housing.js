@@ -56,7 +56,6 @@ class QuestionCardHousing extends React.Component {
     async fetchData() {
         const results = JSON.parse(await SecureStore.getItemAsync("hasResultsBeenAccessed"))
         const thisPage = JSON.parse(await SecureStore.getItemAsync("hasHousingBeenAccessed"))
-        console.log("thispage: " + thisPage)
         this.setState({hasResultsBeenAccessed: results, hasHousingBeenAccessed: thisPage})
         if (results == "true" || thisPage == "true") { // change the children to what the user selected if the user has accessed Results or this page
             const zipCode = JSON.parse(await SecureStore.getItemAsync("zipCode"))

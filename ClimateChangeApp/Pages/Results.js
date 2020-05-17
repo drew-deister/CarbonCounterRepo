@@ -59,8 +59,6 @@ class Results extends React.Component {
 
     }
 
-    
-
     static navigationOptions = { // this is the label in the middle of the nav bar
         title: 'Housing',
     };

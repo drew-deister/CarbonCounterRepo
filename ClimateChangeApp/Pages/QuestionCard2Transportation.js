@@ -81,7 +81,6 @@ class QuestionCardTransportation extends React.Component {
         this.setState({mode: mode})
     }
 
-
     saveAndPush() { // change this to some checkvalue function
         if (this.checkValid()) {
             SecureStore.setItemAsync("numMiles", JSON.stringify(this.state.numMiles)) // save to async

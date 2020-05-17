@@ -16,12 +16,31 @@ export default class CarbonCounterIntroPage extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            hasDoneSurveyBefore: "false",
+        }
     }
     
     static navigationOptions = { // this is the label in the middle of the nav bar
         //title: 'hello',
         //headerRight: HeaderNext,
     };
+
+    componentDidMount() {
+        this.fetchData().done()
+        this.props.navigation.addListener('didFocus', () => { // runs every time the screen is seen
+            // The screen is focused
+            this.fetchData().done()
+        });
+    }
+    
+    async fetchData() {
+        const hasHousingBeenAccessed = JSON.parse(await SecureStore.getItemAsync("hasHousingBeenAccessed"))
+        if (hasHousingBeenAccessed == "true") {
+            console.log("THIS IS TRUE")
+            this.setState({hasDoneSurveyBefore: "true"})
+        }
+    }
 
     resume() {
         this.props.navigation.navigate("Household")
@@ -30,8 +49,7 @@ export default class CarbonCounterIntroPage extends Component {
         SecureStore.setItemAsync("hasTransportationBeenAccessed", JSON.stringify("true"))
         SecureStore.setItemAsync("hasDietBeenAccessed", JSON.stringify("true"))
         SecureStore.setItemAsync("hasShoppingBeenAccessed", JSON.stringify("true"))
-        // Do this no matter what
-        SecureStore.setItemAsync("hasResultsBeenAccessed", JSON.stringify("false"))
+        // NOTE: dont change hasResultsBeenAccessed in SecureStore
     }
 
     newSurvey() {
@@ -45,7 +63,7 @@ export default class CarbonCounterIntroPage extends Component {
     }
 
     render() {
-
+        var surveyedBefore = this.state.hasDoneSurveyBefore
         return (
 
             <View style={styles.container}>
@@ -62,7 +80,6 @@ export default class CarbonCounterIntroPage extends Component {
                     </Text>
                 </View>
             
-
                 <View style={{flex: 200, justifyContent: "center"}}>
                     <AsafNextButton 
                         style = {{marginBottom: 0}}
@@ -76,11 +93,16 @@ export default class CarbonCounterIntroPage extends Component {
                     >
                         New Survey
                     </AsafNextButton>
-                    <AsafNextButton
+
+                    {
+                        (surveyedBefore == "true") ? // show this only if they've done a survey before
+                        <AsafNextButton
                         onPress={() => this.resume()}
-                    >
-                        Resume
-                    </AsafNextButton>
+                        >
+                            Resume
+                        </AsafNextButton>
+                        : null
+                    }
                 </View>
             </View>
             
