@@ -26,7 +26,6 @@ class QuestionCardShopping extends React.Component {
         super(props);
         this.state = {
             shoppingFrequency: -1,
-            articlesPerShop: -1, // don't think you need this
             hasResultsBeenAccessed: "false",
         }
         this.callbackFunction1 = this.callbackFunction1.bind(this);
@@ -60,7 +59,7 @@ class QuestionCardShopping extends React.Component {
             SecureStore.setItemAsync("shoppingFrequency", JSON.stringify(this.state.shoppingFrequency))
             SecureStore.setItemAsync("articlesPerShop", JSON.stringify(this.state.articlesPerShop)) // dont need this
             this.props.navigation.navigate('Results')
-            } 
+            }
     }
 
     // only used when back to results button is visible
@@ -74,6 +73,11 @@ class QuestionCardShopping extends React.Component {
       if (this.state.shoppingFrequency < 0)
       {
         alert ("Please enter your shopping frequency.")
+        return false;
+      }
+      if (isNaN(this.state.shoppingFrequency))
+      {
+        alert ("Please enter a number for your shopping frequency.")
         return false;
       }
       return true

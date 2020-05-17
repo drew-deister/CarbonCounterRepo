@@ -69,25 +69,17 @@ class QuestionCardDiet extends React.Component {
     saveAndPush() { // change this to some checkvalue function
         if (this.checkValid()) {
             SecureStore.setItemAsync("beefServings", JSON.stringify(this.state.beefServings))
-<<<<<<< HEAD
             SecureStore.setItemAsync("dairyServings", JSON.stringify(this.state.dairyServings))
             this.props.navigation.push('Shopping')
             }
-=======
-            SecureStore.setItemAsync("dairyServings", JSON.stringify(this.state.dairyServings)) 
-            this.props.navigation.navigate('Shopping')            
-            } else {
-            alert('Please answer all questions.')
-        }
->>>>>>> master
     }
 
     // only used when back to results button is visible
     saveAndGoBackToResults() {
         console.log("should be pushing")
         SecureStore.setItemAsync("beefServings", JSON.stringify(this.state.beefServings))
-        SecureStore.setItemAsync("dairyServings", JSON.stringify(this.state.dairyServings)) 
-        this.props.navigation.navigate('Shopping')  
+        SecureStore.setItemAsync("dairyServings", JSON.stringify(this.state.dairyServings))
+        this.props.navigation.navigate('Shopping')
         this.props.navigation.navigate('Results') // you took results off the stack so must re-push
     }
 
@@ -97,10 +89,19 @@ class QuestionCardDiet extends React.Component {
         alert ("Please enter the number of beef servings you consume.")
         return false;
       }
-
+      if (isNaN(this.state.beefServings))
+      {
+        alert ("Please enter a number for the quantity of beef servings you consume.")
+        return false;
+      }
       if (this.state.dairyServings < 0)
       {
         alert ("Please enter the number of dairy servings you consume.")
+        return false;
+      }
+      if (isNaN(this.state.dairyServings))
+      {
+        alert ("Please enter a number for the quantity of dairy servings you consume.")
         return false;
       }
       return true;
@@ -112,12 +113,9 @@ class QuestionCardDiet extends React.Component {
         return(
 
                 <View style = {styles.view}>
-<<<<<<< HEAD
-                    <InputQuestion
-=======
                     { // can move this where we want it
                         (access == "true") ?
-                        <AsafNextButton 
+                        <AsafNextButton
                                 onPress= {() => this.saveAndGoBackToResults()}
                                 style={{backgroundColor: this.props.secondaryColor, marginBottom: 0}}
                                 textStyle={{color: "white"}}>
@@ -125,22 +123,17 @@ class QuestionCardDiet extends React.Component {
                                 Back to results
                         </AsafNextButton>
                         : null // don't do anything
-                    } 
-                    <InputQuestion 
+                    }
+                    <InputQuestion
                         ref = {'q1'}
->>>>>>> master
                         questionStyle={{color: this.props.secondaryColor}}
                         questionLines={2}
                         keyboardType = {'numeric'}
                         parentCallBack = {this.callbackFunction1}
                         question = {DIET_INFO["questions"][0]}
                         placeholder = {DIET_INFO["placeholders"][0]}/>
-<<<<<<< HEAD
                     <InputQuestion
-=======
-                    <InputQuestion 
                         ref = {'q2'}
->>>>>>> master
                         questionStyle={{color: this.props.secondaryColor}}
                         questionLines={3}
                         keyboardType = {'numeric'}

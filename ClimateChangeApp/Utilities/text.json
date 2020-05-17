@@ -19,12 +19,6 @@
         "intro": {
             "title": "Carbon Counter",
             "description": "This activity will provide information about the greenhouse gas emissions that are produced as a result of some of your daily activities. The results will help you better understand your carbon footprint.",
-<<<<<<< HEAD
-            "disclaimerTitle": "Note: ",
-            "disclaimer": "this activity captures just a few activities and is not a total picture of your carbon footprint, it is just an estimate of one slice of your life"
-        },
-
-=======
             "disclaimer": "Note: this activity captures just a few activities and is not a total picture of your carbon footprint, it is just an estimate of one slice of your life",
             "info": [
                 "Greenhouse Effect",
@@ -47,8 +41,7 @@
                 "body"
             ]
             },
-        
->>>>>>> master
+
         "household": {
             "title": "Household",
             "questions": [
@@ -62,20 +55,6 @@
                 "NONE"
             ],
             "info": [
-<<<<<<< HEAD
-                {
-                    "section": "Zip Code",
-                    "text": "Your zip code allows us to determine the type of fuels that are likely used to power your home (e.g., heat, cool, and provide electricity) where you live."
-                },
-                {
-                    "section": "House size",
-                    "text": "The size of your house primarily determines how much energy is used to heat or cool your home and how much electricity is used to power things like appliances. However, there are other factors such as how old or energy efficient your home is that can make a difference in the amount of energy used. This exercise will give you a general estimate based on average homes in your area and does not take into account specific circumstances that might make your home use more or less fossil fuels"
-                },
-                {
-                    "section": "Who you live with",
-                    "text": "If you live with others in the home, then all the energy used in your home is not just for you, others get the benefit from that same amount of energy used. The number of people in your household is used to calculate the emissions that should be attributable just to you."
-                }
-=======
                 "Zip Code",
                 "Your zip code allows us to determine the type of fuels that are likely used to power your home (e.g., heat, cool, and provide electricity) where you live.",
                 "House size",
@@ -90,7 +69,6 @@
                 "body",
                 "header",
                 "body"
->>>>>>> master
             ]
         },
 
@@ -121,19 +99,12 @@
                 "Bicycle or walk"
             ],
             "info": [
-<<<<<<< HEAD
-                {
-                    "section": "Transportation",
-                    "text": "In this section, we assume that your primary use of transportation modes is to get to school and back. Then, we factored in a multiplier of that number based on your response regarding summer travel patterns."
-                }
-=======
                 "Transportation",
                 "In this section, we assume that your primary use of transportation modes is to get to school and back. Then, we factored in a multiplier of that number based on your response regarding summer travel patterns."
             ],
             "infoTypes": [
                 "header",
                 "body"
->>>>>>> master
             ]
         },
 
@@ -148,32 +119,6 @@
                 "Give your best estimate"
             ],
             "info": [
-<<<<<<< HEAD
-                {
-                    "section": "What is a serving?",
-                    "text": "For the number of servings, it is fine to just guess — the idea is simply to give yourself an idea of the emissions impact of various food choices. But, if you want to try to be more precise, a \"serving\" is described below:"
-                },
-                {
-                    "section": "Beef",
-                    "text": "1 serving = 4 ounces, about the size of a deck of cards"
-                },
-                {
-                    "section": "Dairy",
-                    "categoryText": [
-                        "1 serving of eggs = 2 egss",
-                        "1 serving of milk products (milk, yogurt, etc) = 8 ounces, about the size of a baseball",
-                        "1 serving of cheese = 3 ounces, about the size of 12 dice or three individual string cheese"
-                    ]
-                },
-                {
-                    "section": "Diet Summary",
-                    "text": [
-                        "We deliberately picked two relatively high impact food choices. We omitted pork but its emissions profile is less than beef but more than dairy. Producing plant based foods generally emits fewer greenhouse gas emissions. Animal based food requires feed (that must be grown and processed), land, and more water than plant based food.",
-                        "Cows are especially greenhouse gas intensive because they are ruminant animals. They have a special digestive system that produces methane (cow burps). Cows are just one part of the greenhouse gas emissions produced in the agricultural system, and agriculture is just one part of the greenhouse gas emissions produced by human activity.",
-                        "Many people are also working on novel solutions that would not depend on changing dietary preferences around the world."
-                    ]
-                }
-=======
                 "What is a serving?",
                 "For the number of servings, it is fine to just guess — the idea is simply to give yourself an idea of the emissions impact of various food choices. But, if you want to try to be more precise, a \"serving\" is described below:",
                 "Beef",
@@ -200,7 +145,6 @@
                 "body",
                 "body",
                 "body"
->>>>>>> master
             ]
         },
 
@@ -213,18 +157,6 @@
                 "Give your best estimate"
             ],
             "info": [
-<<<<<<< HEAD
-                {
-                    "section": "Shopping",
-                    "text": [
-                        "The amount of greenhouse gases emitted to produce different types of clothing (e.g., pants, dresses, socks, etc) will vary based on the materials, method, and energy sources used. We use data from the production of an \"average\" t-shirt for this question to give you an idea of your clothing shopping impacts.",
-                        "Of course, there are many things we buy and use that are not captured by this question, such as electronics, cosmetics, toiletries, games, appliances, food, and much more. But this is meant to give you a snapshot of one aspect of your life. Next time you touch any object, imagine how and where it might have been made, and the energy source and materials that were needed to make and transport it.",
-                        "There are many people in the world working hard to change the way we make and transport things, what happens to things at the end of their useful lives, and where we get the energy to make the things we enjoy. We do not have to go without the things we like or that make life easier in order to address climate change."
-                    ]
-                }
-
-            ]
-=======
                 "Shopping",
                 "The amount of greenhouse gases emitted to produce different types of clothing (e.g., pants, dresses, socks, etc) will vary based on the materials, method, and energy sources used. We use data from the production of an \"average\" t-shirt for this question to give you an idea of your clothing shopping impacts.",
                 "Of course, there are many things we buy and use that are not captured by this question, such as electronics, cosmetics, toiletries, games, appliances, food, and much more. But this is meant to give you a snapshot of one aspect of your life. Next time you touch any object, imagine how and where it might have been made, and the energy source and materials that were needed to make and transport it.",
@@ -237,7 +169,7 @@
                 "body"
             ]
         },
-        
+
         "results": {
             "info": [
                 "CO2 Equivalents",
@@ -254,7 +186,7 @@
                     "",
                     " solar panels operated for a year would offset your emissions."
                 ],
-            
+
                 "Tree": [
                     "A tree is most efficient at CO2 removal when it reaches ten years old. It would take ",
                     " 10-year-old trees one full year to remove your emissions."
@@ -264,7 +196,7 @@
                     " miles."
                 ],
                 "SmartPhone": [
-                    "your emissions are equal to the emissions produced from charging ",
+                    "Your emissions are equal to the emissions produced from charging ",
                     " smart phones."
                 ],
                 "SolidCarbon": [
@@ -274,9 +206,8 @@
 
 
             }
-            
 
->>>>>>> master
+
         }
 
     }

@@ -28,7 +28,7 @@ class QuestionCardTransportation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            numMiles: 1,
+            numMiles: 0,
             summerChange: 1,
             mode: '',
             color: ['red', 'red', 'red', 'red', 'red'],
@@ -80,7 +80,7 @@ class QuestionCardTransportation extends React.Component {
             SecureStore.setItemAsync("numMiles", JSON.stringify(this.state.numMiles)) // save to async
             SecureStore.setItemAsync("mode", JSON.stringify(this.state.mode))
             this.props.navigation.navigate('Diet')
-            } 
+            }
     }
 
     // only used when back to results button is visible
@@ -100,6 +100,11 @@ class QuestionCardTransportation extends React.Component {
         alert ("Please enter your primary form of transportation.")
         return false;
       }
+      if (this.state.numMiles === 0)
+      {
+        alert ("Please input how many miles you drive.")
+        return false;
+      }
       return true;
     }
 
@@ -107,9 +112,6 @@ class QuestionCardTransportation extends React.Component {
         var access = this.state.hasResultsBeenAccessed
         return(
                     <View style = {styles.view}>
-<<<<<<< HEAD
-                        <SliderQuestion
-=======
                         { // can move this where we want it
                             (access == "true") ?
                             <AsafNextButton
@@ -123,7 +125,6 @@ class QuestionCardTransportation extends React.Component {
                         }
                         <SliderQuestion
                             ref = {'slider1'}
->>>>>>> master
                             question={TRANSPORTATION_INFO["questions"][0]}
                             questionLines={3}
                             questionStyle={{fontSize: 18}}
@@ -145,12 +146,8 @@ class QuestionCardTransportation extends React.Component {
                                         */
                                         }
                         <MCQuestion
-<<<<<<< HEAD
-                            question={TRANSPORTATION_INFO["questions"][1]}
-=======
                             ref = {'MCQuestion'}
                             question={TRANSPORTATION_INFO["questions"][1]}
->>>>>>> master
                             questionLines={2}
                             questionStyle={{fontSize: 18}}
                             answerOptions={TRANSPORTATION_INFO["MCOptions"]}

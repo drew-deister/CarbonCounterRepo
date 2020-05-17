@@ -23,6 +23,7 @@ const multiplier = {
   Tree: 1/48,
   Car: 1.1,
   SmartPhone: 57.8,
+  SolidCarbon: 1/3.7
 }
 
 class MetricView extends React.Component {

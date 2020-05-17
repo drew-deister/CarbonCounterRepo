@@ -219,7 +219,7 @@ class Results extends React.Component {
         <View style={styles.safeView}>
             <ScrollView style={styles.scrollViewStyle}
                         contentContainerStyle = {styles.containerStyle}>
-                
+
                 <View style = {styles.pageHeaderContainer}>
                     <Text style={styles.CO2Title}>
                         Your estimated green house gas emissions are:
@@ -262,60 +262,19 @@ class Results extends React.Component {
 
                     <View style={styles.metricsContainer}>
                         <Text style={styles.pageTitle}>Metrics</Text>
-<<<<<<< HEAD
-                        <MetricView metricName="SolarPanel" totalCo2 = {totalCO2}></MetricView>
-                        <MetricView metricName="Car" totalCo2 = {totalCO2} textStyle={{marginTop: -15}}></MetricView>
-                        <MetricView metricName="Tree" totalCo2 = {totalCO2}></MetricView>
-                        <MetricView metricName="SmartPhone" totalCo2 = {totalCO2}></MetricView>
-
-
-                  <Button
-                      icon={<Icon name="arrow-forward" color="white"/>}
-                      iconRight
-                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower
-                      title='Housing'
-                      onPress= {() => this.props.navigation.navigate('Household')}
-                  />
-                  <Button
-                      icon={<Icon name="arrow-forward" color="white"/>}
-                      iconRight
-                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower
-                      title='Transportation'
-                      onPress= {() => this.props.navigation.navigate('Transportation')}
-                  />
-                  <Button
-                      icon={<Icon name="arrow-forward" color="white"/>}
-                      iconRight
-                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower
-                      title='Diet'
-                      onPress= {() => this.props.navigation.navigate('Diet')}
-                  />
-                  <Button
-                      icon={<Icon name="arrow-forward" color="white"/>}
-                      iconRight
-                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower
-                      title='Shopping'
-                      onPress= {() => this.props.navigation.navigate('Shopping')}
-                  />
-
-                   </View>
-
-              </ScrollView>
-          </View>
-=======
                         <MetricView metricName="SolarPanel" totalCo2 = {totalCO2}/>
-                        <MetricView metricName="Car" totalCo2 = {totalCO2} 
+                        <MetricView metricName="Car" totalCo2 = {totalCO2}
                                     textStyle={{marginTop: -15}}/>
                         <MetricView metricName="Tree" totalCo2 = {totalCO2}/>
                         <MetricView metricName="SmartPhone" totalCo2 = {totalCO2}
                                     containerStyle={{marginBottom: 20}}/>
                         <MetricView metricName="SolidCarbon" totalCo2 = {totalCO2}
                                     containerStyle={{marginBottom: 20}}/>
-                    </View> 
+                    </View>
 
                     <View style={styles.goBackContainer}>
                         <Text style={styles.pageTitle}>Go Back</Text>
-                  
+
                         <AsafNextButton
                             onPress= {() => this.props.navigation.navigate('Household')}
                             style={{marginBottom: 10, marginTop: 25, backgroundColor: "#EB5B6D", borderColor: "#EB5B6D"}}
@@ -342,10 +301,10 @@ class Results extends React.Component {
                         </AsafNextButton>
 
                     </View>
-               
+
                 </View>
 
-            </ScrollView> 
+            </ScrollView>
 
             <InfoModal  ref={"infoModal"}
                         parentObject={this}
@@ -354,10 +313,9 @@ class Results extends React.Component {
                         xMarkStyle={{color: '#73A388'}}>
                 <ParagraphView  infoArr={Results_Info["info"]}
                                 infoTypeArr={Results_Info["infoTypes"]}
-                                textStyle={{color: '#73A388'}}/>     
+                                textStyle={{color: '#73A388'}}/>
             </InfoModal>
         </View>
->>>>>>> master
       )
     }
 
@@ -483,7 +441,7 @@ CO2Number:
     borderColor: 'transparent',
     borderWidth: 1,
   },
-  
+
 modalButtonContainer: {
   width: "100%",
   height: "100%",
