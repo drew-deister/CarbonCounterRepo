@@ -7,17 +7,24 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
-const AsafNextButton = (props) => {
-  return (
-    <View style={[styles.shadow, props.viewStyle]}>
-      <TouchableOpacity
-        onPress={props.onPress}
-        style={[styles.buttonBody, props.style]}
-      >
-        <Text style={[styles.buttonText, props.textStyle]}>{props.children}</Text>
-      </TouchableOpacity>
-    </View>
-  );
+export default class AsafNextButton extends React.Component {
+
+
+
+  render() {
+    return (
+      <View style={[styles.shadow, this.props.viewStyle]}>
+        <TouchableOpacity
+          onPress={this.props.onPress}
+          style={[styles.buttonBody, this.props.style]}
+        >
+          <Text style={[styles.buttonText, this.props.textStyle]}>{this.props.children}</Text>
+        </TouchableOpacity>
+      </View>
+    );
+
+  }
+  
 };
 
 // this is good style
@@ -47,4 +54,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export { AsafNextButton };
+

@@ -96,7 +96,10 @@ const AppNavigator = createStackNavigator(
     Results: { screen: Results },
     WePlanet: {screen: WePlanetIntroPage},
     WePlanetMain: {screen: WePlanetMain},
-    Credit: {screen: Credit}
+    Credit: {screen: Credit},
+    IntroPage1: { screen: IntroPage1 },
+    IntroPage2: { screen: IntroPage2 },
+    IntroPage3: { screen: IntroPage3 },
   },
   {
     cardStyle: {

@@ -22,7 +22,7 @@ class SliderQuestion extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            sliderValue: 1,
+            sliderValue: null,
         }
     }
 
@@ -36,6 +36,7 @@ class SliderQuestion extends React.Component {
         shouldDisplay: PropTypes.bool,
         minLabel: PropTypes.string,
         maxLabel: PropTypes.string,
+        fixedDecimals: PropTypes.number
     }
 
     static defaultProps = {
@@ -47,7 +48,8 @@ class SliderQuestion extends React.Component {
         step: 1,
         shoudlDisplay: true,
         minLabel: "",
-        maxLabel: ""
+        maxLabel: "",
+        fixedDecemals: null,
     }
 
     changeValue(value) {
@@ -85,8 +87,15 @@ class SliderQuestion extends React.Component {
                     { 
                     this.props.shouldDisplay ? // this is called a ternary operator: the text element will display if true
                         <Text style={styles.sliderValue}>
-                            {this.state.sliderValue} 
+                            
+                            {
+                                
+                            this.props.fixedDecimals !== null && this.state.sliderValue !== null ?
+                            this.state.sliderValue.toFixed(this.props.fixedDecimals) :
+                            this.state.sliderValue
+                            }  
                         </Text>
+                        
                     : null
                     }
                     <Text style={[styles.sliderLabel, {textAlign: 'right'}]}>{this.props.maxLabel}</Text>

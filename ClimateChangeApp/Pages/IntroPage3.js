@@ -2,7 +2,7 @@
 
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
-import { AsafNextButton } from "../Components/AsafNextButton";
+import AsafNextButton from "../Components/AsafNextButton";
 import INFORMATION from '../Utilities/text.json'; // import JSON file
 import {
   widthPercentageToDP as wp,

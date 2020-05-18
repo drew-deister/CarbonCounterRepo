@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View, StyleSheet, Text, Image} from 'react-native';
-import { AsafNextButton } from "../Components/AsafNextButton";
+import AsafNextButton from "../Components/AsafNextButton";
 import INFORMATION from '../Utilities/text.json'; // import JSON file
 import * as SecureStore from 'expo-secure-store';
 import {
@@ -110,6 +110,7 @@ export default class CarbonCounterIntroPage extends Component {
                     >
                         New Survey
                     </AsafNextButton>
+
 
                     {
                         (surveyedBefore == "true") ? // show this only if they've done a survey before

@@ -12,7 +12,6 @@ import {
   ScrollView,
   Linking
 } from "react-native";
-import { AsafNextButton } from "../Components/AsafNextButton";
 import InfoModal from "../Components/InfoModal";
 import { Left } from "native-base";
 import INFORMATION from '../Utilities/text.json'; // import JSON file
