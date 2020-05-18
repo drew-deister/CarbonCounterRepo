@@ -10,13 +10,7 @@ import {StyleSheet, View} from "react-native";
 import * as SecureStore from 'expo-secure-store';
 import { InputQuestion } from '../Components/InputQuestion';
 import { AsafNextButton } from "../Components/AsafNextButton";
-import {Text, Icon, Button, Slider} from 'react-native-elements';
 import INFORMATION from '../Utilities/text.json'; // import JSON file
-import {
-    widthPercentageToDP as wp,
-    heightPercentageToDP as hp,
-    listenOrientationChange, removeOrientationListener
-  } from 'react-native-responsive-screen';
 
 const SHOPPING_INFO = INFORMATION["carbonCounterScreens"]["shopping"];
 
@@ -26,7 +20,6 @@ class QuestionCardShopping extends React.Component {
         super(props);
         this.state = { 
             shoppingFrequency: -1,
-            articlesPerShop: -1, // don't think you need this
             hasResultsBeenAccessed: "false",
             hasShoppingBeenAccessed: "false",
         }
@@ -64,7 +57,6 @@ class QuestionCardShopping extends React.Component {
     saveAndPush() { // change this to some checkvalue function
         if (this.checkValid()) {
             SecureStore.setItemAsync("shoppingFrequency", JSON.stringify(this.state.shoppingFrequency))
-            SecureStore.setItemAsync("articlesPerShop", JSON.stringify(this.state.articlesPerShop)) // dont need this
             SecureStore.setItemAsync("hasShoppingBeenAccessed", JSON.stringify("true"))
             this.props.navigation.navigate('Results')            
             } else {
@@ -75,11 +67,10 @@ class QuestionCardShopping extends React.Component {
     // only used when back to results button is visible
     saveAndGoBackToResults() {
         SecureStore.setItemAsync("shoppingFrequency", JSON.stringify(this.state.shoppingFrequency))
-        SecureStore.setItemAsync("articlesPerShop", JSON.stringify(this.state.articlesPerShop))
         this.props.navigation.navigate('Results') // you took results off the stack so must re-push
     }
 
-    checkValid() { // do some sort of error checking here
+    checkValid() { // do error checking
         return true;//(this.state.articlesPerShop != -1 && this.state.shoppingFrequency != -1)
     }
 
@@ -88,7 +79,6 @@ class QuestionCardShopping extends React.Component {
         var access = this.state.hasResultsBeenAccessed
         return(
                 <View style = {styles.view}>
-                    
                     <InputQuestion 
                         ref = {'q1'}
                         questionLines={3}
@@ -97,16 +87,7 @@ class QuestionCardShopping extends React.Component {
                         question = {SHOPPING_INFO["questions"][0]} 
                         placeholder = {SHOPPING_INFO["placeholders"][0]}/>
 
-                    {/* LUCAS       -       Leah had us delete this question. 
-                                            Once you see this, if you agree, delete the following commented out code*/ } 
-                    {/* <InputQuestion 
-                        questionLines={2}
-                        keyboardType = {'numeric'}
-                        parentCallBack = {this.callbackFunction2}                             
-                        question = {this.props.data.articlesPerShop} 
-                        placeholder = {this.props.data.articlesPerShopPlaceholder}/> */}
-
-                    { // can move this where we want it
+                    { 
                         (access == "true") ?
                         <AsafNextButton 
                                 onPress= {() => this.saveAndGoBackToResults()}
@@ -123,7 +104,6 @@ class QuestionCardShopping extends React.Component {
                             Next
                         </AsafNextButton>
                     }       
-                    
                 </View> 
         )    
     }

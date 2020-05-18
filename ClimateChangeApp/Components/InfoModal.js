@@ -14,12 +14,6 @@ export default class InfoModal extends Component {
 
   static defaultProps = {
       modalStyle: {backgroundColor: "white"}
-
-      // backgroundColor: "#FCCCC0"
-      // backgroundColor: "#F6F8EF",  light green
-      // housing:
-      // backgroundColor: '#FCCCC0',
-      // secondary: '#EB5B6D'
   }
 
 
@@ -111,8 +105,6 @@ const styles = StyleSheet.create({
     color: "#73A388",
     fontSize: 34,
     fontWeight: "900",
-    // marginBottom: -15,
-    // paddingBottom: -20,
   }
 });
 

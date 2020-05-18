@@ -6,18 +6,12 @@
 // _______________TRANSPORTATION QUESTION CARD__________________
 
 import React, { Component } from 'react';
-import {StyleSheet, View, TouchableHighlight} from "react-native";
-import {Icon, Button, Slider, Text} from 'react-native-elements';
+import {StyleSheet, View} from "react-native";
 import {SliderQuestion} from '../Components/SliderQuestion';
 import { AsafNextButton } from "../Components/AsafNextButton";
 import {MCQuestion} from '../Components/MCQuestion'
 import * as SecureStore from 'expo-secure-store';
-import INFORMATION from '../Utilities/text.json'; // import JSON file
-import {
-    widthPercentageToDP as wp,
-    heightPercentageToDP as hp,
-    listenOrientationChange, removeOrientationListener
-  } from 'react-native-responsive-screen';
+import INFORMATION from '../Utilities/text.json'; 
 import { throwIfAudioIsDisabled } from 'expo-av/build/Audio/AudioAvailability';
 
 
@@ -40,8 +34,8 @@ class QuestionCardTransportation extends React.Component {
 
     componentDidMount() {
         this.fetchData().done()
-        this.props.navigation.addListener('didFocus', () => { // runs every time the screen is seen
-            // The screen is focused
+        // the contents of this listener execute every time the screen is focused, i.e. shown 
+        this.props.navigation.addListener('didFocus', () => { 
             this.fetchData().done()
         });
     }
@@ -107,7 +101,7 @@ class QuestionCardTransportation extends React.Component {
         var access = this.state.hasResultsBeenAccessed
         return(
                     <View style = {styles.view}>
-                        { // can move this where we want it
+                        { 
                             (access == "true") ?
                             <AsafNextButton
                                 onPress= {() => this.saveAndGoBackToResults()}
@@ -130,17 +124,6 @@ class QuestionCardTransportation extends React.Component {
                             callback = {this.updateSliderState1}
                         />
 
-
-                        {/* FIXME       -------------------------------------/*
-                                    -   Problem: Some of the answer options
-                                        don't fit well on the screens
-                                    -   We need to ask Leah if its possible to
-                                        shorten the MCOptions (the answers to
-                                        he transportation question)
-                                    -   Alternatively, we could add an "info"
-                                        button to a few of the answers
-                                        */
-                                        }
                         <MCQuestion
                             ref = {'MCQuestion'}
                             question={TRANSPORTATION_INFO["questions"][1]}

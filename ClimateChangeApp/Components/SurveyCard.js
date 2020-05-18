@@ -6,13 +6,10 @@
 import React, { Component } from 'react';
 import {ScrollView, Text, StyleSheet, View, Image, TouchableOpacity} from "react-native";
 import PropTypes from 'prop-types';
-import { AsafNextButton } from "./AsafNextButton";
 import { InfoModal } from "./InfoModal";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { Row } from 'native-base';
 import ParagraphView from "./ParagraphView";
 import * as Progress from "react-native-progress";
-import WePlanetIntroPage from '../Pages/WePlanetIntro';
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
@@ -38,12 +35,10 @@ class SurveyCard extends React.Component {
             //used to determine whether ScrollView can be scrolled
             showingModal: false
         };
-        //nextScreen: props.children;
     }
     static propTypes = {
         title: PropTypes.string,
         imageSrc: PropTypes.string,
-        // nextScreen: PropTypes.string,
     }
     static defaultProps = {
         title: 'Household',
@@ -51,7 +46,6 @@ class SurveyCard extends React.Component {
         infoImageStyle: {},
         style: {},                      //used to change backgroundColor
         titleStyle: {},                 //used to change title text color
-        // nextScreen: 'Home',
     }
 
     showInfoModalAndDisableScroll() {
@@ -66,24 +60,14 @@ class SurveyCard extends React.Component {
     setScrollView = scrollView => {
         // NOTE: scrollView will be null when the component is unmounted
         this._scrollView = scrollView;
-      };
+    };
 
-    // componentDidMount() {
-    //     this.flashScroll();
-        
-    //   }
-    
-    //   flashScroll() {
-    //     setTimeout(() => {
-    //         this._scrollView.flashScrollIndicators();
-
-    //     }, 200)
-    //   }
 
     render() {
         return (
             <View style={styles.safeView}>
-                <KeyboardAwareScrollView enableResetScrollToCoords={false}
+                <KeyboardAwareScrollView // this is similar to scrollview
+                    resetScrollToCoords={{x: 0, y:0}}
                     extraScrollHeight={-30}
                     style={[styles.scrollViewStyle, this.props.style]}
                     contentContainerStyle = {styles.containerStyle}
@@ -109,11 +93,6 @@ class SurveyCard extends React.Component {
                     <View>
                         {this.props.children}
                     </View>
-                    {/* <AsafNextButton
-                            onPress={() => this.props.navigation.push(this.props.nextScreen)}
-                            >
-                            Next
-                    </AsafNextButton> */}
 
                 </KeyboardAwareScrollView>
 
@@ -170,10 +149,8 @@ const styles = StyleSheet.create({
         flexGrow: 1,
         marginTop: 0,
         padding: 0,
-        //justifyContent: 'space-between',
         alignItems: 'center',
         alignContent: 'center',
-        //shadowOpacity: .1,
     },
     titleContainer: {
         flexDirection: "row",
@@ -186,8 +163,6 @@ const styles = StyleSheet.create({
     pageTitle: {
         color: 'white',
         fontSize: 42,
-        // paddingLeft: 40,
-        //width: 224,
         fontWeight: '600',
         textAlign: 'center',
     },

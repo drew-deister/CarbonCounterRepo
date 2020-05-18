@@ -14,14 +14,12 @@ const INFO = INFORMATION["introScreens"][2];
 
 export default class IntroPage extends Component {
 
-
   static navigationOptions = {
     // headerTitle: 'new title',
     headerShown: false
   }
-  // "main method"
+
   render() {
-    //const { navigate } = this.props.navigation;
     return (
         <View style={styles.container}>
 

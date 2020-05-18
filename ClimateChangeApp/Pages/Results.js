@@ -2,7 +2,6 @@
 // Email: andrew.z.deister@vanderbilt.edu
 // Date: 12/26/19
 
-// Results Page: to be edited by Lucas
 // NOTE on Asynchronous Functions/Code: Note that componentDidMount() is called automatically by the compiler.
 // So theoretically, state will be re-rendered before the components the values will be fetched and the state will be
 // re-rended automatically.
@@ -149,7 +148,7 @@ class Results extends React.Component {
       else{
         multiplier = 1.5;
       }
-//should be divided by this.state.numPeople
+      //should be divided by this.state.numPeople
       return (multiplier * averageHomekwhMonth * 12 * this.state.numPeople);
     }
 
@@ -330,16 +329,7 @@ class Results extends React.Component {
                             >
                             Go Home
                         </AsafNextButton>
-
-
-                        {/* <Button
-                      icon={<Image source={require("../assets/social-media.png")} />}
-                      iconRight
-                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
-                      title='Go Home'
-                      onPress= {() => this.props.navigation.navigate('Home')}
-                  /> */}
-
+                        
                     </View>
                
                 </View>
