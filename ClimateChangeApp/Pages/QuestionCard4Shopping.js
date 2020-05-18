@@ -65,7 +65,22 @@ class QuestionCardShopping extends React.Component {
     }
 
     checkValid() { // do error checking
-        return true;//(this.state.articlesPerShop != -1 && this.state.shoppingFrequency != -1)
+        if (this.state.shoppingFrequency === '')
+      {
+        alert ("Please enter your shopping frequency.")
+        return false;
+      }
+      if (isNaN(parseInt(this.state.shoppingFrequency)))
+      {
+        alert ("Please enter a number for your shopping frequency.")
+        return false;
+      }
+      if (parseInt(this.state.shoppingFrequency) < 0 )
+      {
+        alert ("Please enter a non negative number for your shopping frequency.")
+        return false;
+      }
+      return true
     }
 
 
