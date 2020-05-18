@@ -73,14 +73,27 @@ class QuestionCardTransportation extends React.Component {
             SecureStore.setItemAsync("mode", JSON.stringify(this.state.mode))
             SecureStore.setItemAsync("summerChange", JSON.stringify(this.state.summerChange))
             this.props.navigation.navigate('Diet')
-            }
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     // only used when back to results button is visible
     saveAndGoBackToResults() {
-        this.saveAndPush()
-        this.props.navigation.navigate('Shopping')
-        this.props.navigation.navigate('Results') // you took results off the stack so must re-push
+        if (this.saveAndPush()) {
+            this.props.navigation.navigate('Shopping')
+            this.props.navigation.navigate('Results') // you took results off the stack so must re-push
+        }
+        
+
+    //     SecureStore.setItemAsync("numMiles", JSON.stringify(this.state.numMiles)) // save to async
+    //     SecureStore.setItemAsync("summerChange", JSON.stringify(this.state.summerChange))
+    //     SecureStore.setItemAsync("mode", JSON.stringify(this.state.mode))
+    //     this.props.navigation.navigate('Diet')
+    //     this.props.navigation.navigate('Shopping')
+    //     this.props.navigation.navigate('Results') // you took results off the stack so must re-push
     }
 
     checkValid() {

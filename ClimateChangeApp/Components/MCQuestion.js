@@ -84,7 +84,7 @@ class MCQuestion extends React.Component {
         for (let i = 0; i < this.props.answerOptions.length; ++i) {
             this.state.color.push(this.props.defaultAnswerColor)
             answersList.push(
-                <TouchableHighlight 
+                <TouchableHighlight
                     style = {[styles.choiceButton, {backgroundColor: this.state.color[i]}]}
                     onPress = {() => this.updateButton(i, this.props.answerOptions[i])}
                     key = {i} >
@@ -100,10 +100,11 @@ class MCQuestion extends React.Component {
             this.state.color[index] = this.props.secondaryColor
         } else {
             this.state.color[index] = this.props.defaultAnswerColor
+            mode = '';
         }
         for (let i = 0; i < this.props.answerOptions.length; i++) { // unselect the other
             if (this.state.color[i] == this.props.secondaryColor && i != index) { // don't change the one you just updated
-                this.state.color[i] = this.props.defaultAnswerColor
+                this.state.color[i] = this.props.defaultAnswerColor;
             }
         }
         this.setState({color: this.state.color})
@@ -117,7 +118,7 @@ class MCQuestion extends React.Component {
                 this.state.color[i] = this.props.defaultAnswerColor
             }
         }
-    }  
+    }
 
 
     render() {
@@ -125,7 +126,7 @@ class MCQuestion extends React.Component {
         // answers gets rendered later in file
         const answers = this.makeAnswerOptions();
 
-        return (            
+        return (
             <View style={styles.container}>
                 <QuestionText
                     lines={this.props.questionLines}
@@ -137,7 +138,7 @@ class MCQuestion extends React.Component {
                     {answers}
                 </View>
 
-            </View>   
+            </View>
         )
     }
 }

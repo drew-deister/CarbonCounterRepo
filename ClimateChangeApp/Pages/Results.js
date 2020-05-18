@@ -51,18 +51,18 @@ class Results extends React.Component {
         numPeople: 0,
         squareFootage: 0,
         numMiles: 0,
-        greenAmount: 0,
         summerChange: 0,
         mode: '',
         beefServings: 0,
         dairyServings: 0,
         shoppingFrequency: 0,
-        articlesPerShop: 0,
         dummyNumber: 40,
       }
       SecureStore.setItemAsync("hasResultsBeenAccessed", JSON.stringify("true"))
 
     }
+
+
 
     static navigationOptions = { // this is the label in the middle of the nav bar
         title: 'Housing',
@@ -77,15 +77,14 @@ class Results extends React.Component {
       // housing
       const zipCode = JSON.parse(await SecureStore.getItemAsync("zipCode"))
       // use 1/num people because total housing is divided by num people
-      const numPeople = 1/JSON.parse(await SecureStore.getItemAsync("numPeople"))
+      const numPeople = 1/(1+JSON.parse(await SecureStore.getItemAsync("numPeople")))
       const squareFootage = JSON.parse(await SecureStore.getItemAsync("squareFootage"))
 
       // transportation
       const numMiles = JSON.parse(await SecureStore.getItemAsync("numMiles"))
       //multiply by .01 to make decimal
-      const greenAmount = .01*JSON.parse(await SecureStore.getItemAsync("greenAmount"))
-      const summerChange = .01*JSON.parse(await SecureStore.getItemAsync("summerChange"))
       const mode = JSON.parse(await SecureStore.getItemAsync("mode"))
+      const summerChange = .01 * JSON.parse(await SecureStore.getItemAsync("summerChange"))
 
       // diet
       const beefServings = JSON.parse(await SecureStore.getItemAsync("beefServings"))
@@ -93,15 +92,14 @@ class Results extends React.Component {
 
       // shopping
       const shoppingFrequency = JSON.parse(await SecureStore.getItemAsync("shoppingFrequency"))
-      const articlesPerShop = JSON.parse(await SecureStore.getItemAsync("articlesPerShop"))
 
       // this not only changes the state but also
       // rerenders the components in view
       this.setState({zipCode: zipCode, numPeople: numPeople, squareFootage: squareFootage,
-                     numMiles: numMiles, greenAmount: greenAmount, summerChange: summerChange, mode: mode,
+                     numMiles: numMiles, summerChange: summerChange, mode: mode,
                      beefServings: beefServings, dairyServings: dairyServings,
-                     shoppingFrequency: shoppingFrequency, articlesPerShop: articlesPerShop});
-
+                     shoppingFrequency: shoppingFrequency});
+      
 
       this.calculateDiet()
       this.calculateShopping()
@@ -121,12 +119,13 @@ class Results extends React.Component {
 
     calculateShopping() {
       const POUNDS_PER_SHIRT = 12.13
-      return (POUNDS_PER_SHIRT * 12 * this.state.shoppingFrequency * this.state.articlesPerShop)
+      return (POUNDS_PER_SHIRT * 12 * this.state.shoppingFrequency * 4)
     }
 
     calculateHousing() { // iterate through JSON file in Utilities
       var averageHomekwhMonth = 0;
       var multiplier = 1.0;
+      var i;
       for (i in ZipCode) {
           if (ZipCode[i]["Zip"] === parseInt(this.state.zipCode)) {
             averageHomekwhMonth += ZipCode[i]["Avg Home kwh"]["month"];
@@ -153,24 +152,27 @@ class Results extends React.Component {
     }
 
     calculateTransportation() {
-      MPG_rate = 1 // dummy bc idk if you have to initialize
-      if (this.mode == "Sedan") {
+      var MPG_rate = 1 // dummy bc idk if you have to initialize
+      if (this.state.mode == "Regular car") {
         MPG_rate = 30
-      } else if (this.mode == "Car SUV") {
+      } else if (this.state.mode == "Small SUV (Ford Escape)") {
         MPG_rate = 26.2
-      } else if (this.mode == "Truck SUV") {
+      } else if (this.state.mode == "Large SUV (Chevy Suburban)") {
         MPG_rate = 22.4
-      } else if (this.mode == "Minivan") {
+      } else if (this.state.mode == "Minivan") {
         MPG_rate = 22.2
-      } else { // pickup truck
+      } else if (this.state.mode == "Pickup truck (Ford F-150)"){
+        MPG_rate = 18.9
+    } else if (this.state.mode == "Train or bus") {
+      return this.state.numMiles * 180 * 0.5 * (.75 + .25 * (this.state.summerChange + .5))
+    }
+      else { // pickup truck
         MPG_rate = 18.9
       }
-      multiplier =  180 * (1/MPG_rate) * 8887 * 0.00220462;
+      var multiplier =  180 * (1/MPG_rate) * 8887 * 0.00220462;
       //.75 from non summer + .25 * the change over the summer
-      summer = (.75 + .25 * this.state.summerChange)
-      //max greenamount is .5
-      green = (this.state.greenAmount + 0.5);
-      return multiplier * summer * green * this.state.numMiles;// lbsCO2/yr
+      var summer = (.75 + (.25 * this.state.summerChange))
+      return multiplier * summer  * this.state.numMiles;// lbsCO2/yr
     }
 
   showInfoModalAndDisableScroll() {
@@ -283,14 +285,14 @@ class Results extends React.Component {
                     <View style={styles.metricsContainer}>
                         <Text style={styles.pageTitle}>Metrics</Text>
                         <MetricView metricName="SolarPanel" totalCo2 = {totalCO2}/>
-                        <MetricView metricName="Car" totalCo2 = {totalCO2} 
+                        <MetricView metricName="Car" totalCo2 = {totalCO2}
                                     textStyle={{marginTop: -15}}/>
                         <MetricView metricName="Tree" totalCo2 = {totalCO2}/>
                         <MetricView metricName="SmartPhone" totalCo2 = {totalCO2}
                                     containerStyle={{marginBottom: 20}}/>
                         <MetricView metricName="SolidCarbon" totalCo2 = {totalCO2}
                                     containerStyle={{marginBottom: 20}}/>
-                    </View> 
+                    </View>
 
 
                     <View style={styles.goBackContainer}>
@@ -331,10 +333,10 @@ class Results extends React.Component {
                         </AsafNextButton>
                         
                     </View>
-               
+
                 </View>
 
-            </ScrollView> 
+            </ScrollView>
 
             <InfoModal  ref={"infoModal"}
                         parentObject={this}
@@ -343,7 +345,7 @@ class Results extends React.Component {
                         xMarkStyle={{color: '#73A388'}}>
                 <ParagraphView  infoArr={Results_Info["info"]}
                                 infoTypeArr={Results_Info["infoTypes"]}
-                                textStyle={{color: '#73A388'}}/>     
+                                textStyle={{color: '#73A388'}}/>
             </InfoModal>
         </View>
       )
@@ -352,7 +354,7 @@ class Results extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  
+
 view: {
     alignItems: 'center',
     flexDirection: 'row'
@@ -472,7 +474,7 @@ CO2Number:
     borderColor: 'transparent',
     borderWidth: 1,
   },
-  
+
 modalButtonContainer: {
   width: "100%",
   height: "100%",

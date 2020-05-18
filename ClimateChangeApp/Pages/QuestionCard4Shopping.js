@@ -24,7 +24,6 @@ class QuestionCardShopping extends React.Component {
             hasShoppingBeenAccessed: "false",
         }
         this.callbackFunction1 = this.callbackFunction1.bind(this);
-        this.callbackFunction2 = this.callbackFunction2.bind(this);
     }
 
     componentDidMount() {
@@ -50,24 +49,19 @@ class QuestionCardShopping extends React.Component {
         this.setState({shoppingFrequency: value})
     }
 
-    callbackFunction2(value) {
-        this.setState({articlesPerShop: value})
-    }
 
     saveAndPush() { // change this to some checkvalue function
         if (this.checkValid()) {
             SecureStore.setItemAsync("shoppingFrequency", JSON.stringify(this.state.shoppingFrequency))
             SecureStore.setItemAsync("hasShoppingBeenAccessed", JSON.stringify("true"))
             this.props.navigation.navigate('Results')            
-            } else {
-            alert('Please answer all questions.')
         }
     }
 
     // only used when back to results button is visible
     saveAndGoBackToResults() {
-        SecureStore.setItemAsync("shoppingFrequency", JSON.stringify(this.state.shoppingFrequency))
-        this.props.navigation.navigate('Results') // you took results off the stack so must re-push
+        this.saveAndPush()
+        // for this page, saveAndPush is the same as saveAndGoBackToResults
     }
 
     checkValid() { // do error checking
@@ -83,20 +77,21 @@ class QuestionCardShopping extends React.Component {
                         ref = {'q1'}
                         questionLines={3}
                         keyboardType = {'numeric'}
-                        parentCallBack = {this.callbackFunction1}                             
-                        question = {SHOPPING_INFO["questions"][0]} 
+                        parentCallBack = {this.callbackFunction1}
+                        question = {SHOPPING_INFO["questions"][0]}
                         placeholder = {SHOPPING_INFO["placeholders"][0]}/>
 
-                    { 
+
+                    { // can move this where we want it
                         (access == "true") ?
-                        <AsafNextButton 
+                        <AsafNextButton
                                 onPress= {() => this.saveAndGoBackToResults()}
                                 style={{backgroundColor: "#73A388", marginBottom: 0}}
                                 textStyle={{color: "white"}}>
 
                                 Back to results
                         </AsafNextButton>
-                        : 
+                        :
                         <AsafNextButton
                         onPress={() => this.saveAndPush()}
                         viewStyle={{marginTop: 16}}

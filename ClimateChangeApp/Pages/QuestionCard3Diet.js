@@ -25,9 +25,9 @@ const DIET_INFO = INFORMATION["carbonCounterScreens"]["diet"];
 class QuestionCardDiet extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { 
-            beefServings: -1,
-            dairyServings: -1,
+        this.state = {
+            beefServings: '',
+            dairyServings: '',
             hasResultsBeenAccessed: "false",
             hasDietBeenAccessed: "false",
         }
@@ -72,22 +72,53 @@ class QuestionCardDiet extends React.Component {
             SecureStore.setItemAsync("beefServings", JSON.stringify(this.state.beefServings))
             SecureStore.setItemAsync("dairyServings", JSON.stringify(this.state.dairyServings))
             SecureStore.setItemAsync("hasDietBeenAccessed", JSON.stringify("true"))
-            this.props.navigation.navigate('Shopping')            
+            this.props.navigation.navigate('Shopping')   
+            return true;         
             } else {
-            alert('Please answer all questions.')
+                // alert('Please answer all questions.')
+            return false;
         }
     }
 
     // only used when back to results button is visible
     saveAndGoBackToResults() {
-        SecureStore.setItemAsync("beefServings", JSON.stringify(this.state.beefServings))
-        SecureStore.setItemAsync("dairyServings", JSON.stringify(this.state.dairyServings)) 
-        this.props.navigation.navigate('Shopping')  
-        this.props.navigation.navigate('Results') // you took results off the stack so must re-push
+        if (this.saveAndPush()) {
+            this.props.navigation.navigate('Results') // you took results off the stack so must re-push
+        }
     }
 
     checkValid() { // do some sort of error checking here
-        return true;//(this.state.beefServings != -1 && this.state.beefServings != -1)
+      if (this.state.beefServings === '')
+      {
+        alert ("Please enter the number of beef servings you consume.")
+        return false;
+      }
+      if (isNaN(parseInt(this.state.beefServings)))
+      {
+        alert ("Please enter a number for the quantity of beef servings you consume.")
+        return false;
+      }
+      if (parseInt(this.state.beefServings) < 0)
+      {
+        alert ("Please enter a non negative number for the quantity of beef servings you consume.")
+        return false;
+      }
+      if (this.state.dairyServings === '')
+      {
+        alert ("Please enter the number of dairy servings you consume.")
+        return false;
+      }
+      if (isNaN(parseInt(this.state.dairyServings)))
+      {
+        alert ("Please enter a number for the quantity of dairy servings you consume.")
+        return false;
+      }
+      if (parseInt(this.state.dairyServings) < 0)
+      {
+        alert ("Please enter a non negative number for the quantity of dairy servings you consume.")
+        return false;
+      }
+      return true;
     }
 
 
@@ -98,7 +129,7 @@ class QuestionCardDiet extends React.Component {
                 <View style = {styles.view}>
                     { // can move this where we want it
                         (access == "true") ?
-                        <AsafNextButton 
+                        <AsafNextButton
                                 onPress= {() => this.saveAndGoBackToResults()}
                                 style={{backgroundColor: this.props.secondaryColor, marginBottom: 0}}
                                 textStyle={{color: "white"}}>
@@ -106,22 +137,22 @@ class QuestionCardDiet extends React.Component {
                                 Back to results
                         </AsafNextButton>
                         : null // don't do anything
-                    } 
-                    <InputQuestion 
+                    }
+                    <InputQuestion
                         ref = {'q1'}
                         questionStyle={{color: this.props.secondaryColor}}
                         questionLines={2}
                         keyboardType = {'numeric'}
-                        parentCallBack = {this.callbackFunction1}                             
-                        question = {DIET_INFO["questions"][0]} 
+                        parentCallBack = {this.callbackFunction1}
+                        question = {DIET_INFO["questions"][0]}
                         placeholder = {DIET_INFO["placeholders"][0]}/>
-                    <InputQuestion 
+                    <InputQuestion
                         ref = {'q2'}
                         questionStyle={{color: this.props.secondaryColor}}
                         questionLines={3}
                         keyboardType = {'numeric'}
-                        parentCallBack = {this.callbackFunction2}                             
-                        question = {DIET_INFO["questions"][1]} 
+                        parentCallBack = {this.callbackFunction2}
+                        question = {DIET_INFO["questions"][1]}
                         placeholder = {DIET_INFO["placeholders"][1]}/>
 
                     <AsafNextButton
@@ -131,9 +162,9 @@ class QuestionCardDiet extends React.Component {
                             Next
                     </AsafNextButton>
 
-                </View> 
+                </View>
 
-        )    
+        )
     }
 
 }
@@ -142,7 +173,7 @@ class QuestionCardDiet extends React.Component {
 const styles = StyleSheet.create({
     view: {
         alignItems: 'center',
-    } 
+    }
 })
 
 

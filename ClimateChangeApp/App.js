@@ -96,7 +96,10 @@ const AppNavigator = createStackNavigator(
     Results: { screen: Results },
     WePlanet: {screen: WePlanetIntroPage},
     WePlanetMain: {screen: WePlanetMain},
-    Credit: {screen: Credit}
+    Credit: {screen: Credit},
+    IntroPage1: { screen: IntroPage1 },
+    IntroPage2: { screen: IntroPage2 },
+    IntroPage3: { screen: IntroPage3 },
   },
   {
     cardStyle: {
@@ -104,7 +107,7 @@ const AppNavigator = createStackNavigator(
         // shadowOpacity: .5,
         // shadowRadius: 10,
     },
-    initialRouteName: "IntroPage1", // For functioning app, use "IntroPage1"
+    initialRouteName: "Home", // For functioning app, use "IntroPage1"
     //headerMode: "None",
     headerLayoutPreset: "center",
     transitionConfig: () => ({

@@ -14,7 +14,7 @@
         }
 
     ],
-    
+
     "carbonCounterScreens": {
         "intro": {
             "title": "Carbon Counter",
@@ -41,12 +41,12 @@
                 "body"
             ]
             },
-        
+
         "household": {
             "title": "Household",
             "questions": [
                 "Zip Code",
-                "How many people do you live with?",
+                "How many other people do you live with?",
                 "House size (square feet)?"
             ],
             "placeholders": [
@@ -90,11 +90,11 @@
                 "Travel more"
             ],
             "MCOptions": [
-                "Regular sedan or wagon",
-                "Car type SUV (e.g., RAV4, Ford Escape)",
-                "Truck type SUV (e.g., Chevy Suburban, Nissan Titan)",
+                "Regular car",
+                "Small SUV (Ford Escape)",
+                "Large SUV (Chevy Suburban)",
                 "Minivan",
-                "Pickup truck (e.g., Ford F-150)",
+                "Pickup truck (Ford F-150)",
                 "Train or bus",
                 "Bicycle or walk"
             ],
@@ -185,7 +185,7 @@
                 "body"
             ]
         },
-        
+
         "results": {
             "info": [
                 "CO2 Equivalents",
@@ -202,7 +202,7 @@
                     "",
                     " solar panels operated for a year would offset your emissions."
                 ],
-            
+
                 "Tree": [
                     "A tree is most efficient at CO2 removal when it reaches ten years old. It would take ",
                     " 10-year-old trees one full year to remove your emissions."
@@ -212,7 +212,7 @@
                     " miles."
                 ],
                 "SmartPhone": [
-                    "your emissions are equal to the emissions produced from charging ",
+                    "Your emissions are equal to the emissions produced from charging ",
                     " smart phones."
                 ],
                 "SolidCarbon": [
@@ -222,7 +222,7 @@
 
 
             }
-            
+
 
         }
 
