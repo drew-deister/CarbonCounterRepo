@@ -9,7 +9,7 @@ import React, { Component } from 'react';
 import {StyleSheet, View} from "react-native";
 import * as SecureStore from 'expo-secure-store';
 import { InputQuestion } from '../Components/InputQuestion';
-import { AsafNextButton } from "../Components/AsafNextButton";
+import AsafNextButton from "../Components/AsafNextButton";
 import INFORMATION from '../Utilities/text.json'; // import JSON file
 
 const SHOPPING_INFO = INFORMATION["carbonCounterScreens"]["shopping"];

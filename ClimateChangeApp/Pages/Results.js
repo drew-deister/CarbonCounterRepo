@@ -30,7 +30,7 @@ const Results_Info = INFORMATION["carbonCounterScreens"]["results"]
 
 
 import * as SecureStore from 'expo-secure-store';
-import { AsafNextButton } from '../Components/AsafNextButton';
+import AsafNextButton from '../Components/AsafNextButton';
 
 //Pie chart configuration
   const chartConfig = {

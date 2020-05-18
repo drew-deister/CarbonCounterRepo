@@ -34,6 +34,7 @@ class MCQuestion extends React.Component {
     defaultAnswerColor: "rgba(255, 255, 255, .52)",
     secondaryColor: "rgba(252, 205, 193, .85)",
     answerOptions: ["answer1", "answer2", "answer3"],
+    answerStyle: [{}, {}, {}, {}, {}]
   };
 
   // This makes an answer option for each str in AnswerOptions prop,

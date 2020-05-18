@@ -11,7 +11,7 @@ import {StyleSheet, View} from "react-native";
 import {Text, Icon, Button, Slider} from 'react-native-elements';
 import * as SecureStore from 'expo-secure-store';
 import { InputQuestion } from '../Components/InputQuestion';
-import { AsafNextButton } from "../Components/AsafNextButton";
+import AsafNextButton from "../Components/AsafNextButton";
 import INFORMATION from '../Utilities/text.json'; // import JSON file
 
 import {

@@ -22,7 +22,7 @@ import {
     listenOrientationChange, removeOrientationListener
   } from 'react-native-responsive-screen';
 import { SliderQuestion } from '../Components/SliderQuestion';
-import { AsafNextButton } from "../Components/AsafNextButton";
+import AsafNextButton from "../Components/AsafNextButton";
 import ZipCode from '../Utilities/convertcsv.json'; // import JSON file
 
 
@@ -53,18 +53,21 @@ class QuestionCardHousing extends React.Component {
         this.props.navigation.addListener('didFocus', () => { // runs every time the screen is seen
             // The screen is focused
             this.fetchData().done()
+            // access = this.state.hasResultsBeenAccessed
         });
     }
 
     async fetchData() {
+        const accessed = JSON.parse(await SecureStore.getItemAsync("hasHousingBeenAccessed"))
         const results = JSON.parse(await SecureStore.getItemAsync("hasResultsBeenAccessed"))
         this.setState({hasResultsBeenAccessed: results})
-        if (results == "true") { // change the children to what the user selected if the user has accessed Results
+        if (accessed == "true") { // change the children to what the user selected if the user has accessed Results
             const zipCode = JSON.parse(await SecureStore.getItemAsync("zipCode"))
             const numPeople = JSON.parse(await SecureStore.getItemAsync("numPeople"))
             const squareFootage = JSON.parse(await SecureStore.getItemAsync("squareFootage"))
             this.setState({zipCode: zipCode, numPeople: numPeople, squareFootage: squareFootage})
             this.refs.q1.changeText(zipCode)
+            console.log(zipCode)
             this.refs.q2.changeText(numPeople)
             this.refs.slider.changeValue(squareFootage)
         }
@@ -91,7 +94,10 @@ class QuestionCardHousing extends React.Component {
             SecureStore.setItemAsync("zipCode", JSON.stringify(this.state.zipCode)) // save to async
             SecureStore.setItemAsync("numPeople", JSON.stringify(this.state.numPeople))
             SecureStore.setItemAsync("squareFootage", JSON.stringify(this.state.sliderValue))
+            SecureStore.setItemAsync("hasHousingBeenAccessed", JSON.stringify("true"))
             this.props.navigation.navigate('Transportation')
+            console.log("this.state.zipCode", this.state.zipCode)
+
             return true;
         } else {
             return false;
@@ -163,7 +169,7 @@ class QuestionCardHousing extends React.Component {
         return(
             <View style = {styles.view}>
                 { // can move this where we want it
-                    (access == "true") ?
+                    (this.state.hasResultsBeenAccessed == "true") ?
                     <AsafNextButton
                         onPress= {() => this.saveAndGoBackToResults()}
                         style={{backgroundColor: this.props.secondary, marginBottom: 0}}

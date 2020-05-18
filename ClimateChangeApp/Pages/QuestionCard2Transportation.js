@@ -8,7 +8,7 @@
 import React, { Component } from 'react';
 import {StyleSheet, View} from "react-native";
 import {SliderQuestion} from '../Components/SliderQuestion';
-import { AsafNextButton } from "../Components/AsafNextButton";
+import AsafNextButton from "../Components/AsafNextButton";
 import {MCQuestion} from '../Components/MCQuestion'
 import * as SecureStore from 'expo-secure-store';
 import INFORMATION from '../Utilities/text.json'; 
@@ -41,9 +41,13 @@ class QuestionCardTransportation extends React.Component {
     }
 
     async fetchData() {
+        const accessed = JSON.parse(await SecureStore.getItemAsync("hasTransportationBeenAccessed"))
         const results = JSON.parse(await SecureStore.getItemAsync("hasResultsBeenAccessed"))
+        if (results == "true") {
+            // this.refs.goBackToResults.showButton();
+        }
         this.setState({hasResultsBeenAccessed: results})
-        if (results == "true") { // change the children to what the user selected if the user has accessed Results
+        if (accessed == "true") { // change the children to what the user selected if the user has accessed Results
             const numMiles = JSON.parse(await SecureStore.getItemAsync("numMiles"))
             const summerChange = JSON.parse(await SecureStore.getItemAsync("summerChange"))
             const mode = JSON.parse(await SecureStore.getItemAsync("mode"))
@@ -72,6 +76,7 @@ class QuestionCardTransportation extends React.Component {
             SecureStore.setItemAsync("numMiles", JSON.stringify(this.state.numMiles)) // save to async
             SecureStore.setItemAsync("mode", JSON.stringify(this.state.mode))
             SecureStore.setItemAsync("summerChange", JSON.stringify(this.state.summerChange))
+            SecureStore.setItemAsync("hasTransportationBeenAccessed", JSON.stringify("true"))
             this.props.navigation.navigate('Diet')
             return true;
         } else {
@@ -86,35 +91,25 @@ class QuestionCardTransportation extends React.Component {
             this.props.navigation.navigate('Shopping')
             this.props.navigation.navigate('Results') // you took results off the stack so must re-push
         }
-        
-
-    //     SecureStore.setItemAsync("numMiles", JSON.stringify(this.state.numMiles)) // save to async
-    //     SecureStore.setItemAsync("summerChange", JSON.stringify(this.state.summerChange))
-    //     SecureStore.setItemAsync("mode", JSON.stringify(this.state.mode))
-    //     this.props.navigation.navigate('Diet')
-    //     this.props.navigation.navigate('Shopping')
-    //     this.props.navigation.navigate('Results') // you took results off the stack so must re-push
     }
 
     checkValid() {
-      if (this.state.mode === '')
-      {
-        alert ("Please enter your primary form of transportation.")
-        return false;
-      }
-      if (this.state.numMiles === 0)
-      {
-        alert ("Please input how many miles you travel.")
-        return false;
-      }
-      return true;
+        if (this.state.mode === '') {
+            alert ("Please enter your primary form of transportation.")
+            return false;
+        } else if (this.state.numMiles === 0) {
+            alert ("Please input how many miles you travel.")
+            return false;
+        } else {
+            return true;
+        } 
     }
 
     render() {
         var access = this.state.hasResultsBeenAccessed
         return(
                     <View style = {styles.view}>
-                        { 
+                        {
                             (access == "true") ?
                             <AsafNextButton
                                 onPress= {() => this.saveAndGoBackToResults()}
@@ -143,8 +138,6 @@ class QuestionCardTransportation extends React.Component {
                             questionLines={2}
                             questionStyle={{fontSize: 18}}
                             answerOptions={TRANSPORTATION_INFO["MCOptions"]}
-                            answerStyle={[{}, {}, {},
-                                {}, {}, {}, ]}
                             callback={this.updateMCState}
                             secondaryColor='rgba(252, 205, 193, .85)'
                         ></MCQuestion>
