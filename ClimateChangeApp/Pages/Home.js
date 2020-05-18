@@ -150,16 +150,17 @@ const styles = StyleSheet.create({
     },
     creditButton: {
         width: wp("75%"), //271
-        height: hp("6%"),//146,
+        height: 35,//hp("6%"),//146,
         borderRadius: 30,
         backgroundColor: '#F0F5DF', 
         alignItems: 'center',
         borderColor: '#73A388',
-        borderWidth: 2,
+        // shadowRadius: 4,
+        shadowOpacity: .2,
+        // borderWidth: 2,
         alignItems: 'center',
         justifyContent: 'center'
         // justifyContent: "flex-end"
-        // backgroundColor: 'blue'
     },
     creditText: {
         // width: "75%", //211,

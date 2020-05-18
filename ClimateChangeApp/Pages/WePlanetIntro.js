@@ -1,4 +1,4 @@
-// Drew
+// Written by Drew Deister
 
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
@@ -20,7 +20,7 @@ export default class WePlanetIntroPage extends Component {
           <View style={{ flex: 200,
                          justifyContent: "flex-end"}}>
 
-              <Text style={styles.topText}>Climate Change is a Global Issue.</Text>
+              <Text style={styles.topText}>Climate Change is a global issue.</Text>
           </View>
 
 
@@ -37,7 +37,6 @@ export default class WePlanetIntroPage extends Component {
                          justifyContent: "center"}}>
               <AsafNextButton
                 onPress={() => this.props.navigation.navigate("WePlanetMain")}
-                // style={styles.buttonDesign}
               >
             Go to Map
           </AsafNextButton>

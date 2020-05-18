@@ -4,7 +4,6 @@ import React, { Component, useState } from "react";
 import {
   Modal,
   Text,
-  TouchableHighlight,
   View,
   Alert,
   Image,

@@ -8,6 +8,7 @@
 
 // _______________HOUSING QUESTION CARD__________________
 
+
 import React, { Component } from 'react';
 import {StyleSheet, View} from "react-native";
 import {Text, Icon, Button, Slider} from 'react-native-elements';
@@ -22,6 +23,8 @@ import {
   } from 'react-native-responsive-screen';
 import { SliderQuestion } from '../Components/SliderQuestion';
 import { AsafNextButton } from "../Components/AsafNextButton";
+import ZipCode from '../Utilities/convertcsv.json'; // import JSON file
+
 
 
 const HOUSEHOLD_INFO = INFORMATION["carbonCounterScreens"]["household"];
@@ -30,15 +33,14 @@ const HOUSEHOLD_INFO = INFORMATION["carbonCounterScreens"]["household"];
 class QuestionCardHousing extends React.Component {
     constructor(props) {
         super(props);
-        // this holds the state of the sub components 
+        // this holds the state of the sub components
         // it is superior to letting the subcompents manage themselves because we can access their states
         // and save them when the next button is pushed
-        this.state = { 
+        this.state = {
             zipCode: 0,
-            numPeople: 0,
+            numPeople: '',
             sliderValue: 1,
             hasResultsBeenAccessed: "false",
-            hasHousingBeenAccessed: "false",
         }
         this.callbackFunction1 = this.callbackFunction1.bind(this); // make sure these are both correct
         this.callbackFunction2 = this.callbackFunction2.bind(this);
@@ -46,6 +48,7 @@ class QuestionCardHousing extends React.Component {
     }
 
     componentDidMount() {
+        SecureStore.setItemAsync("hasResultsBeenAccessed", JSON.stringify("false")); // this only needs to be done once, in one page
         this.fetchData().done()
         this.props.navigation.addListener('didFocus', () => { // runs every time the screen is seen
             // The screen is focused
@@ -55,9 +58,8 @@ class QuestionCardHousing extends React.Component {
 
     async fetchData() {
         const results = JSON.parse(await SecureStore.getItemAsync("hasResultsBeenAccessed"))
-        const thisPage = JSON.parse(await SecureStore.getItemAsync("hasHousingBeenAccessed"))
-        this.setState({hasResultsBeenAccessed: results, hasHousingBeenAccessed: thisPage})
-        if (results == "true" || thisPage == "true") { // change the children to what the user selected if the user has accessed Results or this page
+        this.setState({hasResultsBeenAccessed: results})
+        if (results == "true") { // change the children to what the user selected if the user has accessed Results
             const zipCode = JSON.parse(await SecureStore.getItemAsync("zipCode"))
             const numPeople = JSON.parse(await SecureStore.getItemAsync("numPeople"))
             const squareFootage = JSON.parse(await SecureStore.getItemAsync("squareFootage"))
@@ -84,24 +86,19 @@ class QuestionCardHousing extends React.Component {
 
     // called when next button is pushed
     saveAndPush() {
+
         if (this.checkValid()) {
             SecureStore.setItemAsync("zipCode", JSON.stringify(this.state.zipCode)) // save to async
             SecureStore.setItemAsync("numPeople", JSON.stringify(this.state.numPeople))
             SecureStore.setItemAsync("squareFootage", JSON.stringify(this.state.sliderValue))
-            SecureStore.setItemAsync("hasHousingBeenAccessed", JSON.stringify("true"))
             this.props.navigation.navigate('Transportation')
-        } else {
-            alert("Please enter a valid zipcode.")
         }
-        
+
     }
 
     // only used when back to results button is visible
     saveAndGoBackToResults() {
-        SecureStore.setItemAsync("zipCode", JSON.stringify(this.state.zipCode)) // save to async
-        SecureStore.setItemAsync("numPeople", JSON.stringify(this.state.numPeople))
-        SecureStore.setItemAsync("squareFootage", JSON.stringify(this.state.sliderValue))
-        this.props.navigation.navigate('Transportation')
+        this.saveAndPush();
         this.props.navigation.navigate('Diet')
         this.props.navigation.navigate('Shopping')
         this.props.navigation.navigate('Results') // you took results off the stack so must re-push
@@ -109,7 +106,39 @@ class QuestionCardHousing extends React.Component {
 
     // checks whether current inputs are valid
     checkValid() {
-        return true;((this.state.zipCode.length == 5) && (this.state.sliderValue != 1)) 
+      var averageHomekwhMonth = 0;
+      var i;
+      for (i in ZipCode) {
+          if (ZipCode[i]["Zip"] === parseInt(this.state.zipCode)) {
+            averageHomekwhMonth += ZipCode[i]["Avg Home kwh"]["month"];
+          }
+      }
+      if (averageHomekwhMonth === 0)
+      {
+        alert ("Please enter a valid zip code.")
+        return false;
+      }
+      if (this.state.numPeople === '')
+      {
+        alert ("Please enter how many people you live with.")
+        return false;
+      }
+      if (isNaN(parseInt(this.state.numPeople)))
+      {
+        alert ("Please enter a number for how many people you live with.")
+        return false;
+      }
+      if (parseInt(this.state.numPeople) < 0)
+      {
+        alert ("Please enter a non negative number for how many people that you live with.")
+        return false;
+      }
+      if (this.state.sliderValue === 1)
+      {
+        alert ("If you aren't sure what the size of your home is, please guess.")
+        return false;
+      }
+      return true;
     }
 
     render() {
@@ -118,7 +147,7 @@ class QuestionCardHousing extends React.Component {
             <View style = {styles.view}>
                 { // can move this where we want it
                     (access == "true") ?
-                    <AsafNextButton 
+                    <AsafNextButton
                         onPress= {() => this.saveAndGoBackToResults()}
                         style={{backgroundColor: this.props.secondary, marginBottom: 0}}
                         textStyle={{color: 'white'}}>
@@ -126,21 +155,21 @@ class QuestionCardHousing extends React.Component {
                         Back to results
                     </AsafNextButton>
                     : null // don't do anything
-                }  
-                <InputQuestion 
+                }
+                <InputQuestion
                     ref = {'q1'}
                     keyboardType = {'numeric'}
-                    parentCallBack = {this.callbackFunction1} 
-                    question = {HOUSEHOLD_INFO["questions"][0]} 
+                    parentCallBack = {this.callbackFunction1}
+                    question = {HOUSEHOLD_INFO["questions"][0]}
                     placeholder = {HOUSEHOLD_INFO["placeholders"][0]}/>
-                <InputQuestion 
+                <InputQuestion
                     ref = {'q2'}
                     keyboardType = {'numeric'}
-                    parentCallBack = {this.callbackFunction2} 
-                    question = {HOUSEHOLD_INFO["questions"][1]} 
+                    parentCallBack = {this.callbackFunction2}
+                    question = {HOUSEHOLD_INFO["questions"][1]}
                     placeholder = {HOUSEHOLD_INFO["placeholders"][1]}
                     questionLines={2} />
-                
+
                 <SliderQuestion
                     ref = {'slider'}
                     question={HOUSEHOLD_INFO["questions"][2]}
@@ -155,7 +184,7 @@ class QuestionCardHousing extends React.Component {
                     Next
                 </AsafNextButton>
             </View>
-        )    
+        )
     }
 
 }

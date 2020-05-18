@@ -67,13 +67,11 @@ const styles = StyleSheet.create({
     container: {
         paddingTop: 20,
         width: wp("80%"),
-        // borderColor: 'black',
-        // borderWidth: 1,
         alignItems: 'center'
     },
     image: {
         width: wp("35%"),
-        height: wp("25%"),//100,
+        height: wp("25%"),
     },
     text: {
         marginTop: 5,

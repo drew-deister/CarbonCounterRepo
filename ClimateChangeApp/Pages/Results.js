@@ -2,7 +2,6 @@
 // Email: andrew.z.deister@vanderbilt.edu
 // Date: 12/26/19
 
-// Results Page: to be edited by Lucas
 // NOTE on Asynchronous Functions/Code: Note that componentDidMount() is called automatically by the compiler.
 // So theoretically, state will be re-rendered before the components the values will be fetched and the state will be
 // re-rended automatically.
@@ -149,7 +148,7 @@ class Results extends React.Component {
       else{
         multiplier = 1.5;
       }
-//should be divided by this.state.numPeople
+      //should be divided by this.state.numPeople
       return (multiplier * averageHomekwhMonth * 12 * this.state.numPeople);
     }
 
@@ -259,7 +258,7 @@ class Results extends React.Component {
 
                 <View style={styles.cardStyle}>
                     <Text style={styles.pageTitle}>Results</Text>
-                    <Text style={styles.subTitle}>from each category</Text>
+                    <Text style={styles.bottomText}>from each category</Text>
 
                     <View style={styles.pieChartContainer}>
                         <PieChart data={data}
@@ -271,7 +270,14 @@ class Results extends React.Component {
                                   paddingLeft="15"
                           //absolute //remove to give percentages
                           />
+
+                        <View style={{width: wp("75%"), marginTop: 10}}>
+                           <Text style={styles.bottomText}>To learn more about a specifc category, click on the "info" button next to the title of any of the previous pages</Text>
+                        </View>
                     </View>
+
+                    
+                  
 
 
                     <View style={styles.metricsContainer}>
@@ -289,6 +295,7 @@ class Results extends React.Component {
 
                     <View style={styles.goBackContainer}>
                         <Text style={styles.pageTitle}>Go Back</Text>
+                        <Text style={styles.bottomText}>Go back and change your answers to see how it affects the results!</Text>
                   
                         <AsafNextButton
                             onPress= {() => this.props.navigation.navigate('Household')}
@@ -322,16 +329,7 @@ class Results extends React.Component {
                             >
                             Go Home
                         </AsafNextButton>
-
-
-                        {/* <Button
-                      icon={<Image source={require("../assets/social-media.png")} />}
-                      iconRight
-                      buttonStyle={{backgroundColor: 'gray', marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 15}}// update this to move lower 
-                      title='Go Home'
-                      onPress= {() => this.props.navigation.navigate('Home')}
-                  /> */}
-
+                        
                     </View>
                
                 </View>
@@ -459,11 +457,12 @@ CO2Number:
     fontStyle: 'italic',
     textAlign: 'center',
   },
-  subTitle: {
+  bottomText: {
     color: '#73A388',
     fontSize: 16,
     fontWeight: '600',
     textAlign: 'center',
+    
   },
 
   pieChartContainer: {

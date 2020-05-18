@@ -6,12 +6,9 @@
 // purpose: Display a single question and text input on a Carbon Counter survey screen.
 //          For now, it is just used in the Housing component, but hopefully will be extended to other categories
 //          note: author had difficulty implementing state, therefore state is not yet used
-// To Do:
-//    1. Implement state to keep track of user input
 
 import React, { Component, useState } from 'react';
 import {StyleSheet, View} from "react-native";
-import {Button, Text, Card, Icon} from 'react-native-elements';
 import { TextInput } from 'react-native-gesture-handler';
 import { QuestionText } from './QuestionText';
 import {
@@ -49,7 +46,6 @@ class InputQuestion extends React.Component {
             question={this.props.question}
             style={this.props.questionStyle}
         ></QuestionText>
-        {/* <Text style = {[styles.text, this.props.questionStyle]}>{this.props.question}</Text> */}
         <TextInput 
           ref = {'textInput'}
           style={styles.questionInput}
@@ -71,9 +67,8 @@ export { InputQuestion };
 
 const styles = StyleSheet.create({
   text: {
-    width: wp('65%'),//245,
+    width: wp('65%'),
     aspectRatio: 100/ 12,
-    //marginVertical: 8,
     color: 'white',
     fontSize: 20,
     fontWeight: '600',
@@ -81,7 +76,6 @@ const styles = StyleSheet.create({
     
   },
   view: {
-    //marginVertical: 8,
     flexDirection: 'column',
     alignItems: 'center',
     marginVertical: 16,
@@ -90,7 +84,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     width: wp('74%'),
     height: 40.5,
-    //aspectRatio: 100 / 15,
     borderRadius: 20,
     padding: 10,
   }

@@ -49,11 +49,13 @@ const styles = StyleSheet.create({
     },
     button: {
         width: wp("75%"), //271
-        height: hp("22%"),//146,
+        height: 146,//hp("22%"),
         borderRadius: 30,
         backgroundColor: '#9AD1F2', 
         alignItems: 'center',
-        justifyContent: "flex-end"
+        justifyContent: "flex-end",
+        // shadowOpacity: .2,
+        // shadowRadius: 2,
         // backgroundColor: 'blue'
     },
     activityTitle:{

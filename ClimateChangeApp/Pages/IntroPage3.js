@@ -14,14 +14,12 @@ const INFO = INFORMATION["introScreens"][2];
 
 export default class IntroPage extends Component {
 
-
   static navigationOptions = {
     // headerTitle: 'new title',
     headerShown: false
   }
-  // "main method"
+
   render() {
-    //const { navigate } = this.props.navigation;
     return (
         <View style={styles.container}>
 
@@ -59,7 +57,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   imageContainer: {
-      marginTop: 25,
+      marginTop: 80,
       alignItems: "center",
       height: wp("53%"), // ratio of height : width should be 
       width: wp("94%"),  //       wp("50%") : wp("90%") ish

@@ -6,12 +6,10 @@
 import React, { Component } from 'react';
 import {ScrollView, Text, StyleSheet, View, Image, TouchableOpacity} from "react-native";
 import PropTypes from 'prop-types';
-import { AsafNextButton } from "./AsafNextButton";
 import { InfoModal } from "./InfoModal";
-import { Row } from 'native-base';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import ParagraphView from "./ParagraphView";
 import * as Progress from "react-native-progress";
-import WePlanetIntroPage from '../Pages/WePlanetIntro';
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
@@ -37,12 +35,10 @@ class SurveyCard extends React.Component {
             //used to determine whether ScrollView can be scrolled
             showingModal: false
         };
-        //nextScreen: props.children;
     }
     static propTypes = {
         title: PropTypes.string,
         imageSrc: PropTypes.string,
-        // nextScreen: PropTypes.string,
     }
     static defaultProps = {
         title: 'Household',
@@ -50,7 +46,6 @@ class SurveyCard extends React.Component {
         infoImageStyle: {},
         style: {},                      //used to change backgroundColor
         titleStyle: {},                 //used to change title text color
-        // nextScreen: 'Home',
     }
 
     showInfoModalAndDisableScroll() {
@@ -65,27 +60,19 @@ class SurveyCard extends React.Component {
     setScrollView = scrollView => {
         // NOTE: scrollView will be null when the component is unmounted
         this._scrollView = scrollView;
-      };
+    };
 
-    componentDidMount() {
-        this.flashScroll();
-        
-      }
-    
-      flashScroll() {
-        setTimeout(() => {
-            this._scrollView.flashScrollIndicators();
-
-        }, 200)
-      }
 
     render() {
         return (
             <View style={styles.safeView}>
-                <ScrollView style={[styles.scrollViewStyle, this.props.style]}
-                            contentContainerStyle = {styles.containerStyle}
-                            scrollEnabled={!this.state.showingModal}
-                            ref={this.setScrollView}>
+                <KeyboardAwareScrollView // this is similar to scrollview
+                    resetScrollToCoords={{x: 0, y:0}}
+                    extraScrollHeight={-30}
+                    style={[styles.scrollViewStyle, this.props.style]}
+                    contentContainerStyle = {styles.containerStyle}
+                    scrollEnabled={!this.state.showingModal}
+                    ref={this.setScrollView}>
                     <Image style = {styles.image} source = {images[this.props.imageName]} />
                     <View style={styles.titleContainer}>
                         <Text style={[styles.pageTitle, this.props.titleStyle]}>{this.props.title}</Text>
@@ -103,18 +90,11 @@ class SurveyCard extends React.Component {
                         </View>
                     </View>
 
-                    
-
                     <View>
                         {this.props.children}
                     </View>
-                    {/* <AsafNextButton
-                            onPress={() => this.props.navigation.push(this.props.nextScreen)}
-                            >
-                            Next
-                    </AsafNextButton> */}
 
-                </ScrollView>
+                </KeyboardAwareScrollView>
 
                 <View style={styles.progressBarContainer}>
                     <Progress.Bar
@@ -161,7 +141,7 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 40,
     },
     image: {
-        marginTop: 32,
+        marginTop: 8,
         height: 180,
         width: 295,
     },
@@ -169,10 +149,8 @@ const styles = StyleSheet.create({
         flexGrow: 1,
         marginTop: 0,
         padding: 0,
-        //justifyContent: 'space-between',
         alignItems: 'center',
         alignContent: 'center',
-        //shadowOpacity: .1,
     },
     titleContainer: {
         flexDirection: "row",
@@ -185,8 +163,6 @@ const styles = StyleSheet.create({
     pageTitle: {
         color: 'white',
         fontSize: 42,
-        // paddingLeft: 40,
-        //width: 224,
         fontWeight: '600',
         textAlign: 'center',
     },
@@ -206,7 +182,7 @@ const styles = StyleSheet.create({
         width: 25,
     },
     progressBarContainer: {
-        height: 60,
+        height: wp('12%'),
         justifyContent: 'center',
         paddingHorizontal: wp("8%"),
         opacity: .8,

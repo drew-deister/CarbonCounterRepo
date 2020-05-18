@@ -1,24 +1,14 @@
 import React, { Component } from "react";
 import { StyleSheet, View, TouchableHighlight } from "react-native";
-import {
-  Text,
-  Card,
-  Icon,
-  Button,
-  Slider,
-  ListItem,
-  List,
-} from "react-native-elements";
+import {Text} from "react-native-elements";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
   listenOrientationChange,
   removeOrientationListener,
 } from "react-native-responsive-screen";
-import { diagonalScale } from "../Utilities/Scaling";
 import { QuestionText } from "./QuestionText";
 import PropTypes from "prop-types";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 const DEFAULT_ANSWER_COLOR = "rgba(255, 255, 255, .52)";
 
@@ -68,7 +58,6 @@ class MCQuestion extends React.Component {
         </TouchableHighlight>
       );
     }
-    return answersList;
   }
 
   updateButton(index, mode) {
