@@ -5,9 +5,9 @@
 // https://firebase.google.com/docs/storage/web/download-files
 // https://www.youtube.com/watch?v=_GOI7h9ojr8
 import React, { Component, useState } from 'react';
-import {Image, Dimensions, StyleSheet, View, TouchableOpacity} from "react-native";
-import MapView, {Callout, Marker} from 'react-native-maps';
-import {Button, Text, Card, Icon} from 'react-native-elements';
+import {Image, Dimensions, StyleSheet, View, ActivityIndicator} from "react-native";
+import MapView, {Marker} from 'react-native-maps';
+import {Text} from 'react-native-elements';
 import GlobeVideoModal from '../Components/GlobeVideoModal'; 
 import FirebaseConfig from '../Utilities/FirebaseConfig';
 
@@ -24,8 +24,7 @@ require("firebase/firestore");
 const mapstyle = require('../mapstyle.json');
 
 // starting location 
-const startingLocation = 
-{
+const startingLocation = {
     latitude: 18.50,
     longitude: 14.65,
     latitudeDelta: 85,
@@ -43,6 +42,7 @@ class GeoVideo1 extends React.Component {
         location: startingLocation,
         hasMarkerBeenPressed: false,
         markersList: [],
+        showLoadingSymbol: true,
       }
       // Initialize Firebase, if statement checks if its been initialized
       if (!firebase.apps.length) { firebase.initializeApp(FirebaseConfig.FirebaseConfigKeys); }
@@ -51,10 +51,19 @@ class GeoVideo1 extends React.Component {
     }
 
 
+    componentDidMount() {   
+      // fetch markers, and when done, hide the loading component
+      this.fetchMarkers().then((value) => {
+        this.setState({showLoadingSymbol: false})
+      })
+    }
+
     // this sets this.state.markersList. _onPressVideo finds the download URLS separately.
-    async componentDidMount() {     
+    async fetchMarkers() {
       var firestoreRef = firebase.firestore();
-      firestoreRef.collection("Markers").get().then((querySnapshot) => {
+      // for some reason you have to return this promise even though you won't use it
+      // cf https://stackoverflow.com/questions/50047445/how-to-evaluate-firestore-query-before-executing-the-next-lline
+      return firestoreRef.collection("Markers").get().then((querySnapshot) => {
         const MARKERS = [];
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
@@ -68,7 +77,11 @@ class GeoVideo1 extends React.Component {
             });
             this.setState({markersList: MARKERS});
         });
-      });   
+      }).catch(error => {
+        console.log(error);
+        Alert.alert("There was a problem loading the map.")
+        this.setState({showLoadingSymbol: false}) // no point in showing this anymore
+      }) 
     }
 
     handleLocationChange = (newLocation) => {
@@ -111,7 +124,12 @@ class GeoVideo1 extends React.Component {
               </MapView>
               {
                 !(this.state.hasMarkerBeenPressed)
-                ? <Text style={styles.overlay}>Tap on a marker to hear about a part of the world you are curious about!</Text>
+                ? <Text style={styles.overlayText}>Tap on a marker to hear about a part of the world you are curious about!</Text>
+                : null
+              }
+              {
+                (this.state.showLoadingSymbol)
+                ? <ActivityIndicator style={styles.overlayLoadingSymbol} size="large" color="black"/>
                 : null
               }
           </View>
@@ -143,7 +161,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width, 
     height: Dimensions.get('window').height - 25, 
   }, 
-  overlay: {
+  overlayText: {
     position: 'absolute',
     top: 50,
     color: 'white',
@@ -152,6 +170,10 @@ const styles = StyleSheet.create({
     padding: 5,
     textAlign: 'center'
   },
+  overlayLoadingSymbol: {
+    position: 'absolute',
+    alignSelf: 'center',
+  }
 });
 
 
