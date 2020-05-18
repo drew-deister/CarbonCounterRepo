@@ -3,14 +3,6 @@ import { ScrollView, View, StyleSheet, Image, Text } from "react-native";
 import SurveyCard from "../Components/SurveyCard";
 import { QuestionCardHousing } from "./QuestionCard1Housing";
 import INFORMATION from "../Utilities/text.json"; // import JSON file
-import * as Progress from "react-native-progress";
-
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-  listenOrientationChange,
-  removeOrientationListener,
-} from "react-native-responsive-screen";
 import HeaderRightArrow from "../Components/HeaderRightArrow";
 import HeaderBackArrow from "../Components/HeaderBackArrow";
 import HeaderLeafLogo from "../Components/HeaderLeafLogo";
@@ -70,16 +62,6 @@ export default class HouseholdSurvey extends Component {
             }}
           />
         </SurveyCard>
-
-        {/* <View style={styles.progressBar}>
-          <Progress.Bar
-            progress={0}
-            width={null}
-            borderColor={"#73A388"}
-            borderWidth={2}
-            color={"#73A388"}
-          />
-        </View> */}
       </View>
     );
   }

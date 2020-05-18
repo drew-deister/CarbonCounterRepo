@@ -11,11 +11,10 @@ import {Button, Text, Card, Icon} from 'react-native-elements';
 import GlobeVideoModal from '../Components/GlobeVideoModal'; 
 import FirebaseConfig from '../Utilities/FirebaseConfig';
 
-//TODO: Add authentication/change read/write rules in database
-
 // Firebase App (the core Firebase SDK) is always required and
 // must be listed before other Firebase SDKs
 // Require statements are equivalent to import statements
+// NOTE: Update expo if you run into problems with firebase. 
 var firebase = require("firebase/app");
 
 // Add the Firebase products that you want to use
@@ -24,13 +23,13 @@ require("firebase/firestore");
 
 const mapstyle = require('../mapstyle.json');
 
-// starting location (change name)
-const alps = 
+// starting location 
+const startingLocation = 
 {
-    latitude: 46.88,
-    longitude: 9.65,
-    latitudeDelta: 15,
-    longitudeDelta: 15,
+    latitude: 18.50,
+    longitude: 14.65,
+    latitudeDelta: 85,
+    longitudeDelta: 85,
 }
 
 class GeoVideo1 extends React.Component {
@@ -41,10 +40,9 @@ class GeoVideo1 extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        location: alps,
+        location: startingLocation,
         hasMarkerBeenPressed: false,
         markersList: [],
-        //locationsSeen: []
       }
       // Initialize Firebase, if statement checks if its been initialized
       if (!firebase.apps.length) { firebase.initializeApp(FirebaseConfig.FirebaseConfigKeys); }
@@ -75,7 +73,6 @@ class GeoVideo1 extends React.Component {
 
     handleLocationChange = (newLocation) => {
       this.setState({ location: newLocation });
-      //this.checkLocationsSeen; // this is below the render 
     }; 
 
     // retrieve download url and display in modal
@@ -98,7 +95,7 @@ class GeoVideo1 extends React.Component {
               style={styles.mapStyle}
               mapType='satellite'
               customMapStyle={mapstyle}
-              initialRegion={alps}
+              initialRegion={startingLocation}
               provider='google'
               showsCompass = {true}
               showsBuildings = {true}
@@ -123,23 +120,6 @@ class GeoVideo1 extends React.Component {
         </View>
       )
     }
-    // idk if we'll need this but I'm keeping it just in case.
-    /*checkLocationsSeen = () => {
-      console.log("I gET HERE");
-      var latMin = this.state.location.latitude - this.state.location.latitudeDelta;
-      var latMax = this.state.location.latitude + this.state.location.latitudeDelta;
-      var longMin = this.state.location.longitude - this.state.location.longitudeDelta;
-      var longMax = this.state.location.longitude + this.state.location.longitudeDelta;
-      console.log("latitude range:", latMin, latMax);
-      console.log("longitude range:", longMin, longMax);
-      var seenLocations = allLocations.filter(function (location) {
-        var latSeen = location.latitude > latMin && location.latidue < latMax;
-        var longSeen = location.longitude > longMin && location.longitude < longMax;
-        return latSeen && longSeen;
-      });
-      this.setState({ locationsSeen: seenLocationds});
-      console.log(this.state.locationsSeen); 
-    }; */
 }
 
 export default GeoVideo1
@@ -151,20 +131,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
     padding: 0,
-    //height: DEVICE_HEIGHT,
-    //width: DEVICE_WIDTH,
     borderColor: 'black',
     borderWidth: 1
   },
   mapContainer: {
-    //flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
   mapStyle: {
-    width: Dimensions.get('window').width, // 320
-    height: Dimensions.get('window').height - 25, // 450
+    width: Dimensions.get('window').width, 
+    height: Dimensions.get('window').height - 25, 
   }, 
   overlay: {
     position: 'absolute',

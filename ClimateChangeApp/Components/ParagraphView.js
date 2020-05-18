@@ -42,18 +42,14 @@ class ParagraphView extends React.Component {
         for (let i = 0; i < this.props.infoArr.length; ++i) {
             infoList.push(
                 <View key={i} style={styles.individualTextContainer}>
-                    <Text style={[styles[this.props.infoTypeArr[i]], this.props.textStyle]}>{this.props.infoArr[i]}</Text>
-                         
+                    <Text style={[styles[this.props.infoTypeArr[i]], this.props.textStyle]}>{this.props.infoArr[i]}</Text>  
                     {
                         this.props.infoImageArr[i] ?
                         <View style={styles.imageContainer}>
-                            {/* <Text>{this.props.infoImageArr[i]}</Text> */}
                             <Image style={styles.image}
                                 source={images[this.props.infoImageArr[i]]}></Image>
                         </View>
-                        
                         : null
-
                     }
                 </View>
             )
@@ -67,15 +63,8 @@ class ParagraphView extends React.Component {
         }
     }
 
-
-
-
-
     render() {
-
-        // const formattedInfo = this.makeAllSections();
         const formattedInfo = this.makeInfoSections();
-
         return (
             <View style={styles.container}>
                 {formattedInfo}

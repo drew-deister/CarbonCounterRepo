@@ -1,7 +1,5 @@
 import React, { Component, useState } from 'react';
-import {StyleSheet, View, Dimensions} from "react-native";
-import {Button, Text, Card, Icon} from 'react-native-elements';
-import { TextInput } from 'react-native-gesture-handler';
+import {View, Dimensions} from "react-native";
 import {
   PieChart,
 } from 'react-native-chart-kit'

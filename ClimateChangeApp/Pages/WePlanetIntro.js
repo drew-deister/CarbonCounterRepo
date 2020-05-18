@@ -1,4 +1,4 @@
-// Drew
+// Written by Drew Deister
 
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
@@ -37,7 +37,6 @@ export default class WePlanetIntroPage extends Component {
                          justifyContent: "center"}}>
               <AsafNextButton
                 onPress={() => this.props.navigation.navigate("WePlanetMain")}
-                // style={styles.buttonDesign}
               >
             Go to Map
           </AsafNextButton>

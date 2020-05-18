@@ -16,7 +16,7 @@ const NextButton = (props) => {
 }
 const styles = StyleSheet.create({
   buttonBody: {
-    backgroundColor: '#0B7310', //blue --> '#00aeef',
+    backgroundColor: '#0B7310',
     width: 100,
     height: 50,
     paddingLeft: 20,
@@ -31,10 +31,8 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
     fontWeight: '600',
-    //backgroundColor: 'green',
   },
   image: {
-    // need to figure out how to resize the image 
     marginLeft: 10,
     padding: 20,
     width: 5,

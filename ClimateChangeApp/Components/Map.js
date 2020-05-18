@@ -1,14 +1,6 @@
 import React from 'react';
 import MapView, { Marker, Callout } from 'react-native-maps';
 import {StyleSheet, View} from "react-native";
-import { QuestionCard1 } from '../Pages/QuestionCard1';
-import GeoVideo2 from '../Pages/GeoVideo2';
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-  listenOrientationChange, removeOrientationListener
-} from 'react-native-responsive-screen';
-
 
 const alps = {
   latitude: 46.88,
