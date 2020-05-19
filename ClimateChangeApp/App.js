@@ -7,6 +7,7 @@ import Home from './Pages/Home';
 import Results from './Pages/Results';
 import WePlanetIntroPage from './Pages/WePlanetIntro';
 import WePlanetMain from './Pages/WePlanetMain';
+// import WePlanetSelectionBar from './Pages/WePlanetSelectionBar';
 import Credit from './Pages/Credit';
 import IntroPage1 from "./Pages/IntroPage1";
 import IntroPage2 from "./Pages/IntroPage2";
@@ -100,6 +101,7 @@ const AppNavigator = createStackNavigator(
     IntroPage1: { screen: IntroPage1 },
     IntroPage2: { screen: IntroPage2 },
     IntroPage3: { screen: IntroPage3 },
+    // WePlanetSelectionBar: { screen: WePlanetSelectionBar }
   },
   {
     cardStyle: {
