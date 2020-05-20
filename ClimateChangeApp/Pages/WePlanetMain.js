@@ -12,6 +12,9 @@ import MapView, {Marker} from 'react-native-maps';
 import {Text} from 'react-native-elements';
 import GlobeVideoModal from '../Components/GlobeVideoModal'; 
 import FirebaseConfig from '../Utilities/FirebaseConfig';
+import INFORMATION from '../Utilities/text.json';
+
+const WE_PLANET_INFO = INFORMATION["wePlanetScreens"]["main"]
 
 
 import {
@@ -20,6 +23,7 @@ import {
   listenOrientationChange,
   removeOrientationListener,
 } from "react-native-responsive-screen";
+import WePlanetIntroPage from './WePlanetIntro';
 
 // Firebase App (the core Firebase SDK) is always required and
 // must be listed before other Firebase SDKs
@@ -329,7 +333,7 @@ class GeoVideo1 extends React.Component {
                 !(this.state.hasMarkerBeenPressed)
                 ? 
                 <View style={styles.overlayTextContainer}> 
-                    <Text style={styles.overlayText}>Tap on a marker to hear from a part of the world you are curious about!</Text>
+                    <Text style={styles.overlayText}>{WE_PLANET_INFO["instruction"]}</Text>
                 </View>
 
                 : null
