@@ -27,6 +27,9 @@ import DataSources from '../Components/DataSources';
 const CREDIT_INFO = INFORMATION["creditScreen"];
 const CHANGE = CREDIT_INFO["Change++"];
 
+
+const inset = { top: 0, left: 0, bottom: 0, right: 0}
+
 export default class CreditPage extends Component {
 
 
@@ -52,6 +55,7 @@ export default class CreditPage extends Component {
   }
   
   render() {
+    
 
     //const { navigate } = this.props.navigation;
     return (
@@ -65,6 +69,8 @@ export default class CreditPage extends Component {
 
           <View style={{flex: 470, justifyContent: "center"}}>
               <ScrollView
+                  scrollIndicatorInsets= {inset}
+                  // style={{backgroundColor: "blue"}}
                   ref={this.setScrollView}
               >
                 <Text style={styles.topText}>{CREDIT_INFO["title"]}</Text>

@@ -46,6 +46,7 @@ class HomeScreenActivityCard extends React.Component {
 const styles = StyleSheet.create({
     container: {
         paddingVertical: 16,
+        shadowOpacity: .2,
     },
     button: {
         width: wp("75%"), //271

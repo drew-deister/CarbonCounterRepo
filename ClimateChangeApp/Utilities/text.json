@@ -228,6 +228,17 @@
 
     },
 
+    "wePlanetScreens": {
+        "intro": {
+            "title": "WePlanet",
+            "description": "This activity will provide information about the greenhouse gas emissions that are produced as a result of some of your daily activities. The results will help you better understand your carbon footprint.",
+            "disclaimer": "Note: this activity captures just a few activities and is not a total picture of your carbon footprint, it is just an estimate of one slice of your life"
+        },
+        "main": {
+            "instruction": "Tap on a marker to hear from a part of the world you are curious about!"
+        } 
+    },
+
     "creditScreen": {
         "title": "Credit",
 
