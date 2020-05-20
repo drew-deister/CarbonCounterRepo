@@ -7,7 +7,7 @@
 // EXTREMELY helpful link for Animated and selection scroll bar:
 // https://codedaily.io/tutorials/9/Build-a-Map-with-Custom-Animated-Markers-and-Region-Focus-when-Content-is-Scrolled-in-React-Native
 import React, { Component, useState } from 'react';
-import {Image, Dimensions, StyleSheet, View, ActivityIndicator, Animated, Slider} from "react-native";
+import {Image, Dimensions, StyleSheet, View, ActivityIndicator, Animated, Slider, TouchableOpacity} from "react-native";
 import MapView, {Marker} from 'react-native-maps';
 import {Text} from 'react-native-elements';
 import GlobeVideoModal from '../Components/GlobeVideoModal'; 
@@ -35,7 +35,12 @@ const mapstyle = require('../mapstyle.json');
 
 // For the selection scroll bar
 const CARD_HEIGHT = 30;
-const CARD_WIDTH = wp("80%");
+const CARD_WIDTH = wp("60%");
+const CARD_MARGIN = 10;
+const CARDS_SHOWING = 3;
+const CONTAINER_PADDING_TOP = 30
+const CONTAINER_PADDING_BOTTOM = CONTAINER_PADDING_TOP / 2
+const CONTAINER_PADDING = CONTAINER_PADDING_BOTTOM + CONTAINER_PADDING_TOP;
 
 // starting location 
 const startingLocation = {
@@ -49,16 +54,21 @@ const startingLocation = {
 class GeoVideo1 extends React.Component {
     static navigationOptions = {
       title: ' ',
+      headerStyle: {
+        backgroundColor: "#73A388",
+        borderBottomWidth: 0,
+      }
     }; 
 
     constructor(props) {
       super(props);
       this.state = {
         location: startingLocation,
-        hasMarkerBeenPressed: false,
+        hasMarkerBeenPressed: true,   //set to false on load
         markersList: [],
         showLoadingSymbol: true,
-        sliderValue: 1
+        sliderValue: 1,
+        selectionCardsShowing: 1,//CARDS_SHOWING
       }
       // Initialize Firebase, if statement checks if its been initialized
       if (!firebase.apps.length) { firebase.initializeApp(FirebaseConfig.FirebaseConfigKeys); }
@@ -68,11 +78,21 @@ class GeoVideo1 extends React.Component {
       this.animation = new Animated.Value(0);
     }
 
+    toggleCardHeight() {
+      if (this.state.selectionCardsShowing === 3) {
+          this.setState({selectionCardsShowing: 1})
+          // this.selectionScroll.getNode().scrollTo({y: this.index * (CARD_HEIGHT + CARD_MARGIN), animated: false})
+      } else {
+        this.setState({selectionCardsShowing: 3})
+      }
+    };
+
 
     componentDidMount() {   
       // fetch markers, and when done, hide the loading component
       this.fetchMarkers().then((value) => {
-        this.setState({showLoadingSymbol: false})
+        this.setState({showLoadingSymbol: false, hasMarkerBeenPressed: false})
+
       })
       //******** to avoid maxing out on firebase, the following can be used as
       //         markers, without video functionality */
@@ -115,12 +135,14 @@ class GeoVideo1 extends React.Component {
       // ];
       // this.setState({markersList: markers})
 
+
+
       // *********** the above^ commented lines of code can be used as markers 
       //              during development to avoid overuse of firebase reads
 
       // zooms to the region of the map based on selection
       this.animation.addListener(({ value }) => {
-        let index = Math.floor(value / (CARD_HEIGHT+10) + 0.3); // animate 30% away from landing on the next item
+       let index = Math.floor(value / (CARD_HEIGHT+CARD_MARGIN) + 0.3); // animate 30% away from landing on the next item
         if (index >= this.state.markersList.length) {
           index = this.state.markersList.length - 1;
         }
@@ -135,13 +157,14 @@ class GeoVideo1 extends React.Component {
             this.map.animateToRegion(
               {
                 ...coordinates,
+                //map zoom size --> higher delta means more zoomed out
                 latitudeDelta: 30, //this.state.location.latitudeDelta,
                 longitudeDelta: 30, //this.state.location.longitudeDelta,
               },
               350
             );
           }
-        }, 10);
+        }, 10);   // 10 miliseconds scroll timeout
       });
     }
 
@@ -178,7 +201,7 @@ class GeoVideo1 extends React.Component {
     // retrieve download url and display in modal
     _onPressVideo(name, videoFileName, index) { 
       // scrolls the scroll bar if the user presses on a marker
-      this.selectionScroll.getNode().scrollTo({y: index * (CARD_HEIGHT + 10), animated: true})
+      this.selectionScroll.getNode().scrollTo({y: index * (CARD_HEIGHT + CARD_MARGIN), animated: false})
       this.setState({hasMarkerBeenPressed: true})
 
       var storageRef = firebase.storage().ref().child('CarbonXP_Storage/' + name);
@@ -198,9 +221,9 @@ class GeoVideo1 extends React.Component {
       //      A better explanation of interpolate() is found: https://reactnative.dev/docs/animations#interpolation
       const interpolations = this.state.markersList.map((marker, index) => {
         const inputRange = [
-          (index - 1) * (CARD_HEIGHT + 10),
-          index * (CARD_HEIGHT + 10),
-          ((index + 1) * (CARD_HEIGHT + 10)),
+          (index - 1) * (CARD_HEIGHT + CARD_MARGIN),
+          index * (CARD_HEIGHT + CARD_MARGIN),
+          ((index + 1) * (CARD_HEIGHT + CARD_MARGIN)),
         ];
         const scale = this.animation.interpolate({
           inputRange,
@@ -269,7 +292,7 @@ class GeoVideo1 extends React.Component {
             
             <MapView 
               ref ={map => this.map = map}
-              style={styles.mapStyle}
+              style={[styles.mapStyle, {marginTop: (CARD_HEIGHT + CARD_MARGIN) * this.state.selectionCardsShowing + CONTAINER_PADDING}]}
               mapType='satellite'
               customMapStyle={mapstyle}
               initialRegion={this.state.location}
@@ -304,7 +327,11 @@ class GeoVideo1 extends React.Component {
 
               {
                 !(this.state.hasMarkerBeenPressed)
-                ? <Text style={styles.overlayText}>Tap on a marker to hear about a part of the world you are curious about!</Text>
+                ? 
+                <View style={styles.overlayTextContainer}> 
+                    <Text style={styles.overlayText}>Tap on a marker to hear from a part of the world you are curious about!</Text>
+                </View>
+
                 : null
               }
               {
@@ -312,14 +339,30 @@ class GeoVideo1 extends React.Component {
                 ? <ActivityIndicator style={styles.overlayLoadingSymbol} size="large" color="black"/>
                 : null
               }
-          </View>
-          <View style={styles.selectionContainer}>
+
               
+              
+          </View>
+
+          {
+                (this.state.showLoadingSymbol)
+                ? null :
+          <View style={[styles.selectionContainer, {height: (CARD_HEIGHT + CARD_MARGIN) * this.state.selectionCardsShowing + CONTAINER_PADDING}]}
+                >
+                  
+              <TouchableOpacity style={styles.xMarkPosition}
+                          onPress={() => {
+                        
+                            this.toggleCardHeight()
+                            
+                          }}>
+            <Text style={styles.xMark}>{this.state.selectionCardsShowing === 3 ? "x" : "+"}</Text>
+        </TouchableOpacity>
               <Animated.ScrollView
                     // horizontal
                     scrollEventThrottle={1}
                     showsVerticalScrollIndicator={false}
-                    snapToInterval={CARD_HEIGHT + 10}
+                    snapToInterval={CARD_HEIGHT + CARD_MARGIN}
                     ref ={scrollView => this.selectionScroll = scrollView}
                     // essentially keeps track of animation state. see helpful links above
                     onScroll={Animated.event(
@@ -333,6 +376,7 @@ class GeoVideo1 extends React.Component {
                             },
                         ],
                         // { useNativeDriver: true }
+                      
                     )}
                     style={styles.scrollView}
                     contentContainerStyle={styles.endPadding}
@@ -343,11 +387,12 @@ class GeoVideo1 extends React.Component {
                               <Text style={styles.cardTitle}>{marker.name}</Text>
                             </View>
                         ))}
-                        <View style={{height: CARD_HEIGHT*2 + 20}}></View>
+                        <View style={{height: CARD_HEIGHT*(this.state.selectionCardsShowing - 1) + CARD_MARGIN*(this.state.selectionCardsShowing-1)}}></View>
                 </Animated.ScrollView>
                 <View style={styles.highlightLeft}/>
                 <View style={styles.highlightRight}/>
           </View>
+          } 
           <GlobeVideoModal ref={'globevideomodal'} parentObject = {this}> 
           </GlobeVideoModal>
         </View>
@@ -365,13 +410,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     padding: 0,
     borderColor: 'black',
-    borderWidth: 1
+    borderWidth: 0,
+    // backgroundColor: 'blue'
   },
   mapContainer: {
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
+    backgroundColor: "#73A388"
   },
   markerContainer: {
     height: 50,
@@ -383,33 +430,37 @@ const styles = StyleSheet.create({
 
   },
   marker: {
-    // marginTop: 15,
-    // padding: 50,
-    // margin: 50,
-    // opacity: 1,
+    // marker gets cut off by marker container if
+    // percentages are any bigger due to animated
     height: "67%",
     width: "67%",
     position: "absolute",
-    // bottom: 0,
-    // right: 0
-    // resizeMode: "contain",
-    // transform: [{scale: 1.5}]
   },
   selectionContainer: {
-      // position: "absolute",
-      // bottom: 0,
-      height: 120,
-      width: wp("100%"),
+      borderTopLeftRadius: 20,
+      borderTopRightRadius: 20,
+      paddingTop: CONTAINER_PADDING_TOP,
+      paddingBottom: CONTAINER_PADDING_BOTTOM,
+      height: (CARD_HEIGHT + CARD_MARGIN) * CARDS_SHOWING + CONTAINER_PADDING,
+      width: CARD_WIDTH + wp("20%"),
       backgroundColor: "#73A388",
+      // backgroundColor: "transparent",
       alignItems: "center"
   },
   mapStyle: {
+    // marginTop: (CARD_HEIGHT + CARD_MARGIN) * CARDS_SHOWING + CONTAINER_PADDING,
     width: Dimensions.get('window').width, 
-    height: Dimensions.get('window').height - 25, 
+    height: Dimensions.get('window').height// - 25, 
   }, 
-  overlayText: {
+  overlayTextContainer: {
     position: 'absolute',
     top: 50,
+    width: wp("80%"),
+    backgroundColor: "#73A388",
+    borderRadius: 12,
+  },
+  overlayText: {
+    
     color: 'white',
     fontSize: 18,
     fontWeight: "600",
@@ -422,25 +473,28 @@ const styles = StyleSheet.create({
   },
   highlightLeft: {
     width: wp("5%"),
-    height: CARD_HEIGHT/6,
-    backgroundColor: 'black',
+    height: CARD_HEIGHT/6,  //5
+    backgroundColor: "#F0F5DF",
     position: "absolute",
     left: wp("2.5%"),
-    top: 17.5,
+    //margin above the first card - half the height of the highlight + half the card height + container padding
+    top: CARD_MARGIN/2 - CARD_HEIGHT/12 + CARD_HEIGHT/2 + CONTAINER_PADDING_TOP,
+    borderRadius: 5,
   },
   highlightRight: {
     width: wp("5%"),
     height: CARD_HEIGHT/6,
     position: "absolute",
-    backgroundColor: "black",
+    backgroundColor: "#F0F5DF",
     right: wp("2.5%"),
-    top: 17.5
+    top: CARD_MARGIN/2 - CARD_HEIGHT/12 + CARD_HEIGHT/2 + CONTAINER_PADDING_TOP,
+    borderRadius: 5,
   },
   card: {
     height: CARD_HEIGHT,
     width: CARD_WIDTH,
     backgroundColor: "#F0F5DF",
-    marginVertical: 5,
+    marginVertical: CARD_MARGIN / 2,
     alignItems: "center",
     justifyContent: "center",
     // marginHorizontal: 50,
@@ -449,6 +503,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowOffset: { x: 2, y: -2 },
     overflow: "hidden",
+    borderRadius: 12
   },
   cardTitle: {
     fontSize: 12,
@@ -456,13 +511,16 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   scrollView: {
-    // height: CARD_HEIGHT * 3 + 10 * 3,
-    // position: "absolute",
-    // top: 440,
-    // left: 40,
-    // right: 0,
-    // paddingVertical: 10,
-    // backgroundColor: 'blue'
+  },
+  xMarkPosition: {
+    position: "absolute",
+    left: 10,
+    top: 5,
+  },
+  xMark: {
+    color: "#F0F5DF",
+    fontSize: 24,
+    fontWeight: "900",
   },
   endPadding: {
     // paddingBottom: Dimensions.get('window').height - CARD_WIDTH,
