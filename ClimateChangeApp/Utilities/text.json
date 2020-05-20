@@ -15,6 +15,20 @@
 
     ],
 
+    "homeScreen": {
+        "title": "Activities",
+        "info": [
+            "Carbon Experience",
+            "These activities were carefully designed to allow you to dictate your personal climate change learning experience. Choose an activity to find out more.",
+            "If you have an idea for an activity you think should be included in CarbonXP, see the credit page, accessed from the home page of this app, for contact information!"
+        ],
+        "infoTypes": [
+            "header",
+            "body",
+            "body"
+        ]
+    },
+
     "carbonCounterScreens": {
         "intro": {
             "title": "Carbon Counter",
@@ -273,7 +287,7 @@
                 "If you have a potential project, visit ",
                 "changeplupus.org",
                 " for more details on how to contact us!",
-                "With questions about this app, contact Change++ Project Manager, Ethan Shifrin, at Ethan.shifrin@vanderbilt.edu"
+                "With questions about this app, contact Change++ Project Manager, Ethan Shifrin, at ethan.shifrin@vanderbilt.edu, or Dr Leah A. Dundon, at leah.a.dundon@vanderbilt.edu"
             ],
 
             "website": "https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&ved=2ahUKEwjQ7MjagrfpAhWRK80KHU3vBugQFjACegQIBRAB&url=http%3A%2F%2Fchangeplusplus.org%2F&usg=AOvVaw3apCQvfl-qJ2Cnbj3cWJtS",

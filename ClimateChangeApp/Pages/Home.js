@@ -8,6 +8,13 @@ import {
   listenOrientationChange,
   removeOrientationListener,
 } from "react-native-responsive-screen";
+import InfoModal from '../Components/InfoModal';
+import ParagraphView from '../Components/ParagraphView';
+import INFORMATION from '../Utilities/text.json';
+import TextLink from '../Components/TextLink';
+
+const INFO = INFORMATION["homeScreen"]
+
 //import { black } from 'react-native-paper/lib/typescript/src/styles/colors';
 
 function LogoTitle() {
@@ -22,7 +29,9 @@ function LogoTitle() {
 export default class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+        showingModal: false
+    };
   }
 
   static navigationOptions = {
@@ -48,6 +57,20 @@ export default class Home extends Component {
     }, 200)
   }
 
+  showInfoModalAndDisableScroll() {
+    this.setState({showingModal: true})
+    this.refs.infoModal.showInfoModal()
+    }
+
+    enableScroll() {
+        this.setState({showingModal: false})
+    }
+
+    setScrollView = scrollView => {
+        // NOTE: scrollView will be null when the component is unmounted
+        this._scrollView = scrollView;
+    };
+
     // "main method"
     render() {
         const {navigate} = this.props.navigation;
@@ -65,9 +88,25 @@ export default class Home extends Component {
                     <View style = {styles.imageContainer}>
                             <Image style = {styles.image} source = {require('../assets/Home.png')} />
                     </View>
+
                     <View style={styles.headerTextContainer}>
                         <Text style={styles.pageTitle}>Activities</Text>
+                            
+                        <View style={[styles.infoButtonContainer]}>
+                            <TouchableOpacity
+                            style={styles.modalButtonContainer}
+                            onPress={() => this.showInfoModalAndDisableScroll()}
+                            >
+                                <Image
+                                    style={styles.infoImage}
+                                    source={require("../assets/informationbutton.png")}
+                                />
+                            </TouchableOpacity>
+                        </View>
                     </View>
+                    {/* <View style={styles.headerTextContainer}>
+                        <Text style={styles.pageTitle}>Activities</Text>
+                    </View> */}
                     
                     <HomeScreenActivityCard 
                         title = {"Carbon Counter"}      
@@ -98,6 +137,20 @@ export default class Home extends Component {
 
                     
                 </ScrollView>
+                <InfoModal
+                        ref={"infoModal"}
+                        parentObject={this}
+                        onClosed={() => this.enableScroll()}
+                        modalStyle={{backgroundColor: "#F6F8EF"}}
+                        xMarkStyle={{color: "#73A388"}}
+                     >
+                        <ParagraphView 
+                            infoArr={INFO["info"]}
+                            infoTypeArr={INFO["infoTypes"]}
+                            textStyle={{color: "#73A388"}}
+                            />
+                        
+                </InfoModal>
             </View>
             
         );
@@ -135,13 +188,42 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     headerTextContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        // justifyContent: "center",
         paddingTop: 16,
+        width: wp("62%"),
     },
+    modalButtonContainer: {
+        width: "100%",
+        height: "100%",
+        alignItems: "center",
+    },
+    infoImage: {
+        height: "100%",
+        width: "100%",
+        tintColor: '#73A388'
+      },
+    infoButtonContainer: {
+        marginLeft: 5,
+        marginTop: 5,
+        height: 25,
+        width: 25,
+    },
+    // titleContainer: {
+    //     flexDirection: "row",
+    //     alignItems: "center",
+    //     justifyContent: "center",
+    //     marginTop: 15,
+    //     height: 60,
+    //     width: 280,
+    // },
     pageTitle: {
         color: '#73A388',   //green
-        fontSize: 23,
-        height: 33,
-        width: wp("62%"), //224
+        fontSize: 30,
+        // textAlign: "center",
+        // height: 33,
+        // width: wp("62%"), //224
         fontWeight: '700',
     },
     creditButtonContainer: {
