@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {ScrollView, Text, StyleSheet, View, Image} from "react-native";
 import PropTypes from 'prop-types';
+import TextWithEmbeddedLink from './TextWithEmbeddedLink';
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
@@ -40,19 +41,47 @@ class ParagraphView extends React.Component {
 
         const infoList = []
         for (let i = 0; i < this.props.infoArr.length; ++i) {
-            infoList.push(
-                <View key={i} style={styles.individualTextContainer}>
-                    <Text style={[styles[this.props.infoTypeArr[i]], this.props.textStyle]}>{this.props.infoArr[i]}</Text>  
-                    {
-                        this.props.infoImageArr[i] ?
-                        <View style={styles.imageContainer}>
-                            <Image style={styles.image}
-                                source={images[this.props.infoImageArr[i]]}></Image>
-                        </View>
-                        : null
+            // if the element belongs to a textWithEmbeddedLink
+            if (this.props.infoTypeArr[i] == "embeddedLink-body" || this.props.infoTypeArr[i] == "embeddedLink-link") {
+                let myLinkIndex = -1;
+                let myTextArr = [];
+                let j = i;
+                while (this.props.infoTypeArr[j] != "link") {
+                    myTextArr.push(this.props.infoArr[j])
+                    // only one should be a link
+                    if (this.props.infoTypeArr[j] == "embeddedLink-link") {
+                        myLinkIndex = j - i;
                     }
-                </View>
-            )
+                    ++j;
+                }
+
+                infoList.push(
+                    <View key={i} style={styles.individualTextContainer}>
+                        <TextWithEmbeddedLink
+                            textArr={myTextArr}
+                            linkIndex={myLinkIndex}
+                            link={this.props.infoArr[j]}
+                            textStyle={styles.body}
+                        />
+                    </View>
+                )
+                i = j + 1;
+            } else {
+                infoList.push(
+                    <View key={i} style={styles.individualTextContainer}>
+                        <Text style={[styles[this.props.infoTypeArr[i]], this.props.textStyle]}>{this.props.infoArr[i]}</Text>  
+                        {
+                            this.props.infoImageArr[i] ?
+                            <View style={styles.imageContainer}>
+                                <Image style={styles.image}
+                                    source={images[this.props.infoImageArr[i]]}></Image>
+                            </View>
+                            : null
+                        }
+                    </View>
+                )
+            }
+            
         }
         return infoList;
     }

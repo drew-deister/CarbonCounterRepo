@@ -80,7 +80,7 @@ export default class CreditPage extends Component {
                     <Text style={[styles.bottomText, styles.paragraphEnd, {flex: 7}]}>
                       {CHANGE["info"][0]}
                     </Text>
-                    <View style={{flex: 4}}>
+                    <View style={{flex: 4, paddingTop: 10}}>
                         <Image style={{width: 120, height: 120}}
                             source={require("../assets/changeplusplus.png")}
                             />
@@ -96,7 +96,13 @@ export default class CreditPage extends Component {
                 />
 
               {/* CarbonXP was built it concert with... */}
-                <Text style={[styles.bottomText, styles.paragraphEnd]}>
+              <View style={{flexDirection: "row"}}>
+                <View style={{flex: 4, paddingTop: 10}}>
+                        <Image style={{width: 120, height: 80}}
+                            source={require("../assets/VCCILogo.png")}
+                            />
+                </View>
+                <Text style={[styles.bottomText, styles.paragraphEnd, {flex: 7}]}>
                     {CREDIT_INFO["contributions"]["stakeHolders"][0]}
                     <TextLink link={CREDIT_INFO["contributions"]["emails"]["LeahDundon"]}>
                         {CREDIT_INFO["contributions"]["stakeHolders"][1]}
@@ -106,6 +112,8 @@ export default class CreditPage extends Component {
                         {CREDIT_INFO["contributions"]["stakeHolders"][3]}
                     </TextLink>
                 </Text>
+                
+              </View>
 
                 {/* With questions about this app... */}
                 <Text style={[styles.bottomText, styles.paragraphEnd]}>

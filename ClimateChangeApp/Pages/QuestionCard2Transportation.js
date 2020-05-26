@@ -149,7 +149,7 @@ class QuestionCardTransportation extends React.Component {
                                 question={TRANSPORTATION_INFO["questions"][2]}
                                 questionLines={3}
                                 questionStyle={{fontSize: 18}}
-                                max = {100} min = {1} step = {1}
+                                max = {1.5} min = {.5} step = {.1}
                                 shouldDisplay = {false}
                                 callback = {this.updateSliderState2}
                                 secondaryColor='#F0F5DF'

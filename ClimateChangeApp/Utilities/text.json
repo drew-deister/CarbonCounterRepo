@@ -243,10 +243,46 @@
     },
 
     "wePlanetScreens": {
+        "title": "WePlanet",
+
+
         "intro": {
-            "title": "WePlanet",
-            "description": "This activity will provide information about the greenhouse gas emissions that are produced as a result of some of your daily activities. The results will help you better understand your carbon footprint.",
-            "disclaimer": "Note: this activity captures just a few activities and is not a total picture of your carbon footprint, it is just an estimate of one slice of your life"
+            "instruction": "Read the background information",
+            "climateChangeConferenceBackground": {
+                "buttonText": "Where were these videos taken?",
+                "info": [
+                    "The following activity consists of videos taken of people attending the United Nations climate change negotiations held in Madrid, Spain in December 2019.",
+                    "This annual event is known as the “COP,” which stands for the Conference of the Parties (“COP”) to the United Nations Framework Convention on Climate Change (“UNFCCC”).",
+                    "The UNFCCC is a formal international treaty established in 1992 to address climate change -- the United States became a party to the treaty when it was signed by President George H.W. Bush and then officially ratified (approved) by the U.S. Senate in 1992.",
+                    "Many sub-agreements have been negotiated pursuant to the framework created by the UNFCCC, most famously the Paris Agreement in 2015."
+                ],
+                "infoTypes": [
+                    "body",
+                    "body",
+                    "body",
+                    "body"
+                ]
+            },
+            "peopleBackground": {
+                "buttonText": "Who is speaking?",
+                "info": [
+                    "The people in these videos are speaking spontaneously in response to the question we presented:  What do you want young people in the United States to know about climate change?",
+                    "They had no time to prepare their comments and graciously and voluntarily agreed to be part of this project. The people on the videos are speaking for themselves, and do not necessarily represent the views or opinions of any country or organization. Some edits were made to the subtitles for clarity.",
+                    "If you would like to participate and add a video, please contact ",
+                    "Dr. Leah A. Dundon",
+                    ". We hope to eventually have a participant from every country in the world!",
+                    "mailto:leah.a.dundon@vanderbilt.edu"
+                    
+                ],
+                "infoTypes": [
+                    "body",
+                    "body",
+                    "embeddedLink-body",
+                    "embeddedLink-link",
+                    "embeddedLink-body",
+                    "link"
+                ]
+            }
         },
         "main": {
             "instruction": "Tap on a marker to hear from a part of the world you are curious about!"

@@ -152,27 +152,74 @@ class Results extends React.Component {
     }
 
     calculateTransportation() {
-      var MPG_rate = 1 // dummy bc idk if you have to initialize
-      if (this.state.mode == "Regular car") {
-        MPG_rate = 30
-      } else if (this.state.mode == "Small SUV (Ford Escape)") {
-        MPG_rate = 26.2
-      } else if (this.state.mode == "Large SUV (Chevy Suburban)") {
-        MPG_rate = 22.4
-      } else if (this.state.mode == "Minivan") {
-        MPG_rate = 22.2
-      } else if (this.state.mode == "Pickup truck (Ford F-150)"){
-        MPG_rate = 18.9
-    } else if (this.state.mode == "Train or bus") {
-      return this.state.numMiles * 180 * 0.5 * (.75 + .25 * (this.state.summerChange + .5))
-    }
-      else { // pickup truck
-        MPG_rate = 18.9
+
+      // calculate number of miles in the school year
+      // calculate number of miles in the summer/weekends
+      
+      const milesSchool = this.state.numMiles * 180;
+      const milesSummer = this.state.numMiles * this.state.summerChange * 185;
+      const totalMiles = milesSchool + milesSummer;
+
+      // calculate pounds of CO2 per mile
+      const CO2_rate_gallon = 19.59
+      const MPG_rate = 0; 
+      const CO2_rate_mile = 0; // pounds of CO2 emitted per mile
+      switch(this.state.mode) {
+        case "Regular car":
+          MPG_rate = 30;
+          CO2_rate_mile = CO2_rate_gallon / MPG_rate;
+          break;
+        case "Small SUV (Ford Escape)":
+          MPG_rate = 26.2;
+          CO2_rate_mile = CO2_rate_gallon / MPG_rate;
+          break;
+        case "Large SUV (Chevy Suburban)":
+          MPG_rate = 22.4;
+          CO2_rate_mile = CO2_rate_gallon / MPG_rate;
+          break;
+        case "Minivan":
+          MPG_rate = 22.2;
+          CO2_rate_mile = CO2_rate_gallon / MPG_rate;
+          break;
+        case "Pickup truck (Ford F-150)":
+          MPG_rate = 18.9;
+          CO2_rate_mile = CO2_rate_gallon / MPG_rate;
+          break;
+        case "Train or bus":
+          MPG_rate = 50 // FIXME
+          break;
+        case "Bicycle or walk":
+          MPG_rate = INF;
+          CO2_rate_mile = 0;
+          break;
+        default:
+          // code block
       }
-      var multiplier =  180 * (1/MPG_rate) * 8887 * 0.00220462;
-      //.75 from non summer + .25 * the change over the summer
-      var summer = (.75 + (.25 * this.state.summerChange))
-      return multiplier * summer  * this.state.numMiles;// lbsCO2/yr
+
+      // calculate pounds of CO2 per year
+      return totalMiles * CO2_rate_mile;
+
+    //   var MPG_rate = 1 // dummy bc idk if you have to initialize
+    //   if (this.state.mode == "Regular car") {
+    //     MPG_rate = 30
+    //   } else if (this.state.mode == "Small SUV (Ford Escape)") {
+    //     MPG_rate = 26.2
+    //   } else if (this.state.mode == "Large SUV (Chevy Suburban)") {
+    //     MPG_rate = 22.4
+    //   } else if (this.state.mode == "Minivan") {
+    //     MPG_rate = 22.2
+    //   } else if (this.state.mode == "Pickup truck (Ford F-150)"){
+    //     MPG_rate = 18.9
+    // } else if (this.state.mode == "Train or bus") {
+    //   return this.state.numMiles * 180 * 0.5 * (.75 + .25 * (this.state.summerChange + .5))
+    // }
+    //   else { // pickup truck
+    //     MPG_rate = 18.9
+    //   }
+    //   var multiplier =  180 * (1/MPG_rate) * 8887 * 0.00220462;
+    //   //.75 from non summer + .25 * the change over the summer
+    //   var summer = (.75 + (.25 * this.state.summerChange))
+    //   return multiplier * summer  * this.state.numMiles;// lbsCO2/yr
     }
 
   showInfoModalAndDisableScroll() {

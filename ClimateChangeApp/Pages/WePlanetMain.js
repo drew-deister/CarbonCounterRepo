@@ -23,7 +23,7 @@ import {
   listenOrientationChange,
   removeOrientationListener,
 } from "react-native-responsive-screen";
-import WePlanetIntroPage from './WePlanetIntro';
+import WePlanetIntroPage from './WePlanetIntro2';
 
 // Firebase App (the core Firebase SDK) is always required and
 // must be listed before other Firebase SDKs

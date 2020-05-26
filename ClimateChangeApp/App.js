@@ -5,7 +5,9 @@ import {createStackNavigator} from 'react-navigation-stack';
 import {StackViewStyleInterpolator} from 'react-navigation-stack'
 import Home from './Pages/Home';
 import Results from './Pages/Results';
-import WePlanetIntroPage from './Pages/WePlanetIntro';
+import WePlanetIntroPage1 from './Pages/WePlanetIntro1';
+import WePlanetIntroPage2 from './Pages/WePlanetIntro2';
+import WePlanetIntroPage3 from './Pages/WePlanetIntro3';
 import WePlanetMain from './Pages/WePlanetMain';
 // import WePlanetSelectionBar from './Pages/WePlanetSelectionBar';
 import Credit from './Pages/Credit';
@@ -95,7 +97,9 @@ const AppNavigator = createStackNavigator(
     Diet: {screen: SurveyDiet},
     Shopping: {screen: SurveyShopping},
     Results: { screen: Results },
-    WePlanet: {screen: WePlanetIntroPage},
+    WePlanet: {screen: WePlanetIntroPage1},
+    WePlanet2: {screen: WePlanetIntroPage2},
+    WePlanet3: {screen: WePlanetIntroPage3},
     WePlanetMain: {screen: WePlanetMain},
     Credit: {screen: Credit},
     IntroPage1: { screen: IntroPage1 },
@@ -109,7 +113,7 @@ const AppNavigator = createStackNavigator(
         // shadowOpacity: .5,
         // shadowRadius: 10,
     },
-    initialRouteName: "IntroPage2", // For functioning app, use "IntroPage1"
+    initialRouteName: "Home", // For functioning app, use "IntroPage1"
     //headerMode: "None",
     headerLayoutPreset: "center",
     transitionConfig: () => ({
