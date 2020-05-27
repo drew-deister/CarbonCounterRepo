@@ -182,7 +182,7 @@ class GeoVideo1 extends React.Component {
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
             MARKERS.push({
-              name: doc.id,
+              name: doc.data().country, // these names will not be unique so don't try to index
               coordinates: {
                 latitude: doc.data().latitude,
                 longitude: doc.data().longitude,
@@ -208,7 +208,7 @@ class GeoVideo1 extends React.Component {
       this.selectionScroll.getNode().scrollTo({y: index * (CARD_HEIGHT + CARD_MARGIN), animated: false})
       this.setState({hasMarkerBeenPressed: true})
 
-      var storageRef = firebase.storage().ref().child('CarbonXP_Storage/' + name);
+      var storageRef = firebase.storage().ref().child('CarbonXP_Storage/');
       var videoRef = storageRef.child(videoFileName);
       videoRef.getDownloadURL().then((url) => {
         this.refs.globevideomodal.showGlobeVideoModal(url, name); 
