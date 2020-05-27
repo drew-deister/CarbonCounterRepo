@@ -16,6 +16,10 @@ const INFO = INFORMATION["wePlanetScreens"]
 
 
 export default class WePlanetIntroPage extends Component {
+
+  
+  
+
   render() {
     const { navigate } = this.props.navigation;
     return (
@@ -40,7 +44,7 @@ export default class WePlanetIntroPage extends Component {
 
           
           
-          <View style={{ flex: 200,
+          <View style={{ flex: 100,
                          justifyContent: "center"}}>
               <AsafNextButton
                 onPress={() => this.props.navigation.navigate("WePlanet2")}

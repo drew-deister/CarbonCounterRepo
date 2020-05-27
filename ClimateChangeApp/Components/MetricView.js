@@ -35,12 +35,26 @@ class MetricView extends React.Component {
 
     static propTypes = {
         metricName: PropTypes.string,
-        totalCO2: PropTypes.number,
+        totalCo2: PropTypes.number,
     }
     static defaultProps = {
         metricName: 'Tree',
-        totalCO2: 1,
+        totalCo2: 1,
         textStyle: {},
+    }
+
+    // formats numbers by adding commas if necessary, maintains decimals
+    addCommas(nStr)
+    {
+        nStr += '';
+        let x = nStr.split('.');
+        let x1 = x[0];
+        let x2 = x.length > 1 ? '.' + x[1] : '';
+        let rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+        return x1 + x2;
     }
 
 
@@ -53,7 +67,7 @@ class MetricView extends React.Component {
                     <Text style={[styles.text, this.props.textStyle]}>
                         {metricViewInfo[this.props.metricName][0]}
                         <Text style={styles.number}>
-                            {parseInt(this.props.totalCo2*multiplier[this.props.metricName])}
+                            {this.addCommas(parseInt(this.props.totalCo2*multiplier[this.props.metricName]))}
                         </Text>
                         {metricViewInfo[this.props.metricName][1]}
                     </Text>

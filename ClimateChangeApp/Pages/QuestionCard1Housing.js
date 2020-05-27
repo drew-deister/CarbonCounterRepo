@@ -196,7 +196,7 @@ class QuestionCardHousing extends React.Component {
                 <SliderQuestion
                     ref = {'slider'}
                     question={HOUSEHOLD_INFO["questions"][2]}
-                    max={4000} min={600} step={1}
+                    max={4000} min={600} step={100}
                     shouldDisplay={true}
                     callback = {this.updateSliderState} />
 

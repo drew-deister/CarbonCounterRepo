@@ -28,6 +28,8 @@ import {
 
 const Results_Info = INFORMATION["carbonCounterScreens"]["results"]
 
+// to fix scrollIndicators
+const inset = { top: 0, left: 0, bottom: 0, right: 0}
 
 import * as SecureStore from 'expo-secure-store';
 import AsafNextButton from '../Components/AsafNextButton';
@@ -74,17 +76,22 @@ class Results extends React.Component {
     }
 
     async fetchData() { // should probably add some error handling here
+      
+      console.log(" ")
+      console.log("RE-RENDERING")
+      console.log(" ")
+
+
       // housing
-      const zipCode = JSON.parse(await SecureStore.getItemAsync("zipCode"))
-      // use 1/num people because total housing is divided by num people
-      const numPeople = 1/(1+JSON.parse(await SecureStore.getItemAsync("numPeople")))
-      const squareFootage = JSON.parse(await SecureStore.getItemAsync("squareFootage"))
+      let zipCode = JSON.parse(await SecureStore.getItemAsync("zipCode"))
+      let numPeople = parseInt(JSON.parse(await SecureStore.getItemAsync("numPeople")))
+      let squareFootage = JSON.parse(await SecureStore.getItemAsync("squareFootage"))
 
       // transportation
       const numMiles = JSON.parse(await SecureStore.getItemAsync("numMiles"))
       //multiply by .01 to make decimal
       const mode = JSON.parse(await SecureStore.getItemAsync("mode"))
-      const summerChange = .01 * JSON.parse(await SecureStore.getItemAsync("summerChange"))
+      const summerChange = JSON.parse(await SecureStore.getItemAsync("summerChange"))
 
       // diet
       const beefServings = JSON.parse(await SecureStore.getItemAsync("beefServings"))
@@ -92,6 +99,31 @@ class Results extends React.Component {
 
       // shopping
       const shoppingFrequency = JSON.parse(await SecureStore.getItemAsync("shoppingFrequency"))
+
+      // ********* the following can be used for quicker testing during development
+      // console.log("original type of numPeople: ", typeof numPeople)
+
+      // zipCode = "60614"
+      // numPeople = 4
+      // squareFootage = 2410
+
+      // console.log("changed type of numPeople: ", typeof numPeople)
+      // const numMiles = 3
+      // const summerChange = 1.0
+      // const mode = "Regular car"
+      // const beefServings = 7
+      // const dairyServings = 3
+      // const shoppingFrequency = 5 
+      
+      // console.log("zipCode", zipCode)
+      // console.log("numPeople", numPeople)
+      // console.log("squareFootage", squareFootage)
+      // console.log("numMiles", numMiles)
+      // console.log("summerChange", summerChange)
+      // console.log("mode", mode),
+      // console.log("beefServings", beefServings)
+      // console.log("dairyServings", dairyServings)
+      // console.log("shoppingFrequency", shoppingFrequency)
 
       // this not only changes the state but also
       // rerenders the components in view
@@ -101,17 +133,17 @@ class Results extends React.Component {
                      shoppingFrequency: shoppingFrequency});
       
 
-      this.calculateDiet()
-      this.calculateShopping()
-      this.calculateHousing()
-      this.calculateTransportation()
+      // this.calculateDiet()
+      // this.calculateShopping()
+      // this.calculateHousing()
+      // this.calculateTransportation()
     }
 
     // == vs ===?
     // MARK: Do calculations
     calculateDiet() { // calculates results with variables in this.state
       const POUNDS_PER_BEEF_SERVING = 6.61
-      const POUNDS_PER_CHEESE_SERVING = 2.45
+      const POUNDS_PER_CHEESE_SERVING = 1.35
 
       return ((this.state.beefServings * POUNDS_PER_BEEF_SERVING * 52) +
                 (this.state.dairyServings * POUNDS_PER_CHEESE_SERVING * 52))
@@ -119,51 +151,52 @@ class Results extends React.Component {
 
     calculateShopping() {
       const POUNDS_PER_SHIRT = 12.13
-      return (POUNDS_PER_SHIRT * 12 * this.state.shoppingFrequency * 4)
+      return (POUNDS_PER_SHIRT * this.state.shoppingFrequency * 4)
     }
 
     calculateHousing() { // iterate through JSON file in Utilities
-      var averageHomekwhMonth = 0;
+      var averageHomeMWh_rate_year = 0.0;
+      var lbsCO2_rate_MWh = 0.0;
       var multiplier = 1.0;
       var i;
       for (i in ZipCode) {
           if (ZipCode[i]["Zip"] === parseInt(this.state.zipCode)) {
-            averageHomekwhMonth += ZipCode[i]["Avg Home kwh"]["month"];
+            averageHomeMWh_rate_year = ZipCode[i]["KWh"]["month -> MWh"]["year"];
+            lbsCO2_rate_MWh = ZipCode[i]["Subregion annual CO2e output emission rate (lb"]["MWh)"];
           }
       }
-      if (this.state.squareFootage < 800)
+      if (this.state.squareFootage < 801)
       {
         multiplier = 0.5;
       }
-      else if (this.state.squareFootage < 1500) {
+      else if (this.state.squareFootage < 1501) {
         multiplier = 0.75;
       }
-      else if (this.state.squareFootage < 2500) {
+      else if (this.state.squareFootage < 2501) {
         multiplier = 1.0;
       }
-      else if (this.state.squareFootage < 4500) {
+      else if (this.state.squareFootage < 4501) {
         multiplier = 1.25;
       }
-      else{
+      else {
         multiplier = 1.5;
       }
+      console.log("Housing: ", lbsCO2_rate_MWh * (multiplier * averageHomeMWh_rate_year) / (this.state.numPeople + 1))
       //should be divided by this.state.numPeople
-      return (multiplier * averageHomekwhMonth * 12 * this.state.numPeople);
+      return (lbsCO2_rate_MWh * (multiplier * averageHomeMWh_rate_year) / (this.state.numPeople + 1));
     }
 
     calculateTransportation() {
 
-      // calculate number of miles in the school year
-      // calculate number of miles in the summer/weekends
-      
+      // calculate miles      
       const milesSchool = this.state.numMiles * 180;
       const milesSummer = this.state.numMiles * this.state.summerChange * 185;
       const totalMiles = milesSchool + milesSummer;
 
-      // calculate pounds of CO2 per mile
+      // calculate rate: pounds of CO2 emitted per mile
       const CO2_rate_gallon = 19.59
-      const MPG_rate = 0; 
-      const CO2_rate_mile = 0; // pounds of CO2 emitted per mile
+      let MPG_rate = 0; 
+      let CO2_rate_mile = 0;
       switch(this.state.mode) {
         case "Regular car":
           MPG_rate = 30;
@@ -186,7 +219,9 @@ class Results extends React.Component {
           CO2_rate_mile = CO2_rate_gallon / MPG_rate;
           break;
         case "Train or bus":
-          MPG_rate = 50 // FIXME *************************************
+          // according to US Dot, CO2 per mile per passanger
+          // of average bus / train and full capacity
+          CO2_rate_mile = .16 
           break;
         case "Bicycle or walk":
           MPG_rate = INF;
@@ -195,31 +230,8 @@ class Results extends React.Component {
         default:
           // code block
       }
-
       // calculate pounds of CO2 per year
       return totalMiles * CO2_rate_mile;
-
-    //   var MPG_rate = 1 // dummy bc idk if you have to initialize
-    //   if (this.state.mode == "Regular car") {
-    //     MPG_rate = 30
-    //   } else if (this.state.mode == "Small SUV (Ford Escape)") {
-    //     MPG_rate = 26.2
-    //   } else if (this.state.mode == "Large SUV (Chevy Suburban)") {
-    //     MPG_rate = 22.4
-    //   } else if (this.state.mode == "Minivan") {
-    //     MPG_rate = 22.2
-    //   } else if (this.state.mode == "Pickup truck (Ford F-150)"){
-    //     MPG_rate = 18.9
-    // } else if (this.state.mode == "Train or bus") {
-    //   return this.state.numMiles * 180 * 0.5 * (.75 + .25 * (this.state.summerChange + .5))
-    // }
-    //   else { // pickup truck
-    //     MPG_rate = 18.9
-    //   }
-    //   var multiplier =  180 * (1/MPG_rate) * 8887 * 0.00220462;
-    //   //.75 from non summer + .25 * the change over the summer
-    //   var summer = (.75 + (.25 * this.state.summerChange))
-    //   return multiplier * summer  * this.state.numMiles;// lbsCO2/yr
     }
 
   showInfoModalAndDisableScroll() {
@@ -241,6 +253,20 @@ class Results extends React.Component {
     setTimeout(() => {
         this._scrollView.flashScrollIndicators();
     }, 200)
+  }
+
+  // formats numbers by adding commas if necessary, maintains decimals
+  addCommas(nStr)
+  {
+    nStr += '';
+    let x = nStr.split('.');
+    let x1 = x[0];
+    let x2 = x.length > 1 ? '.' + x[1] : '';
+    let rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+      x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+    return x1 + x2;
   }
 
     render() {
@@ -277,7 +303,8 @@ class Results extends React.Component {
       var totalCO2 = this.calculateHousing() + this.calculateTransportation() + this.calculateDiet() + this.calculateShopping();
       return(
         <View style={styles.safeView}>
-            <ScrollView style={styles.scrollViewStyle}
+            <ScrollView scrollIndicatorInsets={inset}
+                        style={styles.scrollViewStyle}
                         contentContainerStyle = {styles.containerStyle}
                         ref={this.setScrollView}>
                 
@@ -287,7 +314,7 @@ class Results extends React.Component {
                     </Text>
 
                     <View style={styles.CO2NumberContainer}>
-                        <Text style={styles.CO2Number}>{parseInt(totalCO2)}</Text>
+                        <Text style={styles.CO2Number}>{this.addCommas(parseInt(totalCO2))}</Text>
 
                         <View style={styles.infoButtonContainer}>
                             <TouchableOpacity

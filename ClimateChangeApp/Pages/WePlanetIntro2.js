@@ -16,6 +16,22 @@ const INFO = INFORMATION["wePlanetScreens"]
 
 
 export default class WePlanetIntroPage extends Component {
+
+  componentDidMount() { // this is automatically called by the compiler
+    this.flashScroll();
+  }
+
+  setScrollView = scrollView => {
+    // NOTE: scrollView will be null when the component is unmounted
+      this._scrollView = scrollView;
+  };
+
+  flashScroll() {
+    setTimeout(() => {
+        this._scrollView.flashScrollIndicators();
+    }, 200)
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     return (
@@ -34,7 +50,9 @@ export default class WePlanetIntroPage extends Component {
               {/* <Text style={styles.bottomText}>
                   {INFO["intro"]["climateChangeConferenceBackground"]["buttonText"]}
               </Text> */}
-              <ScrollView>
+              <ScrollView
+                ref={this.setScrollView}
+              >
                   <ParagraphView
                     infoArr={INFO["intro"]["climateChangeConferenceBackground"]["info"]}
                     infoTypeArr={INFO["intro"]["climateChangeConferenceBackground"]["infoTypes"]}
@@ -45,7 +63,7 @@ export default class WePlanetIntroPage extends Component {
               
           </View>
           
-          <View style={{ flex: 200,
+          <View style={{ flex: 100,
                          justifyContent: "center"}}>
               <AsafNextButton
                 onPress={() => this.props.navigation.navigate("WePlanet3")}
