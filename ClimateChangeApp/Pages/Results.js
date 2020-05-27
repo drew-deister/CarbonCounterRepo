@@ -186,7 +186,7 @@ class Results extends React.Component {
           CO2_rate_mile = CO2_rate_gallon / MPG_rate;
           break;
         case "Train or bus":
-          MPG_rate = 50 // FIXME
+          MPG_rate = 50 // FIXME *************************************
           break;
         case "Bicycle or walk":
           MPG_rate = INF;
