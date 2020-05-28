@@ -43,34 +43,27 @@ export default class WePlanetIntroPage extends Component {
 
               <Text style={styles.topText}>Who is speaking?</Text>
           </View>
-          {/* {INFO["intro"][0]["question"]} */}
 
           <View style={{ flex: 465,
-                               justifyContent: "flex-begin", width: wp("80%") }}>
-              {/* <Text style={styles.bottomText}>
-                  {INFO["intro"]["climateChangeConferenceBackground"]["buttonText"]}
-              </Text> */}
+                               justifyContent: "flex-begin", width: wp("95%"), paddingBottom: hp("3%") }}>
               <ScrollView
                   ref={this.setScrollView}
+                  contentContainerStyle={{alignItems: "center"}}
               >
                   <ParagraphView
-                    infoArr={INFO["intro"]["peopleBackground"]["info"]}
-                    infoTypeArr={INFO["intro"]["peopleBackground"]["infoTypes"]}
-                    textStyle={{color: "#73A388"}}
+                      infoArr={INFO["intro"]["peopleBackground"]["info"]}
+                      infoTypeArr={INFO["intro"]["peopleBackground"]["infoTypes"]}
+                      textStyle={{color: "#73A388"}}
                 />
+                  <AsafNextButton
+                      onPress={() => this.props.navigation.navigate("WePlanetMain")}
+                   >   
+                      Go to Activity
+                  </AsafNextButton>
               </ScrollView>
             
               
           </View>
-          
-          <View style={{ flex: 100,
-                         justifyContent: "center"}}>
-              <AsafNextButton
-                onPress={() => this.props.navigation.navigate("WePlanetMain")}
-              >
-            Go to Activity
-          </AsafNextButton>
-        </View>
 
         <View style={styles.progressBarContainer}>
                     <Progress.Bar

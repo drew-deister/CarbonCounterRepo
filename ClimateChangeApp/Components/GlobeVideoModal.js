@@ -47,25 +47,23 @@ export default class GlobeVideoModal extends Component {
                         style={{
                             position: 'absolute',
                             right: 22,
-                            top: 3,
+                            top: 10,
+                            // backgroundColor: 'blue'
                         }}
                         onPress={() => {
                             this.closeModal()}}>
-                        <Image
-                            style={[styles.modalBackIcon]}
-                            source={require('../assets/cancelButton1.png')} // update image
-                        /> 
+                        <Text style={styles.xMark}>X</Text>
                     </TouchableOpacity>
                     <Text style = {styles.text}>{this.state.name}</Text>
                     <Video
-                    source={{ uri: this.state.url }}
-                    style={styles.Video}
-                    resizeMode="cover"      //fill container bounds while preserving aspect ratio
-                    shouldPlay
-                    useNativeControls={true}
-                    rate={1.0}
-                    isMute={false}
-                    volume={1.0}
+                        source={{ uri: this.state.url }}
+                        style={styles.Video}
+                        resizeMode="cover"      //fill container bounds while preserving aspect ratio
+                        shouldPlay
+                        useNativeControls={true}
+                        rate={1.0}
+                        isMute={false}
+                        volume={1.0}
                     />
                 </View>
             </Modal>
@@ -84,23 +82,27 @@ const styles = StyleSheet.create({
     text: {
         color: "white",
         fontSize: 20,
-        fontWeight: "200",
+        fontWeight: "300",
+        paddingTop: 15
     }, 
     MainContainer: {
         flexDirection: "column",
         alignItems: 'center',
         justifyContent: 'space-around',
         padding: 0,
+        // backgroundColor: "blue",
+        height: "100%",
+        paddingBottom: 20,
         // borderColor: 'black',
         // borderWidth: 1
       },
     
     Modal: {
-        justifyContent: 'center',
+        justifyContent: "space-around",
         borderRadius: Platform.OS === 'ios' ? 30 : 0,
         shadowRadius: 10, 
         width: wp("85%"),
-        height: hp("60%"),
+        height: wp("75%"),
         backgroundColor: '#73A388',
     }, 
     Caption: {
@@ -116,7 +118,12 @@ const styles = StyleSheet.create({
         //width: '100%',
         // borderColor: 'black',
         // borderWidth: 1,
-        height: '85%', // i believe this is 85% of the parent container
-        width: '100%'
-    }
+        height: '75%', // i believe this is 85% of the parent container
+        width: '90%'
+    },
+    xMark: {
+        color: "white",
+        fontSize: 30,
+        fontWeight: "700",
+      }
   });

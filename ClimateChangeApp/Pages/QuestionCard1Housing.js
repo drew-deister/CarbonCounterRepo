@@ -48,7 +48,7 @@ class QuestionCardHousing extends React.Component {
     }
 
     componentDidMount() {
-        SecureStore.setItemAsync("hasResultsBeenAccessed", JSON.stringify("false")); // this only needs to be done once, in one page
+        // SecureStore.setItemAsync("hasResultsBeenAccessed", JSON.stringify("false")); // this only needs to be done once, in one page
         this.fetchData().done()
         this.props.navigation.addListener('didFocus', () => { // runs every time the screen is seen
             // The screen is focused

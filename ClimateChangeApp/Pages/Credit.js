@@ -69,7 +69,7 @@ export default class CreditPage extends Component {
 
           <View style={{flex: 470, justifyContent: "center"}}>
               <ScrollView
-                  scrollIndicatorInsets= {inset}
+                  // scrollIndicatorInsets= {inset}
                   // style={{backgroundColor: "blue"}}
                   ref={this.setScrollView}
               >

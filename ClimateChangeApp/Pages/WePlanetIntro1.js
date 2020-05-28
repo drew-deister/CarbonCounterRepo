@@ -26,16 +26,20 @@ export default class WePlanetIntroPage extends Component {
 
       <View style={styles.container}>
 
-          <View style={{ flex: 200,
-                         justifyContent: "flex-end"}}>
+          <View style={{  flex: 200,
+                          justifyContent: "flex-end" }}>
 
               <Text style={styles.topText}>{INFO["title"]}</Text>
-              <Text style={styles.bottomText}>Featuring exclusive content from the United Nations Framework Convention on Climate Change</Text>
+              <Text style={styles.bottomText}>
+                  {INFO["intro"]["UNFCCC"]}
+              </Text>
           </View>
           {/* {INFO["intro"][0]["question"]} */}
 
-          <View style={{ flex: 365,
-                               justifyContent: "flex-begin", alignItems: "center", width: wp("80%") }}>
+          <View style={{  flex: 365,
+                          justifyContent: "flex-begin",
+                          alignItems: "center",
+                          width: wp("80%") }}>
               
             
               <Image source={require("../assets/UNFCCC_Logo.png")}
@@ -75,7 +79,7 @@ const styles = StyleSheet.create({
   },
   topText: {
     color: "#73A388",
-    fontSize: 34,
+    fontSize: 28,
     paddingBottom: 20,
     textAlign: 'center',
     fontWeight: "bold",

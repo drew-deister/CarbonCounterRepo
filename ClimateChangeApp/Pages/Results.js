@@ -303,7 +303,8 @@ class Results extends React.Component {
       var totalCO2 = this.calculateHousing() + this.calculateTransportation() + this.calculateDiet() + this.calculateShopping();
       return(
         <View style={styles.safeView}>
-            <ScrollView scrollIndicatorInsets={inset}
+            <ScrollView 
+                        // scrollIndicatorInsets={inset}
                         style={styles.scrollViewStyle}
                         contentContainerStyle = {styles.containerStyle}
                         ref={this.setScrollView}>
