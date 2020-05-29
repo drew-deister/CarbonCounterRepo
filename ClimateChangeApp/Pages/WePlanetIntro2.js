@@ -60,6 +60,7 @@ export default class WePlanetIntroPage extends Component {
 
           <AsafNextButton
                 onPress={() => this.props.navigation.navigate("WePlanet3")}
+                style={{marginTop: 15}}
               >
             Continue
           </AsafNextButton>
