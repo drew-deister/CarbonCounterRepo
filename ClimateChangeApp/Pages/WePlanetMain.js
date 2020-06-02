@@ -333,7 +333,11 @@ class GeoVideo1 extends React.Component {
                 !(this.state.hasMarkerBeenPressed)
                 ? 
                 <View style={styles.overlayTextContainer}> 
-                    <Text style={styles.overlayText}>{WE_PLANET_INFO["instruction"]}</Text>
+                    <Text style={styles.overlayText}
+                        allowFontScaling={false}
+                        >
+                            {WE_PLANET_INFO["instruction"]}
+                    </Text>
                 </View>
 
                 : null
@@ -360,7 +364,11 @@ class GeoVideo1 extends React.Component {
                             this.toggleCardHeight()
                             
                           }}>
-            <Text style={styles.xMark}>{this.state.selectionCardsShowing === 3 ? "x" : "+"}</Text>
+            <Text style={styles.xMark}
+                  allowFontScaling={false}
+                  >
+                      {this.state.selectionCardsShowing === 3 ? "x" : "+"}
+            </Text>
         </TouchableOpacity>
               <Animated.ScrollView
                     // horizontal
@@ -388,7 +396,11 @@ class GeoVideo1 extends React.Component {
                       {/* selection scroll bar cards */}
                         {this.state.markersList.map((marker, index) => (
                             <View style={styles.card} key={index}>
-                              <Text style={styles.cardTitle}>{marker.name}</Text>
+                              <Text style={styles.cardTitle}
+                                    allowFontScaling={false}
+                                    >
+                                        {marker.name}
+                              </Text>
                             </View>
                         ))}
                         <View style={{height: CARD_HEIGHT*(this.state.selectionCardsShowing - 1) + CARD_MARGIN*(this.state.selectionCardsShowing-1)}}></View>

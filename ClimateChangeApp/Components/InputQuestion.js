@@ -55,7 +55,10 @@ class InputQuestion extends React.Component {
           value = {this.state.txt}
           placeholderTextColor = {'#898d91'}
           onChangeText={text => this.sendData(text)} // update parent state (QuestionCard)
+          allowFontScaling={false}
           >
+            
+          
         </TextInput>
       </View>
     )

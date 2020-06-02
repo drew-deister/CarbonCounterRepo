@@ -76,11 +76,6 @@ class Results extends React.Component {
     }
 
     async fetchData() { // should probably add some error handling here
-      
-      console.log(" ")
-      console.log("RE-RENDERING")
-      console.log(" ")
-
 
       // housing
       let zipCode = JSON.parse(await SecureStore.getItemAsync("zipCode"))
@@ -310,12 +305,18 @@ class Results extends React.Component {
                         ref={this.setScrollView}>
                 
                 <View style = {styles.pageHeaderContainer}>
-                    <Text style={styles.CO2Title}>
+                    <Text style={styles.CO2Title}
+                              allowFontScaling={false}
+                              >
                         Your estimated green house gas emissions are:
                     </Text>
 
                     <View style={styles.CO2NumberContainer}>
-                        <Text style={styles.CO2Number}>{this.addCommas(parseInt(totalCO2))}</Text>
+                        <Text style={styles.CO2Number}
+                              allowFontScaling={false}
+                              >
+                                {this.addCommas(parseInt(totalCO2))}
+                        </Text>
 
                         <View style={styles.infoButtonContainer}>
                             <TouchableOpacity
@@ -330,12 +331,24 @@ class Results extends React.Component {
                         </View>
                     </View>
 
-                    <Text style={styles.CO2Title}> pounds of CO2 per year</Text>
+                    <Text style={styles.CO2Title}
+                          allowFontScaling={false}
+                          >
+                              pounds of CO2 per year
+                    </Text>
                 </View>
 
                 <View style={styles.cardStyle}>
-                    <Text style={styles.pageTitle}>Results</Text>
-                    <Text style={styles.bottomText}>from each category</Text>
+                    <Text style={styles.pageTitle}
+                          allowFontScaling={false}
+                          >
+                              Results
+                    </Text>
+                    <Text style={styles.bottomText}
+                          allowFontScaling={false}
+                          >
+                              from each category
+                    </Text>
 
                     <View style={styles.pieChartContainer}>
                         <PieChart data={data}
@@ -349,7 +362,11 @@ class Results extends React.Component {
                           />
 
                         <View style={{width: wp("75%"), marginTop: 10}}>
-                           <Text style={styles.bottomText}>To learn more about a specifc category, click on the "info" button next to the title of any of the previous pages</Text>
+                           <Text style={styles.bottomText}
+                              allowFontScaling={false}
+                              >
+                                To learn more about a specifc category, click on the "info" button next to the title of any of the previous pages
+                            </Text>
                         </View>
                     </View>
 
@@ -358,7 +375,11 @@ class Results extends React.Component {
 
 
                     <View style={styles.metricsContainer}>
-                        <Text style={styles.pageTitle}>Metrics</Text>
+                        <Text style={styles.pageTitle}
+                              allowFontScaling={false}
+                              >
+                                Metrics
+                        </Text>
                         <MetricView metricName="SolarPanel" totalCo2 = {totalCO2}/>
                         <MetricView metricName="Car" totalCo2 = {totalCO2}
                                     textStyle={{marginTop: -15}}/>
@@ -371,8 +392,16 @@ class Results extends React.Component {
 
 
                     <View style={styles.goBackContainer}>
-                        <Text style={styles.pageTitle}>Go Back</Text>
-                        <Text style={styles.bottomText}>Go back and change your answers to see how it affects the results!</Text>
+                        <Text style={styles.pageTitle}
+                              allowFontScaling={false}
+                              >
+                                Go Back
+                        </Text>
+                        <Text style={styles.bottomText}
+                              allowFontScaling={false}
+                              >
+                                Go back and change your answers to see how it affects the results!
+                        </Text>
                   
                         <AsafNextButton
                             onPress= {() => this.props.navigation.navigate('Household')}

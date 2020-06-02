@@ -90,7 +90,11 @@ export default class Home extends Component {
                     </View>
 
                     <View style={styles.headerTextContainer}>
-                        <Text style={styles.pageTitle}>Activities</Text>
+                        <Text style={styles.pageTitle}
+                              allowFontScaling={false}
+                              >
+                                  Activities
+                        </Text>
                             
                         <View style={[styles.infoButtonContainer]}>
                             <TouchableOpacity
@@ -129,7 +133,11 @@ export default class Home extends Component {
                                             onPress={() => 
                                             this.props.navigation.navigate("Credit")
                                             }>
-                            <Text style={styles.creditText}>Credit</Text>
+                            <Text style={styles.creditText}
+                              allowFontScaling={false}
+                              >
+                                  Credit
+                            </Text>
 
                         </TouchableOpacity>
 

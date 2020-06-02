@@ -33,7 +33,9 @@ export default class DataSources extends React.Component {
             } else {
                 sourceList.push(
                 <Text key = {i}
-                      style={this.props.sourceStyle}>
+                      style={this.props.sourceStyle}
+                      allowFontScaling={false}
+                      >
                         {SOURCES["sources"][i]["main"]}.
                 </Text>
                 )
@@ -49,8 +51,14 @@ export default class DataSources extends React.Component {
 
         return (
             <View style={this.props.containerStyle}>
-                <Text style={this.props.headerStyle}>{SOURCES["title"]}</Text>
-                <Text style={this.props.descriptionStyle}>{SOURCES["description"]}</Text>
+                <Text style={this.props.headerStyle}
+                      allowFontScaling={false}
+                      >
+                      {SOURCES["title"]}</Text>
+                <Text style={this.props.descriptionStyle}
+                      allowFontScaling={false}
+                      >
+                      {SOURCES["description"]}</Text>
                 {sourcesText}
             </View>
           

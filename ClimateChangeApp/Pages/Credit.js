@@ -73,11 +73,17 @@ export default class CreditPage extends Component {
                   // style={{backgroundColor: "blue"}}
                   ref={this.setScrollView}
               >
-                <Text style={styles.topText}>{CREDIT_INFO["title"]}</Text>
+                <Text style={styles.topText}
+                      allowFontScaling={false}
+                      >
+                          {CREDIT_INFO["title"]}
+                </Text>
 
                 {/* This app was developed by Change++... */}
                 <View style={{flexDirection: "row"}}>
-                    <Text style={[styles.bottomText, styles.paragraphEnd, {flex: 7}]}>
+                    <Text style={[styles.bottomText, styles.paragraphEnd, {flex: 7}]}
+                      allowFontScaling={false}
+                      >
                       {CHANGE["info"][0]}
                     </Text>
                     <View style={{flex: 4, paddingTop: 10}}>
@@ -102,13 +108,15 @@ export default class CreditPage extends Component {
                             source={require("../assets/VCCILogo.png")}
                             />
                 </View>
-                <Text style={[styles.bottomText, styles.paragraphEnd, {flex: 7}]}>
+                <Text style={[styles.bottomText, styles.paragraphEnd, {flex: 7}]}
+                      allowFontScaling={false}
+                      >
                     {CREDIT_INFO["contributions"]["stakeHolders"][0]}
-                    <TextLink link={CREDIT_INFO["contributions"]["emails"]["LeahDundon"]}>
+                    <TextLink link={CREDIT_INFO["contributions"]["personalLinks"]["LeahDundon"]}>
                         {CREDIT_INFO["contributions"]["stakeHolders"][1]}
                     </TextLink>
                     {CREDIT_INFO["contributions"]["stakeHolders"][2]}
-                    <TextLink link={CREDIT_INFO["contributions"]["emails"]["CharlesDoktycz"]}>
+                    <TextLink link={CREDIT_INFO["contributions"]["personalLinks"]["CharlesDoktycz"]}>
                         {CREDIT_INFO["contributions"]["stakeHolders"][3]}
                     </TextLink>
                 </Text>
@@ -116,52 +124,67 @@ export default class CreditPage extends Component {
               </View>
 
                 {/* With questions about this app... */}
-                <Text style={[styles.bottomText, styles.paragraphEnd]}>
+                <TextWithEmbeddedLink
+                    textArr={[CHANGE["info"][4], CHANGE["info"][5], CHANGE["info"][6]]}
+                    linkIndex={1}
+                    link={CHANGE["projectSectionLink"]}
+                    textStyle={[styles.bottomText, styles.paragraphEnd]}
+                />
+                {/* <Text style={[styles.bottomText, styles.paragraphEnd]}
+                      allowFontScaling={false}
+                      >
                     {CHANGE["info"][4]}
-                </Text>
+                </Text> */}
 
                 {/* CarbonXP Software Development Team:... */}
                 <View style={styles.paragraphEnd}>
-                    <Text style={styles.bottomText}> {CHANGE["team"][0]}</Text>
+                    <Text style={styles.bottomText}
+                      allowFontScaling={false}
+                      >
+                      {CHANGE["team"][0]}</Text>
                     <TextWithEmbeddedLink
                       textArr={[CHANGE["team"][1],CHANGE["team"][2]]}
                       linkIndex={0}
-                      link={CHANGE["emails"]["EthanShifrin"]}
+                      link={CHANGE["personalLinks"]["EthanShifrin"]}
                       textStyle={[styles.bottomText, styles.indent]}
                       />
                     <TextWithEmbeddedLink
                       textArr={[CHANGE["team"][3],CHANGE["team"][4]]}
                       linkIndex={0}
-                      link={CHANGE["emails"]["DrewDeister"]}
+                      link={CHANGE["personalLinks"]["DrewDeister"]}
                       textStyle={[styles.bottomText, styles.indent]}
                       />
                     <TextWithEmbeddedLink
                       textArr={[CHANGE["team"][5],CHANGE["team"][6]]}
                       linkIndex={0}
-                      link={CHANGE["emails"]["LucasGoldman"]}
+                      link={CHANGE["personalLinks"]["LucasGoldman"]}
                       textStyle={[styles.bottomText, styles.indent]}
                       />
                     <TextWithEmbeddedLink
                       textArr={[CHANGE["team"][7],CHANGE["team"][8]]}
                       linkIndex={0}
-                      link={CHANGE["emails"]["AsafRoth"]}
+                      link={CHANGE["personalLinks"]["AsafRoth"]}
                       textStyle={[styles.bottomText, styles.indent]}
                       />
                 </View>
 
                 {/* Important Contributions:... */}
                 <View style={styles.paragraphEnd}>
-                    <Text style={styles.bottomText}>Important Contributions:</Text>
+                    <Text style={styles.bottomText}
+                        allowFontScaling={false}
+                        >
+                        Important Contributions:
+                    </Text>
                     <TextWithEmbeddedLink
                       textArr={[CREDIT_INFO["contributions"]["other"][0],CREDIT_INFO["contributions"]["other"][1]]}
                       linkIndex={0}
-                      link={CREDIT_INFO["contributions"]["emails"]["JennaTanner"]}
+                      link={CREDIT_INFO["contributions"]["personalLinks"]["JennaTanner"]}
                       textStyle={[styles.bottomText, styles.indent]}
                       />
                     <TextWithEmbeddedLink
                       textArr={[CREDIT_INFO["contributions"]["other"][2],CREDIT_INFO["contributions"]["other"][3]]}
                       linkIndex={0}
-                      link={CREDIT_INFO["contributions"]["emails"]["JoshLipsey"]}
+                      link={CREDIT_INFO["contributions"]["personalLinks"]["JoshLipsey"]}
                       textStyle={[styles.bottomText, styles.indent]}
                       />
                 </View>

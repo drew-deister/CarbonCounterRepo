@@ -64,9 +64,13 @@ class MetricView extends React.Component {
                     <View style={styles.shadow}>
                         <Image style = {styles.image} source = {images[this.props.metricName]} />
                     </View>
-                    <Text style={[styles.text, this.props.textStyle]}>
+                    <Text style={[styles.text, this.props.textStyle]}
+                              allowFontScaling={false}
+                              >
                         {metricViewInfo[this.props.metricName][0]}
-                        <Text style={styles.number}>
+                        <Text style={styles.number}
+                              allowFontScaling={false}
+                              >
                             {this.addCommas(parseInt(this.props.totalCo2*multiplier[this.props.metricName]))}
                         </Text>
                         {metricViewInfo[this.props.metricName][1]}

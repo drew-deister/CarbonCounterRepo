@@ -11,7 +11,11 @@ const ratio = {
 class QuestionText extends React.Component {
     render() {
         return (
-            <Text style = {[styles.text, ratio[this.props.lines], this.props.style]}>{this.props.question}</Text>
+            <Text style = {[styles.text, ratio[this.props.lines], this.props.style]}
+                  allowFontScaling={false}
+                  >
+                    {this.props.question}
+            </Text>
     )
   }
 }

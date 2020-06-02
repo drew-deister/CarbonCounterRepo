@@ -52,9 +52,17 @@ export default class GlobeVideoModal extends Component {
                         }}
                         onPress={() => {
                             this.closeModal()}}>
-                        <Text style={styles.xMark}>X</Text>
+                        <Text style={styles.xMark}
+                              allowFontScaling={false}
+                              >
+                                X
+                        </Text>
                     </TouchableOpacity>
-                    <Text style = {styles.text}>{this.state.name}</Text>
+                    <Text style = {styles.text}
+                          allowFontScaling={false}
+                          >
+                            {this.state.name}
+                    </Text>
                     <Video
                         source={{ uri: this.state.url }}
                         style={styles.Video}

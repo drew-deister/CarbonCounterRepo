@@ -89,7 +89,11 @@ class MCQuestion extends React.Component {
                     style = {[styles.choiceButton, {backgroundColor: this.state.color[i]}]}
                     onPress = {() => this.updateButton(i, this.props.answerOptions[i])}
                     key = {i} >
-                    <Text style={[styles.buttonText, this.props.answerStyle[i]]}>{this.props.answerOptions[i]}</Text>
+                    <Text style={[styles.buttonText, this.props.answerStyle[i]]}
+                              allowFontScaling={false}
+                              >
+                                {this.props.answerOptions[i]}
+                    </Text>
                 </TouchableHighlight>
             )
         }

@@ -51,7 +51,11 @@ export default class InfoModal extends Component {
                           onPress={() => {
                             this.closeModal()
                           }}>
-            <Text style={[styles.xMark, this.props.xMarkStyle]}>X</Text>
+            <Text style={[styles.xMark, this.props.xMarkStyle]}
+                      allowFontScaling={false}
+                      >
+                      X
+            </Text>
         </TouchableOpacity>
       
         <ScrollView

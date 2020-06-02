@@ -29,9 +29,15 @@ export default class WePlanetIntroPage extends Component {
           <View style={{  flex: 200,
                           justifyContent: "flex-end" }}>
 
-              <Text style={styles.topText}>{INFO["title"]}</Text>
-              <Text style={styles.bottomText}>
-                  {INFO["intro"]["UNFCCC"]}
+              <Text style={styles.topText}
+                    allowFontScaling={false}
+                    >
+                        {INFO["title"]}
+              </Text>
+              <Text style={styles.bottomText}
+                    allowFontScaling={false}
+                    >        
+                        {INFO["intro"]["UNFCCC"]}
               </Text>
           </View>
           {/* {INFO["intro"][0]["question"]} */}

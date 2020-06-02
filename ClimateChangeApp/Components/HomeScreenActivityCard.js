@@ -35,7 +35,11 @@ class HomeScreenActivityCard extends React.Component {
             <View style={[styles.container, this.props.containerStyle]}>
                 <TouchableOpacity style={[styles.button, this.props.style]}
                     onPress={() => this.props.navigation.navigate(this.props.navigateToActivity)}>
-                    <Text style={styles.activityTitle}>{this.props.title}</Text>
+                    <Text style={styles.activityTitle}
+                              allowFontScaling={false}
+                              >
+                                  {this.props.title}
+                    </Text>
      
                 </TouchableOpacity>
             </View>

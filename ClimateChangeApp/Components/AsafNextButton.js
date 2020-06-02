@@ -18,7 +18,9 @@ export default class AsafNextButton extends React.Component {
           onPress={this.props.onPress}
           style={[styles.buttonBody, this.props.style]}
         >
-          <Text style={[styles.buttonText, this.props.textStyle]}>{this.props.children}</Text>
+          <Text style={[styles.buttonText, this.props.textStyle]}
+                allowFontScaling={false}
+                >{this.props.children}</Text>
         </TouchableOpacity>
       </View>
     );

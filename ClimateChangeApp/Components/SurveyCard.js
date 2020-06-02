@@ -75,7 +75,11 @@ class SurveyCard extends React.Component {
                     ref={this.setScrollView}>
                     <Image style = {styles.image} source = {images[this.props.imageName]} />
                     <View style={styles.titleContainer}>
-                        <Text style={[styles.pageTitle, this.props.titleStyle]}>{this.props.title}</Text>
+                        <Text style={[styles.pageTitle, this.props.titleStyle]}
+                              allowFontScaling={false}
+                              >
+                                {this.props.title}
+                        </Text>
                             
                         <View style={styles.infoButtonContainer}>
                             <TouchableOpacity

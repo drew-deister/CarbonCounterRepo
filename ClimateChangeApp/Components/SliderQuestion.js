@@ -83,7 +83,11 @@ class SliderQuestion extends React.Component {
                 </View>
 
                 <View style={styles.sliderLabelContainer}>
-                    <Text style={styles.sliderLabel}>{this.props.minLabel}</Text>
+                    <Text style={styles.sliderLabel}
+                          allowFontScaling={false}
+                          >
+                            {this.props.minLabel}
+                    </Text>
                     { 
                     this.props.shouldDisplay ? // this is called a ternary operator: the text element will display if true
                         <Text style={styles.sliderValue}>
@@ -98,7 +102,11 @@ class SliderQuestion extends React.Component {
                         
                     : null
                     }
-                    <Text style={[styles.sliderLabel, {textAlign: 'right'}]}>{this.props.maxLabel}</Text>
+                    <Text style={[styles.sliderLabel, {textAlign: 'right'}]}
+                          allowFontScaling={false}
+                          >
+                            {this.props.maxLabel}
+                    </Text>
                 </View>
                 
             </View>   

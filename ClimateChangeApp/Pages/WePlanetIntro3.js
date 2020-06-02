@@ -41,7 +41,11 @@ export default class WePlanetIntroPage extends Component {
           <View style={{ flex: 100,
                          justifyContent: "flex-end"}}>
 
-              <Text style={styles.topText}>Who is speaking?</Text>
+              <Text style={styles.topText}
+                    allowFontScaling={false}
+                    >
+                        Who is speaking?
+              </Text>
           </View>
 
           <View style={{ flex: 465,

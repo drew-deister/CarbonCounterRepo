@@ -87,11 +87,17 @@ export default class CarbonCounterIntroPage extends Component {
                             flex: 200,
                             justifyContent: "flex-end",
                             }}>
-                    <Text style={styles.topText}>{INFO["title"]}</Text>
+                    <Text style={styles.topText}
+                              allowFontScaling={false}
+                              >
+                                {INFO["title"]}
+                    </Text>
                 </View>
 
                 <View style={{flex: 365, justifyContent: "flex-begin"}}>
-                    <Text style={styles.bottomText}>
+                    <Text style={styles.bottomText}
+                              allowFontScaling={false}
+                              >
                         {INFO["description"]}
                     </Text>
                 </View>

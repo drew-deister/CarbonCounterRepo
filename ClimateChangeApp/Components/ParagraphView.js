@@ -69,7 +69,11 @@ class ParagraphView extends React.Component {
             } else {
                 infoList.push(
                     <View key={i} style={styles.individualTextContainer}>
-                        <Text style={[styles[this.props.infoTypeArr[i]], this.props.textStyle]}>{this.props.infoArr[i]}</Text>  
+                        <Text style={[styles[this.props.infoTypeArr[i]], this.props.textStyle]}
+                              allowFontScaling={false}
+                              >
+                                {this.props.infoArr[i]}
+                        </Text>  
                         {
                             this.props.infoImageArr[i] ?
                             <View style={styles.imageContainer}>

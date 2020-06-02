@@ -23,11 +23,14 @@ export default class TextWithEmbeddedLink extends React.Component {
         for(let i = 0; i < this.props.textArr.length; ++i) {
             if (i+1 == this.props.linkIndex) {
                 textList.push(
-                    <Text key={i} style={this.props.textStyle}>
+                    <Text key={i} style={this.props.textStyle}
+                          allowFontScaling={false}
+                          >
                         {this.props.textArr[i]}
                         <Text style={styles.linkStyle}
                                 onPress={ ()=> Linking.openURL(this.props.link)}
-                        >
+                                allowFontScaling={false}
+                            >
                             {this.props.textArr[i+1]}
                         </Text>
                         {this.props.textArr.length > i+2 ?
@@ -39,9 +42,12 @@ export default class TextWithEmbeddedLink extends React.Component {
                 i += 2;
             } else if (i === this.props.linkIndex) {
                 textList.push(
-                    <Text key={i} style={this.props.textStyle}>
+                    <Text key={i} style={this.props.textStyle}
+                          allowFontScaling={false}
+                          >
                         <Text style={styles.linkStyle}
                                 onPress={ ()=> Linking.openURL(this.props.link)}
+                                allowFontScaling={false}
                         >
                             {this.props.textArr[i]}
                         </Text>
@@ -54,7 +60,11 @@ export default class TextWithEmbeddedLink extends React.Component {
                 ++i;
             } else {
                 textList.push(
-                    <Text key={i} style={this.props.textStyle}>{this.props.textArr[i]}</Text>
+                    <Text key={i} style={this.props.textStyle}
+                          allowFontScaling={false}
+                          >
+                        {this.props.textArr[i]}
+                    </Text>
                 )
             }
         }

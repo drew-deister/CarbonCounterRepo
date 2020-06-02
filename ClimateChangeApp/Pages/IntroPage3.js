@@ -30,7 +30,8 @@ export default class IntroPage extends Component {
             </View>
 
             <View style={{flex: 270, justifyContent: 'center'}}>
-                <Text style={styles.Text}>
+                <Text style={styles.Text}
+                      allowFontScaling={false}>
                   {INFO["description"]}
                 </Text>
             </View> 
