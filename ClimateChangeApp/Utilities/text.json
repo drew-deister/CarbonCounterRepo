@@ -96,12 +96,12 @@
             "sliderMin": [
                 "NONE",
                 "NONE",
-                "Travel less"
+                "Travel half as much"
             ],
             "sliderMax": [
                 "NONE",
                 "None",
-                "Travel more"
+                "Travel 2x more"
             ],
             "MCOptions": [
                 "Regular car",
@@ -294,7 +294,9 @@
 
         "contributions": {
             "stakeHolders": [
-                "CarbonXP was built in concert with the Vanderbilt Climate Change Initiative, The Curb Center, ",
+                "CarbonXP was built in concert with the ",
+                "Vanderbilt Climate Change Initiative",
+                ", The Curb Center, ",
                 "Dr. Leah A. Dundon",
                 ", and ",
                 "Charles Doktycz"

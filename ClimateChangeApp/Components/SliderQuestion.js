@@ -50,6 +50,8 @@ class SliderQuestion extends React.Component {
         minLabel: "",
         maxLabel: "",
         fixedDecemals: null,
+        sliderValuePrefix: "",
+        sliderValuePostfix: "",
     }
 
     changeValue(value) {
@@ -90,15 +92,22 @@ class SliderQuestion extends React.Component {
                     </Text>
                     { 
                     this.props.shouldDisplay ? // this is called a ternary operator: the text element will display if true
+                        
                         <Text style={styles.sliderValue}>
-                            
+                            <Text style={styles.sliderValuePrefix}>
+                                {this.props.sliderValuePrefix}
+                            </Text>
                             {
                                 
                             this.props.fixedDecimals !== null && this.state.sliderValue !== null ?
                             this.state.sliderValue.toFixed(this.props.fixedDecimals) :
                             this.state.sliderValue
                             }  
+                            <Text style={styles.sliderValuePrefix}>
+                                {this.props.sliderValuePostfix}
+                            </Text>
                         </Text>
+                        
                         
                     : null
                     }
@@ -131,9 +140,13 @@ const styles = StyleSheet.create({
         height: 5,
     },
     sliderValue: {
+        // backgroundColor: "blue",
         color: 'white',
         fontSize: 20, //diagonalScale(4.5),
         fontWeight: '600',
+    },
+    sliderValuePrefix: {
+        fontSize: 15
     },
     container: {
         alignItems: 'center',
@@ -150,9 +163,10 @@ const styles = StyleSheet.create({
         height: 10,
     },
     sliderLabelContainer: {
+        // backgroundColor: "red",
         flexDirection: 'row',
         width: wp('74%'),
-        justifyContent: 'space-between'
+        justifyContent: 'center'//'space-between'
     },
     sliderLabel: {
         width: wp('26%'),

@@ -176,8 +176,7 @@ class Results extends React.Component {
       else {
         multiplier = 1.5;
       }
-      console.log("Housing: ", lbsCO2_rate_MWh * (multiplier * averageHomeMWh_rate_year) / (this.state.numPeople + 1))
-      //should be divided by this.state.numPeople
+      
       return (lbsCO2_rate_MWh * (multiplier * averageHomeMWh_rate_year) / (this.state.numPeople + 1));
     }
 
@@ -219,12 +218,14 @@ class Results extends React.Component {
           CO2_rate_mile = .16 
           break;
         case "Bicycle or walk":
-          MPG_rate = INF;
+          // MPG_rate = INF;
           CO2_rate_mile = 0;
           break;
         default:
           // code block
       }
+      console.log("mode", this.state.mode)
+      console.log("CO2 from transportation", totalMiles * CO2_rate_mile)
       // calculate pounds of CO2 per year
       return totalMiles * CO2_rate_mile;
     }
@@ -265,37 +266,42 @@ class Results extends React.Component {
   }
 
     render() {
+      const CO2_Housing = this.calculateHousing()
+      const CO2_Transportation = this.calculateTransportation()
+      const CO2_Diet = this.calculateDiet()
+      const CO2_Shopping = this.calculateShopping()
+
       const data = [
         {
           name: 'Housing',
-          percent: this.calculateHousing(),
+          percent: CO2_Housing,
           color: '#FCCCC0',
           legendFontColor: '#7F7F7F',
           legendFontSize: 11,
         },
         {
           name: 'Transportation',
-          percent: this.calculateTransportation(),
+          percent: CO2_Transportation,
           color: '#F08080',
           legendFontColor: '#7F7F7F',
           legendFontSize: 11,
         },
         {
           name: 'Diet',
-          percent: this.calculateDiet(),
+          percent: CO2_Diet,
           color: '#66CDAA',
           legendFontColor: '#7F7F7F',
           legendFontSize: 11,
         },
         {
           name: 'Shopping',
-          percent: this.calculateShopping(),
+          percent: CO2_Shopping,
           color: '#87CEEB',
           legendFontColor: '#7F7F7F',
           legendFontSize: 11,
         }
       ]
-      var totalCO2 = this.calculateHousing() + this.calculateTransportation() + this.calculateDiet() + this.calculateShopping();
+      var totalCO2 = CO2_Housing + CO2_Transportation + CO2_Diet + CO2_Shopping;
       return(
         <View style={styles.safeView}>
             <ScrollView 

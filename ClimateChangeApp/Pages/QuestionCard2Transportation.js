@@ -127,7 +127,7 @@ class QuestionCardTransportation extends React.Component {
                             questionStyle={{fontSize: 18}}
                             secondaryColor='#F0F5DF'
                             fixedDecimals = {1}
-                            max = {20} min = {0.5} step = {.5}      //these are now default props
+                            max = {30} min = {0.5} step = {.5}      //these are now default props
                             shouldDisplay = {true}
                             callback = {this.updateSliderState1}
                         />
@@ -149,12 +149,15 @@ class QuestionCardTransportation extends React.Component {
                                 question={TRANSPORTATION_INFO["questions"][2]}
                                 questionLines={3}
                                 questionStyle={{fontSize: 18}}
-                                max = {1.5} min = {.5} step = {.1}
-                                shouldDisplay = {false}
+                                max = {2} min = {.1} step = {.1}
+                                shouldDisplay = {true}
                                 callback = {this.updateSliderState2}
                                 secondaryColor='#F0F5DF'
-                                minLabel={TRANSPORTATION_INFO["sliderMin"][2]}
-                                maxLabel={TRANSPORTATION_INFO["sliderMax"][2]}
+                                fixedDecimals={1}
+                                sliderValuePrefix={"summer travel is "}
+                                sliderValuePostfix={"x school year"}
+                                // minLabel={TRANSPORTATION_INFO["sliderMin"][2]}
+                                // maxLabel={TRANSPORTATION_INFO["sliderMax"][2]}
                             />
                         </View>
 

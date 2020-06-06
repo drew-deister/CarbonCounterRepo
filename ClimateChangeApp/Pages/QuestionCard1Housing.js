@@ -96,7 +96,7 @@ class QuestionCardHousing extends React.Component {
             SecureStore.setItemAsync("squareFootage", JSON.stringify(this.state.sliderValue))
             SecureStore.setItemAsync("hasHousingBeenAccessed", JSON.stringify("true"))
             this.props.navigation.navigate('Transportation')
-            console.log("this.state.zipCode", this.state.zipCode)
+
 
             return true;
         } else {
@@ -196,7 +196,7 @@ class QuestionCardHousing extends React.Component {
                 <SliderQuestion
                     ref = {'slider'}
                     question={HOUSEHOLD_INFO["questions"][2]}
-                    max={4000} min={600} step={100}
+                    max={6000} min={600} step={100}
                     shouldDisplay={true}
                     callback = {this.updateSliderState} />
 

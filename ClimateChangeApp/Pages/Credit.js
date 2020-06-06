@@ -87,9 +87,14 @@ export default class CreditPage extends Component {
                       {CHANGE["info"][0]}
                     </Text>
                     <View style={{flex: 4, paddingTop: 10}}>
-                        <Image style={{width: 120, height: 120}}
-                            source={require("../assets/changeplusplus.png")}
-                            />
+                        <TouchableOpacity style={{width: 120, height: 120, borderRadius: 60}}
+                                          onPress={ ()=> Linking.openURL(CHANGE["website"])}>
+
+                        
+                            <Image style={{width: 120, height: 120}}
+                                source={require("../assets/changeplusplus.png")}
+                                />
+                        </TouchableOpacity>
                     </View>
                 </View>
                 
@@ -104,20 +109,27 @@ export default class CreditPage extends Component {
               {/* CarbonXP was built it concert with... */}
               <View style={{flexDirection: "row"}}>
                 <View style={{flex: 4, paddingTop: 10}}>
+                    <TouchableOpacity style={{width: 120, height: 80}}
+                                      onPress={ ()=> Linking.openURL("https://www.vanderbilt.edu/climatechange/")}>
                         <Image style={{width: 120, height: 80}}
                             source={require("../assets/VCCILogo.png")}
                             />
+                    </TouchableOpacity>
                 </View>
                 <Text style={[styles.bottomText, styles.paragraphEnd, {flex: 7}]}
                       allowFontScaling={false}
                       >
                     {CREDIT_INFO["contributions"]["stakeHolders"][0]}
-                    <TextLink link={CREDIT_INFO["contributions"]["personalLinks"]["LeahDundon"]}>
+                    <TextLink link={"https://www.vanderbilt.edu/climatechange/"}>
                         {CREDIT_INFO["contributions"]["stakeHolders"][1]}
                     </TextLink>
                     {CREDIT_INFO["contributions"]["stakeHolders"][2]}
-                    <TextLink link={CREDIT_INFO["contributions"]["personalLinks"]["CharlesDoktycz"]}>
+                    <TextLink link={CREDIT_INFO["contributions"]["personalLinks"]["LeahDundon"]}>
                         {CREDIT_INFO["contributions"]["stakeHolders"][3]}
+                    </TextLink>
+                    {CREDIT_INFO["contributions"]["stakeHolders"][4]}
+                    <TextLink link={CREDIT_INFO["contributions"]["personalLinks"]["CharlesDoktycz"]}>
+                        {CREDIT_INFO["contributions"]["stakeHolders"][5]}
                     </TextLink>
                 </Text>
                 

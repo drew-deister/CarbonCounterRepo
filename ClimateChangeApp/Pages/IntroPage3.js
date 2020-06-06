@@ -15,8 +15,9 @@ const INFO = INFORMATION["introScreens"][2];
 export default class IntroPage extends Component {
 
   static navigationOptions = {
+    headerStyle: {backgroundColor: '#73A388',  height: 45, borderBottomWidth: 0},
     // headerTitle: 'new title',
-    headerShown: false
+    // headerShown: false
   }
 
   render() {
@@ -52,6 +53,7 @@ export default class IntroPage extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: -50,
     flex: 1,
     flexDirection: "column",
     backgroundColor: "#F6F8EF",

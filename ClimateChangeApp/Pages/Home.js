@@ -38,7 +38,7 @@ export default class Home extends Component {
     title: " ",
     headerTitle: LogoTitle,
     headerStyle: {backgroundColor: '#73A388',  height: 45, borderBottomWidth: 0},
-    headerLeft: null
+    // headerLeft: null
   };
 
   setScrollView = scrollView => {
