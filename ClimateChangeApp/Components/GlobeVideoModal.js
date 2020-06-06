@@ -5,12 +5,13 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modalbox';
 import Button from 'react-native-button';
-import { Video } from 'expo-av';
+import { Audio, Video } from 'expo-av';
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
     listenOrientationChange, removeOrientationListener
   } from 'react-native-responsive-screen';
+import { INTERRUPTION_MODE_ANDROID_DO_NOT_MIX, INTERRUPTION_MODE_ANDROID_DUCK_OTHERS } from 'expo-av/build/Audio';
 
 var screen = Dimensions.get('window');
 
@@ -31,6 +32,18 @@ export default class GlobeVideoModal extends Component {
     closeModal() {
         this.refs.myModal.close()
     }
+
+    componentDidMount() {
+        Audio.setAudioModeAsync({                                                                                                
+            playsInSilentModeIOS: true,                                                                                                           
+            allowsRecordingIOS: false,                                                                                                                                                                                   
+            interruptionModeIOS: Audio. INTERRUPTION_MODE_IOS_DUCK_OTHERS,                                                                         
+            shouldDuckAndroid: true,                                                                                                           
+            interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DUCK_OTHERS,                                                                 
+        });
+    }
+
+    
 
     render() {
         const { width } = Dimensions.get('window');
@@ -70,8 +83,9 @@ export default class GlobeVideoModal extends Component {
                         shouldPlay
                         useNativeControls={true}
                         rate={1.0}
-                        isMute={false}
+                        isMuted={false}
                         volume={1.0}
+                        playsInSilentModeIOS={true}
                     />
                 </View>
             </Modal>
