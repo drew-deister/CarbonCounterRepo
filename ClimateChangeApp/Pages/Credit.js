@@ -178,6 +178,18 @@ export default class CreditPage extends Component {
                       link={CHANGE["personalLinks"]["AsafRoth"]}
                       textStyle={[styles.bottomText, styles.indent]}
                       />
+                    <TextWithEmbeddedLink
+                      textArr={[CHANGE["team"][9],CHANGE["team"][10]]}
+                      linkIndex={0}
+                      link={CHANGE["personalLinks"]["KenzieMacdonald"]}
+                      textStyle={[styles.bottomText, styles.indent]}
+                      />
+                    <TextWithEmbeddedLink
+                      textArr={[CHANGE["team"][11],CHANGE["team"][12]]}
+                      linkIndex={0}
+                      link={CHANGE["personalLinks"]["GraceJennings"]}
+                      textStyle={[styles.bottomText, styles.indent]}
+                      />
                 </View>
 
                 {/* Important Contributions:... */}
