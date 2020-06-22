@@ -211,6 +211,9 @@ export default class CreditPage extends Component {
                       link={CREDIT_INFO["contributions"]["personalLinks"]["JoshLipsey"]}
                       textStyle={[styles.bottomText, styles.indent]}
                       />
+                    <Text style={[styles.bottomText, styles.indent]}>
+                      {CREDIT_INFO["contributions"]["other"][4]}
+                    </Text>
                 </View>
 
                 {/* Data Sources... */}
