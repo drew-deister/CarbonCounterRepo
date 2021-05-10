@@ -15,7 +15,7 @@
     "expo-av": "~8.1.0",
     "expo-secure-store": "~8.1.0",
     "firebase": "7.9.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "lodash.debounce": "^4.0.8",
     "native-base": "^2.13.8",
     "prop-types": "^15.7.2",
